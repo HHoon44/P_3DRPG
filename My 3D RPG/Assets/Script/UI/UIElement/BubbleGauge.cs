@@ -1,4 +1,5 @@
-﻿using ProjectChan.Resource;
+﻿using ProjectChan.Define;
+using ProjectChan.Resource;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,15 @@ namespace ProjectChan.UI
 {
     public class BubbleGauge : MonoBehaviour
     {
-        private Image hpBar;    // -> 버블 게이지의 이미지 컴포넌트
+
+        public UIType uiType;   // -> 현재 UI의 타입
+        private Image Bar;    // -> 버블 게이지의 이미지 컴포넌트
 
         private void Start()
         {
-            hpBar = GetComponent<Image>();
-            hpBar.sprite = SpriteLoader.GetSprite(AtlasType.UIAtlase, "HpBar");
+            Bar = GetComponent<Image>();
+            Bar.sprite = SpriteLoader.GetSprite(AtlasType.UIAtlase, uiType.ToString());
+            Bar.type = Image.Type.Filled;
         }
 
         /// <summary>
@@ -26,7 +30,7 @@ namespace ProjectChan.UI
         /// <param name="value"></param>
         public void SetGauge(float value)
         {
-            hpBar.fillAmount = value;
+            Bar.fillAmount = value;
         }
     }
 }

@@ -33,7 +33,8 @@ SpriteAtlas:
     packables:
     - {fileID: 2800000, guid: 9a0c912cfdbe53a4a8cf04effa0de444, type: 3}
     - {fileID: 102900000, guid: 4e75f4c8d3559e04fac4572ad9b34d45, type: 3}
-    totalSpriteSurfaceArea: 343129
+    - {fileID: 2800000, guid: 53239b8b98ae7274a8ad1c0ee3fa345d, type: 3}
+    totalSpriteSurfaceArea: 350129
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -97,6 +98,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 572ed12bb4e8e7e41bc5ba532b97a7e3, type: 3}
   - {fileID: 21300000, guid: 03baac3b4b5d7e14c9e093abc715fa68, type: 3}
   - {fileID: 21300000, guid: 7bf1da7bf81070a45944210805b67760, type: 3}
+  - {fileID: 21300000, guid: 53239b8b98ae7274a8ad1c0ee3fa345d, type: 3}
   - {fileID: 21300000, guid: 74f8bddbf59e2c2448c467a91fe11474, type: 3}
   - {fileID: 21300000, guid: 9a0c912cfdbe53a4a8cf04effa0de444, type: 3}
   - {fileID: 21300000, guid: 8348177c5efeb5a47853a7298257e390, type: 3}
@@ -181,6 +183,7 @@ SpriteAtlas:
   - helmet
   - magnet
   - crown
+  - EnergyBar
   - candy
   - HpBar
   - gem

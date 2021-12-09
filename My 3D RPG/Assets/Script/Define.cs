@@ -17,6 +17,8 @@ namespace ProjectChan.Define
 
     public enum QuestType { None, Collection, Hunt, Conversation }
 
+    public enum UIType { None, HpBar, EnergyBar }
+
     public class Camera
     {
         public enum CamView { Standard, Front }
@@ -38,6 +40,7 @@ namespace ProjectChan.Define
         public const string Quest = "Quest";
         public const string FormChange = "FormChange";
         public const string Interaction = "Interaction";
+        public const string Sprint = "Sprint";
     }
 
     public class Spawn
@@ -117,6 +120,7 @@ namespace ProjectChan.Define
         public const string SDJosnPath = "Assets/StaticData/Json";
         public const float BaseNovelSize = 0.7915039f;
         public const float NPCNovelSize = 1.518182f;
+        public const float ChangeFormValue = 20.0f;
     }
 
     public class Resource

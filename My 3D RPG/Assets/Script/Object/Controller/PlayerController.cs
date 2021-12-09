@@ -80,7 +80,7 @@ namespace ProjectChan.Object
             {
                 // -> Vertical을 누르면 여기서 반응
                 var value = UnityEngine.Input.GetAxis(input.Key);
-                 
+
                 // -> GetAxisZ(value)이렇게 값을 전달
                 input.Value.GetAxisValue(value);
             }
@@ -119,12 +119,32 @@ namespace ProjectChan.Object
 
         }
 
-        private void GetAxisZ(float value)      // -> Z축 이동
+        private void GetAxisZ(float value)     
         {
             var newDir = PlayerCharacter.boActor.moveDir;
-            var sprint = 0.5f + UnityEngine.Input.GetAxis("Sprint") * .5f;
-            newDir.z = value * sprint; 
-            PlayerCharacter.boActor.moveDir = newDir;
+            var sprint = 0.5f;
+
+            // -> 1209 여기 수정 잘못바꾼듯 원본 기억이 안남
+            // -> 현재 기력이 0보다 큰 상태에서 달리기 버튼을 눌렀다면 달리기
+            if (UnityEngine.Input.GetAxis(Input.Sprint) > 0 && PlayerCharacter.boActor.currentEnergy > 10)
+            {
+                PlayerCharacter.isRun = true;
+                SetSprint(UnityEngine.Input.GetAxis(Input.Sprint));
+            }
+            // -> 아니면 달릴 수 없음
+            else
+            {
+                PlayerCharacter.isRun = false;
+                SetSprint();
+            }
+
+            // -> 공통된 부분
+            void SetSprint(float value = 0)
+            {
+                sprint += value * .5f;
+                newDir.z = sprint;
+                PlayerCharacter.boActor.moveDir = newDir;
+            }
         }
 
         private void GetMouseX(float value)     // -> Y축 회전
@@ -173,7 +193,7 @@ namespace ProjectChan.Object
             canRot = true;
         }
 
-        private void OnNotMouseRight()      
+        private void OnNotMouseRight()
         {
             canRot = false;
         }

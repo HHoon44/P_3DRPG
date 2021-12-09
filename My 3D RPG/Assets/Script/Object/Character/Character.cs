@@ -14,7 +14,8 @@ namespace ProjectChan.Object
 
     public class Character : Actor
     {
-        public BoCharacter boCharacter;
+        public bool isRun;                      // -> 플레이어는 달리는 중인가?
+        public BoCharacter boCharacter;         // -> 현재 캐릭터가 지닌 스텟정보
 
         public override void Initialize(BoActor boActor)
         {
@@ -132,6 +133,7 @@ namespace ProjectChan.Object
             ChangeForm();
             ChangeWeapon();
             JumpUpdate();
+            EnergyUpdate();
             base.ActorUpdate();
         }
 
@@ -248,8 +250,10 @@ namespace ProjectChan.Object
 
         public void ChangeForm()
         {
-            if (Input.GetButtonDown("FormChange"))
+            if (Input.GetButtonDown("FormChange") && boActor.currentEnergy > Define.StaticData.ChangeFormValue)
             {
+                boActor.currentEnergy -= Define.StaticData.ChangeFormValue;
+
                 // -> 코하쿠 >> 라이덴
                 if (transform.GetChild(0).gameObject.activeSelf == true &&
                     transform.GetChild(1).gameObject.activeSelf == false)
@@ -349,6 +353,27 @@ namespace ProjectChan.Object
                     anim.SetTrigger(charAnim.OutWeapon);
                 }
             }
+        }
+
+        /// <summary>
+        /// => 플레이어 기력을 추가해주는 메서드
+        /// </summary>
+        private void EnergyUpdate()
+        {
+            // -> 달리는 중에는 기력 충전 안되도록
+            if (isRun)
+            {
+                boActor.currentEnergy -= Time.deltaTime * 3.0f;
+                return;
+            }
+
+            // -> 만약 Max값을 넘어가거나 같다면 Max값으로 설정해줌
+            if (boActor.currentEnergy >= boActor.maxEnergy)
+            {
+                boActor.currentEnergy = boActor.maxEnergy;
+            }
+
+            boActor.currentEnergy += Time.deltaTime;
         }
 
         #region 애니메이션 이벤트
