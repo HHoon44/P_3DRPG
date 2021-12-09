@@ -1,0 +1,232 @@
+﻿[
+  {
+    "index": 1000,
+    "name": "코하쿠",
+    "kr": "내 이름은 코하쿠!",
+    "stagePath": "0",
+    "portraitPath": "portrait_kohaku",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  },
+  {
+    "index": 1001,
+    "name": "코하쿠",
+    "kr": "오늘 이 유니티 여자 고등학교의 신입생이 되었다",
+    "stagePath": "0",
+    "portraitPath": "portrait_kohaku",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 4
+  },
+  {
+    "index": 1002,
+    "name": "코하쿠",
+    "kr": "신입생 라이프를 잔뜩 즐겨야지!",
+    "stagePath": "0",
+    "portraitPath": "portrait_kohaku",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  },
+  {
+    "index": 1003,
+    "name": "미사키",
+    "kr": "어? 뭐야 코하쿠!",
+    "stagePath": "0",
+    "portraitPath": "portrait_misaki",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  },
+  {
+    "index": 1004,
+    "name": "미사키",
+    "kr": "너 정말 코하쿠야?",
+    "stagePath": "0",
+    "portraitPath": "portrait_misaki",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 4
+  },
+  {
+    "index": 1005,
+    "name": "미사키",
+    "kr": "에에에에에에에에에에??",
+    "stagePath": "0",
+    "portraitPath": "portrait_misaki",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  },
+  {
+    "index": 1006,
+    "name": "코하쿠",
+    "kr": "우와! 미사키~~ 진짜 오랜만이다!!",
+    "stagePath": "0",
+    "portraitPath": "portrait_kohaku",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 3
+  },
+  {
+    "index": 1007,
+    "name": "코하쿠",
+    "kr": "잘 지냈었어?",
+    "stagePath": "0",
+    "portraitPath": "portrait_kohaku",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 2
+  },
+  {
+    "index": 1008,
+    "name": "미사키",
+    "kr": "일단 보류",
+    "stagePath": "0",
+    "portraitPath": "portrait_misaki",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 1
+  },
+  {
+    "index": 1009,
+    "name": "미사키",
+    "kr": "일단 교실로 들어가자~",
+    "stagePath": "0",
+    "portraitPath": "portrait_misaki",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  },
+  {
+    "index": 1010,
+    "name": "유코",
+    "kr": "엥? 코하쿠랑 미사키??",
+    "stagePath": "Corridor4",
+    "portraitPath": "portrait_yuko",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  },
+  {
+    "index": 1011,
+    "name": "유코",
+    "kr": "너희 둘도 이 학교야?",
+    "stagePath": "0",
+    "portraitPath": "portrait_yuko",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 4
+  },
+  {
+    "index": 1012,
+    "name": "유코",
+    "kr": "대박!! 너무 반갑다~!!",
+    "stagePath": "0",
+    "portraitPath": "portrait_yuko",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  },
+  {
+    "index": 1013,
+    "name": "미사키",
+    "kr": "뭐야 우리 모두 같은 반인거야?",
+    "stagePath": "Kyosich",
+    "portraitPath": "portrait_misaki",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  },
+  {
+    "index": 1014,
+    "name": "코하쿠",
+    "kr": "헐 대박..",
+    "stagePath": "0",
+    "portraitPath": "portrait_kohaku",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 3
+  },
+  {
+    "index": 1015,
+    "name": "유코",
+    "kr": " 뭐냐구 젠장~~~ 믿고있었다구~~",
+    "stagePath": "0",
+    "portraitPath": "portrait_yuko",
+    "charType": "Normal",
+    "atlasType": "Portrait",
+    "portraitIndex": 2
+  },
+  {
+    "index": 1016,
+    "name": "0",
+    "kr": "대충 이러쿵 저러쿵해서 이세계로 가게되었다는 내용",
+    "stagePath": "Corridor3",
+    "portraitPath": "0",
+    "charType": "None",
+    "atlasType": "None",
+    "portraitIndex": 0
+  },
+  {
+    "index": 100,
+    "name": "엠버",
+    "kr": "안녕 난 엠버라고해~",
+    "stagePath": "0",
+    "portraitPath": "portrait_Amber",
+    "charType": "NPC",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  },
+  {
+    "index": 101,
+    "name": "엠버",
+    "kr": "안녕 난 엠버일지도?",
+    "stagePath": "0",
+    "portraitPath": "portrait_Amber",
+    "charType": "NPC",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  },
+  {
+    "index": 102,
+    "name": "엠버",
+    "kr": "안녕 난 엠버였나?",
+    "stagePath": "0",
+    "portraitPath": "portrait_Amber",
+    "charType": "NPC",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  },
+  {
+    "index": 200,
+    "name": "베이도우",
+    "kr": "안녕 난 베이도우!",
+    "stagePath": "0",
+    "portraitPath": "portrait_Beidou",
+    "charType": "NPC",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  },
+  {
+    "index": 201,
+    "name": "베이도우",
+    "kr": "안녕 난 베이도우가 아니야!",
+    "stagePath": "0",
+    "portraitPath": "portrait_Beidou",
+    "charType": "NPC",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  },
+  {
+    "index": 202,
+    "name": "베이도우",
+    "kr": "안녕 난 베우이도!",
+    "stagePath": "0",
+    "portraitPath": "portrait_Beidou",
+    "charType": "NPC",
+    "atlasType": "Portrait",
+    "portraitIndex": 0
+  }
+]

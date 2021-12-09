@@ -1,0 +1,16 @@
+﻿[
+  {
+    "index": 1000,
+    "weaponIndex": 1000,
+    "moveSpeed": 5.0,
+    "atkRange": 5.0,
+    "maxHp": 5.0,
+    "maxHpFactor": 5.0,
+    "maxMana": 5.0,
+    "maxManaFactor": 5.0,
+    "atk": 5.0,
+    "atkFactor": 5.0,
+    "def": 3.0,
+    "defFactor": 3.0
+  }
+]

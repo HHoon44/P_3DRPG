@@ -1,0 +1,58 @@
+﻿[
+  {
+    "index": 1000,
+    "string": "Amber",
+    "npcType": "Store",
+    "resourcePath": "Prefabs/Actor/NPC/Amber",
+    "stageIndex": 1000,
+    "baseSpeech": [
+      100,
+      101,
+      102
+    ],
+    "needQuestIndex": [
+      0
+    ],
+    "questIndex": [
+      1000
+    ],
+    "npcPos": [
+      -42.0,
+      4.735,
+      -3.0
+    ],
+    "npcRot": [
+      0.0,
+      87.5,
+      0.0
+    ]
+  },
+  {
+    "index": 1001,
+    "string": "Beidou",
+    "npcType": "Normal",
+    "resourcePath": "Prefabs/Actor/NPC/Beidou",
+    "stageIndex": 1000,
+    "baseSpeech": [
+      200,
+      201,
+      202
+    ],
+    "needQuestIndex": [
+      0
+    ],
+    "questIndex": [
+      0
+    ],
+    "npcPos": [
+      -21.5,
+      4.73,
+      2.0
+    ],
+    "npcRot": [
+      0.0,
+      -170.0,
+      0.0
+    ]
+  }
+]

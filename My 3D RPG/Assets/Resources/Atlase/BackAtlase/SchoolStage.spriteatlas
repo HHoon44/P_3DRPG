@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SchoolStage
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 2193eb8d1d648ae4f88667f9f92b3608, type: 3}
+    totalSpriteSurfaceArea: 5991406
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: c5436740905ea574abfc4b59fc8199e8, type: 3}
+  - {fileID: 21300000, guid: f64aeaa2c4d55a74ba672e8b1cae7601, type: 3}
+  - {fileID: 21300000, guid: a87074080f527cb4ab0937e33e74e1e3, type: 3}
+  - {fileID: 21300000, guid: 9d9071d9b0cdbbb4ab2e4ebfb30db0c5, type: 3}
+  - {fileID: 21300000, guid: 8807c9ab86ea53e4a82cd91e6655614a, type: 3}
+  - {fileID: 21300000, guid: cf5c8ebba5d1ccb4b8cc57e8e9a5d767, type: 3}
+  - {fileID: 21300000, guid: f374bf8d975a467408dd584f7fc01322, type: 3}
+  - {fileID: 21300000, guid: 1a66393e7335a87419c5e133687e1299, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Stairs
+  - Kyosich
+  - Corridor2
+  - RoofTop
+  - Corridor3
+  - Corridor4
+  - Nyugakusiki
+  - Corridor1
+  m_RenderDataMap: {}
+  m_Tag: SchoolStage
+  m_IsVariant: 0

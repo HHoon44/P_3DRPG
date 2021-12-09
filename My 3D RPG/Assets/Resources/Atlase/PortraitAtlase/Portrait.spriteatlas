@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Portrait
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 7bfc6588b4fbb8d4faabdb1a6b0b5403, type: 3}
+    - {fileID: 102900000, guid: 99142b6b9fa35e94e86a2abef71e2aa0, type: 3}
+    - {fileID: 102900000, guid: 71694dcd4a19088459e6504fe72aac99, type: 3}
+    - {fileID: 102900000, guid: 11502e33413ab224e80d60af8a7f1e98, type: 3}
+    totalSpriteSurfaceArea: 64942886
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: de7d0951a65d262428957c973d3a0c55, type: 3}
+  - {fileID: 21300000, guid: fac842c15b034e24f96f761469e43328, type: 3}
+  - {fileID: 21300000, guid: 94d7a5a29b259bb4ea04432708a6dee4, type: 3}
+  - {fileID: 21300000, guid: 45810715878077849b300fa6bd8ce4f6, type: 3}
+  - {fileID: 21300000, guid: 03c919768c718e9429148231f1e8acfc, type: 3}
+  - {fileID: 21300000, guid: 746416e6de7e9df44a17125fe93f301c, type: 3}
+  - {fileID: 21300000, guid: c7e5ad4746e231441aae9ad3b849afbb, type: 3}
+  - {fileID: 21300000, guid: 849aed870335053448937abdad423898, type: 3}
+  - {fileID: 21300000, guid: 2c91a1a73807b3f47843216a81bb0e5e, type: 3}
+  - {fileID: 21300000, guid: efd844d76e24f9a4a839993be8a9c793, type: 3}
+  - {fileID: 21300000, guid: cea61ed7c0d0a6b40afefe6727852f74, type: 3}
+  - {fileID: 21300000, guid: 2d7ba2e794cf4b94cb53eb8b48baccf7, type: 3}
+  - {fileID: 21300000, guid: ff944228c74bc9d4eb9e1020c0ca92e2, type: 3}
+  - {fileID: 21300000, guid: 7a8a0ec9c1107884fa0b3a7ae636d697, type: 3}
+  - {fileID: 21300000, guid: ee7af1aacbe0eaa4a865cfa48e1df665, type: 3}
+  - {fileID: 21300000, guid: 3d34b67ba6c8d6f4a93793da13a1b944, type: 3}
+  - {fileID: 21300000, guid: f3ea7e7bdf11850448c34a9a09f4b03a, type: 3}
+  - {fileID: 21300000, guid: b42554cec9e8a7141a5b6c0d134d59af, type: 3}
+  - {fileID: 21300000, guid: fd611c0f852f71e4ab62f2c8f1bbb15c, type: 3}
+  - {fileID: 21300000, guid: d3a76d1f0df25f44dbc0abdf95dce888, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - portrait_yuko1
+  - portrait_misaki2
+  - portrait_Beidou0
+  - portrait_kohaku1
+  - portrait_misaki5
+  - portrait_kohaku0
+  - portrait_yuko5
+  - portrait_kohaku2
+  - portrait_kohaku4
+  - portrait_kohaku5
+  - portrait_misaki4
+  - portrait_yuko3
+  - portrait_misaki1
+  - portrait_yuko4
+  - portrait_yuko0
+  - portrait_misaki0
+  - portrait_yuko2
+  - portrait_Amber0
+  - portrait_misaki3
+  - portrait_kohaku3
+  m_RenderDataMap: {}
+  m_Tag: Portrait
+  m_IsVariant: 0

@@ -1,0 +1,28 @@
+﻿[
+  {
+    "index": 1000,
+    "name": "빨간포션",
+    "itmeType": "Expendables",
+    "affectingStats": [
+      "currentHp"
+    ],
+    "description": "사용시 Hp를 50을 회복합니다",
+    "resourcePath": "Prefabs/Item/HpPotion",
+    "affectingStatsValue": [
+      50.0
+    ]
+  },
+  {
+    "index": 1001,
+    "name": "파란포션",
+    "itmeType": "Expendables",
+    "affectingStats": [
+      "currentMana"
+    ],
+    "description": "사용시 Mana 50을 회복합니다",
+    "resourcePath": "Prefabs/Item/ManaPotion",
+    "affectingStatsValue": [
+      50.0
+    ]
+  }
+]

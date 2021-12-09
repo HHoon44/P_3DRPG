@@ -1,0 +1,34 @@
+﻿[
+  {
+    "index": 1000,
+    "name": "string",
+    "resourcePath": "Prefabs/Stage/StartVillage",
+    "stageNovel": 2000,
+    "genMonsters": [
+      -1
+    ],
+    "spawnArea": [
+      -1
+    ],
+    "warpStageRef": [
+      1001
+    ]
+  },
+  {
+    "index": 1001,
+    "name": "첫번째 던전",
+    "resourcePath": "Prefabs/Stage/DunGeon",
+    "stageNovel": 3000,
+    "genMonsters": [
+      1000,
+      1001
+    ],
+    "spawnArea": [
+      0,
+      1
+    ],
+    "warpStageRef": [
+      1000
+    ]
+  }
+]

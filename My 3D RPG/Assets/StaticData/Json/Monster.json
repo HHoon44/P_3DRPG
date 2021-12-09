@@ -1,0 +1,46 @@
+﻿[
+  {
+    "index": 1000,
+    "name": "ChuChu1",
+    "resourcePath": "Prefabs/Actor/Monster/ChuChu1",
+    "atkType": "Normal",
+    "dropItemRef": [
+      1000,
+      1001
+    ],
+    "dropItemPer": [
+      0.25,
+      0.25
+    ],
+    "moveSpeed": 1.6,
+    "detectionRange": 2.7,
+    "atkRange": 1.0,
+    "atkInterval": 2.0,
+    "maxHp": 45.0,
+    "maxMana": 50.0,
+    "atk": 95.0,
+    "def": 15.0
+  },
+  {
+    "index": 1001,
+    "name": "ChuChu2",
+    "resourcePath": "Prefabs/Actor/Monster/ChuChu2",
+    "atkType": "Normal",
+    "dropItemRef": [
+      1000,
+      1001
+    ],
+    "dropItemPer": [
+      0.25,
+      0.25
+    ],
+    "moveSpeed": 1.6,
+    "detectionRange": 2.7,
+    "atkRange": 1.0,
+    "atkInterval": 2.0,
+    "maxHp": 40.0,
+    "maxMana": 60.0,
+    "atk": 90.0,
+    "def": 10.0
+  }
+]
