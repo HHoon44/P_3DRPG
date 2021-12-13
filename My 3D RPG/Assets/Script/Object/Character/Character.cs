@@ -14,8 +14,10 @@ namespace ProjectChan.Object
 
     public class Character : Actor
     {
+        public PlayerController playerController;
         public bool isRun;                      // -> 플레이어는 달리는 중인가?
         public BoCharacter boCharacter;         // -> 현재 캐릭터가 지닌 스텟정보
+        private float charged;                  // -> 기력을 충전하기 위한 대기시간
 
         public override void Initialize(BoActor boActor)
         {
@@ -133,7 +135,7 @@ namespace ProjectChan.Object
             ChangeForm();
             ChangeWeapon();
             JumpUpdate();
-            EnergyUpdate();
+            EnergyReCharge();
             base.ActorUpdate();
         }
 
@@ -344,6 +346,9 @@ namespace ProjectChan.Object
                     return;
                 }
 
+                // -> 무기 바꿀땐 멈춰
+                playerController.isPlayerAction = true;
+
                 if (!weaponController.isWeapon)
                 {
                     anim.SetTrigger(charAnim.InWeapon);
@@ -356,11 +361,16 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 플레이어 기력을 추가해주는 메서드
+        /// => 플레이어 기력을 충전해주는 메서드
         /// </summary>
-        private void EnergyUpdate()
+        private void EnergyReCharge()
         {
-            // -> 달리는 중에는 기력 충전 안되도록
+            if (boActor.currentEnergy <= 0)
+            {
+                charged += Time.deltaTime;
+            }
+
+            // -> 달리는 중에는 기력 충전 안댐
             if (isRun)
             {
                 boActor.currentEnergy -= Time.deltaTime * 3.0f;
@@ -371,6 +381,7 @@ namespace ProjectChan.Object
             if (boActor.currentEnergy >= boActor.maxEnergy)
             {
                 boActor.currentEnergy = boActor.maxEnergy;
+                return;
             }
 
             boActor.currentEnergy += Time.deltaTime;
@@ -393,6 +404,11 @@ namespace ProjectChan.Object
         public void OnChangeWeapon()
         {
             weaponController.SetWeapon();
+        }
+
+        public void OnChangeWeaponEnd()
+        {
+            playerController.isPlayerAction = false;
         }
 
         public void OnJumpStart()

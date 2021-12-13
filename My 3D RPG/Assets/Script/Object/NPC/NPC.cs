@@ -78,7 +78,7 @@ namespace ProjectChan.Object
 
                 // -> 플레이어가 현재 상호작용을 시작하려 하므로 Controller안에 있는 isInteraction을 True로
                 var playerController = colls[0].GetComponentInParent<PlayerController>();
-                playerController.isInteraction = true;
+                playerController.isPlayerAction = true;
 
                 OnDialogue(playerController);
             }
@@ -87,7 +87,7 @@ namespace ProjectChan.Object
             {
                 // -> 플레이어가 현재 상호작용을 끝내려 하므로 Controller안에 있는 isInteraction을 false로
                 var playerController = colls[0].GetComponentInParent<PlayerController>();
-                playerController.isInteraction = false;
+                playerController.isPlayerAction = false;
 
                 // -> UIDialogue창도 꺼준다
                 UIWindowManager.Instance.GetWindow<UIDialogue>().Close();

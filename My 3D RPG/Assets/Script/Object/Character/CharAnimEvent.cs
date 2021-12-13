@@ -45,5 +45,10 @@ namespace ProjectChan
         {
             myParent.OnChangeWeapon();
         }
+
+        public void OnChangeWeaponEnd()
+        {
+            myParent.OnChangeWeaponEnd();
+        }
     }
 }

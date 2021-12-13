@@ -98,9 +98,9 @@ namespace ProjectChan.UI
             }
 
             // -> 다이얼로그 버튼을 눌러 Close가 실행되어 캐릭터 입력이 막힌 상태로 UIDialogue창이 꺼지므로 처리
-            if (actor != null && actor.isInteraction == true)
+            if (actor != null && actor.isPlayerAction == true)
             {
-                actor.isInteraction = false;
+                actor.isPlayerAction = false;
             }
 
             dialogueButtons.Clear();

@@ -25,6 +25,7 @@ namespace ProjectChan.Object
         protected Animator anim;
 
         public AttackController attackController { get; private set; }
+
         public WeaponController weaponController { get; private set; }
 
         protected CharAnimParam charAnim;        // -> 캐릭터 애니메이션 파라미터 ID값 정보

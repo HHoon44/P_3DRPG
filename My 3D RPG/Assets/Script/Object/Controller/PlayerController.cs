@@ -20,13 +20,14 @@ namespace ProjectChan.Object
         public Character PlayerCharacter { get; private set; }
         public CameraController cameraController;
         private Transform pointingTarget;
-        public bool isInteraction { get; set; }                     // -> 현재 플레이어가 상호작용중인가?
+        public bool isPlayerAction { get; set; }                     // -> 현재 플레이어가 행동을 취하는 중인가?
 
         public bool HasPointTarget { get; private set; }
         private bool canRot;
 
         public void Initialize(Character character)
         {
+            character.playerController = transform.GetComponent<PlayerController>();
             character.transform.parent = transform;
             character.gameObject.layer = LayerMask.NameToLayer("Player");
 
@@ -62,7 +63,7 @@ namespace ProjectChan.Object
             }
 
             // -> 플레이어가 상호작용중이라면
-            if (isInteraction)
+            if (isPlayerAction)
             {
                 return;
             }
@@ -121,24 +122,26 @@ namespace ProjectChan.Object
 
         private void GetAxisZ(float value)     
         {
-            var newDir = PlayerCharacter.boActor.moveDir;
-            var sprint = 0.5f;
+            var boActor = PlayerCharacter.boActor;
+            var newDir = boActor.moveDir;
+            var sprint = value;
+            var amount = boActor.currentEnergy / boActor.maxEnergy;
 
-            // -> 1209 여기 수정 잘못바꾼듯 원본 기억이 안남
-            // -> 현재 기력이 0보다 큰 상태에서 달리기 버튼을 눌렀다면 달리기
-            if (UnityEngine.Input.GetAxis(Input.Sprint) > 0 && PlayerCharacter.boActor.currentEnergy > 10)
+            // fillAmount 값이 0보다 커야 돌아가도록 하고
+            if (UnityEngine.Input.GetAxis(Input.Sprint) > 0 && amount > 0)
             {
+                // -> 저 달리는 중
                 PlayerCharacter.isRun = true;
                 SetSprint(UnityEngine.Input.GetAxis(Input.Sprint));
             }
-            // -> 아니면 달릴 수 없음
             else
             {
+                // -> 저 안달립니다
                 PlayerCharacter.isRun = false;
                 SetSprint();
             }
 
-            // -> 공통된 부분
+            // -> 로컬함수
             void SetSprint(float value = 0)
             {
                 sprint += value * .5f;
