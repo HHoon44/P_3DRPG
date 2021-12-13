@@ -14,32 +14,40 @@ namespace ProjectChan.UI
 {
     public class UIInventory : UIWindow, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        private List<ItemSlot> itemSlots =
-            new List<ItemSlot>();               // -> 아이템 슬롯 홀더에 자식으로 존재하는 슬롯들을 담아놓을 공간
         private Transform itemSlotHolder;       // -> 아이템 슬롯 홀더를 담을 필드
         public Button sortButton;               // -> 정렬 버튼 (아직 안넣음)
         private GraphicRaycaster gr;            // -> UICanvas가 지닌 캔버스 안을 검색하기 위한 레이캐스트
         private ItemSlot dragSlot;              // -> 드래그되고 있는 아이템 슬롯
         private Vector3 dragSlotOriginVec;      // -> 드래그 되고 있는 아이템 슬롯의 원래 위치
 
+        /// <summary>
+        /// => 아이템 슬롯 홀더에 자식으로 존재하는 슬롯들을 담아놓을 공간
+        /// </summary>
+        public List<ItemSlot> itemSlots = new List<ItemSlot>();
+
         public override void Start()
         {
             base.Start();
 
+            // -> UIInventory가 지닌 그래픽 레이캐스트 컴포넌트를 가져온다
+            // -> 아이템 슬롯을 담아놓을 홀더를 찾아서 가져온다
             gr = GetComponentInParent<GraphicRaycaster>();
             itemSlotHolder = transform.GetChild(0).GetChild(0);
 
+            // -> 홀더에 존재하는 슬롯들을 리스트에 저장 해놓는 작업
             for (int i = 0; i < itemSlotHolder.childCount; i++)
             {
                 itemSlots.Add(itemSlotHolder.GetChild(i).GetComponent<ItemSlot>());
             }
 
+            // -> 리스트에 저장된 슬롯들을 초기화 하는 작업
+            // -> Bo데이터가 지닌 아이템 정보를 슬롯에 초기화 하는 작업
             InitItemSlots();
             InitInventory();
 
+            // -> 정렬 버튼 이벤트 바인딩 작업
             sortButton.onClick.AddListener(() =>
             {
-                // -> 현재 게임매니저가 들고있는 Bo데이터를 가져온다
                 var boItems = GameManager.User.boItems;
 
                 // -> OrderBy 메서드를 이용하여 이름순으로 정렬
@@ -85,6 +93,77 @@ namespace ProjectChan.UI
                     itemSlots[boItem.slotIndex].SetSlot(boItem);
                     break;
                 }
+            }
+        }
+
+        /// <summary>
+        /// => 아이템을 사용한다고 할 때 호출할 메서드
+        /// </summary>
+        /// <param name="boActor"> 현재 아이템을 사용할 액터의 정보 </param>
+        /// <param name="slotIndex"> 몇번째 키입력인지 </param>
+        public void UsedItem(BoActor boActor, int slotIndex)
+        {
+            /// 여기 부분 따로 함수로 빼도 될듯
+            /// 인덱스만 파라미터로 받고 어차피 1번 클릭이든 2번 클릭이든 모두 아래는 모두 같은 작업이라 상관없을듯
+            /// 파라미터로는 아이템 슬롯이 지닌 슬롯 인덱스 -1 하면 될듯
+
+            // -> BoItem이 존재한다면 슬롯에 아이템이 존재한다
+            if (itemSlots[slotIndex].BoItem != null)
+            {
+                // -> 슬롯에 존재하는 아이템이 소비 아이템인가 확인
+                if (itemSlots[slotIndex].BoItem.sdItem.itemType == Define.ItemType.Expendables)
+                {
+                    // -> 어떤 스탯에 영향을 미치는지에 따라서 나눔
+                    switch (itemSlots[slotIndex].BoItem.sdItem.affectingStats[0])
+                    {
+                        case "currentHp":
+                            /// 사용하면 스탯 올려주고 
+                            /// 개수 줄어들어야함 그리고 Dto에 다시 저장해야함
+                            boActor.currentHp += itemSlots[slotIndex].BoItem.sdItem.affectingStatsValue[slotIndex];
+
+                            if (boActor.currentHp >= boActor.maxHp)
+                            {
+                                boActor.currentHp = boActor.maxHp;
+                            }
+
+                            DiminishAmount();
+                            break;
+
+                        case "currentEnergy":
+                            boActor.currentEnergy += itemSlots[slotIndex].BoItem.sdItem.affectingStatsValue[0];
+
+                            if (boActor.currentEnergy >= boActor.maxEnergy)
+                            {
+                                boActor.currentEnergy = boActor.maxEnergy;
+                            }
+
+                            DiminishAmount();
+                            break;
+                    }
+                }
+
+                void DiminishAmount()
+                {
+                    itemSlots[slotIndex].BoItem.amount--;
+
+                    /// 0개 일때 작업 수정하기
+                    if (itemSlots[slotIndex].BoItem.amount == 0)
+                    {
+                        itemSlots[slotIndex].SetSlot(null);
+                    }
+                    else
+                    {
+                        itemSlots[slotIndex].AmountUpdate(itemSlots[slotIndex].BoItem);
+                    }
+                }
+
+                DummyServer.Instance.userData.dtoItem = new DtoItem(GameManager.User.boItems);
+                DummyServer.Instance.Save();
+            }
+            else
+            {
+                // -> 빈 슬롯이면 종료
+                return;
             }
         }
 
@@ -200,7 +279,7 @@ namespace ProjectChan.UI
 
             // -> 이미지를 옮기는 작업이였으므로 다시 원 위치로 설정
             dragSlot.ItemImage.transform.position = dragSlotOriginVec;
-            
+
             // -> 드래그가 끝난 지점에 존재하는 ItemSlot에 데이터를 담아놓을 공간
             ItemSlot destSlot = null;
 
@@ -211,7 +290,7 @@ namespace ProjectChan.UI
                 {
                     continue;
                 }
-                
+
                 // -> 위의 조건을 만족하고 이름에 ItemSlot을 포함한다면
                 if (results[i].gameObject.name.Contains("ItemSlot"))
                 {

@@ -1,5 +1,7 @@
 ﻿using ProjectChan.DB;
+using ProjectChan.Dummy;
 using ProjectChan.SD;
+using ProjectChan.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -136,6 +138,7 @@ namespace ProjectChan.Object
             ChangeWeapon();
             JumpUpdate();
             EnergyReCharge();
+            ItemUsed();
             base.ActorUpdate();
         }
 
@@ -199,7 +202,7 @@ namespace ProjectChan.Object
             else
             {
                 // -> 레이가 Floor를 인지 하지 못했다면 아직 땅에 닿지 않은 상태
-                boActor.isGround = false;   
+                boActor.isGround = false;
             }
 
             // -> 플레이어의 상태가 점프가 아니라면
@@ -249,6 +252,7 @@ namespace ProjectChan.Object
                 anim.SetBool(charAnim.isJump, false);
             }
         }
+
 
         public void ChangeForm()
         {
@@ -357,6 +361,24 @@ namespace ProjectChan.Object
                 {
                     anim.SetTrigger(charAnim.OutWeapon);
                 }
+            }
+        }
+
+        /// <summary>
+        /// => 인벤토리에 있는 소비 아이템을 사용하는 메서드
+        /// </summary>
+        private void ItemUsed()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                var uiInventory = UIWindowManager.Instance.GetWindow<UIInventory>();
+                uiInventory.UsedItem(boActor, 0);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                var uiInventory = UIWindowManager.Instance.GetWindow<UIInventory>();
+                uiInventory.UsedItem(boActor, 1);
             }
         }
 

@@ -2,7 +2,7 @@
   {
     "index": 1000,
     "name": "빨간포션",
-    "itmeType": "Expendables",
+    "itemType": "Expendables",
     "affectingStats": [
       "currentHp"
     ],
@@ -15,7 +15,7 @@
   {
     "index": 1001,
     "name": "파란포션",
-    "itmeType": "Expendables",
+    "itemType": "Expendables",
     "affectingStats": [
       "currentMana"
     ],
