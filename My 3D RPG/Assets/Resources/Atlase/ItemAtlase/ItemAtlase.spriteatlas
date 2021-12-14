@@ -42,7 +42,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 471cfdb321339f8458b39bba046c110f, type: 3}
   - {fileID: 21300000, guid: 3336da89f222e9746ac075baa97e08b0, type: 3}
   m_PackedSpriteNamesToIndex:
-  - ManaPotion
+  - EnergyPotion
   - HpPotion
   m_RenderDataMap: {}
   m_Tag: ItemAtlase

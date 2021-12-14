@@ -14,13 +14,13 @@
   },
   {
     "index": 1001,
-    "name": "파란포션",
+    "name": "에너지포션",
     "itemType": "Expendables",
     "affectingStats": [
-      "currentMana"
+      "currentEnergy"
     ],
-    "description": "사용시 Mana 50을 회복합니다",
-    "resourcePath": "Prefabs/Item/ManaPotion",
+    "description": "사용시 Energy 50을 회복합니다",
+    "resourcePath": "Prefabs/Item/EnergyPotion",
     "affectingStatsValue": [
       50.0
     ]

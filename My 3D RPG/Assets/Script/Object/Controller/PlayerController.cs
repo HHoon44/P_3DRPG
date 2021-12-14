@@ -120,33 +120,34 @@ namespace ProjectChan.Object
 
         }
 
-        private void GetAxisZ(float value)     
+        private void GetAxisZ(float value)
         {
+            /// 차자따 봄인!
+            /// 어쨋든 sprint를 입력하기 전까지는 0.5랑 -0.5임 결국엔
             var boActor = PlayerCharacter.boActor;
             var newDir = boActor.moveDir;
-            var sprint = value;
-            var amount = boActor.currentEnergy / boActor.maxEnergy;
+            var sprint = value > Define.StaticData.BaseSpeed ? Define.StaticData.BaseSpeed :
+                value < -Define.StaticData.BaseSpeed ? -Define.StaticData.BaseSpeed : value;
 
-            // fillAmount 값이 0보다 커야 돌아가도록 하고
-            if (UnityEngine.Input.GetAxis(Input.Sprint) > 0 && amount > 0)
+            Debug.Log(sprint);
+
+            /// value 조건식걸어서 쉬프트 키 눌러도 앞으로 가는거 막아야 할듯
+
+            sprint += UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
+
+            Debug.Log(sprint);
+
+            newDir.z = sprint;
+            PlayerCharacter.boActor.moveDir = newDir;
+
+            if (sprint > Define.StaticData.BaseSpeed ||
+                sprint < -Define.StaticData.BaseSpeed)
             {
-                // -> 저 달리는 중
                 PlayerCharacter.isRun = true;
-                SetSprint(UnityEngine.Input.GetAxis(Input.Sprint));
             }
             else
             {
-                // -> 저 안달립니다
                 PlayerCharacter.isRun = false;
-                SetSprint();
-            }
-
-            // -> 로컬함수
-            void SetSprint(float value = 0)
-            {
-                sprint += value * .5f;
-                newDir.z = sprint;
-                PlayerCharacter.boActor.moveDir = newDir;
             }
         }
 

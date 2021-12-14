@@ -12,22 +12,16 @@ namespace ProjectChan.UI
     public class UIBattle : UIWindow
     {
         public PlayerController playerController;       // -> PlayerController
-        private GameObject itemHolder;                  // -> 아이템들이 담겨있는 오브젝트
         public BubbleGauge hpBubbleGauge;               // -> Hp 게이지 컴포넌트
         public BubbleGauge energyBubbleGauge;           // -> Energy 게이지 컴포넌트
-
+        public Canvas worldCanvas;                      // -> 월드 컨버스 객체
         public Texture2D normalCursor;                  // -> 기본 마우스 커서 이미지
         public Texture2D targetPointCursor;             // -> 몬스터 타겟팅 커서 이미지
 
-        public Canvas worldCanvas;                      // -> 월드 컨버스 객체
-
-        private List<MonHpBar> allMonHpBar = new List<MonHpBar>();  
-
-        public override void Start()
-        {
-            base.Start();
-            itemHolder = GameObject.Find("ItemHolder");
-        }
+        /// <summary>
+        /// => 현재 몬스터가 지니고 있는 체력바
+        /// </summary>
+        private List<MonHpBar> allMonHpBar = new List<MonHpBar>();
 
         private void Update()
         {
@@ -47,20 +41,20 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 아이템 홀더에 존재하는 자식객체들이 카메라를 바라보게 하는 메서드
+        /// => 월드 컨버스 안에 존재하는 객체들이 플레이어를 바라 보도록 설정하는 메서드
         /// </summary>
         public void BillboardUpdate()
         {
-            if (itemHolder == null)
+            if (worldCanvas == null)
             {
                 return;
             }
 
             var camTrans = CameraController.Cam.transform;
 
-            for (int i = 0; i < itemHolder.transform.childCount; i++)
+            for (int i = 0; i < worldCanvas.transform.childCount; i++)
             {
-                var child = itemHolder.transform.GetChild(i);
+                var child = worldCanvas.transform.GetChild(i);
 
                 /// => LookAt : 지정된 오브젝트들이 파라미터로 들어간 Target을 바라보게 해줌
                 child.LookAt(camTrans, Vector3.up);
@@ -68,8 +62,7 @@ namespace ProjectChan.UI
                 /// => 표류하지 않거나 의도하지 않은 회전을 일으킬 수 있기때문에 직접적으로 바꾸지 않음 
                 var newRot = child.eulerAngles;
                 newRot.x = 0;
-                newRot.y = 0;
-
+                newRot.z = 0;
                 child.eulerAngles = newRot;
             }
         }

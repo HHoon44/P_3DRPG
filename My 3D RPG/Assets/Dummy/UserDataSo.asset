@@ -25,22 +25,17 @@ MonoBehaviour:
   dtoStage:
     errorCode: 0
     errorMessage: 
-    lastStageIndex: 1000
-    lastPosX: -57.739902
-    lastPosY: 4.818088
-    lastPosZ: 22.230711
+    lastStageIndex: 1001
+    lastPosX: -41.924908
+    lastPosY: 8.201831
+    lastPosZ: 2.618284
   dtoItem:
     errorCode: 0
     errorMessage: 
     dtoItems:
-    - index: 1000
-      slotIndex: 0
-      amount: 0
-      reinforceValue: 0
-      isEquip: 0
     - index: 1001
-      slotIndex: 1
-      amount: 14
+      slotIndex: 0
+      amount: 3
       reinforceValue: 0
       isEquip: 0
   dtoQuest:

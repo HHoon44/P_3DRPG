@@ -270,8 +270,8 @@ namespace ProjectChan.Object
             // -> 현재 진행중인 퀘스트 목록을 가져온다
             var progressQuests = GameManager.User.boQuest.progressQuests;
 
-            // -> 현재 몬스터가 존재하는 진행중인 퀘스트 인덱스값
-            var questIndex = 0;
+            // -> 현재 몬스터가 타켓인 진행중인 퀘스트 인덱스를 담을 변수
+            var questIndex = -1;
 
             // -> 현재 몬스터를 타겟으로 하는 진행중인 퀘스트 찾기
             for (int i = 0; i < progressQuests.Count; i++)
@@ -282,38 +282,43 @@ namespace ProjectChan.Object
                 {
                     // -> 이때 i의 값은 현재 몬스터를 타겟으로하는 퀘스트가 위치하는 곳의 인덱스 값이다
                     questIndex = i;
+                    break;
                 }
             }
 
-            var length = progressQuests[questIndex].sdQuest.target.Length;
-
-            var detailIndex = 0;
-
-            // -> 진행중인 퀘스트를 찾았으니 현재 몬스터의 디테일 값을 찾는 작업
-            for (int i = 0; i < length; i++)
+            // -> 0보다 크거나 같다면 퀘스트가 존재
+            if (questIndex >= 0)
             {
-                if (progressQuests[questIndex].sdQuest.target[i] == boMonster.sdMonster.index)
+                var length = progressQuests[questIndex].sdQuest.target.Length;
+
+                var detailIndex = 0;
+
+                // -> 진행중인 퀘스트를 찾았으니 현재 몬스터의 디테일 값을 찾는 작업
+                for (int i = 0; i < length; i++)
                 {
-                    detailIndex = i;
+                    if (progressQuests[questIndex].sdQuest.target[i] == boMonster.sdMonster.index)
+                    {
+                        detailIndex = i;
+                    }
                 }
+
+                // -> 타겟을 잡았으므로 디테일 값을 올려주는데 만약 이미 디테일 값만큼 처치했다면 더이상 올라가지 않도록
+                if (progressQuests[questIndex].sdQuest.questDetail[detailIndex]
+                    != progressQuests[questIndex].details[detailIndex])
+                {
+                    progressQuests[questIndex].details[detailIndex]++;
+                }
+
+                // -> Bo데이터 변했으므로 Dto데이터에 다시 저장하는 작업
+                var dummyServer = DummyServer.Instance;
+                var dtoProgressQuest = new DtoQuestProgress();
+                dtoProgressQuest.index = progressQuests[questIndex].sdQuest.index;
+                dtoProgressQuest.details = progressQuests[questIndex].details;
+
+                // -> 어차피 Dto에 있는 데이터를 Bo에 저장했었기 때문에 현재 퀘스트가 존재하는 인덱스는 둘다 같다고 생각
+                dummyServer.userData.dtoQuest.progressQuests[questIndex] = dtoProgressQuest;
+                dummyServer.Save();
             }
-
-            // -> 타겟을 잡았으므로 디테일 값을 올려주는데 만약 이미 디테일 값만큼 처치했다면 더이상 올라가지 않도록
-            if (progressQuests[questIndex].sdQuest.questDetail[detailIndex]
-                != progressQuests[questIndex].details[detailIndex])
-            {
-                progressQuests[questIndex].details[detailIndex]++;
-            }
-
-            // -> Bo데이터 변했으므로 Dto데이터에 다시 저장하는 작업
-            var dummyServer = DummyServer.Instance;
-            var dtoProgressQuest = new DtoQuestProgress();
-            dtoProgressQuest.index = progressQuests[questIndex].sdQuest.index;
-            dtoProgressQuest.details = progressQuests[questIndex].details;
-
-            // -> 어차피 Dto에 있는 데이터를 Bo에 저장했었기 때문에 현재 퀘스트가 존재하는 인덱스는 둘다 같다고 생각
-            dummyServer.userData.dtoQuest.progressQuests[questIndex] = dtoProgressQuest;
-            dummyServer.Save();
 
             #endregion
 
@@ -331,6 +336,7 @@ namespace ProjectChan.Object
             var itemPool = ObjectPoolManager.Instance.GetPool<Item>(PoolType.Item);
 
             // -> 아이템의 상위객체로할 ItemHolder를 찾는 작업
+            // -> ObjectPoolManager의 하위로 존재하는 ItemHolder를 가져옴
             if (GameObject.Find("ItemHolder"))
             {
                 itemHolder = GameObject.Find("ItemHolder");

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -350,8 +351,11 @@ namespace ProjectChan.Object
                     return;
                 }
 
-                // -> 무기 바꿀땐 멈춰
+                // -> 무기 바꿀땐 이동 입력이랑 이동 멈추기
                 playerController.isPlayerAction = true;
+                playerController.PlayerCharacter.boActor.moveDir = Vector3.zero;
+                var newDir = Vector3.zero;
+                playerController.PlayerCharacter.boActor.rotDir = newDir;
 
                 if (!weaponController.isWeapon)
                 {
@@ -365,20 +369,27 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 인벤토리에 있는 소비 아이템을 사용하는 메서드
+        /// => 아이템 키의 입력을 받는 메서드
         /// </summary>
         private void ItemUsed()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                var uiInventory = UIWindowManager.Instance.GetWindow<UIInventory>();
-                uiInventory.UsedItem(boActor, 0);
-            }
+            if (Input.GetKeyDown(KeyCode.Alpha1)) { ItemKey(KeyCode.Alpha1.ToString()); }
+            if (Input.GetKeyDown(KeyCode.Alpha2)) { ItemKey(KeyCode.Alpha2.ToString()); }
+            if (Input.GetKeyDown(KeyCode.Alpha3)) { ItemKey(KeyCode.Alpha3.ToString()); }
+            if (Input.GetKeyDown(KeyCode.Alpha4)) { ItemKey(KeyCode.Alpha4.ToString()); }
+            if (Input.GetKeyDown(KeyCode.Alpha5)) { ItemKey(KeyCode.Alpha5.ToString()); }
+            if (Input.GetKeyDown(KeyCode.Alpha6)) { ItemKey(KeyCode.Alpha6.ToString()); }
+            if (Input.GetKeyDown(KeyCode.Alpha7)) { ItemKey(KeyCode.Alpha7.ToString()); }
+            if (Input.GetKeyDown(KeyCode.Alpha8)) { ItemKey(KeyCode.Alpha8.ToString()); }
+            if (Input.GetKeyDown(KeyCode.Alpha9)) { ItemKey(KeyCode.Alpha9.ToString()); }
 
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            // -> 로컬 함수
+            void ItemKey(string value)
             {
+                Debug.Log(value);
                 var uiInventory = UIWindowManager.Instance.GetWindow<UIInventory>();
-                uiInventory.UsedItem(boActor, 1);
+                var index = Regex.Replace(value, @"[^\d]", "");
+                uiInventory.UsedItem(boActor, int.Parse(index) - 1);
             }
         }
 
@@ -426,6 +437,7 @@ namespace ProjectChan.Object
         public void OnChangeWeapon()
         {
             weaponController.SetWeapon();
+
         }
 
         public void OnChangeWeaponEnd()

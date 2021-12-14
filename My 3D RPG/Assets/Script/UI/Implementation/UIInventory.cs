@@ -17,13 +17,13 @@ namespace ProjectChan.UI
         private Transform itemSlotHolder;       // -> 아이템 슬롯 홀더를 담을 필드
         public Button sortButton;               // -> 정렬 버튼 (아직 안넣음)
         private GraphicRaycaster gr;            // -> UICanvas가 지닌 캔버스 안을 검색하기 위한 레이캐스트
-        private ItemSlot dragSlot;              // -> 드래그되고 있는 아이템 슬롯
-        private Vector3 dragSlotOriginVec;      // -> 드래그 되고 있는 아이템 슬롯의 원래 위치
+        private ItemSlot dragSlot;              // -> 옮기려는 아이템 슬롯
+        private Vector3 dragSlotOriginVec;      // -> 옮기려는 아이템 슬롯의 원 위치
 
         /// <summary>
         /// => 아이템 슬롯 홀더에 자식으로 존재하는 슬롯들을 담아놓을 공간
         /// </summary>
-        public List<ItemSlot> itemSlots = new List<ItemSlot>();
+        public List<ItemSlot> itemSlots { get; private set; } = new List<ItemSlot>();
 
         public override void Start()
         {
@@ -40,8 +40,7 @@ namespace ProjectChan.UI
                 itemSlots.Add(itemSlotHolder.GetChild(i).GetComponent<ItemSlot>());
             }
 
-            // -> 리스트에 저장된 슬롯들을 초기화 하는 작업
-            // -> Bo데이터가 지닌 아이템 정보를 슬롯에 초기화 하는 작업
+            // -> 리스트에 저장된 슬롯들을 초기화 하는 작업과 Bo데이터가 지닌 아이템 정보를 슬롯에 초기화 하는 작업
             InitItemSlots();
             InitInventory();
 
@@ -76,8 +75,7 @@ namespace ProjectChan.UI
         /// <param name="boItem"> 플레이어가 습득한 아이템 정보 </param>
         public void AddItem(BoItem boItem)
         {
-            // -> BoItem의 슬롯 인덱스가 -1이 아니라면 이미 슬롯에 존재한 아이템이므로
-            //    해당 슬롯인덱스의 아이템 슬롯을 재설정 해준다
+            // -> Bo데이터의 슬롯 인덱스가 0보다 크다면 아이템이 존재하는 것 이므로 슬롯 세팅
             if (boItem.slotIndex >= 0)
             {
                 itemSlots[boItem.slotIndex].SetSlot(boItem);
@@ -103,10 +101,6 @@ namespace ProjectChan.UI
         /// <param name="slotIndex"> 몇번째 키입력인지 </param>
         public void UsedItem(BoActor boActor, int slotIndex)
         {
-            /// 여기 부분 따로 함수로 빼도 될듯
-            /// 인덱스만 파라미터로 받고 어차피 1번 클릭이든 2번 클릭이든 모두 아래는 모두 같은 작업이라 상관없을듯
-            /// 파라미터로는 아이템 슬롯이 지닌 슬롯 인덱스 -1 하면 될듯
-
             // -> BoItem이 존재한다면 슬롯에 아이템이 존재한다
             if (itemSlots[slotIndex].BoItem != null)
             {
@@ -119,7 +113,7 @@ namespace ProjectChan.UI
                         case "currentHp":
                             /// 사용하면 스탯 올려주고 
                             /// 개수 줄어들어야함 그리고 Dto에 다시 저장해야함
-                            boActor.currentHp += itemSlots[slotIndex].BoItem.sdItem.affectingStatsValue[slotIndex];
+                            boActor.currentHp += itemSlots[slotIndex].BoItem.sdItem.affectingStatsValue[0];
 
                             if (boActor.currentHp >= boActor.maxHp)
                             {
@@ -142,14 +136,20 @@ namespace ProjectChan.UI
                     }
                 }
 
+                // -> 로컬 함수
                 void DiminishAmount()
                 {
+                    // -> 사용했으니 개수를 감소한다
                     itemSlots[slotIndex].BoItem.amount--;
 
-                    /// 0개 일때 작업 수정하기
+                    // -> 만약 아이템을 다 소비 했다면
                     if (itemSlots[slotIndex].BoItem.amount == 0)
                     {
-                        itemSlots[slotIndex].SetSlot(null);
+                        // -> 기존의 아이템 슬롯의 정보를 제거
+                        // -> 새로운 슬롯 정보를 대입
+                        GameManager.User.boItems.Remove(itemSlots[slotIndex].BoItem);
+                        ItemSlot itemSlot = new ItemSlot();
+                        itemSlots[slotIndex].SetSlot(itemSlot.BoItem);
                     }
                     else
                     {
@@ -256,7 +256,7 @@ namespace ProjectChan.UI
         /// <param name="eventData"> 마우스의 정보를 담고 있는 데이터 </param>
         public void OnDrag(PointerEventData eventData)
         {
-            // -> 만약 드래그할 슬롯이 존재하지 않는다면
+            // -> 옮기려는 슬롯이 없다면
             if (dragSlot == null)
             {
                 return;
@@ -277,10 +277,10 @@ namespace ProjectChan.UI
 
             gr.Raycast(eventData, results);
 
-            // -> 이미지를 옮기는 작업이였으므로 다시 원 위치로 설정
+            // -> 이미지를 원 위치로 설정
             dragSlot.ItemImage.transform.position = dragSlotOriginVec;
 
-            // -> 드래그가 끝난 지점에 존재하는 ItemSlot에 데이터를 담아놓을 공간
+            // -> 드래그가 끝난 지점에 존재하는 슬롯의 데이터를 담을 변수
             ItemSlot destSlot = null;
 
             for (int i = 0; i < results.Count; i++)
@@ -305,30 +305,27 @@ namespace ProjectChan.UI
                 return;
             }
 
-            // -> BoItem 데이터가 변할 예정이므로
             var boItems = GameManager.User.boItems;
 
-            // -> 이전 슬롯에 존재하는 BoItem 데이터를 복사한다
+            // -> 이전 슬롯에 존재하는 Bo데이터를 복사
             var tempBoItem = dragSlot.BoItem.ObjcetCopy();
 
-            // -> 드래그 슬롯에 존재하는 BoItem 데이터를 BoItems에서 삭제하고
-            //    객체 복사를 사용하여 복사한 데이터를 추가해준다
+            // -> 옮기려는 슬롯의 Bo데이터는 삭제
+            // -> 위에서 복사한 데이터를 저장
             boItems.Remove(dragSlot.BoItem);
             boItems.Add(tempBoItem);
 
-            // -> 목적지에 존재하는 슬롯 데이터를 드래그 슬롯에 세팅
+            // -> 목적지에 존재하는 데이터를 옮기려는 슬롯에 세팅
             dragSlot.SetSlot(destSlot.BoItem);
             SetSlotIndex(dragSlot);
 
-            // -> 드래그 슬롯에 존재하는 슬롯 데이터를 목적지 슬롯에 세팅
+            // -> 목적지 슬롯에는 옮겼던 슬롯의 데이터를 저장
             destSlot.SetSlot(tempBoItem);
             SetSlotIndex(destSlot);
 
-            // -> BoItems 데이터에 변동이 생겼으므로 DtoItem에 재저장한다
             DummyServer.Instance.userData.dtoItem = new DtoItem(boItems);
             DummyServer.Instance.Save();
 
-            // -> 정규식을 이용하여 오브젝트 이름에서 SlotIndex를 가져오는 작업
             void SetSlotIndex(ItemSlot itemSlot)
             {
                 if (itemSlot.BoItem == null)
@@ -336,6 +333,7 @@ namespace ProjectChan.UI
                     return;
                 }
 
+                // -> 정규식을 이용하여 오브젝트 이름에서 SlotIndex를 가져오는 작업
                 var index = Regex.Replace(itemSlot.gameObject.name, @"[^\d]", "");
                 itemSlot.BoItem.slotIndex = int.Parse(index);
             }
