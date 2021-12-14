@@ -328,15 +328,13 @@ namespace ProjectChan.Object
             var itemNumber = boMonster.sdMonster.dropItemRef[itemIndex];
             var sdItem = GameManager.SD.sdItems.Where(obj => obj.index == itemNumber)?.SingleOrDefault();
 
-
             // -> 아이템을 풀에 생성
             var resourceManager = ResourceManager.Instance;
             resourceManager.LoadPoolableObject<Item>(PoolType.Item, sdItem.resourcePath, 10);
 
             var itemPool = ObjectPoolManager.Instance.GetPool<Item>(PoolType.Item);
 
-            // -> 아이템의 상위객체로할 ItemHolder를 찾는 작업
-            // -> ObjectPoolManager의 하위로 존재하는 ItemHolder를 가져옴
+            // -> 아이템의 부모를 찾는 작업
             if (GameObject.Find("ItemHolder"))
             {
                 itemHolder = GameObject.Find("ItemHolder");

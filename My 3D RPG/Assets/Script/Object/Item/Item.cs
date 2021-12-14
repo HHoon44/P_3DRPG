@@ -14,7 +14,7 @@ namespace ProjectChan.Object
 {
     public class Item : MonoBehaviour, IPoolableObject
     {
-        private SDItem sdItem;
+        private SDItem sdItem;      // -> 현재 아이템의 기획 데이터
 
         public bool CanRecycle { get; set; } = true;
         
@@ -44,7 +44,7 @@ namespace ProjectChan.Object
             var userInventory = UIWindowManager.Instance.GetWindow<UIInventory>();
 
             // -> 아이템이 장비 아이템인지 판단
-            var isEquip = sdItem.itemType == Define.ItemType.Equipment;
+            var isEquip = (sdItem.itemType == Define.ItemType.Equipment);
 
             // -> 장비 아이템이 아니라면
             if (!isEquip)

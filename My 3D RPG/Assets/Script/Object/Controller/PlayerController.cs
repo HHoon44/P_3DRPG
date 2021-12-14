@@ -126,29 +126,20 @@ namespace ProjectChan.Object
             /// 어쨋든 sprint를 입력하기 전까지는 0.5랑 -0.5임 결국엔
             var boActor = PlayerCharacter.boActor;
             var newDir = boActor.moveDir;
-            var sprint = value > Define.StaticData.BaseSpeed ? Define.StaticData.BaseSpeed :
-                value < -Define.StaticData.BaseSpeed ? -Define.StaticData.BaseSpeed : value;
+            var sprint = Define.StaticData.BaseSpeed + UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
 
-            Debug.Log(sprint);
+            // -> 처음엔 걷기
+            PlayerCharacter.isRun = false;
 
-            /// value 조건식걸어서 쉬프트 키 눌러도 앞으로 가는거 막아야 할듯
-
-            sprint += UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
-
-            Debug.Log(sprint);
-
-            newDir.z = sprint;
-            PlayerCharacter.boActor.moveDir = newDir;
-
-            if (sprint > Define.StaticData.BaseSpeed ||
-                sprint < -Define.StaticData.BaseSpeed)
+            // -> 대쉬 버튼 클릭시 달리기
+            if (UnityEngine.Input.GetAxis(Input.Sprint) != 0)
             {
+                sprint += UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
                 PlayerCharacter.isRun = true;
             }
-            else
-            {
-                PlayerCharacter.isRun = false;
-            }
+
+            newDir.z = (sprint * value);
+            PlayerCharacter.boActor.moveDir = newDir;
         }
 
         private void GetMouseX(float value)     // -> Y축 회전

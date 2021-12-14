@@ -124,6 +124,13 @@ namespace ProjectChan.Define
         public const float BaseSpeed = 0.5f;
     }
 
+    public class ItemData
+    {
+        public const KeyCode startNumer = KeyCode.Alpha1;
+        public const KeyCode endNumber = KeyCode.Alpha9;
+        public const int interval = 48;
+    }
+
     public class Resource
     {
         public enum AtlasType { None, BackGround, SchoolStage, Portrait, UIAtlase, ItemAtlase }

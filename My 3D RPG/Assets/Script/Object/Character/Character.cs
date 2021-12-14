@@ -321,14 +321,16 @@ namespace ProjectChan.Object
             {
                 if (GameManager.User.boPrevStatDic.ContainsKey(actorType))
                 {
-                    if (GameManager.User.boPrevStatDic[actorType].currentHp < 0)
+                    var boPrevStat = GameManager.User.boPrevStatDic[actorType];
+
+                    if (boPrevStat.currentHp < 0)
                     {
                         boCharacter.currentHp = 0;
                     }
                     else
                     {
-                        boCharacter.currentHp = GameManager.User.boPrevStatDic[actorType].currentHp;
-                        boCharacter.currentEnergy = GameManager.User.boPrevStatDic[actorType].currentMana;
+                        boCharacter.currentHp = boPrevStat.currentHp;
+                        boCharacter.currentEnergy = boPrevStat.currentMana;
                     }
                 }
                 else
@@ -371,25 +373,24 @@ namespace ProjectChan.Object
         /// <summary>
         /// => 아이템 키의 입력을 받는 메서드
         /// </summary>
+        /// 
         private void ItemUsed()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1)) { ItemKey(KeyCode.Alpha1.ToString()); }
-            if (Input.GetKeyDown(KeyCode.Alpha2)) { ItemKey(KeyCode.Alpha2.ToString()); }
-            if (Input.GetKeyDown(KeyCode.Alpha3)) { ItemKey(KeyCode.Alpha3.ToString()); }
-            if (Input.GetKeyDown(KeyCode.Alpha4)) { ItemKey(KeyCode.Alpha4.ToString()); }
-            if (Input.GetKeyDown(KeyCode.Alpha5)) { ItemKey(KeyCode.Alpha5.ToString()); }
-            if (Input.GetKeyDown(KeyCode.Alpha6)) { ItemKey(KeyCode.Alpha6.ToString()); }
-            if (Input.GetKeyDown(KeyCode.Alpha7)) { ItemKey(KeyCode.Alpha7.ToString()); }
-            if (Input.GetKeyDown(KeyCode.Alpha8)) { ItemKey(KeyCode.Alpha8.ToString()); }
-            if (Input.GetKeyDown(KeyCode.Alpha9)) { ItemKey(KeyCode.Alpha9.ToString()); }
+            var uiInventory = UIWindowManager.Instance.GetWindow<UIInventory>();
+
+            for (KeyCode i = Define.ItemData.startNumer; i <= Define.ItemData.endNumber; ++i)
+            {
+                if (Input.GetKeyDown(i))
+                {
+                    ItemKey(i);
+                }
+            }
 
             // -> 로컬 함수
-            void ItemKey(string value)
+            void ItemKey(KeyCode value)
             {
-                Debug.Log(value);
-                var uiInventory = UIWindowManager.Instance.GetWindow<UIInventory>();
-                var index = Regex.Replace(value, @"[^\d]", "");
-                uiInventory.UsedItem(boActor, int.Parse(index) - 1);
+                int index = (int)value - Define.ItemData.interval;
+                uiInventory.UsedItem(boActor, index - 1);
             }
         }
 
