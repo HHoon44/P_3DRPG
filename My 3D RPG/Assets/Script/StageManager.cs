@@ -232,19 +232,12 @@ namespace ProjectChan
                 monsterHolder.position = Vector3.zero;
             }
 
-            /// Test
-            if (monsterHolder.childCount > 2)
-            {
-                return;
-            }
-
             // -> 현재 스테이지 정보를 가져온다
             var sd = GameManager.SD;
             var sdStage = GameManager.User.boStage.sdStage;
 
             // -> 생성할 몬스터 갯수
-            //var monsterSpawnCnt = Random.Range(Spawn.MinMonsterSpawnCnt, Spawn.MaxMonsterSpawnCnt);
-            var monsterSpawnCnt = 2;
+            var monsterSpawnCnt = Random.Range(Spawn.MinMonsterSpawnCnt, Spawn.MaxMonsterSpawnCnt);
             var monsterPool = ObjectPoolManager.Instance.GetPool<Monster>(PoolType.Monster);
             var battleManager = BattleManager.Instance;
 
@@ -272,8 +265,8 @@ namespace ProjectChan
                 }
 
                 var bounds = spawnAreaBounds[sdStage.spawnArea[randIndex]];
-                var spawnPosX = Random.Range(-bounds.size.x * .5f, bounds.size.x * .5f);
-                var spawnPosZ = Random.Range(-bounds.size.z * .5f, bounds.size.z * .5f);
+                var spawnPosX = Random.Range(-bounds.size.x * 0.5f, bounds.size.x * 0.5f);
+                var spawnPosZ = Random.Range(-bounds.size.z * 0.5f, bounds.size.z * 0.5f);
                 var centerPos = new Vector3(bounds.center.x, 0, bounds.center.z);
 
                 // -> 몬스터가 생성될 위치에 Ray를 쏴서 그 지점의 Y값을 얻으려는 작업

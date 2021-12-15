@@ -46,8 +46,9 @@ namespace ProjectChan.UI
             // -> 대상이 죽은 상태라면
             if (target.State == Define.Actor.ActorState.Dead)
             {
-                //target.State = Define.Actor.ActorState.None;
+                // -> 들어갈때 Stat이 Dead상태로 풀에 돌아가면 재사용할때 바로 죽음
                 ObjectPoolManager.Instance.GetPool<MonHpBar>(Define.PoolType.MonHpBar).ReturnPoolableObject(this);
+                target.State = Define.Actor.ActorState.None;
                 target = null;
                 return;
             }

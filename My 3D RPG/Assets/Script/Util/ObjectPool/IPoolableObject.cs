@@ -10,5 +10,4 @@ namespace ProjectChan.Util
     {
         bool CanRecycle { get; set; }
     }
-    //
 }

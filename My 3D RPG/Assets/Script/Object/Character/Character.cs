@@ -253,11 +253,9 @@ namespace ProjectChan.Object
                 anim.SetBool(charAnim.isJump, false);
             }
         }
-
-
         public void ChangeForm()
         {
-            if (Input.GetButtonDown("FormChange") && boActor.currentEnergy > Define.StaticData.ChangeFormValue)
+            if (Input.GetButtonDown("FormChange") && boActor.currentEnergy > Define.StaticData.ChangeFormValue && !playerController.isPlayerAction)
             {
                 boActor.currentEnergy -= Define.StaticData.ChangeFormValue;
 

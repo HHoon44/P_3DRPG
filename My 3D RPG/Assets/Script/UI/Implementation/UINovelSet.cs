@@ -17,6 +17,7 @@ namespace ProjectChan.UI
         public TextMeshProUGUI speakerName;     // -> 현재 말하는 캐릭터 이름
         public TextMeshProUGUI dialogue;        // -> 현재 말하는 캐릭터의 대사
         public Image portrait;                  // -> 현재 말하는 캐릭터의 이미지
+        public Animation portraitAnim;          // -> 초상화 애니메이션
         private AspectRatioFitter arf;
 
         public override void Start()

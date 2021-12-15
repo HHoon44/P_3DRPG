@@ -56,7 +56,9 @@ namespace ProjectChan.Util
             T recycleObj = Pool.Find(obj => pred(obj) && obj.CanRecycle);
 
             if (recycleObj == null)
+            { 
                 return null;
+            }
 
             recycleObj.CanRecycle = false;
 

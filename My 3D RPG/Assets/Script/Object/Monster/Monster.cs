@@ -79,9 +79,12 @@ namespace ProjectChan.Object
         public override void ActorUpdate()
         {
             // -> 플레이어 탐지
-            CheckDetection();
-
-            base.ActorUpdate();
+            // -> 안죽었을 때만
+            if (State != ActorState.Dead)
+            {
+                CheckDetection();
+                base.ActorUpdate();
+            }
         }
 
         public override void MoveUpdate()
@@ -330,7 +333,9 @@ namespace ProjectChan.Object
 
             // -> 아이템을 풀에 생성
             var resourceManager = ResourceManager.Instance;
-            resourceManager.LoadPoolableObject<Item>(PoolType.Item, sdItem.resourcePath, 10);
+            resourceManager.LoadPoolableObject<Item>(PoolType.Item, sdItem.resourcePath, 5);
+
+            Debug.Log(sdItem.resourcePath);
 
             var itemPool = ObjectPoolManager.Instance.GetPool<Item>(PoolType.Item);
 
