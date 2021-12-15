@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c7b5ee6d805865f4d87c945585777026, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4925,7 +4925,7 @@ GameObject:
   - component: {fileID: 8738788923911488478}
   - component: {fileID: -7457871778802881299}
   m_Layer: 0
-  m_Name: EnergyPotion
+  m_Name: Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4972,6 +4972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537c94ab9a577e94a882f9fde1e7ece2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshRender: {fileID: 23000010119388918}
 --- !u!1 &1000013970829164
 GameObject:
   m_ObjectHideFlags: 0

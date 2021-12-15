@@ -20,10 +20,10 @@ namespace ProjectChan.Object
     {
         private float currentPatrolWaitTime;    // -> 현재 정찰 대기시간
         private float patrolWaitTime;           // -> 정찰 대기시간 최대값
-        private Vector3 destPos;                // -> 목적지 위치 ( 정찰 위치, 타겟 위치 )
+        private Vector3 destPos;                // -> 목적지 위치 (정찰 위치, 타겟 위치)
         public BoMonster boMonster;             // -> 몬스터의 정보가 담겨있는 Bo데이터
-        private NavMeshAgent agent;             // -> NavMesh 위에서 움직일 대상
-        private NavMeshPath path;               // -> Agent가 돌아다닐 경로
+        private NavMeshAgent agent;             // -> NavMesh 위에서 움직일 대상 (몬스터)
+        private NavMeshPath path;               // -> 에이전트가 돌아다닐 경로
         private GameObject itemHolder;          // -> 몬스터가 떨군 아이템을 자식으로 달아놓을 게임오브젝트
 
         public bool CanRecycle { get; set; } = true;
@@ -37,6 +37,7 @@ namespace ProjectChan.Object
             SetStats();
             InitPatrolWaitTime();
             SetAnimParam(boActor.actorType);
+
             // -> 목적지 위치를 몬스터의 현재 위치로 설정
             // -> 이렇게 하면 바로 몬스터가 새로운 목적지를 설정함
             destPos = transform.position;
@@ -79,12 +80,9 @@ namespace ProjectChan.Object
         public override void ActorUpdate()
         {
             // -> 플레이어 탐지
-            // -> 안죽었을 때만
-            if (State != ActorState.Dead)
-            {
-                CheckDetection();
-                base.ActorUpdate();
-            }
+            CheckDetection();
+
+            base.ActorUpdate();
         }
 
         public override void MoveUpdate()
@@ -115,26 +113,28 @@ namespace ProjectChan.Object
         /// <returns></returns>
         private bool GetMovement()
         {
+            // -> 타겟이 존재한다면
             if (attackController.hasTarget)
             {
-                // -> 공격 가능 상태라면  false
-                // -> 공격 불가능 상태라면 true
+                // -> 평소에는 False이다가 대상을 만나면 True
                 return !attackController.canAtk;
             }
-
+            
+            // -> 멈춰있다면
             if (State == ActorState.Idle)
             {
                 currentPatrolWaitTime += Time.deltaTime;
 
+                // -> 최대 대기시간보다 크거나 같다면
                 if (currentPatrolWaitTime >= patrolWaitTime)
                 {
-                    // -> 현재 대기 시간이 최대 대기시간보다 크거나 그 값과 같다면 움직일 수있도록 한다
                     InitPatrolWaitTime();
                     return true;
                 }
-
-                // -> 대기 시간이 지나지 않았으므로 false를 반환
-                return false;
+                else
+                {
+                    return false;
+                }
             }
 
             /// => Vector3.magnitude : 벡터의 길이를 반환한다
@@ -142,9 +142,10 @@ namespace ProjectChan.Object
             var distance = (destPos - transform.position).magnitude;
 
             /// => stoppingDistance : 목표 위치에 가까워졌을 시, 정지하는 거리 값
-            // -> 사이거리 값이 정지하는 거리 값보다 작다면 목적지를 재설정한다
+            // -> 사이거리 값이 정지하는 거리 값보다 작거나 같다면
             if (distance <= agent.stoppingDistance)
             {
+                // -> 목적지에 거의 도달 했다는 의미 이므로 목적지 재설정
                 ChangeDestPos();
                 return false;
             }
@@ -157,8 +158,8 @@ namespace ProjectChan.Object
         /// </summary>
         private void ChangeDestPos()
         {
-            // -> 몬스터마다 스폰 구역이 다르므로, 몬스터의 인덱스 값을 넘겨
-            //    해당 몬스터의 스폰 구역 내에서 랜덤한 위치를 반환 한다
+            // -> 몬스터마다 스폰 구역이 다르므로
+            //    몬스터의 인덱스 값을 넘겨 해당 몬스터의 스폰 구역 내에서 랜덤한 위치를 반환 한다
             destPos = StageManager.Instance.GetRandPosInArea(boMonster.sdMonster.index);
 
             /// => CalculatePath : 에이전트 위치에서 목적지(destPos)까지의 거리중 최단 거리를 계산하고
@@ -166,15 +167,17 @@ namespace ProjectChan.Object
             ///                    (정확히는 NavMeshPath 안에 있는 Vector3[] corners에 최단 경로의 코너들의 위치 벡터가 저장됨 )
             var isExist = agent.CalculatePath(destPos, path);
 
-            // -> 경로가 존재 하지 않는다면 목적지 재설정
+            // -> 경로가 존재 하지 않는다면
             if (!isExist)
             {
+                // -> 다시 설정
                 ChangeDestPos();
             }
             /// => NavMeshPathStatus.PathPartial : 해당 경로가 목적지에 도달 할 수 없는 상태를 나타낸다
-            // -> 존재는 하지만 path의 상태가 도달 할 수 없는 상태라면 목적지 재설정
+            // -> 도달 할 수 없는 Path라면
             else if (path.status == NavMeshPathStatus.PathPartial)
             {
+                // -> 다시 설정
                 ChangeDestPos();
             }
         }
@@ -203,17 +206,17 @@ namespace ProjectChan.Object
         */
 
         /// <summary>
-        /// => 몬스터가 캐릭터를 감지하도록 하는 메서드
+        /// => 몬스터가 플레이어를 감지하도록 하는 메서드
         /// </summary>
         private void CheckDetection()
         {
-            // -> 저장해놓은 감지범위
+            // -> 감지범위 설정
             var extentsValue = boMonster.sdMonster.detectionRange;
             var halfExtents = new Vector3(extentsValue, extentsValue, extentsValue);
 
             /// => OverlapBox : 센터(transform.position)에서 사이즈(halfExtents)에 transform.rotation만큼 회전한 상자에 충돌한
             ///                 콜라이더를 전부 반환한다
-            // -> 오버랩박스를 이용하여 Player레이어를 감지한다
+            // -> 오버랩박스를 이용하여 플레이어를 감지
             var colls = Physics.OverlapBox(transform.position, halfExtents, transform.rotation,
                 1 << LayerMask.NameToLayer("Player"));
 
@@ -224,7 +227,7 @@ namespace ProjectChan.Object
                 return;
             }
 
-            // -> 충돌한 콜라이더가 존재하므로 타겟은 존재한다
+            // -> 타겟 존재
             attackController.hasTarget = true;
 
             // -> 에이전트의 목적지(destPos)를 제일 처음으로 충돌한 콜라이더의 객체 포지션으로 설정
@@ -234,10 +237,11 @@ namespace ProjectChan.Object
 
             /// => Vector3.sqrMagnitude : 벡터의 길이를 제곱한 값을 반환함
             ///                           (크기의 제곱을 구하는 것이 Vector3.magnitude보다 훨씬 빠르다)
-            // -> 타겟과의 거리가 공격범위(atkRange)보다 작거나 같다면 공격 범위안에 들었다는 의미이므로
+            // -> 타겟과의 거리가 공격범위보다 작거나 같다면
             if (distance.sqrMagnitude <= boActor.atkRange)
             {
-                // -> 공격이 가능하고, 현재 오브젝트가 타겟을 바라보도록 방향벡터(distance.normalized)를 이용하여 설정한다
+                // -> 범위 안에 존재하므로 공격이 가능하고
+                //    현재 오브젝트가 타겟을 바라보도록 방향벡터(distance.normalized)를 이용하여 설정
                 attackController.canAtk = true;
                 transform.rotation = Quaternion.LookRotation(distance.normalized);
             }
@@ -260,7 +264,7 @@ namespace ProjectChan.Object
             // -> 공격이 끝났으므로 쿨타임 체크 가능여부는 true
             attackController.canCheckCoolTime = true;
             anim.SetBool(monAnim.isAttack, false);
-            SetState(ActorState.Idle);
+            SetState(ActorState.Walk);
         }
 
         /// <summary>
@@ -330,12 +334,6 @@ namespace ProjectChan.Object
             var itemIndex = Random.Range(0, boMonster.sdMonster.dropItemPer.Length);
             var itemNumber = boMonster.sdMonster.dropItemRef[itemIndex];
             var sdItem = GameManager.SD.sdItems.Where(obj => obj.index == itemNumber)?.SingleOrDefault();
-
-            // -> 아이템을 풀에 생성
-            var resourceManager = ResourceManager.Instance;
-            resourceManager.LoadPoolableObject<Item>(PoolType.Item, sdItem.resourcePath, 5);
-
-            Debug.Log(sdItem.resourcePath);
 
             var itemPool = ObjectPoolManager.Instance.GetPool<Item>(PoolType.Item);
 

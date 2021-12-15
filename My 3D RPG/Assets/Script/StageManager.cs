@@ -278,6 +278,7 @@ namespace ProjectChan
                 monster.transform.position = centerPos + new Vector3(spawnPosX, hit.point.y, spawnPosZ);
                 monster.transform.SetParent(monsterHolder, true);
                 monster.Initialize(new BoMonster(sdMonster));
+                monster.State = Define.Actor.ActorState.None;   /// Test
                 battleManager.AddActor(monster);
             }
         }

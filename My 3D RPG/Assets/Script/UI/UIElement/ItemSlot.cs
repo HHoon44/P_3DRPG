@@ -45,8 +45,7 @@ namespace ProjectChan.UI
             else
             {
                 ItemAmount.text = boItem.amount.ToString();
-                var path = boItem.sdItem.resourcePath.Substring(boItem.sdItem.resourcePath.LastIndexOf('/') + 1);
-                ItemImage.sprite = SpriteLoader.GetSprite(Define.Resource.AtlasType.ItemAtlase, path);
+                ItemImage.sprite = SpriteLoader.GetSprite(Define.Resource.AtlasType.ItemAtlase, boItem.sdItem.resourcePath);
                 ItemImage.color = Color.white;
             }
         }

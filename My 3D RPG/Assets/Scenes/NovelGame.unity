@@ -223,6 +223,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 119129356}
     m_Modifications:
+    - target: {fileID: 466888758040015216, guid: 758be31f5e3ba4842b4db97a82d66d51, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 466888758040015217, guid: 758be31f5e3ba4842b4db97a82d66d51, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -335,6 +339,10 @@ PrefabInstance:
       propertyPath: isOpen
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 466888759067320730, guid: 758be31f5e3ba4842b4db97a82d66d51, type: 3}
+      propertyPath: portraitAnim
+      value: 
+      objectReference: {fileID: 51683320}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758be31f5e3ba4842b4db97a82d66d51, type: 3}
 --- !u!224 &51683318 stripped

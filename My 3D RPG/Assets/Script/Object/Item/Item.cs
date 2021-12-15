@@ -14,10 +14,11 @@ namespace ProjectChan.Object
 {
     public class Item : MonoBehaviour, IPoolableObject
     {
-        private SDItem sdItem;      // -> 현재 아이템의 기획 데이터
+        private SDItem sdItem;              // -> 현재 아이템의 기획 데이터
+        public MeshRenderer meshRender;
 
         public bool CanRecycle { get; set; } = true;
-        
+
         /// <summary>
         /// => 아이템 초기 설정 메서드
         /// </summary>
@@ -25,7 +26,12 @@ namespace ProjectChan.Object
         public void Initialize(int itemNumber)
         {
             // -> 현재 아이템의 SD데이터를 파라미터로 받은 itemNumber을 이용하여 불러온다
-            sdItem =  GameManager.SD.sdItems.Where(obj => obj.index == itemNumber)?.SingleOrDefault();
+            sdItem = GameManager.SD.sdItems.Where(obj => obj.index == itemNumber)?.SingleOrDefault();
+
+            var materials = meshRender.materials;
+            var material = Resources.Load<Material>(sdItem.resourcePath);
+            materials[0] = material;
+            meshRender.materials = materials;
         }
 
         private void OnTriggerEnter(Collider other)

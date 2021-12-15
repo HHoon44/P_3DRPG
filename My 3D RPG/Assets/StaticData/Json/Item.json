@@ -7,7 +7,7 @@
       "currentHp"
     ],
     "description": "사용시 Hp를 50을 회복합니다",
-    "resourcePath": "Prefabs/Item/HpPotion",
+    "resourcePath": "Hp_Potion",
     "affectingStatsValue": [
       50.0
     ]
@@ -20,7 +20,7 @@
       "currentEnergy"
     ],
     "description": "사용시 Energy 50을 회복합니다",
-    "resourcePath": "Prefabs/Item/EnergyPotion",
+    "resourcePath": "Energy_Potion",
     "affectingStatsValue": [
       50.0
     ]

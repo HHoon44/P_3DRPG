@@ -42,6 +42,7 @@ namespace ProjectChan.Resource
             LoadPoolableObject<MonHpBar>(PoolType.MonHpBar, "Prefabs/UI/MonHpBar", 10);
             LoadPoolableObject<DialogueButton>(PoolType.DialogueButton, "Prefabs/UI/DialogueButton", 10);
             LoadPoolableObject<QuestSlot>(PoolType.QuestSlot, "Prefabs/UI/QuestSlot", 10);
+            LoadPoolableObject<Object.Item>(PoolType.Item, "Prefabs/Item/Potion", 10);
         }
 
         public void LoadBackGround()
