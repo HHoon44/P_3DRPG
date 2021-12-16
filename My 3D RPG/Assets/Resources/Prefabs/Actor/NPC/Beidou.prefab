@@ -152,7 +152,7 @@ Animator:
   m_GameObject: {fileID: 93531033770871011}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0bcf7c939076bde409549c6f68ef9cbc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 11cc82f766356a34eab97ebd5fc9db4c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a38579d3de13f9e4f98e7b505327ddb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 6694518944628131875}
 --- !u!136 &4631168969872120373
 CapsuleCollider:
   m_ObjectHideFlags: 0

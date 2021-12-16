@@ -2867,7 +2867,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 11cc82f766356a34eab97ebd5fc9db4c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2885,6 +2885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a38579d3de13f9e4f98e7b505327ddb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 2576543247191049095}
 --- !u!136 &6612062406395239549
 CapsuleCollider:
   m_ObjectHideFlags: 0

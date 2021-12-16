@@ -31,8 +31,11 @@ namespace ProjectChan.UI
         /// </summary>
         /// <param name="boNovel"> SDNovel 데이터를 지닌 Bo데이터 </param>
         public void SetNovel(BoNovel boNovel)
-        { 
+        {
+            /// 보류
+            //portraitAnim.SetTrigger("doMove");
 
+            // -> 이름, 대화 세팅
             speakerName.text = boNovel.name;
             dialogue.text = boNovel.speeches;
 
@@ -45,8 +48,6 @@ namespace ProjectChan.UI
                 portrait.sprite = SpriteLoader.GetSprite
                     (boNovel.atlasType, boNovel.portraitPath + boNovel.currentPortrait.ToString());
             }
-
-            portraitAnim.SetTrigger("doMove");
 
             Open();
         }

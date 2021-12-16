@@ -49,6 +49,7 @@ namespace ProjectChan.Novel
             // -> 다음 이야기 진행되기 위해서 진행인덱스 증가
             SetNovelGround(boNovel.stagePath);
             uiNovelSet.SetNovel(boNovel);
+            //uiNovelSet.portraitAnim.SetTrigger("doMove");
             gameManager.speechIndex++;
         }
 

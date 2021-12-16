@@ -12,8 +12,11 @@ namespace ProjectChan.Object
 {
     public class NPC : MonoBehaviour
     {
+        private float currentAnimTime;
+        private float maxAnimTime;
         private BoNPC boNPC;        // -> NPC Bo데이터
         private Collider coll;      // -> NPC가 가진 콜라이더
+        public Animator anim;
 
         /// <summary>
         /// => NPC 첫 세팅
@@ -25,8 +28,8 @@ namespace ProjectChan.Object
             coll ??= transform.Find("Area").GetComponent<Collider>();
 
             // -> SD데이터에 있는 Position 값과 Rotation 값을 가지고 온다
-            var npcPos = new Vector3 (boNPC.sdNPC.npcPos[0], boNPC.sdNPC.npcPos[1], boNPC.sdNPC.npcPos[2]);
-            var npcRot = new Vector3 (boNPC.sdNPC.npcRot[0], boNPC.sdNPC.npcRot[1], boNPC.sdNPC.npcRot[2]);
+            var npcPos = new Vector3(boNPC.sdNPC.npcPos[0], boNPC.sdNPC.npcPos[1], boNPC.sdNPC.npcPos[2]);
+            var npcRot = new Vector3(boNPC.sdNPC.npcRot[0], boNPC.sdNPC.npcRot[1], boNPC.sdNPC.npcRot[2]);
 
             gameObject.name = boNPC.sdNPC.resourcePath.Remove(0, boNPC.sdNPC.resourcePath.LastIndexOf('/') + 1);
 
@@ -41,6 +44,36 @@ namespace ProjectChan.Object
         public void NPCUpdate()
         {
             CheckInteraction();
+
+            CheckAnimTime();
+
+        }
+
+        private void CheckAnimTime()
+        {
+            currentAnimTime += Time.deltaTime;
+
+            if (currentAnimTime >= maxAnimTime)
+            {
+                var index = boNPC.sdNPC.resourcePath.LastIndexOf('/');
+                var name = boNPC.sdNPC.resourcePath.Remove(0, boNPC.sdNPC.resourcePath.LastIndexOf('/') + 1);
+                anim.SetTrigger(name);
+                anim.SetBool("isMotion", true);
+
+                ClearNPCAnimTime();
+            }
+
+        }
+
+        private void ClearNPCAnimTime()
+        {
+            currentAnimTime = 0;
+            maxAnimTime = Random.Range(1, 3);
+        }
+
+        public void NPCBaseIdle()
+        {
+            anim.SetBool("isMotion", false);
         }
 
         /*
@@ -91,7 +124,7 @@ namespace ProjectChan.Object
 
                 // -> UIDialogue창도 꺼준다
                 UIWindowManager.Instance.GetWindow<UIDialogue>().Close();
-                boNPC.isInteraction = false;    
+                boNPC.isInteraction = false;
             }
         }
 
@@ -149,7 +182,7 @@ namespace ProjectChan.Object
 
                 /// => Array.Intersect : 두개의 배열을 비교하여 교집합의 개수를 구해낸다
                 // -> 선행 퀘스트 길이와 선행 퀘스트와 이미 클리어한 퀘스트의 교집합의 개수가 같지않다면
-                if (antencedentIndex.Length != 
+                if (antencedentIndex.Length !=
                     antencedentIndex.Intersect(boQuests.completedQuests.Select(obj => obj.index)).Count())
                 {
                     // -> 아직 i번째 퀘스트는 선행 퀘스트를 완료하지 못했으므로 NPC의 퀘스트 목록에서 제거해준다
@@ -163,7 +196,7 @@ namespace ProjectChan.Object
             boNPC.quests = resultQusts.ToArray();
 
             #endregion
-            
+
             // -> 현재 NPC가 가지고 있는 speechIndex의 길이까지 랜덤값을 구한다
             // -> 구한 랜덤값과 같은 인덱스를 가진 노벨 기획데이터를 가져와서 Bo에 저장한다
             var randIndex = Random.Range(0, boNPC.sdNPC.baseSpeech.Length);
