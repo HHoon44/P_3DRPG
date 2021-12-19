@@ -19,9 +19,6 @@ namespace ProjectChan
         public bool useDummyServer;                             // -> DummyServer을 사용하고 있는가?
         public float loadProgress;                              // -> 다음씬이 얼마나 준비되었는지에 대한 값
 
-        public int currentTalseIndex { get; set; }              // -> 현재 이야기 인덱스
-        public int speechIndex { get; set; }                    // -> 현재 이야기 진행도 인덱스
-
         [SerializeField]
         private StaticDataModule sd = new StaticDataModule();
         public static StaticDataModule SD => Instance.sd;       // -> SD데이터 연결고리가 되어주는 프로퍼티
@@ -40,9 +37,6 @@ namespace ProjectChan
 
             var StartController = FindObjectOfType<StartController>();
             StartController?.Initialize();
-
-            currentTalseIndex = 1000;
-            speechIndex = 0;
         }
 
         public void OnApplicationSetting()

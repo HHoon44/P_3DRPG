@@ -12,7 +12,7 @@ using static ProjectChan.Define.Actor;
 
 namespace ProjectChan.UI
 {
-    public class UINovelSet : UIWindow
+    public class NovelSet : UIWindow
     {
         public TextMeshProUGUI speakerName;     // -> 현재 말하는 캐릭터 이름
         public TextMeshProUGUI dialogue;        // -> 현재 말하는 캐릭터의 대사

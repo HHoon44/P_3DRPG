@@ -18,6 +18,7 @@ namespace ProjectChan.SD
         public string[] affectingStats;         // -> 아이템이 영향을 주는 스텟이름
         public string description;              // -> 아이템의 성능 설명
         public string resourcePath;             // -> 아이템의 저장 경로
+        public int price;                       // -> 아이템 가격
         public float[] affectingStatsValue;     // -> 아이템이 스텟에 영향을 주는 값
     }
 }

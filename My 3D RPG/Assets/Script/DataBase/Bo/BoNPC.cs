@@ -14,7 +14,6 @@ namespace ProjectChan.DB
     public class BoNPC
     {
         public SDNPC sdNPC;             // -> NPC 기획데이터
-        public bool isInteraction;      // -> 상호작용중인가?
         public int[] quests;            // -> 여러 조건등을 거치고 최종적으로 현재 NPC가 지닌 퀘스트 인덱스 값들
 
         public BoNPC(SDNPC sdNPC)

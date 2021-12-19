@@ -115,7 +115,7 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => UIQuest창을 꺼버리는 메서드
+        /// => 퀘스트 창을 닫는 메서드
         /// </summary>
         /// <param name="force"></param>
         public override void Close(bool force = false)
@@ -123,9 +123,9 @@ namespace ProjectChan.UI
             base.Close(force);
 
             // -> 여기 쫌 수정해야할듯
-            if (listWindow.gameObject.activeSelf) { listWindow.gameObject.SetActive(!listWindow.gameObject.activeSelf); }
-            if (contentWindow.gameObject.activeSelf) { contentWindow.gameObject.SetActive(!contentWindow.gameObject.activeSelf); }
-            if (orderWindow.gameObject.activeSelf) { orderWindow.gameObject.SetActive(!orderWindow.gameObject.activeSelf); }
+            if (listWindow.gameObject.activeSelf)       { listWindow.gameObject.SetActive(!listWindow.gameObject.activeSelf); }
+            if (contentWindow.gameObject.activeSelf)    { contentWindow.gameObject.SetActive(!contentWindow.gameObject.activeSelf); }
+            if (orderWindow.gameObject.activeSelf)      { orderWindow.gameObject.SetActive(!orderWindow.gameObject.activeSelf); }
 
             // -> 퀘스트 창을 닫으면서 창에 있던 QuestSlot들을 다 정리한다
             ClearSlots();
@@ -292,7 +292,7 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 퀘스트를 완료하고나서 완료 버튼 메서드
+        /// => 퀘스트를 완료 후 컨텐츠 창의 완료 버튼을 세팅하는 메서드
         /// </summary>
         /// <param name="currentQuest"> 현재 클리어한 퀘스트 기획 데이터 </param>
         private void OnClickClearQuest(SDQuest currentQuest)

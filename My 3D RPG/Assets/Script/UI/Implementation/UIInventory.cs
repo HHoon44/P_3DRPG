@@ -15,10 +15,11 @@ namespace ProjectChan.UI
     public class UIInventory : UIWindow, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         private Transform itemSlotHolder;       // -> 아이템 슬롯 홀더를 담을 필드
-        public Button sortButton;               // -> 정렬 버튼 (아직 안넣음)
-        private GraphicRaycaster gr;            // -> UICanvas가 지닌 캔버스 안을 검색하기 위한 레이캐스트
+        private GraphicRaycaster gr;            // -> 컨버스안을 탐지하기 위한 레이캐스트
         private ItemSlot dragSlot;              // -> 옮기려는 아이템 슬롯
         private Vector3 dragSlotOriginVec;      // -> 옮기려는 아이템 슬롯의 원 위치
+
+        public Button sortButton;               // -> 정렬 버튼 (아직 안넣음)
 
         /// <summary>
         /// => 아이템 슬롯 홀더에 자식으로 존재하는 슬롯들을 담아놓을 공간

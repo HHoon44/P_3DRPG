@@ -17,10 +17,10 @@ namespace ProjectChan.UI
     /// </summary>
     public class QuestSlot : MonoBehaviour, IPoolableObject
     {
-        public bool CanRecycle { get; set; } = true;
-
         public TextMeshProUGUI title;       // -> 퀘스트 슬롯 타이틀
         public Button btn;                  // -> 퀘스트 슬롯 버튼 기능
+
+        public bool CanRecycle { get; set; } = true;
 
         // -> 아직 디테일 안넣었는데
         public void Initialize(SDQuest sdQuest, QuestTab currentTab)

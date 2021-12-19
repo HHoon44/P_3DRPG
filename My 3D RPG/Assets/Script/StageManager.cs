@@ -48,10 +48,6 @@ namespace ProjectChan
             isMonReady = false;
 
             var sdStage = GameManager.User.boStage.sdStage;
-
-            // -> 현재 스테이지에서 사용할 대화 인덱스
-            GameManager.Instance.currentTalseIndex = sdStage.stageNovel;
-
             var resourceManager = ResourceManager.Instance;
             var objectPoolManager = ObjectPoolManager.Instance;
 

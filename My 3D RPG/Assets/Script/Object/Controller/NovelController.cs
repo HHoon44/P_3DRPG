@@ -18,9 +18,17 @@ namespace ProjectChan.Novel
 {
     public class NovelController : MonoBehaviour
     {
+        private int speechIndex;            // -> 현재 이야기 진행도 인덱스
+        public int currentTalseIndex;       // -> 현재 이야기 인덱스
+
         public Image novelGround;           // -> Novel의 뒷 배경
-        private UINovelSet uiNovelSet;      // -> UINovelSet 스크립트
+        private NovelSet uiNovelSet;        // -> UINovelSet 스크립트
         private SDNovel sdNovel;            // -> 현재 진행할 이야기 데이터
+
+        private void Awake()
+        {
+            currentTalseIndex = 1000;
+        }
 
         /// <summary>
         /// => 이야기의 시작이 되는 메서드
@@ -29,12 +37,12 @@ namespace ProjectChan.Novel
         {
             var gameManager = GameManager.Instance;
             var uiWindowManager = UIWindowManager.Instance;
-            uiNovelSet = uiWindowManager.GetWindow<UINovelSet>();
+            uiNovelSet = uiWindowManager.GetWindow<NovelSet>();
 
             // -> 게임매니저가 들고있는 이야기 인덱스에 이야기진행인덱스를 더한 값과
             //    같은 인덱스를 지닌 Talse기획 데이터를 가져옴
             sdNovel = GameManager.SD.sdNovels.Where(obj => obj.index ==
-            gameManager.currentTalseIndex + gameManager.speechIndex)?.SingleOrDefault();
+            currentTalseIndex + speechIndex)?.SingleOrDefault();
 
             // -> 이야기 하는 캐릭터가 없다면 다음 스테이지로
             if (sdNovel.charType == Define.Actor.CharType.None)
@@ -50,7 +58,7 @@ namespace ProjectChan.Novel
             SetNovelGround(boNovel.stagePath);
             uiNovelSet.SetNovel(boNovel);
             //uiNovelSet.portraitAnim.SetTrigger("doMove");
-            gameManager.speechIndex++;
+            speechIndex++;
         }
 
         /// <summary>
@@ -73,7 +81,7 @@ namespace ProjectChan.Novel
         {
             uiNovelSet.EndNovel();
 
-            var uiInfoSet = UIWindowManager.Instance.GetWindow<UIInfoSet>();
+            var uiInfoSet = UIWindowManager.Instance.GetWindow<InfoSet>();
 
             if (uiInfoSet.isOpen)
             {
@@ -97,7 +105,7 @@ namespace ProjectChan.Novel
             if (Input.GetButtonDown(Define.Input.Quest.ToString()))
             {
                 OnTalse();
-                GameManager.Instance.speechIndex = 16;
+                speechIndex = 16;
             }
         }
     }

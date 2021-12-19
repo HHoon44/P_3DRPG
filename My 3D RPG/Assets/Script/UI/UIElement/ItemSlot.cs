@@ -1,5 +1,7 @@
 ﻿using ProjectChan.DB;
+using ProjectChan.Define;
 using ProjectChan.Resource;
+using ProjectChan.SD;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +18,12 @@ namespace ProjectChan.UI
     /// </summary>
     public class ItemSlot : MonoBehaviour
     {
+        public SDItem sdItem { get; private set; }                 // -> 상점 슬롯이 지닌 아이템 기획 데이터
+
         public BoItem BoItem { get; private set; }          // -> 슬롯에 존재하는 아이템 정보
+
         public Image ItemImage { get; private set; }        // -> 슬롯에 이미지 컴포넌트
+
         public TMP_Text ItemAmount { get; private set; }    // -> 슬롯에 존재하는 텍스트 컴포넌트
 
         public void Initialize()
@@ -48,6 +54,15 @@ namespace ProjectChan.UI
                 ItemImage.sprite = SpriteLoader.GetSprite(Define.Resource.AtlasType.ItemAtlase, boItem.sdItem.resourcePath);
                 ItemImage.color = Color.white;
             }
+        }
+
+        public void SetSlot(SDItem sdItem)
+        {
+            this.sdItem = sdItem;
+
+            ItemAmount.text = sdItem.price.ToString();
+            ItemImage.sprite = SpriteLoader.GetSprite(Define.Resource.AtlasType.ItemAtlase, sdItem.resourcePath);
+            ItemImage.color = Color.white;
         }
 
         /// <summary>

@@ -94,14 +94,17 @@ namespace ProjectChan.Object
             var colls = Physics.OverlapBox
                 (coll.bounds.center, coll.bounds.extents, transform.rotation, 1 << LayerMask.NameToLayer("Player"));
 
-            // -> 오버랩 박스에 걸린 콜라이더가 없다면
+            // -> 범위에 들어온 플레이어가 없다면!
             if (colls.Length == 0)
             {
                 return;
             }
 
+            // -> 현재 범위에 들어온 플레이어!
+            var playerController = colls[0].GetComponentInParent<PlayerController>();
+
             // -> 다이얼로그 버튼 실행
-            if (Input.GetButtonDown(Define.Input.Interaction) && !boNPC.isInteraction)
+            if (Input.GetButtonDown(Define.Input.Interaction) && !playerController.isPlayerAction)
             {
                 // -> 대화할땐 이동, 키입력 막음
                 var character = colls[0].gameObject.GetComponent<Character>();
@@ -109,22 +112,19 @@ namespace ProjectChan.Object
                 var newDir = Vector3.zero;
                 character.boActor.rotDir = newDir;
 
-                // -> 플레이어가 현재 상호작용을 시작하려 하므로 Controller안에 있는 isInteraction을 True로
-                var playerController = colls[0].GetComponentInParent<PlayerController>();
+                // -> 플레이어가 행동을 합니다!
                 playerController.isPlayerAction = true;
 
                 OnDialogue(playerController);
             }
-            // -> 상호작용 키를 눌렀는데 이미 상호작용중이라면
-            else if (Input.GetButtonDown(Define.Input.Interaction) && boNPC.isInteraction)
+            // -> NPC와 대화중에 한번더 키 입력을 했다면!
+            else if (Input.GetButtonDown(Define.Input.Interaction) && playerController.isPlayerAction)
             {
-                // -> 플레이어가 현재 상호작용을 끝내려 하므로 Controller안에 있는 isInteraction을 false로
-                var playerController = colls[0].GetComponentInParent<PlayerController>();
-                playerController.isPlayerAction = false;
-
-                // -> UIDialogue창도 꺼준다
+                // -> 다이얼로그 창을 끕니다!
                 UIWindowManager.Instance.GetWindow<UIDialogue>().Close();
-                boNPC.isInteraction = false;
+
+                // -> 플레이어가 NPC와 대화를 종료합니다!
+                playerController.isPlayerAction = false;
             }
         }
 
@@ -134,9 +134,6 @@ namespace ProjectChan.Object
         /// <param name="actor"> 현재 NPC와 대화중인 액터데이터 </param>
         private void OnDialogue(PlayerController actor)
         {
-            // -> 상호작용 시작
-            boNPC.isInteraction = true;
-
             // -> 실행시킬 UIDialogue를 가져온다
             var uiDialogue = UIWindowManager.Instance.GetWindow<UIDialogue>();
 

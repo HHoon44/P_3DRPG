@@ -441,6 +441,7 @@ namespace ProjectChan.Object
 
         public void OnChangeWeaponEnd()
         {
+            // -> 무기 바꾸는게 끝나면 움직일 수 있다!
             playerController.isPlayerAction = false;
         }
 

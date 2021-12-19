@@ -8,6 +8,7 @@
     ],
     "description": "사용시 Hp를 50을 회복합니다",
     "resourcePath": "Hp_Potion",
+    "price": 100,
     "affectingStatsValue": [
       50.0
     ]
@@ -21,6 +22,7 @@
     ],
     "description": "사용시 Energy 50을 회복합니다",
     "resourcePath": "Energy_Potion",
+    "price": 200,
     "affectingStatsValue": [
       50.0
     ]

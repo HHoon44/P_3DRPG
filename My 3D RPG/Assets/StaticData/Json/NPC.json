@@ -1,7 +1,7 @@
 ﻿[
   {
     "index": 1000,
-    "string": "Amber",
+    "name": "엠버",
     "npcType": "Store",
     "resourcePath": "Prefabs/Actor/NPC/Amber",
     "stageIndex": 1000,
@@ -16,6 +16,10 @@
     "questIndex": [
       1000
     ],
+    "storeItem": [
+      1000,
+      1001
+    ],
     "npcPos": [
       -42.0,
       4.735,
@@ -29,7 +33,7 @@
   },
   {
     "index": 1001,
-    "string": "Beidou",
+    "name": "베이도우",
     "npcType": "Normal",
     "resourcePath": "Prefabs/Actor/NPC/Beidou",
     "stageIndex": 1000,
@@ -42,6 +46,9 @@
       0
     ],
     "questIndex": [
+      0
+    ],
+    "storeItem": [
       0
     ],
     "npcPos": [

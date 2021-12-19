@@ -20,7 +20,8 @@ namespace ProjectChan.Object
         public Character PlayerCharacter { get; private set; }
         public CameraController cameraController;
         private Transform pointingTarget;
-        public bool isPlayerAction { get; set; }                     // -> 현재 플레이어가 행동을 취하는 중인가?
+
+        public bool isPlayerAction { get; set; }                     // -> 플레이어의 행동 여부
 
         public bool HasPointTarget { get; private set; }
         private bool canRot;
@@ -62,7 +63,7 @@ namespace ProjectChan.Object
                 return;
             }
 
-            // -> 플레이어가 상호작용중이라면
+            // -> 플레이어가 행동을 취하는 중이라면!
             if (isPlayerAction)
             {
                 return;

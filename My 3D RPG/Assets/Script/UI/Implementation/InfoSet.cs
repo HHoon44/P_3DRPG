@@ -15,7 +15,7 @@ namespace ProjectChan.UI
     /// <summary>
     /// => 현재까지의 이야기 요약과 다음 스테이지로 넘어가기 위한 셋팅을 해주는 클래스
     /// </summary>
-    public class UIInfoSet : UIWindow
+    public class InfoSet : UIWindow
     {
         public TextMeshProUGUI title;   // -> 현재까지 이야기에 대한 요약 
         public Button btn;              // -> 다음 스테이지로 넘어가기 위한 버튼

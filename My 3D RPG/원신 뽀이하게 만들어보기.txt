@@ -29,5 +29,13 @@
  -> 아이템 슬롯 마우스로 클릭하면 아이템 사도록 하기
  -> 인벤토리에 현재 골드량도 떠야함
  -> 상점 NPC가 무슨 아이템을 들고있어야하는지도 기획 데이터에 작성해야할듯
- -> 그래야 ItemSlot 초기화 할때 할 수 있으내ㅣ깐
- -> 퇴근
+ -> 그래야 ItemSlot 초기화 할때 할 수 있으니깐
+ -> ItemSlot에 슬롯타입? 같은거 둬서 인벤토리 슬롯일 때랑 상점 슬롯일 때 둘로 나눠야할듯?
+ -> SDNPC에 storeItem 넣어야함
+ -> 상점때도 움직이지 않도록 막기
+
+ -> IPointerClickHandler --> OnPointerClick
+ -> Bo --> Dto
+
+ -> DummyServer.Instance.userData.dtoItem = new DtoItem(GameManager.User.boItems);
+ -> new BoAccount(dtoAccount);

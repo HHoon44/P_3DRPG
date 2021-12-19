@@ -65,7 +65,7 @@ namespace ProjectChan.UI
             switch (boNPC.sdNPC.npcType)
             {
                 case Define.Actor.NPCType.Store:
-                    btn.onClick.AddListener(OnClickShop);
+                    btn.onClick.AddListener(() => { OnClickShop(boNPC); });
                     SetUI(SpriteLoader.GetSprite(Define.Resource.AtlasType.UIAtlase, "coin"));
                     break;
             }
@@ -81,9 +81,14 @@ namespace ProjectChan.UI
         /// <summary>
         /// => 상점 NPC에 대한 버튼에 바인딩 될 메서드
         /// </summary>
-        private void OnClickShop()
+        private void OnClickShop(BoNPC boNPC)
         {
+            // -> 다이얼로그 창을 닫습니다!
+            var uiWindowManager = UIWindowManager.Instance;
+            uiWindowManager.GetWindow<UIDialogue>().Close();
 
+            // -> 상점 창을 엽니다!
+            uiWindowManager.GetWindow<UIStore>().Open(boNPC);
         }
 
         /// <summary>
@@ -92,9 +97,8 @@ namespace ProjectChan.UI
         /// <param name="sdQuest"></param>
         private void OnClickQuest(SDQuest sdQuest, int progressQuestIndex)
         {
+            // -> 다이얼로그 창을 닫습니다!
             var uiWindowManager = UIWindowManager.Instance;
-
-            // -> 현재 UIDialogue는 닫고 UIQuest창을 연다
             uiWindowManager.GetWindow<UIDialogue>().Close();
 
             // -> 아직 진행중인 퀘스트가 아니므로

@@ -20,6 +20,7 @@ namespace ProjectChan.SD
         public int[] baseSpeech;        // -> NPC 대화 인덱스
         public int[] needQuestIndex;    // -> NPC가 특정 퀘스트에서만 생성된다면 특정 퀘스트 인덱스 값
         public int[] questIndex;        // -> NPC가 지닌 퀘스트 인덱스
+        public int[] storeItem;         // -> 상점NPC가 지닌 아이템 인덱스
         public float[] npcPos;          // -> NPC Position 값
         public float[] npcRot;          // -> NPC Rotation 값
     }
