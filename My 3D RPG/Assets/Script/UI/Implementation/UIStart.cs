@@ -1,3 +1,4 @@
+using ProjectChan.Resource;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,18 @@ namespace ProjectChan.UI
     {
         public Text loadStateDesc;
         public Image loadFillGauge;
+        public Image backImage;    // -> 설정할 백 이미지
+
+        private void Start()
+        {
+            ResourceManager.Instance.LoadBackGround();
+
+            var backIndex = Random.Range(1, SpriteLoader.atlasIndex + 1);
+            var selectSprite = SpriteLoader.GetSprite(Define.Resource.AtlasType.BackGround, $"Back Ground{backIndex}");
+
+            backImage.sprite = selectSprite;
+        }
+
 
         public void SetLoadStateDescription(string loadState)
         {

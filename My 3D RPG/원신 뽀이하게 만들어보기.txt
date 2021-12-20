@@ -10,9 +10,6 @@
  -> 랜덤으로 보이스가 나옴
 
  ★. UI
- -> 인벤토리는 장비, 소비, 기타창으로 나뉘도록
- -> 장비에 마우스 커서를 올리면 장비 정보창이 나옴
- -> 장비에 커서를 올리고 오른쪽 마우스를 누르면 장착 OR 버리기 버튼이 나온다
 
  ★. 버튼
  -> 이어하기 버튼, 옵션 버튼, 도움말 버튼 활성화 하기
@@ -21,21 +18,4 @@
  -> 기력 사용은 나중에 원신 보고 한번 더 생각해봐야할듯
  -> CanESCClose는 쫌 내 맛대로 수정해야할듯
 
- ★. 12월 16일 일해라 닝겐
- -> 상점 만들기
- -> OnClickShop을 누르면 현재 Dialogue창은 닫고 UIStore을 연다
- -> 그리고 오픈
- -> 오픈하면 인벤토리랑 비스무리 하게 하면 될듯
- -> 아이템 슬롯 마우스로 클릭하면 아이템 사도록 하기
- -> 인벤토리에 현재 골드량도 떠야함
- -> 상점 NPC가 무슨 아이템을 들고있어야하는지도 기획 데이터에 작성해야할듯
- -> 그래야 ItemSlot 초기화 할때 할 수 있으니깐
- -> ItemSlot에 슬롯타입? 같은거 둬서 인벤토리 슬롯일 때랑 상점 슬롯일 때 둘로 나눠야할듯?
- -> SDNPC에 storeItem 넣어야함
- -> 상점때도 움직이지 않도록 막기
-
- -> IPointerClickHandler --> OnPointerClick
- -> Bo --> Dto
-
- -> DummyServer.Instance.userData.dtoItem = new DtoItem(GameManager.User.boItems);
- -> new BoAccount(dtoAccount);
+ ★. 12월 20일 일해라 닝겐

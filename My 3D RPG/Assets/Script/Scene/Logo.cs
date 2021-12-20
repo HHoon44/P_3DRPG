@@ -5,7 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class Logo : MonoBehaviour
 {
-    public void LoadStartScene()    /// -> 로고 Anim이 끝나고 실행
+    /// <summary>
+    /// => 로고 이벤트 메서드
+    /// </summary>
+    public void LoadStartScene()    
     {
         SceneManager.LoadScene("StartScene");
     }

@@ -16,7 +16,7 @@ MonoBehaviour:
     errorCode: 0
     errorMessage: 
     nickName: talse
-    gold: -3496
+    gold: 100
   dtoCharacter:
     errorCode: 0
     errorMessage: 
@@ -26,21 +26,21 @@ MonoBehaviour:
     errorCode: 0
     errorMessage: 
     lastStageIndex: 1000
-    lastPosX: -41.33522
-    lastPosY: 4.7313266
-    lastPosZ: -3.493558
+    lastPosX: -39.244
+    lastPosY: 4.835739
+    lastPosZ: -5.292999
   dtoItem:
     errorCode: 0
     errorMessage: 
     dtoItems:
     - index: 1001
       slotIndex: 1
-      amount: 19
+      amount: 2
       reinforceValue: 0
       isEquip: 0
     - index: 1000
       slotIndex: 0
-      amount: 4
+      amount: 3
       reinforceValue: 0
       isEquip: 0
   dtoQuest:

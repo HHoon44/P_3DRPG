@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,7 +20,8 @@ namespace ProjectChan.UI
         private ItemSlot dragSlot;              // -> 옮기려는 아이템 슬롯
         private Vector3 dragSlotOriginVec;      // -> 옮기려는 아이템 슬롯의 원 위치
 
-        public Button sortButton;               // -> 정렬 버튼 (아직 안넣음)
+        public Button sortButton;               // -> 정렬 버튼
+        public TextMeshProUGUI playerGold;      // -> 플레이어가 지닌 금액
 
         /// <summary>
         /// => 아이템 슬롯 홀더에 자식으로 존재하는 슬롯들을 담아놓을 공간
@@ -44,6 +46,7 @@ namespace ProjectChan.UI
             // -> 리스트에 저장된 슬롯들을 초기화 하는 작업과 Bo데이터가 지닌 아이템 정보를 슬롯에 초기화 하는 작업
             InitItemSlots();
             InitInventory();
+            MyGoldUpdate();
 
             // -> 정렬 버튼 이벤트 바인딩 작업
             sortButton.onClick.AddListener(() =>
@@ -215,6 +218,7 @@ namespace ProjectChan.UI
         {
             if (Input.GetButtonDown(Define.Input.Inventory))
             {
+                // -> 켜진 상태에서 키입력이면 창을 꺼줍니다!
                 if (isOpen)
                 {
                     Close();
@@ -223,6 +227,14 @@ namespace ProjectChan.UI
 
                 Open();
             }
+        }
+
+        /// <summary>
+        /// => 소지한 금액이 바뀌면 업데이트 해주는 메서드
+        /// </summary>
+        public void MyGoldUpdate()
+        {
+            playerGold.text = GameManager.User.boAccount.gold.ToString();
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using ProjectChan.SD;
+﻿using ProjectChan.Object;
+using ProjectChan.SD;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace ProjectChan.DB
     {
         public SDNPC sdNPC;             // -> NPC 기획데이터
         public int[] quests;            // -> 여러 조건등을 거치고 최종적으로 현재 NPC가 지닌 퀘스트 인덱스 값들
+        public PlayerController actor;  // -> 현재 NPC와 대화중인 플레이어
 
         public BoNPC(SDNPC sdNPC)
         {

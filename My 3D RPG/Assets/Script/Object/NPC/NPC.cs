@@ -12,11 +12,11 @@ namespace ProjectChan.Object
 {
     public class NPC : MonoBehaviour
     {
-        private float currentAnimTime;
-        private float maxAnimTime;
-        private BoNPC boNPC;        // -> NPC Bo데이터
-        private Collider coll;      // -> NPC가 가진 콜라이더
-        public Animator anim;
+        private float currentAnimTime;  // -> 현재 애니메이션 실행 시간
+        private float maxAnimTime;      // -> 최대 애니메이션 실행 시간
+        private BoNPC boNPC;            // -> NPC Bo데이터
+        private Collider coll;          // -> NPC가 가진 콜라이더
+        public Animator anim;           // -> NPC 애니메이션
 
         /// <summary>
         /// => NPC 첫 세팅
@@ -106,25 +106,30 @@ namespace ProjectChan.Object
             // -> 다이얼로그 버튼 실행
             if (Input.GetButtonDown(Define.Input.Interaction) && !playerController.isPlayerAction)
             {
-                // -> 대화할땐 이동, 키입력 막음
+                // -> 대화를 할땐 플레이어의 이동과 키입력을 막습니다!
                 var character = colls[0].gameObject.GetComponent<Character>();
                 character.boActor.moveDir = Vector3.zero;
                 var newDir = Vector3.zero;
                 character.boActor.rotDir = newDir;
 
-                // -> 플레이어가 행동을 합니다!
-                playerController.isPlayerAction = true;
+                // -> 현재 NPC와 대화하는 플레이어를 세팅합니다!
+                boNPC.actor = playerController;
 
-                OnDialogue(playerController);
+                // -> 플레이어가 행동을 합니다!
+                boNPC.actor.isPlayerAction = true;
+
+                ///OnDialogue(playerController);
+                OnDialogue();
             }
             // -> NPC와 대화중에 한번더 키 입력을 했다면!
             else if (Input.GetButtonDown(Define.Input.Interaction) && playerController.isPlayerAction)
             {
-                // -> 다이얼로그 창을 끕니다!
+                // -> 다이얼로그 창을 닫습니다!
                 UIWindowManager.Instance.GetWindow<UIDialogue>().Close();
 
                 // -> 플레이어가 NPC와 대화를 종료합니다!
-                playerController.isPlayerAction = false;
+                boNPC.actor.isPlayerAction = false;
+                boNPC.actor = null;
             }
         }
 
@@ -132,7 +137,7 @@ namespace ProjectChan.Object
         /// => 다이얼로그 활성화 메서드
         /// </summary>
         /// <param name="actor"> 현재 NPC와 대화중인 액터데이터 </param>
-        private void OnDialogue(PlayerController actor)
+        private void OnDialogue()
         {
             // -> 실행시킬 UIDialogue를 가져온다
             var uiDialogue = UIWindowManager.Instance.GetWindow<UIDialogue>();
@@ -201,7 +206,8 @@ namespace ProjectChan.Object
             var sdNovel = GameManager.SD.sdNovels.Where(obj => obj.index == speechIndex)?.SingleOrDefault();
             var boNovel = new BoNovel(sdNovel);
 
-            uiDialogue.Initialize(boNovel, boNPC, actor);
+            ///uiDialogue.Initialize(boNovel, boNPC, actor);
+            uiDialogue.Initialize(boNovel, boNPC);
         }
     }
 }
