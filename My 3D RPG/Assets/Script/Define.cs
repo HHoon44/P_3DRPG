@@ -60,7 +60,7 @@ namespace ProjectChan.Define
 
         public enum AttackType { None, Normal }
 
-        public enum CharType { None, Normal, NPC }
+        public enum CharType { None, NovelChar, NPC, Narration }
 
         public enum NPCType { None, Store, Normal }
 
@@ -107,6 +107,12 @@ namespace ProjectChan.Define
         }
     }
 
+    public class Novel
+    {
+        public const int firstNovelIndex = 1000;
+        public const int nextStageLoadIndex = 1016;
+    }
+
     public class Monster
     {
         public const float MinPatrolWaitTime = 1f;
@@ -133,7 +139,15 @@ namespace ProjectChan.Define
 
     public class Resource
     {
-        public enum AtlasType { None, BackGround, SchoolStage, Portrait, UIAtlase, ItemAtlase }
+        public enum AtlasType
+        {
+            None,
+            BackGround,
+            SchoolStage,
+            Portrait,
+            UIAtlase,
+            ItemAtlase
+        }
     }
 
     public class Quest

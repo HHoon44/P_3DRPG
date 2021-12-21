@@ -12,13 +12,14 @@ using static ProjectChan.Define.Actor;
 
 namespace ProjectChan.UI
 {
-    public class NovelSet : UIWindow
+    public class UINovel : UIWindow
     {
+        private AspectRatioFitter arf;          // -> 초상화 크기 설정
+
         public TextMeshProUGUI speakerName;     // -> 현재 말하는 캐릭터 이름
         public TextMeshProUGUI dialogue;        // -> 현재 말하는 캐릭터의 대사
         public Image portrait;                  // -> 현재 말하는 캐릭터의 이미지
-        public Animator portraitAnim;          // -> 초상화 애니메이션
-        private AspectRatioFitter arf;
+        public Animator portraitAnim;           // -> 초상화 애니메이션
 
         public override void Start()
         {
@@ -27,26 +28,23 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 받은 Bo데이터로 NovelSet을 세팅하는 메서드
+        /// => 파라미터로 받은 Bo데이터로 현재 UI를 세팅하는 메서드
         /// </summary>
-        /// <param name="boNovel"> SDNovel 데이터를 지닌 Bo데이터 </param>
+        /// <param name="boNovel"> 노벨 기획 데이터가 담긴 데이터 </param>
         public void SetNovel(BoNovel boNovel)
         {
-            /// 보류
-            //portraitAnim.SetTrigger("doMove");
-
             // -> 이름, 대화 세팅
-            speakerName.text = boNovel.name;
-            dialogue.text = boNovel.speeches;
+            speakerName.text = boNovel.sdNovel.name;
+            dialogue.text = boNovel.sdNovel.kr;
 
             // -> CharType별로 이미지 사이즈 설정
-            SetImageSize(boNovel.charType);
+            SetImageSize(boNovel.sdNovel.charType);
 
             // -> 초상화가 존재하는 경로가 있다면 
-            if (boNovel.portraitPath.Length > 1)
+            if (boNovel.sdNovel.portraitPath.Length > 1)
             {
                 portrait.sprite = SpriteLoader.GetSprite
-                    (boNovel.atlasType, boNovel.portraitPath + boNovel.currentPortrait.ToString());
+                    (Define.Resource.AtlasType.Portrait, boNovel.sdNovel.portraitPath + boNovel.sdNovel.portraitIndex.ToString());
             }
 
             Open();
@@ -60,9 +58,7 @@ namespace ProjectChan.UI
         {
             switch (charType)
             {
-                case CharType.None:
-                    break;
-                case CharType.Normal:
+                case CharType.NovelChar:
                     arf.aspectRatio = Define.StaticData.BaseNovelSize;
                     break;
                 case CharType.NPC:
@@ -72,7 +68,7 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 씬에 존재하는 UINovelSet을 닫아줌
+        /// => 노벨 창을 닫아주는 메서드 (컽)
         /// </summary>
         public void EndNovel()
         {

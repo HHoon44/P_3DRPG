@@ -16,15 +16,12 @@ namespace ProjectChan
 {
     public class StartController : MonoBehaviour
     {
-        public UIStart uiStart;
+        private bool allLoaded;                                 // -> 로드가 모두 되었는지
+        private IntroPhase introPhase = IntroPhase.Start;       // -> 현재 페이즈
+        private Coroutine loadGaugeUpdateCoroutine;             // -> 로드 하는 동안 로드바 게이지를 채울 코루틴
+        private bool loadComplete;                              // -> 현재 페이즈의 로드가 되었는지
 
-        private bool allLoaded;
-
-        private IntroPhase introPhase = IntroPhase.Start;
-
-        private Coroutine loadGaugeUpdateCoroutine;
-
-        private bool loadComplete;
+        public UIStart uiStart;                                 
 
         public bool LoadComplete
         {

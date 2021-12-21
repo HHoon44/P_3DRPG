@@ -15,7 +15,7 @@ namespace ProjectChan.UI
     /// <summary>
     /// => 현재까지의 이야기 요약과 다음 스테이지로 넘어가기 위한 셋팅을 해주는 클래스
     /// </summary>
-    public class InfoSet : UIWindow
+    public class UIInfo : UIWindow
     {
         public TextMeshProUGUI title;   // -> 현재까지 이야기에 대한 요약 
         public Button btn;              // -> 다음 스테이지로 넘어가기 위한 버튼
@@ -23,7 +23,7 @@ namespace ProjectChan.UI
         /// <summary>
         /// => 다음 스테이지로 넘어가기 위한 셋팅
         /// </summary>
-        /// <param name="sdNovel"></param>
+        /// <param name="sdNovel"> 현재 노벨 기획 데이터 </param>
         public void Initialize(SDNovel sdNovel)
         {
             title.text = sdNovel.kr;
@@ -46,9 +46,9 @@ namespace ProjectChan.UI
         private void NextStageSet()
         {
             var stageManager = StageManager.Instance;
-            GameManager.Instance.LoadScene
-            (Define.SceneType.InGame, stageManager.ChangeStage(), stageManager.OnChangeStageComplete);
-            var uiWindowManager = UIWindowManager.Instance;
+
+            // -> 다음 씬을 불러옵니다!
+            GameManager.Instance.LoadScene(Define.SceneType.InGame, stageManager.ChangeStage(), stageManager.OnChangeStageComplete);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace ProjectChan.UI
     /// </summary>
     public class UIDialogue : UIWindow
     {
-        private NovelSet uiNovelSet;                // -> 대화창 셋
+        private UINovel uiNovelSet;                // -> 대화창 셋
         private BoNovel boNovel;                    // -> 대화창을 세팅할때 사용할 데이터
         private BoNPC boNPC;                        // -> 현재 대화하는 NPC데이터
 
@@ -39,7 +39,7 @@ namespace ProjectChan.UI
             this.boNovel = boNovel;
             this.boNPC = boNPC;
 
-            uiNovelSet = transform.Find("NovelSet").GetComponent<NovelSet>();
+            uiNovelSet = transform.Find("NovelSet").GetComponent<UINovel>();
 
             uiNovelSet.SetNovel(this.boNovel);
 

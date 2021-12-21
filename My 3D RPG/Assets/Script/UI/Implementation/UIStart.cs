@@ -8,12 +8,13 @@ namespace ProjectChan.UI
 {
     public class UIStart : MonoBehaviour
     {
-        public Text loadStateDesc;
-        public Image loadFillGauge;
-        public Image backImage;    // -> 설정할 백 이미지
+        public Text loadStateDesc;          // -> 로딩바 텍스트
+        public Image loadFillGauge;         // -> 로딩바 이미지
+        public Image backImage;             // -> 설정할 백 이미지
 
         private void Start()
         {
+            // -> 백 이미지를 설정하는 작업 입니다!
             ResourceManager.Instance.LoadBackGround();
 
             var backIndex = Random.Range(1, SpriteLoader.atlasIndex + 1);

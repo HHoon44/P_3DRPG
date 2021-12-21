@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 466888759067320725}
   - component: {fileID: 9162077086887399981}
   m_Layer: 5
-  m_Name: NovelSet
+  m_Name: UINovelSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 466888759067320729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92244fd896e5158429d9ed7b2a584ea6, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ed51498c76a27d49b7eaba4b7cd1dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canCloseESC: 0

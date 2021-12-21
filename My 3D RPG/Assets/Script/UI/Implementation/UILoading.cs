@@ -11,7 +11,7 @@ using static ProjectChan.Define.Resource;
 public class UILoading : UIWindow
 {
     private static string dot = string.Empty;
-    private static string loadStateDescription = "기어와라 유니티짱";
+    private static string loadStateDescription = "로딩 중입니다";
 
     public TextMeshProUGUI loadStateDesc;
     public Image loadGauge;

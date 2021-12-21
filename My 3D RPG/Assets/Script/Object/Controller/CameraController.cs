@@ -37,18 +37,18 @@ namespace ProjectChan.Object
             switch (camView)
             {
                 case CamView.Standard:
-                    SetPosition(true, standardPos);
+                    SetPosition(standardPos);
                     break;
 
                 case CamView.Front:
-                    SetPosition(false, frontPos);
+                    SetPosition(frontPos);
                     break;
             }
         }
 
         public void SetForceStandarView()
         {
-            SetPosition(false, standardPos);
+            SetPosition(standardPos);
         }
 
         /// PlayerController에서 호출됨
@@ -69,18 +69,10 @@ namespace ProjectChan.Object
             transform.forward = standardPos.forward;
         }
 
-        private void SetPosition(bool isLerp, Transform viewPos)
+        private void SetPosition(Transform viewPos)
         {
-            if (isLerp)
-            {
-                transform.position = Vector3.Lerp(transform.position, viewPos.position, Time.fixedDeltaTime * smooth);
-                transform.forward = Vector3.Lerp(transform.forward, viewPos.forward, Time.fixedDeltaTime * smooth);
-            }
-            else
-            {
-                transform.position = viewPos.position;
-                transform.forward = viewPos.forward;
-            }
+            transform.position = viewPos.position;
+            transform.forward = viewPos.forward;
         }
 
     }
