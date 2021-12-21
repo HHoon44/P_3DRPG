@@ -91,7 +91,7 @@ namespace ProjectChan
                 yield return SceneManager.UnloadSceneAsync(SceneType.Loading.ToString());
 
                 loadComplete?.Invoke();
-                UIWindowManager.Instance.GetWindow<UIBattle>().transform.GetChild(0).gameObject.SetActive(true);
+                UIWindowManager.Instance.GetWindow<UIBattle>().Open();
             }
         }
 

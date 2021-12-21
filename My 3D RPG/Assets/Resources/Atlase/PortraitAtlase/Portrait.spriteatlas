@@ -47,16 +47,14 @@ SpriteAtlas:
     - {fileID: 102900000, guid: 99142b6b9fa35e94e86a2abef71e2aa0, type: 3}
     - {fileID: 102900000, guid: 71694dcd4a19088459e6504fe72aac99, type: 3}
     - {fileID: 102900000, guid: 11502e33413ab224e80d60af8a7f1e98, type: 3}
-    totalSpriteSurfaceArea: 64942886
+    totalSpriteSurfaceArea: 54988325
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: de7d0951a65d262428957c973d3a0c55, type: 3}
   - {fileID: 21300000, guid: fac842c15b034e24f96f761469e43328, type: 3}
   - {fileID: 21300000, guid: 94d7a5a29b259bb4ea04432708a6dee4, type: 3}
-  - {fileID: 21300000, guid: 45810715878077849b300fa6bd8ce4f6, type: 3}
   - {fileID: 21300000, guid: 03c919768c718e9429148231f1e8acfc, type: 3}
   - {fileID: 21300000, guid: 746416e6de7e9df44a17125fe93f301c, type: 3}
   - {fileID: 21300000, guid: c7e5ad4746e231441aae9ad3b849afbb, type: 3}
@@ -65,7 +63,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: efd844d76e24f9a4a839993be8a9c793, type: 3}
   - {fileID: 21300000, guid: cea61ed7c0d0a6b40afefe6727852f74, type: 3}
   - {fileID: 21300000, guid: 2d7ba2e794cf4b94cb53eb8b48baccf7, type: 3}
-  - {fileID: 21300000, guid: ff944228c74bc9d4eb9e1020c0ca92e2, type: 3}
   - {fileID: 21300000, guid: 7a8a0ec9c1107884fa0b3a7ae636d697, type: 3}
   - {fileID: 21300000, guid: ee7af1aacbe0eaa4a865cfa48e1df665, type: 3}
   - {fileID: 21300000, guid: 3d34b67ba6c8d6f4a93793da13a1b944, type: 3}
@@ -74,10 +71,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: fd611c0f852f71e4ab62f2c8f1bbb15c, type: 3}
   - {fileID: 21300000, guid: d3a76d1f0df25f44dbc0abdf95dce888, type: 3}
   m_PackedSpriteNamesToIndex:
-  - portrait_yuko1
   - portrait_misaki2
   - portrait_Beidou0
-  - portrait_kohaku1
   - portrait_misaki5
   - portrait_kohaku0
   - portrait_yuko5
@@ -86,7 +81,6 @@ SpriteAtlas:
   - portrait_kohaku5
   - portrait_misaki4
   - portrait_yuko3
-  - portrait_misaki1
   - portrait_yuko4
   - portrait_yuko0
   - portrait_misaki0

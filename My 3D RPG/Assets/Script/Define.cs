@@ -110,7 +110,7 @@ namespace ProjectChan.Define
     public class Novel
     {
         public const int firstNovelIndex = 1000;
-        public const int nextStageLoadIndex = 1016;
+        public const int nextStageLoadIndex = 1076;
     }
 
     public class Monster
@@ -143,7 +143,7 @@ namespace ProjectChan.Define
         {
             None,
             BackGround,
-            SchoolStage,
+            SchoolImage,
             Portrait,
             UIAtlase,
             ItemAtlase

@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SchoolStage
+  m_Name: SchoolImage
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -47,14 +47,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f374bf8d975a467408dd584f7fc01322, type: 3}
   - {fileID: 21300000, guid: 1a66393e7335a87419c5e133687e1299, type: 3}
   m_PackedSpriteNamesToIndex:
-  - Stairs
-  - Kyosich
-  - Corridor2
-  - RoofTop
-  - Corridor3
-  - Corridor4
-  - Nyugakusiki
-  - Corridor1
+  - "\uACC4\uB2E8"
+  - "\uAD50\uC2E4"
+  - "\uB178\uC744\uC9C4 \uBCF5\uB3C4 2"
+  - "\uC625\uC0C1"
+  - "\uBC29\uACFC\uD6C4 \uBCF5\uB3C4"
+  - "\uBCF5\uB3C4"
+  - "\uB4F1\uAD50"
+  - "\uB178\uC744\uC9C4 \uBCF5\uB3C4"
   m_RenderDataMap: {}
-  m_Tag: SchoolStage
+  m_Tag: SchoolImage
   m_IsVariant: 0

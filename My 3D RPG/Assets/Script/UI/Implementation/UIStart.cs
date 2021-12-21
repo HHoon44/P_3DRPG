@@ -26,7 +26,7 @@ namespace ProjectChan.UI
 
         public void SetLoadStateDescription(string loadState)
         {
-            loadStateDesc.text = $"Load{loadState.ToString()}...";
+            loadStateDesc.text = $"Load{loadState}...";
         }
 
         public IEnumerator LoadGaugeUpdate(float loadPer)

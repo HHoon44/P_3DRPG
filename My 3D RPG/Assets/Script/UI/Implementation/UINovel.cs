@@ -19,7 +19,6 @@ namespace ProjectChan.UI
         public TextMeshProUGUI speakerName;     // -> 현재 말하는 캐릭터 이름
         public TextMeshProUGUI dialogue;        // -> 현재 말하는 캐릭터의 대사
         public Image portrait;                  // -> 현재 말하는 캐릭터의 이미지
-        public Animator portraitAnim;           // -> 초상화 애니메이션
 
         public override void Start()
         {
@@ -37,14 +36,29 @@ namespace ProjectChan.UI
             speakerName.text = boNovel.sdNovel.name;
             dialogue.text = boNovel.sdNovel.kr;
 
-            // -> CharType별로 이미지 사이즈 설정
-            SetImageSize(boNovel.sdNovel.charType);
-
-            // -> 초상화가 존재하는 경로가 있다면 
-            if (boNovel.sdNovel.portraitPath.Length > 1)
+            switch (boNovel.sdNovel.charType)
             {
-                portrait.sprite = SpriteLoader.GetSprite
-                    (Define.Resource.AtlasType.Portrait, boNovel.sdNovel.portraitPath + boNovel.sdNovel.portraitIndex.ToString());
+                case CharType.NovelChar:
+                case CharType.NPC:
+                    // -> 대화하는 캐릭터 타입별로 이미지 사이즈를 정합니다!
+                    SetImageSize(boNovel.sdNovel.charType);
+
+                    // -> 초상화가 존재하는 경로가 있다면 !
+                    if (boNovel.sdNovel.portraitPath.Length > 1 )
+                    {
+                        // -> 이전 나레이션 때문에 현재 알파값이 0이라면!
+                        if (portrait.color.a == 0)
+                        {
+                            portrait.color = Color.white;
+                        }
+
+                        portrait.sprite = SpriteLoader.GetSprite
+                            (Define.Resource.AtlasType.Portrait, boNovel.sdNovel.portraitPath);
+                    }
+                    break;
+                case CharType.Narration:
+                    portrait.color = new Color(1, 1, 1, 0);
+                    break;
             }
 
             Open();

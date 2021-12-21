@@ -27,6 +27,12 @@ namespace ProjectChan.Novel
         private void Awake()
         {
             currentNovelIndex = Define.Novel.firstNovelIndex;
+            speechIndex = 0;
+        }
+
+        private void Start()
+        {
+            OnTalse();
         }
 
         /// <summary>
@@ -39,21 +45,13 @@ namespace ProjectChan.Novel
             {
                 sdNovel = GameManager.SD.sdNovels.Where(obj => obj.index == currentNovelIndex + speechIndex)?.SingleOrDefault();
 
-                // -> 현재 말하는 캐릭터가 나래이션 인가!
-                if (sdNovel.charType == Define.Actor.CharType.Narration)
-                {
+                // -> 노벨 기획 데이터로 새로운 Bo데이터를 만듭니다!
+                BoNovel boNovel = new BoNovel(sdNovel);
 
-                }
-                else
-                {
-                    // -> 노벨 기획 데이터로 새로운 Bo데이터를 만듭니다!
-                    BoNovel boNovel = new BoNovel(sdNovel);
-
-                    // -> 대화를 하기 위한 세팅을 합니다! (배경설정, 노벨 세팅, 대화 인덱스 증가)
-                    SetNovelGround(boNovel.sdNovel.stagePath);
-                    UIWindowManager.Instance.GetWindow<UINovel>().SetNovel(boNovel);
-                    speechIndex++;
-                }
+                // -> 대화를 하기 위한 세팅을 합니다! (배경설정, 노벨 세팅, 대화 인덱스 증가)
+                SetNovelGround(boNovel.sdNovel.stagePath);
+                UIWindowManager.Instance.GetWindow<UINovel>().SetNovel(boNovel);
+                speechIndex++;
             }
             else
             {
@@ -71,7 +69,7 @@ namespace ProjectChan.Novel
             // -> 경로가 존재한다면
             if (path.Length > 1)
             {
-                var stage = SpriteLoader.GetSprite(AtlasType.SchoolStage, path);
+                var stage = SpriteLoader.GetSprite(AtlasType.SchoolImage, path);
                 novelGround.sprite = stage;
             }
         }
@@ -110,7 +108,7 @@ namespace ProjectChan.Novel
             if (Input.GetButtonDown(Define.Input.Quest.ToString()))
             {
                 OnTalse();
-                speechIndex = 16;
+                speechIndex = 76;
             }
         }
     }

@@ -2501,7 +2501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canCloseESC: 0
-  isOpen: 1
+  isOpen: 0
   playerController: {fileID: 1299584242}
   hpBubbleGauge: {fileID: 343448173}
   energyBubbleGauge: {fileID: 663341237}
@@ -8811,7 +8811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1897882598
 RectTransform:
   m_ObjectHideFlags: 0

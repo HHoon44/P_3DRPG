@@ -2,241 +2,748 @@
   {
     "index": 1000,
     "name": "나레이션",
-    "kr": "코하쿠의 집안은 대대로 첫째는 태어날 때부터 신의 계시가  주어지게 되는데, 계시의 내용은 세상에 큰 위기가 닥쳤을 때 사람들을 구해야 하며 사람들을 구하기 위한 힘도 주어진다는 내용이다./코하쿠의 선조들은 모두 고등학생이 될쯤에 세상에 닥친 위기로 부터 사람들을 구했다고 한다./",
-    "stagePath": "노을진 복도",
+    "kr": "테일즈 고등학교에 재학중인 코하쿠 미사키 유코는 어느때와 같이 3명에서 등교중이다.",
+    "stagePath": "등교",
     "portraitPath": "0",
-    "charType": "None",
-    "atlasType": "None",
-    "portraitIndex": 0
+    "charType": "Narration",
+    "atlasType": "None"
   },
   {
     "index": 1001,
     "name": "코하쿠",
-    "kr": "여기가 내가 다니게 될 학교?",
-    "stagePath": "0",
-    "portraitPath": "portrait_kohaku",
+    "kr": "미사키.. 오늘 따라 학교에 더 가기싫은거 같지않아?",
+    "stagePath": "",
+    "portraitPath": "portrait_kohaku4",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 1002,
-    "name": "코하쿠",
-    "kr": "오늘 부터 고등학교 생활인가..",
+    "name": "미사키",
+    "kr": "에휴.. 너는 항상 그 말이더라",
     "stagePath": "0",
-    "portraitPath": "portrait_kohaku",
+    "portraitPath": "portrait_misaki2",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 4
+    "atlasType": "Portrait"
   },
   {
     "index": 1003,
-    "name": "코하쿠",
-    "kr": "많은 친구들을 사귀었으면 좋겠다!",
+    "name": "유코",
+    "kr": "그게 코하쿠니깐..",
     "stagePath": "0",
-    "portraitPath": "portrait_kohaku",
+    "portraitPath": "portrait_yuko0",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 1004,
-    "name": "미사키",
-    "kr": "너  코하쿠야?",
+    "name": "코하쿠",
+    "kr": "항상 그 말이라니~ 주말에는 안한다구~",
     "stagePath": "0",
-    "portraitPath": "portrait_misaki",
+    "portraitPath": "portrait_kohaku4",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 1005,
-    "name": "코하쿠",
-    "kr": "미사키! 정말 오랜만이다~",
+    "name": "미사키",
+    "kr": "그런 의미가 아니잖아…",
     "stagePath": "0",
-    "portraitPath": "portrait_kohaku",
+    "portraitPath": "portrait_misaki4",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 1006,
-    "name": "미사키",
-    "kr": "asdasdasd",
+    "name": "코하쿠",
+    "kr": "유코 무슨 재미있는 일 같은거 안생길까?",
     "stagePath": "0",
-    "portraitPath": "portrait_misaki",
+    "portraitPath": "portrait_kohaku0",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 1007,
-    "name": "코하쿠",
-    "kr": "우와! 미사키~~ 진짜 오랜만이다!!",
+    "name": "유코",
+    "kr": "음… 우리 3명이 다른 세계로 소환 된다던가?",
     "stagePath": "0",
-    "portraitPath": "portrait_kohaku",
+    "portraitPath": "portrait_yuko2",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 3
+    "atlasType": "Portrait"
   },
   {
     "index": 1008,
-    "name": "코하쿠",
-    "kr": "잘 지냈었어?",
+    "name": "미사키",
+    "kr": "유코.. 애니메이션을 너무 본거 아니야?",
     "stagePath": "0",
-    "portraitPath": "portrait_kohaku",
+    "portraitPath": "portrait_misaki2",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 2
+    "atlasType": "Portrait"
   },
   {
     "index": 1009,
-    "name": "미사키",
-    "kr": "일단 보류",
+    "name": "코하쿠",
+    "kr": "오오오오!! 그렇게 되면 진짜 재미있을거 같아",
     "stagePath": "0",
-    "portraitPath": "portrait_misaki",
+    "portraitPath": "portrait_kohaku3",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 1
+    "atlasType": "Portrait"
   },
   {
-    "index": 10010,
+    "index": 1010,
     "name": "미사키",
-    "kr": "일단 교실로 들어가자~",
+    "kr": "뭐가 재미있어! 그렇게 될리가 없잖아",
     "stagePath": "0",
-    "portraitPath": "portrait_misaki",
+    "portraitPath": "portrait_misaki5",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 1011,
     "name": "유코",
-    "kr": "엥? 코하쿠랑 미사키??",
-    "stagePath": "Corridor4",
-    "portraitPath": "portrait_yuko",
+    "kr": "우와 곧 등교시간이야..",
+    "stagePath": "0",
+    "portraitPath": "portrait_yuko2",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 1012,
-    "name": "유코",
-    "kr": "너희 둘도 이 학교야?",
+    "name": "미사키",
+    "kr": "뭐?? 쫌 뛰어야 겠네.. 뛰자!",
     "stagePath": "0",
-    "portraitPath": "portrait_yuko",
+    "portraitPath": "portrait_misaki3",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 4
+    "atlasType": "Portrait"
   },
   {
     "index": 1013,
-    "name": "유코",
-    "kr": "대박!! 너무 반갑다~!!",
+    "name": "코하쿠",
+    "kr": "가자~!~!~!",
     "stagePath": "0",
-    "portraitPath": "portrait_yuko",
+    "portraitPath": "portrait_kohaku4",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 1014,
     "name": "미사키",
-    "kr": "뭐야 우리 모두 같은 반인거야?",
-    "stagePath": "Kyosich",
-    "portraitPath": "portrait_misaki",
+    "kr": "휴.. 늦을뻔 했어 진짜로!",
+    "stagePath": "복도",
+    "portraitPath": "portrait_misaki5",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 1015,
     "name": "코하쿠",
-    "kr": "헐 대박..",
+    "kr": "미사키 달리기 너무 느려~",
     "stagePath": "0",
-    "portraitPath": "portrait_kohaku",
+    "portraitPath": "portrait_kohaku4",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 3
+    "atlasType": "Portrait"
   },
   {
     "index": 1016,
     "name": "유코",
-    "kr": " 뭐냐구 젠장~~~ 믿고있었다구~~",
+    "kr": "그러게 운동좀 해~",
     "stagePath": "0",
-    "portraitPath": "portrait_yuko",
+    "portraitPath": "portrait_yuko0",
     "charType": "NovelChar",
-    "atlasType": "Portrait",
-    "portraitIndex": 2
+    "atlasType": "Portrait"
   },
   {
     "index": 1017,
-    "name": "0",
-    "kr": "대충 이러쿵 저러쿵해서 이세계로 가게되었다는 내용",
-    "stagePath": "Corridor3",
+    "name": "미사키",
+    "kr": "너희가 엄청 빠른거라구.. 얼른 반으로 들어가자",
+    "stagePath": "0",
+    "portraitPath": "portrait_misaki4",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1018,
+    "name": "나레이션",
+    "kr": "아무도 없는 반",
+    "stagePath": "교실",
     "portraitPath": "0",
-    "charType": "None",
-    "atlasType": "None",
-    "portraitIndex": 0
+    "charType": "Narration",
+    "atlasType": "None"
+  },
+  {
+    "index": 1019,
+    "name": "미사키",
+    "kr": "?? 왜 아무도 없지??",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki3",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1020,
+    "name": "코하쿠",
+    "kr": "뭐지 몰래 카메라인가? 혹시 오늘 쉬는 날인가??",
+    "stagePath": "",
+    "portraitPath": "portrait_kohaku3",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1021,
+    "name": "유코",
+    "kr": "오늘은 학교 가는 날이 맞아..",
+    "stagePath": "",
+    "portraitPath": "portrait_yuko2",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1022,
+    "name": "미사키",
+    "kr": "생각해보니깐.. 오는 길에도 마주친 사람 거의 없었던거 같은데?",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki0",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1023,
+    "name": "코하쿠",
+    "kr": "응? 난 모르겠어 유코랑 달리기 시합하느라",
+    "stagePath": "",
+    "portraitPath": "portrait_kohaku0",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1024,
+    "name": "유코",
+    "kr": "응 나도 잘 모르겠어",
+    "stagePath": "",
+    "portraitPath": "portrait_yuko0",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1025,
+    "name": "미사키",
+    "kr": "흠흠…",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki0",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1026,
+    "name": "???",
+    "kr": "당연하지! 여긴 내가 만든 가상의 공간이니깐!",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1027,
+    "name": "미사키",
+    "kr": "!!!! 꺄아아아아아아아악!!! 귀..귀신이야!!!",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki5",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1028,
+    "name": "유코",
+    "kr": "흡!!",
+    "stagePath": "",
+    "portraitPath": "portrait_yuko5",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1029,
+    "name": "코하쿠",
+    "kr": "뭐..뭐야!! 당신 누구야!",
+    "stagePath": "",
+    "portraitPath": "portrait_kohaku5",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1030,
+    "name": "엠버",
+    "kr": "내 이름은 엠버! 스페라 마을의주민이야.",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1031,
+    "name": "코하쿠",
+    "kr": "하…하아…??",
+    "stagePath": "",
+    "portraitPath": "portrait_kohaku3",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1032,
+    "name": "유코",
+    "kr": "이세계!!",
+    "stagePath": "",
+    "portraitPath": "portrait_yuko2",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1033,
+    "name": "미사키",
+    "kr": "그런거 누가 믿겠냐고!! 당신 진짜로 누구고 우리는 왜 여기에 있는거야!",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki3",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1034,
+    "name": "엠버",
+    "kr": "일단 쫌 진정해줘 너희를 갑작스럽게 여기로 오게한건 정말 미안해",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1035,
+    "name": "엠버",
+    "kr": "단도직입적으로 말할게 너희의 도움이 필요해!",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1036,
+    "name": "미사키",
+    "kr": "도움이면 경찰이나 다른 사람들한테 부탁해도 되잖아!",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki2",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1037,
+    "name": "엠버",
+    "kr": "경찰? 그게 뭐지? 우리 세상에는 그런건 없어",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1038,
+    "name": "코하쿠",
+    "kr": "경찰을 모른다고? 경찰을 어떻게 모를 수 있지..?",
+    "stagePath": "",
+    "portraitPath": "portrait_kohaku3",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1039,
+    "name": "엠버",
+    "kr": "일단 한번만 내 이야기를 들어줘.. ",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1040,
+    "name": "미사키",
+    "kr": "이야기를 들어주면 여기서 우리를 내보내주는거야?",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki0",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1041,
+    "name": "엠버",
+    "kr": "그래 약속할게 ",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1042,
+    "name": "미사키",
+    "kr": "그 약속 꼭 지켜",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki2",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1043,
+    "name": "유코",
+    "kr": "(시무룩)",
+    "stagePath": "",
+    "portraitPath": "portrait_yuko4",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1044,
+    "name": "미사키",
+    "kr": "유코 왜 시무룩해..?",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki3",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1045,
+    "name": "엠버",
+    "kr": "사실 스페라 마을에 침략자들이 쳐들어 왔어..",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1046,
+    "name": "엠버",
+    "kr": "우리 마을은 원래 다른 마을에 보호를 받는 마을이였는데",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1047,
+    "name": "엠버",
+    "kr": "그 마을이 침략자들에게 점령 당한 뒤에 우리 마을이 노려지게 되었어..",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1048,
+    "name": "미사키",
+    "kr": "그게 왜 우리랑 상관 있는데?..",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki2",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1049,
+    "name": "엠버",
+    "kr": "우리 마을은 대대로 다른 마을에 보호를 받아왔었는데 만약의 상황을 대비하기 위해서",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1050,
+    "name": "엠버",
+    "kr": "다른 차원으로 넘어갈 수 있는 술식이 있거든",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1051,
+    "name": "엠버",
+    "kr": "그래서 다른 차원의 전사로 선정된 사람에게 도움을 받았던 기록이 있어서 내가 여기로 온거야..",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1052,
+    "name": "미사키",
+    "kr": "그래서 우리를 만나로 온거다?",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki2",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1053,
+    "name": "엠버",
+    "kr": "응..",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1054,
+    "name": "미사키",
+    "kr": "웃기지마! 무슨..아무것도 모르는 차원으로가서 마을을 구하라고?",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki2",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1055,
+    "name": "엠버",
+    "kr": "미안하지만 너가 선정된건 아니라.. 너 옆에 있는 녀석이..",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1056,
+    "name": "미사키",
+    "kr": "에…?에에? 코하쿠가?",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki3",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1057,
+    "name": "코하쿠",
+    "kr": "응? 나??",
+    "stagePath": "",
+    "portraitPath": "portrait_kohaku3",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1058,
+    "name": "엠버",
+    "kr": "그래 너..",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1059,
+    "name": "코하쿠",
+    "kr": "흠… 너희 마을이 위험하다는 거지?",
+    "stagePath": "",
+    "portraitPath": "portrait_kohaku0",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1060,
+    "name": "엠버 ",
+    "kr": "응.. 한시가 급한 상황이야",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1061,
+    "name": "코하쿠",
+    "kr": "저녁까지는 돌아 올 수있어?",
+    "stagePath": "",
+    "portraitPath": "portrait_kohaku3",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1062,
+    "name": "엠버",
+    "kr": "저녁까지는 돌아 올 수있어! 내가 보장할게",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1063,
+    "name": "코하쿠",
+    "kr": "그러면 뭐.. 한번 가보지 뭐~",
+    "stagePath": "",
+    "portraitPath": "portrait_kohaku4",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1064,
+    "name": "미사키",
+    "kr": "코하쿠 너 정말로 갈거야?",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki3",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1065,
+    "name": "코하쿠",
+    "kr": "뭐..그냥 다른 차원은 어떻게 생겼나 궁금하기도 하고~",
+    "stagePath": "",
+    "portraitPath": "portrait_kohaku4",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1066,
+    "name": "코하쿠 ",
+    "kr": "뭔가 도와주고 싶달까?..",
+    "stagePath": "",
+    "portraitPath": "portrait_kohaku4",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1067,
+    "name": "유코",
+    "kr": "나도 갈래~ 뭔가 재미있어보여~",
+    "stagePath": "",
+    "portraitPath": "portrait_yuko0",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1068,
+    "name": "미사키",
+    "kr": "유코 너도 간다고?",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki3",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1069,
+    "name": "엠버",
+    "kr": "정말 고마워!!  우리 마을을 지켜주면 내가 꼭 보답할게!",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1070,
+    "name": "미사키",
+    "kr": "하..진짜.. 너희 둘이 간다고하면.. 나도 갈 수밖에 없잖아..",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki2",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1071,
+    "name": "엠버",
+    "kr": "다들..정말 고마워!!",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1072,
+    "name": "엠버",
+    "kr": "지금 부터 차원 이동 영창을 시작할거야 다들 모여줘!",
+    "stagePath": "",
+    "portraitPath": "portrait_Amber0",
+    "charType": "NPC",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1073,
+    "name": "코하쿠",
+    "kr": "뭔가 가슴이 두근두근 거려!",
+    "stagePath": "",
+    "portraitPath": "portrait_kohaku4",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1074,
+    "name": "유코",
+    "kr": "가자~ 이세계~",
+    "stagePath": "",
+    "portraitPath": "portrait_yuko2",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1075,
+    "name": "미사키",
+    "kr": "아 진짜!! 난 몰라~",
+    "stagePath": "",
+    "portraitPath": "portrait_misaki5",
+    "charType": "NovelChar",
+    "atlasType": "Portrait"
+  },
+  {
+    "index": 1076,
+    "name": "나레이션",
+    "kr": "엠버를 따라 코하쿠 유코 미사키는 스페라 마을로 차원이동을 하게된다.",
+    "stagePath": "",
+    "portraitPath": "0",
+    "charType": "Narration",
+    "atlasType": "None"
   },
   {
     "index": 100,
     "name": "엠버",
     "kr": "안녕 난 엠버라고해~",
     "stagePath": "0",
-    "portraitPath": "portrait_Amber",
+    "portraitPath": "portrait_Amber0",
     "charType": "NPC",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 101,
     "name": "엠버",
     "kr": "안녕 난 엠버일지도?",
     "stagePath": "0",
-    "portraitPath": "portrait_Amber",
+    "portraitPath": "portrait_Amber0",
     "charType": "NPC",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 102,
     "name": "엠버",
     "kr": "안녕 난 엠버였나?",
     "stagePath": "0",
-    "portraitPath": "portrait_Amber",
+    "portraitPath": "portrait_Amber0",
     "charType": "NPC",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 200,
     "name": "베이도우",
     "kr": "안녕 난 베이도우!",
     "stagePath": "0",
-    "portraitPath": "portrait_Beidou",
+    "portraitPath": "portrait_Beidou0",
     "charType": "NPC",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 201,
     "name": "베이도우",
     "kr": "안녕 난 베이도우가 아니야!",
     "stagePath": "0",
-    "portraitPath": "portrait_Beidou",
+    "portraitPath": "portrait_Beidou0",
     "charType": "NPC",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   },
   {
     "index": 202,
     "name": "베이도우",
     "kr": "안녕 난 베우이도!",
     "stagePath": "0",
-    "portraitPath": "portrait_Beidou",
+    "portraitPath": "portrait_Beidou0",
     "charType": "NPC",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "atlasType": "Portrait"
   }
 ]

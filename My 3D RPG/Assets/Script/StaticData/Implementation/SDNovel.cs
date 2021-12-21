@@ -19,6 +19,5 @@ namespace ProjectChan.SD
         public string stagePath;        // -> 배경 이름
         public string portraitPath;     // -> 캐릭터 초상화 이름
         public CharType charType;       // -> 캐릭터 타입
-        public int portraitIndex;       // -> 현재 캐릭터와 일치한 초상화 인덱스
     }
 }
