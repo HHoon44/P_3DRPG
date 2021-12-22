@@ -1,26 +1,10 @@
 ﻿[
   {
     "index": 1000,
-    "kr": "너 뉴비구나!",
-    "portraitPath": "0",
-    "charType": "NPC",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "kr": "사냥터에 가서 츄츄 5마리를 잡아라!"
   },
   {
     "index": 1001,
-    "kr": "사냥터에 가서 츄츄 5마리만 잡아와줘",
-    "portraitPath": "0",
-    "charType": "NPC",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
-  },
-  {
-    "index": 1002,
-    "kr": "사냥터에 가서 츄츄 5마리를 잡자! 엠버년 지가 잡으면 될것을!",
-    "portraitPath": "0",
-    "charType": "None",
-    "atlasType": "Portrait",
-    "portraitIndex": 0
+    "kr": "베이도우에게 말을 걸자!"
   }
 ]

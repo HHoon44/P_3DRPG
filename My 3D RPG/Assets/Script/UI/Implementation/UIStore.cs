@@ -46,6 +46,7 @@ public class UIStore : UIWindow, IPointerClickHandler
 
         // -> 상점에 존재하는 상점 슬롯들을 가져오는 작업!
         storeSlotHolder = transform.GetChild(0).GetChild(0);
+
         for (int i = 0; i < storeSlotHolder.childCount; i++)
         {
             storeSlots.Add(storeSlotHolder.GetChild(i).GetComponent<ItemSlot>());

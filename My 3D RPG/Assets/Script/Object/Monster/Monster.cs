@@ -119,7 +119,7 @@ namespace ProjectChan.Object
                 // -> 평소에는 False이다가 대상을 만나면 True
                 return !attackController.canAtk;
             }
-            
+
             // -> 멈춰있다면
             if (State == ActorState.Idle)
             {
@@ -274,57 +274,49 @@ namespace ProjectChan.Object
         {
             #region 퀘스트 디테일 작업
 
-            // -> 현재 진행중인 퀘스트 목록을 가져온다
+            // -> 현재 진행중인 퀘스트 목록을 가져 옵니다!
             var progressQuests = GameManager.User.boQuest.progressQuests;
 
-            // -> 현재 몬스터가 타켓인 진행중인 퀘스트 인덱스를 담을 변수
+            // -> 현재 몬스터를 타겟으로 하는 진행중인 퀘스트의 인덱스 값을 담을 변수 입니다!
             var questIndex = -1;
 
-            // -> 현재 몬스터를 타겟으로 하는 진행중인 퀘스트 찾기
+            // -> 현재 몬스터를 타겟으로 하는 진행 퀘스트 찾기 작업 입니다!
             for (int i = 0; i < progressQuests.Count; i++)
             {
-                // -> 현재 몬스터와 진행중인 퀘스트 타겟의 인덱스가 같다면
+                // -> 진행중인 퀘스트의 타겟 인덱스와 현재 몬스터의 인덱스가 같다면!
                 if (progressQuests[i].sdQuest.target.Where(obj => obj == boMonster.sdMonster.index)?.SingleOrDefault()
                     == boMonster.sdMonster.index)
                 {
-                    // -> 이때 i의 값은 현재 몬스터를 타겟으로하는 퀘스트가 위치하는 곳의 인덱스 값이다
+                    // -> 현재 몬스터를 타겟으로 하는 퀘스트의 위치 값 입니다!
                     questIndex = i;
                     break;
                 }
             }
 
-            // -> 0보다 크거나 같다면 퀘스트가 존재
-            if (questIndex >= 0)
+            if (questIndex != -1)
             {
-                var length = progressQuests[questIndex].sdQuest.target.Length;
-
-                var detailIndex = 0;
-
                 // -> 진행중인 퀘스트를 찾았으니 현재 몬스터의 디테일 값을 찾는 작업
-                for (int i = 0; i < length; i++)
+                for (int i = 0; i < progressQuests[questIndex].sdQuest.target.Length; i++)
                 {
                     if (progressQuests[questIndex].sdQuest.target[i] == boMonster.sdMonster.index)
                     {
-                        detailIndex = i;
+                        // -> 디테일 값이 퀘스트의 디테일 값을 넘어가지 않도록 막아 줍니다!
+                        progressQuests[questIndex].details[i] =
+                            progressQuests[questIndex].details[i] >= progressQuests[questIndex].sdQuest.questDetail[i] ?
+                            progressQuests[questIndex].sdQuest.questDetail[i] : progressQuests[questIndex].details[i]++;
+
+                        // -> Bo데이터 변했으므로 Dto데이터에 다시 저장하는 작업
+                        var dummyServer = DummyServer.Instance;
+                        var dtoProgressQuest = new DtoQuestProgress();
+                        dtoProgressQuest.index = progressQuests[questIndex].sdQuest.index;
+                        dtoProgressQuest.details = progressQuests[questIndex].details;
+
+                        // -> 어차피 Dto에 있는 데이터를 Bo에 저장했었기 때문에 현재 퀘스트가 존재하는 인덱스는 둘다 같다고 생각
+                        dummyServer.userData.dtoQuest.progressQuests[questIndex] = dtoProgressQuest;
+                        dummyServer.Save();
+                        break;
                     }
                 }
-
-                // -> 타겟을 잡았으므로 디테일 값을 올려주는데 만약 이미 디테일 값만큼 처치했다면 더이상 올라가지 않도록
-                if (progressQuests[questIndex].sdQuest.questDetail[detailIndex]
-                    != progressQuests[questIndex].details[detailIndex])
-                {
-                    progressQuests[questIndex].details[detailIndex]++;
-                }
-
-                // -> Bo데이터 변했으므로 Dto데이터에 다시 저장하는 작업
-                var dummyServer = DummyServer.Instance;
-                var dtoProgressQuest = new DtoQuestProgress();
-                dtoProgressQuest.index = progressQuests[questIndex].sdQuest.index;
-                dtoProgressQuest.details = progressQuests[questIndex].details;
-
-                // -> 어차피 Dto에 있는 데이터를 Bo에 저장했었기 때문에 현재 퀘스트가 존재하는 인덱스는 둘다 같다고 생각
-                dummyServer.userData.dtoQuest.progressQuests[questIndex] = dtoProgressQuest;
-                dummyServer.Save();
             }
 
             #endregion

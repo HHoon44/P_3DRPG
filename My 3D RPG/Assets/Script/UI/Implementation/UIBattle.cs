@@ -37,7 +37,7 @@ namespace ProjectChan.UI
         private void PlayerCursorUpdate()
         {
             Cursor.SetCursor
-                (playerController.HasPointTarget ? targetPointCursor : normalCursor, Vector2.zero, CursorMode.Auto);
+                (playerController.HasPointTarget ? targetPointCursor : normalCursor, new Vector2(20, 1), CursorMode.Auto);
         }
 
         /// <summary>

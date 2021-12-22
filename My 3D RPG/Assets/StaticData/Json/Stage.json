@@ -1,9 +1,8 @@
 ﻿[
   {
     "index": 1000,
-    "name": "string",
+    "name": "스페어 마을",
     "resourcePath": "Prefabs/Stage/StartVillage",
-    "stageNovel": 2000,
     "genMonsters": [
       -1
     ],
@@ -18,7 +17,6 @@
     "index": 1001,
     "name": "첫번째 던전",
     "resourcePath": "Prefabs/Stage/DunGeon",
-    "stageNovel": 3000,
     "genMonsters": [
       1000,
       1001

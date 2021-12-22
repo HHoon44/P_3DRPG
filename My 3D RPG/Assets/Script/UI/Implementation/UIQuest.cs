@@ -123,9 +123,9 @@ namespace ProjectChan.UI
             base.Close(force);
 
             // -> 여기 쫌 수정해야할듯
-            if (listWindow.gameObject.activeSelf)       { listWindow.gameObject.SetActive(!listWindow.gameObject.activeSelf); }
-            if (contentWindow.gameObject.activeSelf)    { contentWindow.gameObject.SetActive(!contentWindow.gameObject.activeSelf); }
-            if (orderWindow.gameObject.activeSelf)      { orderWindow.gameObject.SetActive(!orderWindow.gameObject.activeSelf); }
+            if (listWindow.gameObject.activeSelf) { listWindow.gameObject.SetActive(!listWindow.gameObject.activeSelf); }
+            if (contentWindow.gameObject.activeSelf) { contentWindow.gameObject.SetActive(!contentWindow.gameObject.activeSelf); }
+            if (orderWindow.gameObject.activeSelf) { orderWindow.gameObject.SetActive(!orderWindow.gameObject.activeSelf); }
 
             // -> 퀘스트 창을 닫으면서 창에 있던 QuestSlot들을 다 정리한다
             ClearSlots();
@@ -143,10 +143,10 @@ namespace ProjectChan.UI
             /// -> 수락 버튼을 누를 때 마다 실행 시킬 기능 자체는 똑같은데, 전달되는 데이터가 달라져야한다
             /// -> 수락 버튼을 눌렀을 때 수락한 퀘스트를 유저 DB에 저장하는 기능은 같은데 어떤 퀘스트인지 데이터가 달라지기 때문에
 
-            // -> 버튼에 바인딩된 이벤트 전부 제거
+            // -> 버튼에 바인딩된 이벤트를 전부 제거 합니다!
             acceptBtn.onClick.RemoveAllListeners();
 
-            // -> 현재 오더창에 세팅하는 퀘스트가 '진행중인 퀘스트' 인지 '아직 진행중인 퀘스트가 이닌지' 에 따라서 나눠놓음
+            // -> 미진행 퀘스트, 진행 퀘스트, 완료 퀘스트 별로 나누어놨습니다!
             switch (orderTab)
             {
                 // -> 미진행
@@ -157,18 +157,15 @@ namespace ProjectChan.UI
                         // -> 수락한 퀘스트를 DtoQuest에 저장하는 작업
                         ServerManager.Server.AddQuest(0, sdQuest.index, new ResponsHandler<DtoQuestProgress>(dtoQeustProgress =>
                         {
-                            // -> 핸들러를 통해서 받은 DtoQuestProgress를 BoQuestProgress에 담아둔다음 User에 저장한다
+                            // -> 핸들러를 통해서 받은 Dto데이터를를 Bo데이터로 변환 후 게임매니저에 저장합니다!
                             var boQuestProgress = new BoQuestProgress(dtoQeustProgress);
                             GameManager.User.boQuest.progressQuests.Add(boQuestProgress);
 
-                            // -> 위의 작업이 끝나면 오더창을 끈다
+                            // -> 오더 창과 현재 UI를 닫습니다!
                             orderWindow.gameObject.SetActive(!orderWindow.gameObject.activeSelf);
                             Close();
                         },
-                        failed =>
-                        {
-                        }
-                        ));
+                        failed => { }));
                     });
 
                     refuseBtn.onClick.RemoveAllListeners();
@@ -272,16 +269,29 @@ namespace ProjectChan.UI
             contentDescription.text =
                 GameManager.SD.sdQuestSpeechs.Where(obj => obj.index == progressQuest.description)?.SingleOrDefault().kr;
 
-            var sdQuest = GameManager.SD.sdQuests.Where(obj => obj.index == progressQuest.index)?.SingleOrDefault();
-
             questDetail.text = string.Empty;
 
-            for (int i = 0; i < progressQuest.target.Length; i++)
+            switch (progressQuest.questType)
             {
-                var monsterName = GameManager.SD.sdMonsters.Where(obj => obj.index == progressQuest.target[i])?.SingleOrDefault().name;
+                case Define.QuestType.Collection:
+                case Define.QuestType.Hunt:
+                    // -> 퀘스트의 디테일 정보를 출력하기 위한 작업 입니다!
+                    for (int i = 0; i < progressQuest.target.Length; i++)
+                    {
+                        var targetName = GameManager.SD.sdMonsters.Where(obj => obj.index == progressQuest.target[i])?.SingleOrDefault().name;
+                        questDetail.text += targetName + " : " + details[progressQuest.index][i] + " / " + progressQuest.questDetail[i] + '\n';
+                    }
+                    break;
 
-                questDetail.text += monsterName + " : " + details[progressQuest.index][i] + " / " + sdQuest.questDetail[i] + '\n';
+                case Define.QuestType.Conversation:
+                    for (int i = 0; i < progressQuest.target.Length; i++)
+                    {
+                        var targetName = GameManager.SD.sdNPCs.Where(obj => obj.index == progressQuest.target[i])?.SingleOrDefault().name;
+                        questDetail.text += targetName + '\n';
+                    }
+                    break;
             }
+
 
             // -> 컨텐츠 창에 존재하는 뒤로가기 버튼에 이벤트 바인딩
             BackBtn.onClick.AddListener(() =>

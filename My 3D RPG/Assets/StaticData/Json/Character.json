@@ -1,12 +1,12 @@
 ﻿[
   {
     "index": 1000,
-    "name": "Kohaku",
+    "name": "오토리 코하쿠",
     "resourcePath": "Prefabs/Actor/Character/Otori Kohaku",
     "atkType": "Normal",
     "moveSpeed": 3.5,
     "jumpForce": 60.0,
-    "atkRange": 1.5,
-    "atkInterval": 1.5
+    "atkRange": 2.0,
+    "atkInterval": 1.0
   }
 ]

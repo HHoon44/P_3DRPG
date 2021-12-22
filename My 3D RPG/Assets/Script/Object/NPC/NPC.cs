@@ -1,4 +1,5 @@
 ﻿using ProjectChan.DB;
+using ProjectChan.Dummy;
 using ProjectChan.UI;
 using System;
 using System.Collections.Generic;
@@ -44,10 +45,10 @@ namespace ProjectChan.Object
         public void NPCUpdate()
         {
             CheckInteraction();
-
             CheckAnimTime();
-
         }
+
+        #region NPC 애니메이션
 
         private void CheckAnimTime()
         {
@@ -76,15 +77,7 @@ namespace ProjectChan.Object
             anim.SetBool("isMotion", false);
         }
 
-        /*
-        private void OnDrawGizmos()
-        {
-            var halfExtents = new Vector3(coll.bounds.center.x, coll.bounds.center.y, coll.bounds.center.z);
-
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(transform.position, halfExtents);
-        }
-        */
+        #endregion
 
         /// <summary>
         /// => NPC에 닿은 객체들을 체크하는 메서드
@@ -100,10 +93,9 @@ namespace ProjectChan.Object
                 return;
             }
 
-            // -> 현재 범위에 들어온 플레이어!
+            // -> 현재 범위에 들어온 플레이어 입니다!
             var playerController = colls[0].GetComponentInParent<PlayerController>();
 
-            // -> 다이얼로그 버튼 실행
             if (Input.GetButtonDown(Define.Input.Interaction) && !playerController.isPlayerAction)
             {
                 // -> 대화를 할땐 플레이어의 이동과 키입력을 막습니다!
@@ -112,16 +104,53 @@ namespace ProjectChan.Object
                 var newDir = Vector3.zero;
                 character.boActor.rotDir = newDir;
 
-                // -> 현재 NPC와 대화하는 플레이어를 세팅합니다!
+                // -> 현재 NPC와 대화하는 플레이어를 담아 둡니다!
                 boNPC.actor = playerController;
 
                 // -> 플레이어가 행동을 합니다!
                 boNPC.actor.isPlayerAction = true;
 
-                ///OnDialogue(playerController);
+                var boProgressQuests = GameManager.User.boQuest.progressQuests;
+                var progressIndex = -1;
+
+                for (int i = 0; i < boProgressQuests.Count; i++)
+                {
+                    if (boNPC.sdNPC.index ==
+                        boProgressQuests[i].sdQuest.target.Where(obj => obj == boNPC.sdNPC.index)?.SingleOrDefault())
+                    {
+                        progressIndex = i;
+                        break;
+                    }
+                }
+
+                if (progressIndex != -1)
+                {
+                    for (int i = 0; i < boProgressQuests[progressIndex].sdQuest.target.Length; i++)
+                    {
+                        if (boNPC.sdNPC.index == boProgressQuests[progressIndex].sdQuest.target[i])
+                        {
+                            if (boProgressQuests[progressIndex].sdQuest.target[i] == boNPC.sdNPC.index)
+                            {
+                                boProgressQuests[progressIndex].details[i] = boProgressQuests[progressIndex].sdQuest.questDetail[i];
+                            }
+
+                            // -> Bo데이터 변했으므로 Dto데이터에 다시 저장하는 작업
+                            var dummyServer = DummyServer.Instance;
+                            var dtoProgressQuest = new DtoQuestProgress();
+                            dtoProgressQuest.index = boProgressQuests[progressIndex].sdQuest.index;
+                            dtoProgressQuest.details = boProgressQuests[progressIndex].details;
+
+                            // -> 어차피 Dto에 있는 데이터를 Bo에 저장했었기 때문에 현재 퀘스트가 존재하는 인덱스는 둘다 같다고 생각
+                            dummyServer.userData.dtoQuest.progressQuests[progressIndex] = dtoProgressQuest;
+                            dummyServer.Save();
+
+                            break;
+                        }
+                    }
+                }
+
                 OnDialogue();
             }
-            // -> NPC와 대화중에 한번더 키 입력을 했다면!
             else if (Input.GetButtonDown(Define.Input.Interaction) && playerController.isPlayerAction)
             {
                 // -> 다이얼로그 창을 닫습니다!
@@ -136,78 +165,74 @@ namespace ProjectChan.Object
         /// <summary>
         /// => 다이얼로그 활성화 메서드
         /// </summary>
-        /// <param name="actor"> 현재 NPC와 대화중인 액터데이터 </param>
         private void OnDialogue()
         {
-            // -> 실행시킬 UIDialogue를 가져온다
             var uiDialogue = UIWindowManager.Instance.GetWindow<UIDialogue>();
 
-            #region 퀘스트 인덱스 걸러내기
+            #region 퀘스트 인덱스 걸러내기 작업!
 
-            // -> 현재 게임에 저장되어있는 Bo데이터를 가져온다
             var boQuests = GameManager.User.boQuest;
-
-            // -> 현재 NPC가 지닌 퀘스트 인덱스 목록에서 현재 플레이어가 진행중인 퀘스트 정보들을 지운다
-            //var canOrderQuest = boNPC.sdNPC.questIndex.Except(boQuests.progressQuests.Select(obj => obj.sdQuest.index));
-
-            // -> NPC가 지닌 퀘스트 인덱스 목록에서 완료한 퀘스트 목록을 지운다
-            var canOrderQuest = boNPC.sdNPC.questIndex.Except(boQuests.completedQuests.Select(obj => obj.index));
-
-            // -> 위에 2개의 조건으로 걸러진 데이터를 List로 담아둔다
-            /// -> 엠버가 지닌 1000번째 인덱스 퀘스트의 인덱스 값이 담김
-            var resultQusts = canOrderQuest.ToList();
-
-            // -> 퀘스트들이 담긴 기획 데이터를 가져옴
             var sdQuests = GameManager.SD.sdQuests;
 
-            // -> 선행 퀘스트의 여부를 확인하는 작업
-            /// -> 엠버는 1개의 퀘스트를 지녔으므로 1번 돔
+            // -> NPC가 지닌 퀘스트 목록에서 완료한 퀘스트를 지웁니다!
+            var canOrderQuest = boNPC.sdNPC.questIndex.Except(boQuests.completedQuests.Select(obj => obj.index));
+
+            // -> 남은 데이터를 리스트로 저장합니다!
+            var resultQusts = canOrderQuest.ToList();
+
+            // -> 선행 퀘스트의 여부를 확인하는 작업 입니다!
             for (int i = 0; i < resultQusts.Count(); i++)
             {
-                // -> 0번째 퀘스트 인덱스가 0이라면 퀘스트가 없다는 의미이므로
+                // -> 0번째 퀘스트 인덱스가 0이라면 퀘스트가 없다는 의미 입니다!
                 if (resultQusts[0] == 0)
                 {
                     continue;
                 }
 
-                // -> 현재 NPC의 퀘스트 인덱스 목록(resultQuests)과 같은 인덱스를 가진 퀘스트 기획 데이터를 가져온다
-                //    만약 가져온다면 그 기획 데이터의 선행 퀘스트 목록을 가져온다
-                /// -> 엠버가 가진 퀘스트는 선행 퀘스트를 필요로 하지 않으므로
+                // -> 퀘스트 기획 데이터중 조건을 통해 얻어낸 퀘스트 데이터와 같은 인덱스를 가진 데이터를 가져옵니다!
+                //    그리고 그 데이터의 선행 퀘스트 목록을 가져옵니다!
                 var antencedentIndex = sdQuests.Where(obj => obj.index == resultQusts[i])?.SingleOrDefault().antecedentQuest;
 
-                // -> 만약 선행 퀘스트 목록의 0번째 값이 0이라면 
-                /// -> 바로 여기로 들어옴
+                // -> 만약 선행 퀘스트 목록의 첫번째 값이 0이라면!
                 if (antencedentIndex[0] == 0)
                 {
                     continue;
                 }
 
                 /// => Array.Intersect : 두개의 배열을 비교하여 교집합의 개수를 구해낸다
-                // -> 선행 퀘스트 길이와 선행 퀘스트와 이미 클리어한 퀘스트의 교집합의 개수가 같지않다면
+                // -> 선행 퀘스트의 배열 길이와 선행 퀘스트 값과 이미 클리어한 퀘스트 값의 교집합 개수가 같지 않다면!
                 if (antencedentIndex.Length !=
                     antencedentIndex.Intersect(boQuests.completedQuests.Select(obj => obj.index)).Count())
                 {
-                    // -> 아직 i번째 퀘스트는 선행 퀘스트를 완료하지 못했으므로 NPC의 퀘스트 목록에서 제거해준다
+                    // -> 선행 퀘스트를 완료하지 못했으므로 NPC의 퀘스트 목록에서 제거 합니다!
                     resultQusts.RemoveAt(i);
                     i--;
                 }
             }
 
-            // -> 위의 조건등을 통해서 걸러진 퀘스트 목록을 Bo에 저장
-            /// -> 여기엔 1000번째 퀘스트가 담김
+            // -> 최종적으로 남은 퀘스트를 BoNPC 데이터에 저장합니다!
             boNPC.quests = resultQusts.ToArray();
 
             #endregion
 
-            // -> 현재 NPC가 가지고 있는 speechIndex의 길이까지 랜덤값을 구한다
-            // -> 구한 랜덤값과 같은 인덱스를 가진 노벨 기획데이터를 가져와서 Bo에 저장한다
+            // -> NPC가 지닌 기본 대화 배열의 길이를 이용하여 랜덤 값을 구합니다!
+            // -> 랜덤 값을 통해 기본 대화 데이터를 가져와서 다이얼로그를 세팅합니다!
             var randIndex = Random.Range(0, boNPC.sdNPC.baseSpeech.Length);
             var speechIndex = boNPC.sdNPC.baseSpeech[randIndex];
             var sdNovel = GameManager.SD.sdNovels.Where(obj => obj.index == speechIndex)?.SingleOrDefault();
             var boNovel = new BoNovel(sdNovel);
 
-            ///uiDialogue.Initialize(boNovel, boNPC, actor);
             uiDialogue.Initialize(boNovel, boNPC);
         }
+
+        /*
+        private void OnDrawGizmos()
+        {
+            var halfExtents = new Vector3(coll.bounds.center.x, coll.bounds.center.y, coll.bounds.center.z);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(transform.position, halfExtents);
+        }
+        */
     }
 }

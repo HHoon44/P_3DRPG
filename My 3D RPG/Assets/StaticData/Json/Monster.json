@@ -9,8 +9,8 @@
       1001
     ],
     "dropItemPer": [
-      0.25,
-      0.25
+      0.4,
+      0.5
     ],
     "moveSpeed": 1.6,
     "detectionRange": 2.7,
@@ -18,8 +18,8 @@
     "atkInterval": 2.0,
     "maxHp": 45.0,
     "maxMana": 50.0,
-    "atk": 95.0,
-    "def": 15.0
+    "atk": 10.0,
+    "def": 20.0
   },
   {
     "index": 1001,
@@ -31,8 +31,8 @@
       1001
     ],
     "dropItemPer": [
-      0.25,
-      0.25
+      0.4,
+      0.5
     ],
     "moveSpeed": 1.6,
     "detectionRange": 2.7,
@@ -40,7 +40,7 @@
     "atkInterval": 2.0,
     "maxHp": 40.0,
     "maxMana": 60.0,
-    "atk": 90.0,
-    "def": 10.0
+    "atk": 10.0,
+    "def": 20.0
   }
 ]

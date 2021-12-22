@@ -32,29 +32,19 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 2193eb8d1d648ae4f88667f9f92b3608, type: 3}
-    totalSpriteSurfaceArea: 5991406
+    totalSpriteSurfaceArea: 1560574
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: c5436740905ea574abfc4b59fc8199e8, type: 3}
   - {fileID: 21300000, guid: f64aeaa2c4d55a74ba672e8b1cae7601, type: 3}
-  - {fileID: 21300000, guid: a87074080f527cb4ab0937e33e74e1e3, type: 3}
-  - {fileID: 21300000, guid: 9d9071d9b0cdbbb4ab2e4ebfb30db0c5, type: 3}
-  - {fileID: 21300000, guid: 8807c9ab86ea53e4a82cd91e6655614a, type: 3}
   - {fileID: 21300000, guid: cf5c8ebba5d1ccb4b8cc57e8e9a5d767, type: 3}
   - {fileID: 21300000, guid: f374bf8d975a467408dd584f7fc01322, type: 3}
-  - {fileID: 21300000, guid: 1a66393e7335a87419c5e133687e1299, type: 3}
   m_PackedSpriteNamesToIndex:
-  - "\uACC4\uB2E8"
   - "\uAD50\uC2E4"
-  - "\uB178\uC744\uC9C4 \uBCF5\uB3C4 2"
-  - "\uC625\uC0C1"
-  - "\uBC29\uACFC\uD6C4 \uBCF5\uB3C4"
   - "\uBCF5\uB3C4"
   - "\uB4F1\uAD50"
-  - "\uB178\uC744\uC9C4 \uBCF5\uB3C4"
   m_RenderDataMap: {}
   m_Tag: SchoolImage
   m_IsVariant: 0

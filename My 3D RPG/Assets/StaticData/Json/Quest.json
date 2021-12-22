@@ -3,13 +3,9 @@
     "index": 1000,
     "name": "츄츄 사냥",
     "questType": "Hunt",
-    "description": 1002,
+    "description": 1000,
     "antecedentQuest": [
       0
-    ],
-    "novelIndex": [
-      1000,
-      1001
     ],
     "target": [
       1000,
@@ -26,6 +22,27 @@
     "compensationDetail": [
       3,
       2
+    ]
+  },
+  {
+    "index": 1001,
+    "name": "베이도우와 대화",
+    "questType": "Conversation",
+    "description": 1001,
+    "antecedentQuest": [
+      0
+    ],
+    "target": [
+      1001
+    ],
+    "questDetail": [
+      1001
+    ],
+    "compensation": [
+      1000
+    ],
+    "compensationDetail": [
+      3
     ]
   }
 ]

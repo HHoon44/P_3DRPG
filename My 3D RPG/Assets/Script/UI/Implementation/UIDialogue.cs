@@ -16,9 +16,10 @@ namespace ProjectChan.UI
     /// </summary>
     public class UIDialogue : UIWindow
     {
-        private UINovel uiNovelSet;                // -> 대화창 셋
+        private UINovel uiNovelSet;                 // -> 대화창 셋
         private BoNovel boNovel;                    // -> 대화창을 세팅할때 사용할 데이터
-        private BoNPC boNPC;                        // -> 현재 대화하는 NPC데이터
+        //private BoNPC boNPC;                        // -> 현재 대화하는 NPC데이터
+        public BoNPC boNPC { get; private set; }
 
         public Transform buttonHolder;              // -> 다이얼로그 버튼들이 생성될 홀더
         public Transform functionHolder;            // -> 기능 버튼들이 생성될 홀더
@@ -55,7 +56,7 @@ namespace ProjectChan.UI
         {
             var pool = ObjectPoolManager.Instance.GetPool<DialogueButton>(Define.PoolType.DialogueButton);
 
-            // -> 기능버튼 세팅
+            // -> 기능 버튼을 세팅합니다!
             if (boNPC.sdNPC.npcType != Define.Actor.NPCType.Normal)
             {
                 var button = pool.GetPoolableObject();
@@ -66,13 +67,13 @@ namespace ProjectChan.UI
                 button.gameObject.SetActive(true);
             }
 
-            // -> 현재 NPC가 지닌 퀘스트가 없다면
+            // -> NPC가 지닌 퀘스트가 없다면!
             if (boNPC.quests.Length == 0)
             {
                 return;
             }
 
-            // -> NPC가 지닌 퀘스트가 있다면 퀘스트 버튼 생성 작업 실행
+            // -> 지닌 퀘스트가 있다면 퀘스트 버튼을 세팅합니다!
             if (boNPC.quests[0] != 0)
             {
                 for (int i = 0; i < boNPC.quests.Length; i++)
