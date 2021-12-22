@@ -295,24 +295,25 @@ namespace ProjectChan.Object
 
             if (questIndex != -1)
             {
+                var boProgressQuest = progressQuests[questIndex];
+
                 // -> 진행중인 퀘스트를 찾았으니 현재 몬스터의 디테일 값을 찾는 작업
-                for (int i = 0; i < progressQuests[questIndex].sdQuest.target.Length; i++)
+                for (int i = 0; i < boProgressQuest.sdQuest.target.Length; i++)
                 {
-                    if (progressQuests[questIndex].sdQuest.target[i] == boMonster.sdMonster.index)
+                    if (boProgressQuest.sdQuest.target[i] == boMonster.sdMonster.index)
                     {
                         // -> 디테일 값이 퀘스트의 디테일 값을 넘어가지 않도록 막아 줍니다!
-                        progressQuests[questIndex].details[i] =
-                            progressQuests[questIndex].details[i] >= progressQuests[questIndex].sdQuest.questDetail[i] ?
-                            progressQuests[questIndex].sdQuest.questDetail[i] : progressQuests[questIndex].details[i]++;
+                        boProgressQuest.details[i] = boProgressQuest.details[i] >= boProgressQuest.sdQuest.questDetail[i] ?
+                            boProgressQuest.sdQuest.questDetail[i] : boProgressQuest.details[i] += 1;
 
                         // -> Bo데이터 변했으므로 Dto데이터에 다시 저장하는 작업
                         var dummyServer = DummyServer.Instance;
-                        var dtoProgressQuest = new DtoQuestProgress();
-                        dtoProgressQuest.index = progressQuests[questIndex].sdQuest.index;
-                        dtoProgressQuest.details = progressQuests[questIndex].details;
+                        //dummyServer.userData.dtoQuest.progressQuests[questIndex].details = 
+                        //    (int[])boProgressQuest.details.Clone();
+                        dummyServer.userData.dtoQuest.progressQuests[questIndex].details = 
+                            boProgressQuest.details;
 
                         // -> 어차피 Dto에 있는 데이터를 Bo에 저장했었기 때문에 현재 퀘스트가 존재하는 인덱스는 둘다 같다고 생각
-                        dummyServer.userData.dtoQuest.progressQuests[questIndex] = dtoProgressQuest;
                         dummyServer.Save();
                         break;
                     }

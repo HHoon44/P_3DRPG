@@ -29,7 +29,6 @@ namespace ProjectChan.UI
         /// => 다이얼로그 버튼의 초기 세팅
         /// </summary>
         /// <param name="questIndex"> 현재 NPC의 퀘스트 인덱스 </param>
-        /// <param name="boNPC"> 현재 NPC가 어떤 타입의 NPC인지 확인하기 위한 데이터 </param>
         public void Initialize(int questIndex)
         {
             icon.sprite = SpriteLoader.GetSprite(Define.Resource.AtlasType.UIAtlase, "exclamation");
@@ -37,7 +36,6 @@ namespace ProjectChan.UI
             // -> 플레이어의 진행중인 퀘스트 목록을 가져옵니다!
             var progressQuests = GameManager.User.boQuest.progressQuests;
             var progressQuestIndex = -1;
-
 
             // -> 버튼에 세팅될 퀘스트가 플레이어가 진행중인 퀘스트인가 확인하는 작업입니다!
             for (int i = 0; i < progressQuests.Count; i++)
@@ -65,9 +63,7 @@ namespace ProjectChan.UI
             // -> 다이얼로그 창을 닫습니다!
             var uiWindowManager = UIWindowManager.Instance;
             uiWindowManager.GetWindow<UIDialogue>().Close();
-            uiWindowManager.GetWindow<UIDialogue>().boNPC.actor.isPlayerAction = false; /// 수정 중
 
-            // -> 플레이어가 진행중인 퀘스트 인가!
             if (progressQuestIndex == -1)
             {
                 uiWindowManager.GetWindow<UIQuest>().orderTab = QuestOrderTab.None;
@@ -101,6 +97,7 @@ namespace ProjectChan.UI
                 }
             }
 
+            uiWindowManager.GetWindow<UIDialogue>().boNPC.actor.isPlayerAction = false;
             uiWindowManager.GetWindow<UIQuest>().Open(QuestWindow.Order, sdQuest);
         }
 
@@ -108,8 +105,10 @@ namespace ProjectChan.UI
         /// => 기능 버튼을 세팅하는 작업
         /// </summary>
         /// <param name="boNPC"> 기능 버튼을 지닌 NPC의 데이터 </param>
-        public void SetFuntionButton(BoNPC boNPC)
+        public void SetFuntionButton()
         {
+            var boNPC = UIWindowManager.Instance.GetWindow<UIDialogue>().boNPC;
+
             switch (boNPC.sdNPC.npcType)
             {
                 case Define.Actor.NPCType.Store:
@@ -128,6 +127,7 @@ namespace ProjectChan.UI
         /// <summary>
         /// => 상점 NPC에 대한 버튼에 바인딩 될 메서드
         /// </summary>
+        /// <param name="boNPC"></param>
         private void OnClickShop(BoNPC boNPC)
         {
             // -> 다이얼로그 창을 닫습니다!
@@ -135,7 +135,6 @@ namespace ProjectChan.UI
             uiWindowManager.GetWindow<UIDialogue>().Close();
 
             // -> 상점 창을 엽니다!
-            /// 여기도 그냥 필드로 받아와도 될듯
             uiWindowManager.GetWindow<UIStore>().Open(boNPC);
         }
     }

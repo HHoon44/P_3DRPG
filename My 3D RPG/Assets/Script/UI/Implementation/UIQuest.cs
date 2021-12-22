@@ -151,6 +151,9 @@ namespace ProjectChan.UI
             {
                 // -> 미진행
                 case QuestOrderTab.None:
+
+                    acceptBtnTitle.text = "수락";
+
                     // -> 수락 버튼 클릭시 이벤트 바인딩
                     acceptBtn.onClick.AddListener(() =>
                     {
@@ -180,24 +183,34 @@ namespace ProjectChan.UI
 
                 // -> 진행중
                 case QuestOrderTab.Progress:
-                    acceptBtn.gameObject.SetActive(false);
+
+                    acceptBtnTitle.text = "확인";
+
+                    acceptBtn.onClick.AddListener(() =>
+                    {
+                        Close();
+                    });
+
+                    /// 퀘스트 삭제도 한번
                     refuseBtn.onClick.AddListener(() =>
                     {
                         Close();
-                    });  // 나중에 거절 하면 진행중인 퀘스트 목록에서 삭제
+                    });
+
                     orderDescription.text = GameManager.SD.sdQuestSpeechs.
                         Where(obj => obj.index == sdQuest.description)?.SingleOrDefault().kr;
                     break;
 
-                // -> 퀘스트 완료
+                // -> 클리어
                 case QuestOrderTab.Clear:
                     acceptBtnTitle.text = "완료";
+
                     acceptBtn.onClick.AddListener(() =>
                     {
                         OnClickClearQuest(sdQuest);
                     });
 
-                    // -> 퀘스트 완료시 텍스트 뜨는거
+                    // -> 완료시 대사 입니다!
                     orderDescription.text = "아리가또~";
                     break;
             }
@@ -304,47 +317,49 @@ namespace ProjectChan.UI
         /// <summary>
         /// => 퀘스트를 완료 후 컨텐츠 창의 완료 버튼을 세팅하는 메서드
         /// </summary>
-        /// <param name="currentQuest"> 현재 클리어한 퀘스트 기획 데이터 </param>
+        /// <param name="currentQuest"> 방금 클리어한 퀘스트의 데이터 </param>
         private void OnClickClearQuest(SDQuest currentQuest)
         {
-            // -> 이제 클리어한 퀘스트를 진행중인 퀘스트 목록에서 찾는 작업
             var boQuest = GameManager.User.boQuest;
 
-            // -> 퀘스트가 있는 곳의 인덱스
+            // -> 진행중인 퀘스트가 위치한 곳의 인덱스 값 입니다!
             var progressIndex = 0;
 
-            // -> 진행중인 퀘스트 목록에서 방금 클리어한 퀘스트를 찾는 작업
+            // -> 진행 퀘스트 목록에서 완료한 퀘스트를 찾는 작업 입니다!
             for (int i = 0; i < boQuest.progressQuests.Count; i++)
             {
-                // -> 차자따 뽐인~
                 if (boQuest.progressQuests[i].sdQuest.index == currentQuest.index)
                 {
+                    // -> 진행 퀘스트 목록에 저장 되어있는 클리어한 퀘스트 값 입니다!
                     progressIndex = i;
+                    break;
                 }
             }
 
-            // -> 인덱스를 찾았으니 진행중인 퀘스트에서 삭제
-            // -> 그리고 정렬
-            // -> 그리고 완료한 퀘스트 목록에 추가
+            // -> 인덱스 값을 이용하여 진행 퀘스트 목록에서 제거 합니다!
             boQuest.progressQuests.RemoveAt(progressIndex);
+
+            // -> 진행 퀘스트 목록에서 빵꾸가 났으니 정렬을 한번 합니다!
             boQuest.progressQuests.Sort();
+
+            // -> 진행 퀘스트 인덱스는 완료 퀘스트 목록에 저장 합니다!
             boQuest.completedQuests.Add(currentQuest);
 
-            // -> Bo데이터 변했으므로 Dto데이터에 다시 저장하는 작업
+            // -> Bo데이터에 변동이 생겼으므로 Dto에 Bo데이터를 새롭게 저장합니다!
             var dummyServer = DummyServer.Instance;
             var dtoProgressQuest = new DtoQuestProgress();
 
-            // -> 진행중인 퀘스트는 제거해야 하므로 -1
-            // -> 완료한 퀘스트는 추가해야 하므로 +1
-            var progressLength = dummyServer.userData.dtoQuest.progressQuests.Length - 1;
-            var completeLength = dummyServer.userData.dtoQuest.completeQuests.Length + 1;
+            // -> 진행 퀘스트가 하나 줄었으므로 Dto의 진행 퀘스트 목록 길이는 1을 뺍니다!
+            // -> 완료 퀘스트가 하나 늘었으므로 Dto의 완료 퀘스트 목록 길이는 1을 더합니다!
+            var dtoProgressLength = dummyServer.userData.dtoQuest.progressQuests.Length - 1;
+            var dtoCompleteLength = dummyServer.userData.dtoQuest.completeQuests.Length + 1;
 
-            // -> 진행중인 퀘스트의 배열 길이와 완료한 퀘스트의 배열 길이를 재정의한다
-            Array.Resize(ref dummyServer.userData.dtoQuest.progressQuests, progressLength);
-            Array.Resize(ref dummyServer.userData.dtoQuest.completeQuests, completeLength);
+            // -> 진행, 완료 퀘스트 배열의 길이를 재설정 합니다!
+            Array.Resize(ref dummyServer.userData.dtoQuest.progressQuests, dtoProgressLength);
+            Array.Resize(ref dummyServer.userData.dtoQuest.completeQuests, dtoCompleteLength);
 
-            // -> 빈곳을 채우는 작업
-            for (int i = 0; i < progressLength; i++)
+            // -> Bo의 진행중인 퀘스트 목록의 데이터를 Dto에 저장합니다!
+            for (int i = 0; i < dtoProgressLength; i++)
             {
                 dtoProgressQuest.index = boQuest.progressQuests[i].sdQuest.index;
                 dtoProgressQuest.details = boQuest.progressQuests[i].details;
@@ -352,10 +367,10 @@ namespace ProjectChan.UI
                 dummyServer.userData.dtoQuest.progressQuests[i] = dtoProgressQuest;
             }
 
-            // -> Dto에 완료한 퀘스트를 저장해놓는 작업
-            for (int i = 0; i < completeLength; i++)
+            // -> Dto에 완료한 퀘스트를 저장해놓는 작업 여기가 문제 였노
+            for (int i = 0; i < dtoCompleteLength; i++)
             {
-                dummyServer.userData.dtoQuest.completeQuests[i] = currentQuest.index;
+                dummyServer.userData.dtoQuest.completeQuests[i] = boQuest.completedQuests[i].index;
             }
 
             #region 아이템 보상 작업

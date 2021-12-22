@@ -18,16 +18,20 @@ namespace ProjectChan.UI
     {
         private UINovel uiNovelSet;                 // -> 대화창 셋
         private BoNovel boNovel;                    // -> 대화창을 세팅할때 사용할 데이터
-        //private BoNPC boNPC;                        // -> 현재 대화하는 NPC데이터
-        public BoNPC boNPC { get; private set; }
+
 
         public Transform buttonHolder;              // -> 다이얼로그 버튼들이 생성될 홀더
         public Transform functionHolder;            // -> 기능 버튼들이 생성될 홀더
 
         /// <summary>
+        /// => 현재 플레이어와 대화 중인 NPC의 Bo데이터
+        /// </summary>
+        public BoNPC boNPC { get; private set; }
+
+        /// <summary>
         /// => 현재 활성화된 다이얼 로그 버튼들을 저장해놓는 곳
         /// </summary>
-        private List<DialogueButton> dialogueButtons = new List<DialogueButton>();  
+        private List<DialogueButton> dialogueButtons = new List<DialogueButton>();
 
         /// <summary>
         /// => UIDialogue를 초기 설정하는 메서드
@@ -61,21 +65,19 @@ namespace ProjectChan.UI
             {
                 var button = pool.GetPoolableObject();
                 button.transform.SetParent(functionHolder);
-                button.SetFuntionButton(boNPC);
+                button.SetFuntionButton();
 
                 dialogueButtons.Add(button);
                 button.gameObject.SetActive(true);
             }
 
             // -> NPC가 지닌 퀘스트가 없다면!
-            if (boNPC.quests.Length == 0)
+            if (boNPC.quests[0] == 0)
             {
                 return;
             }
-
-            // -> 지닌 퀘스트가 있다면 퀘스트 버튼을 세팅합니다!
-            if (boNPC.quests[0] != 0)
-            {
+            else
+            {                               
                 for (int i = 0; i < boNPC.quests.Length; i++)
                 {
                     var button = pool.GetPoolableObject();

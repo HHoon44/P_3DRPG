@@ -110,13 +110,14 @@ namespace ProjectChan.Object
                 // -> 플레이어가 행동을 합니다!
                 boNPC.actor.isPlayerAction = true;
 
+                /// 미츠케타 ㅅㅂ
                 var boProgressQuests = GameManager.User.boQuest.progressQuests;
                 var progressIndex = -1;
 
                 for (int i = 0; i < boProgressQuests.Count; i++)
                 {
-                    if (boNPC.sdNPC.index ==
-                        boProgressQuests[i].sdQuest.target.Where(obj => obj == boNPC.sdNPC.index)?.SingleOrDefault())
+                    // -> 만약 진행중인 퀘스트 중에 NPC와 대화 하는 퀘스트가 존재 한다면?
+                    if (boProgressQuests[i].sdQuest.questType == Define.QuestType.Conversation)
                     {
                         progressIndex = i;
                         break;
@@ -125,26 +126,18 @@ namespace ProjectChan.Object
 
                 if (progressIndex != -1)
                 {
+                    // -> 혹시 그 대화 대상이 나?
                     for (int i = 0; i < boProgressQuests[progressIndex].sdQuest.target.Length; i++)
                     {
-                        if (boNPC.sdNPC.index == boProgressQuests[progressIndex].sdQuest.target[i])
+                        // -> 혹시 그 퀘스트 대상의 인덱스 값이랑 내 인덱스 값이랑 같니?
+                        if (boProgressQuests[progressIndex].sdQuest.target[i] == boNPC.sdNPC.index)
                         {
-                            if (boProgressQuests[progressIndex].sdQuest.target[i] == boNPC.sdNPC.index)
-                            {
-                                boProgressQuests[progressIndex].details[i] = boProgressQuests[progressIndex].sdQuest.questDetail[i];
-                            }
+                            // -> 응 너 맞아 그러니 너랑 대화 했다고 표시 해둘게
+                            boProgressQuests[progressIndex].sdQuest.questDetail[i] = boNPC.sdNPC.index;
 
-                            // -> Bo데이터 변했으므로 Dto데이터에 다시 저장하는 작업
                             var dummyServer = DummyServer.Instance;
-                            var dtoProgressQuest = new DtoQuestProgress();
-                            dtoProgressQuest.index = boProgressQuests[progressIndex].sdQuest.index;
-                            dtoProgressQuest.details = boProgressQuests[progressIndex].details;
-
-                            // -> 어차피 Dto에 있는 데이터를 Bo에 저장했었기 때문에 현재 퀘스트가 존재하는 인덱스는 둘다 같다고 생각
-                            dummyServer.userData.dtoQuest.progressQuests[progressIndex] = dtoProgressQuest;
+                            dummyServer.userData.dtoQuest.progressQuests[progressIndex].details = boProgressQuests[progressIndex].sdQuest.questDetail;
                             dummyServer.Save();
-
-                            break;
                         }
                     }
                 }
