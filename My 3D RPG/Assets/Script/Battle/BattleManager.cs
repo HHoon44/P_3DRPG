@@ -16,8 +16,19 @@ namespace ProjectChan.Battle
     /// </summary>
     public class BattleManager : Singleton<BattleManager>
     {
+        /// <summary>
+        /// => 현재 필드 위에 있는 캐릭터 
+        /// </summary>
         public List<Actor> Characters { get; private set; } = new List<Actor>();
+
+        /// <summary>
+        /// => 현재 필드 위에 있는 몬스터
+        /// </summary>
         public List<Actor> Monsters { get; private set; } = new List<Actor>();
+
+        /// <summary>
+        /// 현재 필드 위에 있는 NPC
+        /// </summary>
         public List<NPC> NPCs { get; private set; } = new List<NPC>();
 
         /// <summary>
@@ -63,21 +74,21 @@ namespace ProjectChan.Battle
         }
 
         /// <summary>
-        /// 저장된 액터들이 가지고있는 업데이트 함수를 활성화 하는 메서드
+        /// => 저장된 액터들이 가지고있는 업데이트 함수를 활성화 하는 메서드
         /// </summary>
         /// <param name="actors"> 배틀매니저에 저장되어있는 컨테이너 </param>
         private void ActorUpdate(List<Actor> actors)
         {
             for (int i = 0; i < actors.Count; i++)
             {
-                // -> 액터가 죽지 않았다면 업데이트
-                if (actors[i].State != Define.Actor.ActorState.Dead)// 수정
+                // -> 저장된 액터가 죽지 않았다면 계속 업데이트를 해줍니다!
+                if (actors[i].State != Define.Actor.ActorState.Dead)
                 {
                     actors[i].ActorUpdate();
                 }
-                // -> 액터가 죽었다면 컨테이너에서 제거
                 else
                 {
+                    // -> 만약 죽었다면 액터를 제거 해줍니다!
                     actors.RemoveAt(i);
                     i--;
                     //-> 반복되는 곳에서 리스트 안에 원소를 지울 땐

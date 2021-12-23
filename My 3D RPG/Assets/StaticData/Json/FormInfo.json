@@ -10,7 +10,7 @@
     "maxManaFactor": 5.0,
     "atk": 5.0,
     "atkFactor": 5.0,
-    "def": 3.0,
+    "def": 2.0,
     "defFactor": 3.0
   }
 ]

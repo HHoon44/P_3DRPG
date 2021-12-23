@@ -99,13 +99,15 @@ MonoBehaviour:
     jumpForce: 0
     currentHp: 0
     maxHp: 0
-    currentMana: 0
-    maxMana: 0
+    currentEnergy: 0
+    maxEnergy: 0
     atk: 0
     def: 0
     atkRange: 0
     atkInterval: 0
     isGround: 0
+  isRun: 0
+  playerController: {fileID: 0}
   boCharacter:
     level: 0
     actorType: 0
@@ -116,8 +118,8 @@ MonoBehaviour:
     jumpForce: 0
     currentHp: 0
     maxHp: 0
-    currentMana: 0
-    maxMana: 0
+    currentEnergy: 0
+    maxEnergy: 0
     atk: 0
     def: 0
     atkRange: 0
@@ -126,12 +128,12 @@ MonoBehaviour:
     sdCharacter:
       index: 0
       name: 
+      resourcePath: 
       atkType: 0
       moveSpeed: 0
       jumpForce: 0
       atkRange: 0
       atkInterval: 0
-      resourcePath: 
     sdOriginInfo:
       index: 0
       weaponIndex: 0
@@ -2652,6 +2654,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.17562956
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 908c78d86c4f7be4091ee9fbbe90f964, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 82c3d0d3ad376344580c6c8de1534325, type: 2}
     - target: {fileID: 9500000, guid: 908c78d86c4f7be4091ee9fbbe90f964, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0

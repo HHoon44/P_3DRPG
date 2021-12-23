@@ -43,17 +43,22 @@ namespace ProjectChan.Dummy
             responsHandler.HandleSuccess(SerializationUtil.ToJson(serverData.userData.dtoQuest));
         }
 
+        /// <summary>
+        /// => 새로운 퀘스트를 추가할 때 사용되는 메서드
+        /// </summary>
+        /// <param name="uniqueId"></param>
+        /// <param name="questIndex"></param>
+        /// <param name="responsHandler"></param>
         public void AddQuest(int uniqueId, int questIndex, ResponsHandler<DtoQuestProgress> responsHandler)
         {
-            // -> 파라미터로 받은 퀘스트 인덱스를 통해 같은 값을 가진 퀘스트 기획 데이터를 가져온다
+            // -> 파라미터로 받은 퀘스트 인덱스를 통해 기획 데이터를 가져옵니다!
             var sdQuest = GameManager.SD.sdQuests.Where(obj => obj.index == questIndex)?.SingleOrDefault();
 
-            // -> 클라이언트에 보낼 Dto데이터를 생성
+            // -> 클라이언트에 보낼 새로운 Dto데이터를 생성합니다!
             var dtoQuestProgress = new DtoQuestProgress();
-
             dtoQuestProgress.index = sdQuest.index;
 
-            // -> 퀘스트의 디테일 정보는 현재 퀘스트의 종류에 따라 달라짐
+            // -> 퀘스트의 디테일 정보는 현재 퀘스트의 종류에 따라 달라집니다!
             switch (sdQuest.questType)
             {
                 // -> 사냥 : 몇 종류의 몬스터를 몇마리 잡아라
@@ -62,9 +67,10 @@ namespace ProjectChan.Dummy
                 case Define.QuestType.Collection:
                 case Define.QuestType.Hunt:
                 case Define.QuestType.Conversation:
-                    // -> Dto에 퀘스트 디테일을 저장하기 위해서 배열의 길이를 설정한다
-                    // -> 길이를 설정하고 안의 내용들을 모두 0으로 초기화한다
+                    // -> Dto에 퀘스트 디테일을 저장해놓기 위해 배열의 길이를 설정합니다!
                     Array.Resize(ref dtoQuestProgress.details, sdQuest.target.Length);
+
+                    // -> 길이가 설정된 배열안의 데이터를 모두 0으로 초기화 합니다!
                     Array.ForEach(dtoQuestProgress.details, obj => obj = 0);
                     break;
             }

@@ -107,6 +107,8 @@ namespace ProjectChan.Battle
             // -> 계산된 데미지를 타겟에게 적용
             target.boActor.currentHp = Mathf.Max(target.boActor.currentHp - calDamage, 0);
 
+            target.SetState(ActorState.Damage);
+
             // -> 타겟의 체력이 0이라면 죽은 상태
             if (target.boActor.currentHp <= 0)
             {

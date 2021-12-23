@@ -150,7 +150,7 @@ namespace ProjectChan.UI
             switch (orderTab)
             {
                 // -> 미진행
-                case QuestOrderTab.None:
+                case QuestOrderTab.NoProgress:
 
                     acceptBtnTitle.text = "수락";
 
@@ -347,28 +347,24 @@ namespace ProjectChan.UI
 
             // -> Bo데이터에 변동이 생겼으므로 Dto에 Bo데이터를 새롭게 저장합니다!
             var dummyServer = DummyServer.Instance;
-            var dtoProgressQuest = new DtoQuestProgress();
 
             // -> 진행 퀘스트가 하나 줄었으므로 Dto의 진행 퀘스트 목록 길이는 1을 뺍니다!
             // -> 완료 퀘스트가 하나 늘었으므로 Dto의 완료 퀘스트 목록 길이는 1을 더합니다!
-            var dtoProgressLength = dummyServer.userData.dtoQuest.progressQuests.Length - 1;
-            var dtoCompleteLength = dummyServer.userData.dtoQuest.completeQuests.Length + 1;
+            var progressArrayLength = dummyServer.userData.dtoQuest.progressQuests.Length - 1;
+            var completeArrayLength = dummyServer.userData.dtoQuest.completeQuests.Length + 1;
 
             // -> 진행, 완료 퀘스트 배열의 길이를 재설정 합니다!
-            Array.Resize(ref dummyServer.userData.dtoQuest.progressQuests, dtoProgressLength);
-            Array.Resize(ref dummyServer.userData.dtoQuest.completeQuests, dtoCompleteLength);
+            Array.Resize(ref dummyServer.userData.dtoQuest.progressQuests, progressArrayLength);
+            Array.Resize(ref dummyServer.userData.dtoQuest.completeQuests, completeArrayLength);
 
             // -> Bo의 진행중인 퀘스트 목록의 데이터를 Dto에 저장합니다!
-            for (int i = 0; i < dtoProgressLength; i++)
+            for (int i = 0; i < progressArrayLength; i++)
             {
-                dtoProgressQuest.index = boQuest.progressQuests[i].sdQuest.index;
-                dtoProgressQuest.details = boQuest.progressQuests[i].details;
-
-                dummyServer.userData.dtoQuest.progressQuests[i] = dtoProgressQuest;
+                dummyServer.userData.dtoQuest.progressQuests[i].index = boQuest.progressQuests[i].sdQuest.index;
+                dummyServer.userData.dtoQuest.progressQuests[i].details = boQuest.progressQuests[i].details;
             }
 
-            // -> Dto에 완료한 퀘스트를 저장해놓는 작업 여기가 문제 였노
-            for (int i = 0; i < dtoCompleteLength; i++)
+            for (int i = 0; i < completeArrayLength; i++)
             {
                 dummyServer.userData.dtoQuest.completeQuests[i] = boQuest.completedQuests[i].index;
             }

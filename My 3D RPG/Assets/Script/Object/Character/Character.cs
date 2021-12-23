@@ -17,10 +17,11 @@ namespace ProjectChan.Object
 
     public class Character : Actor
     {
-        public PlayerController playerController;
-        public bool isRun;                      // -> 플레이어는 달리는 중인가?
-        public BoCharacter boCharacter;         // -> 현재 캐릭터가 지닌 스텟정보
-        private float charged;                  // -> 기력을 충전하기 위한 대기시간
+        private float charged;                          // -> 기력을 충전하기 위한 대기시간
+
+        public bool isRun;                              // -> 플레이어는 달리는 중인가?
+        public PlayerController playerController;       // -> 캐릭터를 컨트롤 해줄 컨트롤러
+        public BoCharacter boCharacter;                 // -> 현재 캐릭터가 지닌 스텟정보
 
         public override void Initialize(BoActor boActor)
         {
@@ -438,6 +439,12 @@ namespace ProjectChan.Object
             weaponController.SetWeapon();
 
         }
+        public override void OnDeadEnd()
+        {
+            gameObject.SetActive(false);
+
+            base.OnDeadEnd();
+        }
 
         public void OnChangeWeaponEnd()
         {
@@ -454,6 +461,7 @@ namespace ProjectChan.Object
         {
 
         }
+
 
         #endregion
     }

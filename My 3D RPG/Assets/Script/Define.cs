@@ -56,7 +56,7 @@ namespace ProjectChan.Define
     {
         public enum ActorType { None, Character, Monster, Form }
 
-        public enum ActorState { None, Idle, Walk, Sit, Rise, Jump, Attack, Dead, InWeapon, OutWeapon }
+        public enum ActorState { None, Idle, Walk, Sit, Rise, Jump, Attack, Dead, InWeapon, OutWeapon, Damage }
 
         public enum AttackType { None, Normal }
 
@@ -76,6 +76,7 @@ namespace ProjectChan.Define
             public int InWeapon;
             public int OutWeapon;
             public int isGround;
+            public int isDamage;
 
             public CharAnimParam()
             {
@@ -89,6 +90,7 @@ namespace ProjectChan.Define
                 InWeapon = Animator.StringToHash("InWeapon");
                 OutWeapon = Animator.StringToHash("OutWeapon");
                 isGround = Animator.StringToHash("isGround");
+                isDamage = Animator.StringToHash("isDamage");
             }
         }
 
@@ -97,12 +99,14 @@ namespace ProjectChan.Define
             public int isWalk;
             public int isAttack;
             public int isDead;
+            public int isDamage;
 
             public MonAnimParam()
             {
                 isWalk = Animator.StringToHash("isWalk");
                 isAttack = Animator.StringToHash("isAttack");
                 isDead = Animator.StringToHash("isDead");
+                isDamage = Animator.StringToHash("isDamage");
             }
         }
     }
@@ -154,6 +158,6 @@ namespace ProjectChan.Define
     {
         public enum QuestWindow { None, Order, List, Content }
         public enum QuestTab { None, Progress, Completed }
-        public enum QuestOrderTab { None, Progress, Clear }
+        public enum QuestOrderTab { NoProgress, Progress, Clear }
     }
 }

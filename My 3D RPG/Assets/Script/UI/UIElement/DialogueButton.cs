@@ -51,22 +51,37 @@ namespace ProjectChan.UI
             var sdQuest = GameManager.SD.sdQuests.Where(obj => obj.index == questIndex)?.SingleOrDefault();
 
             title.text = sdQuest.name;
-            btn.onClick.AddListener(() => { OnClickQuest(sdQuest, progressQuestIndex); });
+            btn.onClick.AddListener(() => { OnClickQuest(sdQuest); });
         }
 
         /// <summary>
         /// => NPC가 지닌 퀘스트에 대한 버튼에 바인딩 될 메서드
         /// </summary>
         /// <param name="sdQuest"></param>
-        private void OnClickQuest(SDQuest sdQuest, int progressQuestIndex)
+        private void OnClickQuest(SDQuest sdQuest)
         {
             // -> 다이얼로그 창을 닫습니다!
             var uiWindowManager = UIWindowManager.Instance;
             uiWindowManager.GetWindow<UIDialogue>().Close();
 
+            // -> 플레이어의 진행중인 퀘스트 목록을 가져옵니다!
+            var progressQuests = GameManager.User.boQuest.progressQuests;
+            var progressQuestIndex = -1;
+
+            // -> 버튼에 세팅될 퀘스트가 플레이어가 진행중인 퀘스트인가 확인하는 작업입니다!
+            for (int i = 0; i < progressQuests.Count; i++)
+            {
+                // -> 진행중인 퀘스트라면!
+                if (progressQuests[i].sdQuest.index == sdQuest.index)
+                {
+                    progressQuestIndex = i;
+                    break;
+                }
+            }
+
             if (progressQuestIndex == -1)
             {
-                uiWindowManager.GetWindow<UIQuest>().orderTab = QuestOrderTab.None;
+                uiWindowManager.GetWindow<UIQuest>().orderTab = QuestOrderTab.NoProgress;
             }
             else
             {

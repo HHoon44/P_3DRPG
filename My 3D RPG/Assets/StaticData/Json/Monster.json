@@ -18,7 +18,7 @@
     "atkInterval": 2.0,
     "maxHp": 45.0,
     "maxMana": 50.0,
-    "atk": 10.0,
+    "atk": 20.0,
     "def": 20.0
   },
   {
@@ -40,7 +40,7 @@
     "atkInterval": 2.0,
     "maxHp": 40.0,
     "maxMana": 60.0,
-    "atk": 10.0,
+    "atk": 20.0,
     "def": 20.0
   }
 ]

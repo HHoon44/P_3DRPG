@@ -51,7 +51,10 @@ namespace ProjectChan.UI
             else
             {
                 ItemAmount.text = boItem.amount.ToString();
-                ItemImage.sprite = SpriteLoader.GetSprite(Define.Resource.AtlasType.ItemAtlase, boItem.sdItem.resourcePath);
+
+                var qwe = boItem.sdItem.resourcePath.Remove(0, boItem.sdItem.resourcePath.LastIndexOf('/') + 1);
+
+                ItemImage.sprite = SpriteLoader.GetSprite(Define.Resource.AtlasType.ItemAtlase, qwe);
                 ItemImage.color = Color.white;
             }
         }

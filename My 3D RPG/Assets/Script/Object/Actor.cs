@@ -1,34 +1,43 @@
 ﻿using ProjectChan.Battle;
 using ProjectChan.DB;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace ProjectChan.Object
 {
-    using ActorState = Define.Actor.ActorState;
     using static ProjectChan.Define.Actor;
+    using ActorState = Define.Actor.ActorState;
 
     public abstract class Actor : MonoBehaviour
     {
         [SerializeField]
+
+        /// <summary>
+        /// => 현재 액터의 상태
+        /// </summary>
         public ActorState State { get; set; }
-        protected Vector3 CapVec { get; set; }
 
-        public BoActor boActor;
+        ///protected Vector3 CapVec { get; set; }
 
+        /// <summary>
+        /// => 현재 액터의 콜라이더
+        /// </summary>
         public Collider Coll { get; set; }
-        protected Rigidbody rigid;
-        protected Animator anim;
 
+        /// <summary>
+        /// => 액터의 공격 작업을 컨트롤 하는 컨트롤러
+        /// </summary>
         public AttackController attackController { get; private set; }
 
+        /// <summary>
+        /// => 액터의 무기를 컨트롤 하는 컨트롤러
+        /// </summary>
         public WeaponController weaponController { get; private set; }
 
-        protected CharAnimParam charAnim;        // -> 캐릭터 애니메이션 파라미터 ID값 정보
+        public BoActor boActor;                 // -> 이 스크립트를 가지고 있는 액터
+
+        protected Rigidbody rigid;              // -> 액터의 리지드바디
+        protected Animator anim;                // -> 액터의 애니메이터
+        protected CharAnimParam charAnim;       // -> 캐릭터 애니메이션 파라미터 ID값 정보
         protected MonAnimParam monAnim;         // -> 몬스터 애니메이션 파라미터 ID값 정보
 
         public virtual void Initialize(BoActor boActor)
@@ -57,7 +66,9 @@ namespace ProjectChan.Object
 
             // 공격 상태면 MoveUpdate가 실행되지 않도록 return
             if (State == ActorState.Attack)
+            { 
                 return;
+            }
 
             MoveUpdate();
         }
@@ -126,6 +137,10 @@ namespace ProjectChan.Object
                 case ActorState.Dead:
                     OnDead();
                     break;
+
+                case ActorState.Damage:
+                    OnDamage();
+                    break;
             }
         }
 
@@ -170,6 +185,12 @@ namespace ProjectChan.Object
             switch (boActor.actorType)
             {
                 case ActorType.Character:
+                    attackController.canCheckCoolTime = false;
+                    attackController.isCoolTime = true;
+                    anim.SetBool(charAnim.isAttack, true);
+
+                    break;
+
                 case ActorType.Form:
                     // -> 공격이 시작함에 따라 쿨타임을 체크할 수있는지에 대한 여부는 false
                     //    현재가 공격 쿨타임인지에 대한 여부는 true
@@ -189,6 +210,20 @@ namespace ProjectChan.Object
                     attackController.isCoolTime = true;
                     anim.SetBool(monAnim.isAttack, true);
                     anim.SetBool(monAnim.isWalk, false);
+                    break;
+            }
+        }
+
+        protected virtual void OnDamage()
+        {
+            switch (boActor.actorType)
+            {
+                case ActorType.Character:
+                case ActorType.Form:
+                    anim.SetTrigger(charAnim.isDamage);
+                    break;
+
+                case ActorType.Monster:
                     break;
             }
         }

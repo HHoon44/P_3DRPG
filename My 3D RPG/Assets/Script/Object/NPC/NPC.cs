@@ -104,54 +104,68 @@ namespace ProjectChan.Object
                 var newDir = Vector3.zero;
                 character.boActor.rotDir = newDir;
 
-                // -> 현재 NPC와 대화하는 플레이어를 담아 둡니다!
+                // -> 현재 NPC와 대화하는 플레이어를 담아둡니다!
                 boNPC.actor = playerController;
 
                 // -> 플레이어가 행동을 합니다!
                 boNPC.actor.isPlayerAction = true;
 
-                /// 미츠케타 ㅅㅂ
-                var boProgressQuests = GameManager.User.boQuest.progressQuests;
-                var progressIndex = -1;
+                #region NPC 대화 퀘스트 작업 처리!
 
+                var boProgressQuests = GameManager.User.boQuest.progressQuests;
+
+                // -> 대화 퀘스트가 존재하는 곳의 인덱스 값 입니다!
+                var conversationQuest = -1;
+
+                // -> 진행중인 퀘스트 목록에 NPC 대화 퀘스트가 있는지 확인하는 작업 입니다!
                 for (int i = 0; i < boProgressQuests.Count; i++)
                 {
                     // -> 만약 진행중인 퀘스트 중에 NPC와 대화 하는 퀘스트가 존재 한다면?
                     if (boProgressQuests[i].sdQuest.questType == Define.QuestType.Conversation)
                     {
-                        progressIndex = i;
+                        conversationQuest = i;
                         break;
                     }
                 }
 
-                if (progressIndex != -1)
+                if (conversationQuest != -1)
                 {
-                    // -> 혹시 그 대화 대상이 나?
-                    for (int i = 0; i < boProgressQuests[progressIndex].sdQuest.target.Length; i++)
+                    // -> 대화 대상이 현재 NPC인지 확인하는 작업 입니다!
+                    for (int i = 0; i < boProgressQuests[conversationQuest].sdQuest.target.Length; i++)
                     {
-                        // -> 혹시 그 퀘스트 대상의 인덱스 값이랑 내 인덱스 값이랑 같니?
-                        if (boProgressQuests[progressIndex].sdQuest.target[i] == boNPC.sdNPC.index)
+                        // -> 만약 대상목록에 현재 NPC가 포함 되어있다면!
+                        if (boProgressQuests[conversationQuest].sdQuest.target[i] == boNPC.sdNPC.index)
                         {
-                            // -> 응 너 맞아 그러니 너랑 대화 했다고 표시 해둘게
-                            boProgressQuests[progressIndex].sdQuest.questDetail[i] = boNPC.sdNPC.index;
+                            boProgressQuests[conversationQuest].details[i] = boNPC.sdNPC.index;
 
                             var dummyServer = DummyServer.Instance;
-                            dummyServer.userData.dtoQuest.progressQuests[progressIndex].details = boProgressQuests[progressIndex].sdQuest.questDetail;
+                            dummyServer.userData.dtoQuest.progressQuests[conversationQuest].details = boProgressQuests[conversationQuest].sdQuest.questDetail;
                             dummyServer.Save();
                         }
                     }
                 }
 
+                #endregion
+
                 OnDialogue();
             }
             else if (Input.GetButtonDown(Define.Input.Interaction) && playerController.isPlayerAction)
             {
-                // -> 다이얼로그 창을 닫습니다!
-                UIWindowManager.Instance.GetWindow<UIDialogue>().Close();
+                var uiWindowManager = UIWindowManager.Instance;
 
-                // -> 플레이어가 NPC와 대화를 종료합니다!
-                boNPC.actor.isPlayerAction = false;
-                boNPC.actor = null;
+                if (uiWindowManager.GetWindow<UIStore>().isOpen)
+                {
+                    return;
+                }
+                else
+                {
+                    // -> 다이얼로그 창을 닫습니다!
+                    uiWindowManager.GetWindow<UIDialogue>().Close();
+
+                    // -> 플레이어가 NPC와 대화를 종료합니다!
+                    boNPC.actor.isPlayerAction = false;
+                    boNPC.actor = null;
+                }
             }
         }
 

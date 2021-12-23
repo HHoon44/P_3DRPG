@@ -77,6 +77,9 @@ namespace ProjectChan.Object
             boMonster.def = sdMonster.def;
         }
 
+        /// <summary>
+        /// => 배틀 매니저를 통해서 호출되는 메서드
+        /// </summary>
         public override void ActorUpdate()
         {
             // -> 플레이어 탐지
@@ -194,16 +197,7 @@ namespace ProjectChan.Object
             patrolWaitTime = Random.Range(Define.Monster.MinPatrolWaitTime, Define.Monster.MaxPatrolWaitTime);
         }
 
-        /*
-        private void OnDrawGizmos()
-        {
-            var extentsValue = boMonster.sdMonster.detectionRange;
-            var halfExtents = new Vector3(extentsValue, extentsValue, extentsValue);
 
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(transform.position, halfExtents);
-        }
-        */
 
         /// <summary>
         /// => 몬스터가 플레이어를 감지하도록 하는 메서드
@@ -272,6 +266,8 @@ namespace ProjectChan.Object
         /// </summary>
         public override void OnDeadEnd()
         {
+            destPos = transform.position;
+
             #region 퀘스트 디테일 작업
 
             // -> 현재 진행중인 퀘스트 목록을 가져 옵니다!
@@ -310,7 +306,7 @@ namespace ProjectChan.Object
                         var dummyServer = DummyServer.Instance;
                         //dummyServer.userData.dtoQuest.progressQuests[questIndex].details = 
                         //    (int[])boProgressQuest.details.Clone();
-                        dummyServer.userData.dtoQuest.progressQuests[questIndex].details = 
+                        dummyServer.userData.dtoQuest.progressQuests[questIndex].details =
                             boProgressQuest.details;
 
                         // -> 어차피 Dto에 있는 데이터를 Bo에 저장했었기 때문에 현재 퀘스트가 존재하는 인덱스는 둘다 같다고 생각
@@ -360,5 +356,16 @@ namespace ProjectChan.Object
         }
 
         #endregion
+
+        /*
+        private void OnDrawGizmos()
+        {
+            var extentsValue = boMonster.sdMonster.detectionRange;
+            var halfExtents = new Vector3(extentsValue, extentsValue, extentsValue);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(transform.position, halfExtents);
+        }
+        */
     }
 }
