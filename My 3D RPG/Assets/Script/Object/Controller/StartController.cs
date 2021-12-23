@@ -14,6 +14,9 @@ using UnityEngine.SceneManagement;
 
 namespace ProjectChan
 {
+    /// <summary>
+    /// => 시작 세팅을 도와주는 클래스
+    /// </summary>
     public class StartController : MonoBehaviour
     {
         private bool allLoaded;                                 // -> 로드가 모두 되었는지
@@ -21,8 +24,11 @@ namespace ProjectChan
         private Coroutine loadGaugeUpdateCoroutine;             // -> 로드 하는 동안 로드바 게이지를 채울 코루틴
         private bool loadComplete;                              // -> 현재 페이즈의 로드가 되었는지
 
-        public UIStart uiStart;                                 
+        public UIStart uiStart;                                                       
 
+        /// <summary>
+        /// => 불러오기를 완료 했는가
+        /// </summary>
         public bool LoadComplete
         {
             get => loadComplete;
@@ -30,6 +36,7 @@ namespace ProjectChan
             {
                 loadComplete = value;
 
+                // -> 모든 페이즈를 불러오지 못했다면
                 if (loadComplete && !allLoaded)
                 {
                     NextPhase();
@@ -37,7 +44,9 @@ namespace ProjectChan
             }
         }
 
-        /// GameManager가 FindObjectType을 이용하여 StartController를 찾아내서 Initialize를 해줌
+        /// <summary>
+        /// => 첫 페이즈를 불러오는 메서드
+        /// </summary>
         public void Initialize()
         {
             OnPhase(introPhase);
@@ -45,7 +54,6 @@ namespace ProjectChan
 
         private void OnPhase(IntroPhase phase)
         {
-            /// 현재 진행중인 phase를 text에 띄운다
             uiStart.SetLoadStateDescription(phase.ToString());
 
             if (loadGaugeUpdateCoroutine != null)

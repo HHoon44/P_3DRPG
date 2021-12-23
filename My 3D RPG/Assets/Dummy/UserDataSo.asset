@@ -26,16 +26,16 @@ MonoBehaviour:
     errorCode: 0
     errorMessage: 
     lastStageIndex: 1001
-    lastPosX: -3.6450894
-    lastPosY: 3.237237
-    lastPosZ: 8.102917
+    lastPosX: 10.129693
+    lastPosY: 3.008113
+    lastPosZ: -1.6321285
   dtoItem:
     errorCode: 0
     errorMessage: 
     dtoItems:
     - index: 1000
       slotIndex: 0
-      amount: 27
+      amount: 29
       reinforceValue: 0
       isEquip: 0
     - index: 1001
@@ -50,5 +50,5 @@ MonoBehaviour:
     - errorCode: 0
       errorMessage: 
       index: 1000
-      details: 0500000003000000
+      details: 0500000005000000
     completeQuests: e9030000

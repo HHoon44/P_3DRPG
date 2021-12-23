@@ -54,7 +54,7 @@ namespace ProjectChan.Define
 
     public class Actor
     {
-        public enum ActorType { None, Character, Monster, Form }
+        public enum ActorType { None, Character, Monster, Form, Boss }
 
         public enum ActorState { None, Idle, Walk, Sit, Rise, Jump, Attack, Dead, InWeapon, OutWeapon, Damage }
 
@@ -100,6 +100,7 @@ namespace ProjectChan.Define
             public int isAttack;
             public int isDead;
             public int isDamage;
+            public int randAttack;
 
             public MonAnimParam()
             {
@@ -107,6 +108,7 @@ namespace ProjectChan.Define
                 isAttack = Animator.StringToHash("isAttack");
                 isDead = Animator.StringToHash("isDead");
                 isDamage = Animator.StringToHash("isDamage");
+                randAttack = Animator.StringToHash("randAttack");
             }
         }
     }

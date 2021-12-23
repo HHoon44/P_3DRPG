@@ -470,7 +470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1332744896252326467}
   - component: {fileID: 4944654116114163769}
-  - component: {fileID: 6349423206344511812}
+  - component: {fileID: 4040649587496217621}
   - component: {fileID: 5612401871874403195}
   - component: {fileID: -4983782746872604723}
   m_Layer: 8
@@ -515,7 +515,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &6349423206344511812
+--- !u!65 &4040649587496217621
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -526,8 +526,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 1.2, z: 0.35}
-  m_Center: {x: 0, y: 0.61, z: 0}
+  m_Size: {x: 0.23243931, y: 1.0963094, z: 0.13849065}
+  m_Center: {x: -0.0002760142, y: 0.54530597, z: -0.040422976}
 --- !u!195 &5612401871874403195
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -572,8 +572,8 @@ MonoBehaviour:
     jumpForce: 0
     currentHp: 0
     maxHp: 0
-    currentMana: 0
-    maxMana: 0
+    currentEnergy: 0
+    maxEnergy: 0
     atk: 0
     def: 0
     atkRange: 0
