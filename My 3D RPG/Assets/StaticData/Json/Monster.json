@@ -17,7 +17,6 @@
     "atkRange": 1.0,
     "atkInterval": 2.0,
     "maxHp": 45.0,
-    "maxMana": 50.0,
     "atk": 20.0,
     "def": 20.0
   },
@@ -39,8 +38,26 @@
     "atkRange": 1.0,
     "atkInterval": 2.0,
     "maxHp": 40.0,
-    "maxMana": 60.0,
     "atk": 20.0,
+    "def": 20.0
+  },
+  {
+    "index": 1002,
+    "name": "ChuChuBoss",
+    "resourcePath": "Prefabs/Actor/Mosnter/ChuChuBoss",
+    "atkType": "Normal",
+    "dropItemRef": [
+      1000
+    ],
+    "dropItemPer": [
+      0.8
+    ],
+    "moveSpeed": 5.0,
+    "detectionRange": 5.0,
+    "atkRange": 7.0,
+    "atkInterval": 1.0,
+    "maxHp": 100.0,
+    "atk": 40.0,
     "def": 20.0
   }
 ]

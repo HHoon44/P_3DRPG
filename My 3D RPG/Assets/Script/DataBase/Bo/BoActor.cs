@@ -21,7 +21,7 @@ namespace ProjectChan.DB
         public float currentHp;                 // -> 플레이어의 현재 체력
         public float maxHp;                     // -> 플레이어의 최대 체력
         public float currentEnergy;             // -> 플레이어의 현재 기력
-        public float maxEnergy;                   // -> 플레이어의 최대 기력
+        public float maxEnergy;                 // -> 플레이어의 최대 기력
         public float atk;                       // -> 플레이어의 공격력
         public float def;                       // -> 플레이어의 방어력
         public float atkRange;                  // -> 플레이어의 공격 범위

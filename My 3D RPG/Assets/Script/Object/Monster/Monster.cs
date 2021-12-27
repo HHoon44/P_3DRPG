@@ -70,7 +70,6 @@ namespace ProjectChan.Object
             boMonster.atkType = sdMonster.atkType;
             boMonster.moveSpeed = sdMonster.moveSpeed;
             boMonster.currentHp = boMonster.maxHp = sdMonster.maxHp;
-            boMonster.currentEnergy = boMonster.maxEnergy = sdMonster.maxMana;
             boMonster.atkRange = sdMonster.atkRange;
             boMonster.atkInterval = sdMonster.atkInterval;
             boMonster.atk = sdMonster.atk;

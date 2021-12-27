@@ -23,7 +23,6 @@ namespace ProjectChan.SD
         public float atkRange;          // -> 몬스터 공격 범위
         public float atkInterval;       // -> 몬스터 공격 쿨타임
         public float maxHp;             // -> 몬스터 최대 Hp
-        public float maxMana;           // -> 몬스터 최대 Mana
         public float atk;               // -> 몬스터 공격력
         public float def;               // -> 몬스터 방어력
     }

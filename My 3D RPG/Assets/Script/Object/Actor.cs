@@ -211,6 +211,15 @@ namespace ProjectChan.Object
                     anim.SetBool(monAnim.isAttack, true);
                     anim.SetBool(monAnim.isWalk, false);
                     break;
+
+                case ActorType.Boss:
+
+                    attackController.canCheckCoolTime = false;
+                    attackController.isCoolTime = true;
+                    anim.SetBool(monAnim.isAttack, true);
+                    anim.SetBool(monAnim.isWalk, false);
+                    anim.SetInteger(monAnim.randAttack, 1);
+                    break;
             }
         }
 
