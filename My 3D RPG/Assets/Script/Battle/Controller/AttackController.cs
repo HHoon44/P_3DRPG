@@ -55,11 +55,11 @@ namespace ProjectChan.Battle
         /// </summary>
         public virtual void OnAttack()
         {
-            // -> 공격 타입에 따라 Switch문으로 나눈다
             switch (attacker.boActor.atkType)
             {
                 // -> 일반 공격
                 case AttackType.Normal:
+                case AttackType.Boss:
                     CalculateAttackRange();
 
                     var damage = attacker.boActor.atk;

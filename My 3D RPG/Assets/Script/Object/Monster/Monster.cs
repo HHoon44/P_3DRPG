@@ -257,7 +257,8 @@ namespace ProjectChan.Object
             // -> 공격이 끝났으므로 쿨타임 체크 가능여부는 true
             attackController.canCheckCoolTime = true;
             anim.SetBool(monAnim.isAttack, false);
-            SetState(ActorState.Walk);
+            SetState(ActorState.Idle);
+            ///SetState(ActorState.Walk);
         }
 
         /// <summary>
@@ -266,6 +267,8 @@ namespace ProjectChan.Object
         public override void OnDeadEnd()
         {
             destPos = transform.position;
+
+            StageManager.Instance.huntedMon++;
 
             #region 퀘스트 디테일 작업
 

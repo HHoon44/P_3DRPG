@@ -65,10 +65,10 @@ namespace ProjectChan.Object
             attackController.CheckAttack();
 
             // 공격 상태면 MoveUpdate가 실행되지 않도록 return
-            if (State == ActorState.Attack)
-            { 
-                return;
-            }
+            ///if (State == ActorState.Attack)
+            ///{
+            ///    return;
+            ///}
 
             MoveUpdate();
         }
@@ -77,7 +77,7 @@ namespace ProjectChan.Object
         /// => 오브젝트의 애니메이터에서 애니메이션 파라미터를 얻어올 메서드
         /// </summary>
         /// <param name="type"> ID값을 얻어올 애니메이터를 가진 오브젝트 타입 </param>
-        protected void SetAnimParam(ActorType type) 
+        protected void SetAnimParam(ActorType type)
         {
             switch (boActor.actorType)
             {
@@ -188,7 +188,6 @@ namespace ProjectChan.Object
                     attackController.canCheckCoolTime = false;
                     attackController.isCoolTime = true;
                     anim.SetBool(charAnim.isAttack, true);
-
                     break;
 
                 case ActorType.Form:
@@ -210,15 +209,12 @@ namespace ProjectChan.Object
                     attackController.isCoolTime = true;
                     anim.SetBool(monAnim.isAttack, true);
                     anim.SetBool(monAnim.isWalk, false);
-                    break;
 
-                case ActorType.Boss:
-
-                    attackController.canCheckCoolTime = false;
-                    attackController.isCoolTime = true;
-                    anim.SetBool(monAnim.isAttack, true);
-                    anim.SetBool(monAnim.isWalk, false);
-                    anim.SetInteger(monAnim.randAttack, 1);
+                    // -> 보스 몬스터라면!
+                    if (boActor.atkType == AttackType.Boss)
+                    {
+                        anim.SetInteger(monAnim.randAttack, 1);
+                    }
                     break;
             }
         }
