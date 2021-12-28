@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace ProjectChan
 {
@@ -16,6 +17,13 @@ namespace ProjectChan
     public class ButtonController : MonoBehaviour
     {
         public Transform OptionFrame;
+        public Slider audioSlider;
+
+
+        private void Start()
+        {
+            audioSlider.value = AudioManager.Instance.audio.volume;
+        }
 
         /// <summary>
         /// => 씬에 존재하는 버튼들을 관리함
@@ -35,14 +43,19 @@ namespace ProjectChan
 
                 // -> 옵션 버튼
                 case 2:
-                    Debug.Log("눌림");
-                    QualitySettings.SetQualityLevel(2);
+                    OptionFrame.gameObject.SetActive(true);
+                    gameObject.SetActive(false);
                     break;
 
                 // -> 도움말 버튼
                 case 3:
                     break;
             }
+        }
+
+        public void SetAudioVolume()
+        {
+            audioSlider.value = audioSlider.value;
         }
     }
 }

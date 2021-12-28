@@ -17,6 +17,7 @@
 
  ★. 12월 22일 일해라 닝겐
  - 옵션 버튼 작업 
+ -> 그래픽 설정 and 소리 조절 and 뒤로 가기 버튼
 
 https://mentum.tistory.com/m/194?category=717657
 https://violetababel.tistory.com/416

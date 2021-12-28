@@ -31,7 +31,9 @@ namespace ProjectChan
             base.Awake();
 
             if (gameObject == null)
+            { 
                 return;
+            }
 
             DontDestroyOnLoad(this);
 
