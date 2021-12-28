@@ -58,7 +58,7 @@ namespace ProjectChan.Define
 
         public enum ActorState { None, Idle, Walk, Sit, Rise, Jump, Attack, Dead, InWeapon, OutWeapon, Damage }
 
-        public enum AttackType { None, Normal }
+        public enum AttackType { None, Normal, Boss }
 
         public enum CharType { None, NovelChar, NPC, Narration }
 
@@ -134,6 +134,7 @@ namespace ProjectChan.Define
         public const float NPCNovelSize = 1.518182f;
         public const float ChangeFormValue = 20.0f;
         public const float BaseSpeed = 0.5f;
+        public const int BossIndex = 1002;
     }
 
     public class ItemData
@@ -161,5 +162,10 @@ namespace ProjectChan.Define
         public enum QuestWindow { None, Order, List, Content }
         public enum QuestTab { None, Progress, Completed }
         public enum QuestOrderTab { NoProgress, Progress, Clear }
+    }
+
+    public class GameSetting
+    {
+        public enum QualitySetting { None, VeryLow, Low, Mideum, High, VeryHigh, Ultra}
     }
 }

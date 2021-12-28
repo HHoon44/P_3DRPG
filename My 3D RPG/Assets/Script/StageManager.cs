@@ -21,13 +21,19 @@ namespace ProjectChan
 
     public class StageManager : Singleton<StageManager>
     {
+        private GameObject currentStage;            // -> 현재 스테이지 객체
+        private Transform NPCHolder;                // -> NPC를 자식으로 가질 부모 홀더
+        private float currentMonSpawnTime;          // -> 현재 몬스터 스폰 시간
+        private float maxMonSpawnTime;              // -> 최대 몬스터 스폰 시간
+
+        public int huntedMon = 10;                       // -> 사냥한 몬스터 개수
+        public bool isMonReady;                     // -> 몬스터를 생성할 준비가되었는가?
+        public Transform monsterHolder;             // -> 몬스터를 자식으로 가질 부모 홀더
+
+        /// <summary>
+        /// => 몬스터를 생성할 스폰 지역
+        /// </summary>
         private Dictionary<int, Bounds> spawnAreaBounds = new Dictionary<int, Bounds>();
-        private GameObject currentStage;
-        public bool isMonReady;
-        private float currentMonSpawnTime;
-        private float maxMonSpawnTime;
-        public Transform monsterHolder;
-        private Transform NPCHolder;
 
         private void Update()
         {
@@ -251,10 +257,27 @@ namespace ProjectChan
                     return;
                 }
 
+                /// 설마 보스 몬스터 인덱스 가져온거임?
+                if (genMonsterIndex == StaticData.BossIndex)
+                {
+                    /// 근데 보스 몬스터 소환 할려면 몬스터 10마리 이상은 잡아야하는데 괜춘?
+                    if (huntedMon >= 10)
+                    {
+                        /// 뭐야 잡아놨네 그러면 보스 몬스터 소환 ㄱㄱ
+                        huntedMon = 0;
+                    }
+                    else
+                    {
+                        /// 뭐야 아직 못잡았네 다시 위로 올라가셈~
+                        continue;
+                    }
+                }
+
                 // -> 기획 데이터에 위에서 얻은 몬스터 인덱스와 같은 인덱스 값을 가진 데이터를 가져온다
                 var sdMonster = sd.sdMonsters.Where(obj => obj.index == genMonsterIndex).SingleOrDefault();
                 var monster = monsterPool.GetPoolableObject(obj => obj.name == sdMonster.name);
 
+                // -> 생성되는 몬스터가 없다면 다시 위로 갑니다!
                 if (monster == null)
                 {
                     continue;
@@ -274,7 +297,7 @@ namespace ProjectChan
                 monster.transform.position = centerPos + new Vector3(spawnPosX, hit.point.y, spawnPosZ);
                 monster.transform.SetParent(monsterHolder, true);
                 monster.Initialize(new BoMonster(sdMonster));
-                monster.State = Define.Actor.ActorState.None;   /// Test
+                monster.State = Define.Actor.ActorState.None;   
                 battleManager.AddActor(monster);
             }
         }

@@ -196,8 +196,6 @@ namespace ProjectChan.Object
             patrolWaitTime = Random.Range(Define.Monster.MinPatrolWaitTime, Define.Monster.MaxPatrolWaitTime);
         }
 
-
-
         /// <summary>
         /// => 몬스터가 플레이어를 감지하도록 하는 메서드
         /// </summary>
@@ -257,7 +255,7 @@ namespace ProjectChan.Object
             // -> 공격이 끝났으므로 쿨타임 체크 가능여부는 true
             attackController.canCheckCoolTime = true;
             anim.SetBool(monAnim.isAttack, false);
-            SetState(ActorState.Walk);
+            SetState(ActorState.Idle);
         }
 
         /// <summary>
@@ -266,6 +264,8 @@ namespace ProjectChan.Object
         public override void OnDeadEnd()
         {
             destPos = transform.position;
+
+            StageManager.Instance.huntedMon++;
 
             #region 퀘스트 디테일 작업
 

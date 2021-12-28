@@ -19,10 +19,12 @@
     "resourcePath": "Prefabs/Stage/DunGeon",
     "genMonsters": [
       1000,
-      1001
+      1001,
+      1002
     ],
     "spawnArea": [
       0,
+      1,
       1
     ],
     "warpStageRef": [

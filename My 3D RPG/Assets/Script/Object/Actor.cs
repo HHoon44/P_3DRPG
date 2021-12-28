@@ -66,7 +66,7 @@ namespace ProjectChan.Object
 
             // 공격 상태면 MoveUpdate가 실행되지 않도록 return
             if (State == ActorState.Attack)
-            { 
+            {
                 return;
             }
 
@@ -77,7 +77,7 @@ namespace ProjectChan.Object
         /// => 오브젝트의 애니메이터에서 애니메이션 파라미터를 얻어올 메서드
         /// </summary>
         /// <param name="type"> ID값을 얻어올 애니메이터를 가진 오브젝트 타입 </param>
-        protected void SetAnimParam(ActorType type) 
+        protected void SetAnimParam(ActorType type)
         {
             switch (boActor.actorType)
             {
@@ -188,7 +188,6 @@ namespace ProjectChan.Object
                     attackController.canCheckCoolTime = false;
                     attackController.isCoolTime = true;
                     anim.SetBool(charAnim.isAttack, true);
-
                     break;
 
                 case ActorType.Form:
@@ -199,8 +198,8 @@ namespace ProjectChan.Object
                     anim.SetBool(charAnim.isAttack, true);
 
                     // -> 랜덤으로 공격 애니메이션 실행
-                    var randAttack = UnityEngine.Random.Range(0, 7);
-                    anim.SetInteger(charAnim.randAttack, randAttack + 1);
+                    var charRandAttack = UnityEngine.Random.Range(0, 7);
+                    anim.SetInteger(charAnim.randAttack, charRandAttack + 1);
                     break;
 
                 case ActorType.Monster:
@@ -210,15 +209,13 @@ namespace ProjectChan.Object
                     attackController.isCoolTime = true;
                     anim.SetBool(monAnim.isAttack, true);
                     anim.SetBool(monAnim.isWalk, false);
-                    break;
 
-                case ActorType.Boss:
-
-                    attackController.canCheckCoolTime = false;
-                    attackController.isCoolTime = true;
-                    anim.SetBool(monAnim.isAttack, true);
-                    anim.SetBool(monAnim.isWalk, false);
-                    anim.SetInteger(monAnim.randAttack, 1);
+                    // -> 어택타입이 보스라면!
+                    if (boActor.atkType == AttackType.Boss)
+                    {
+                        var monRandAttack = UnityEngine.Random.Range(0, 2);
+                        anim.SetInteger(monAnim.randAttack, monRandAttack + 1);
+                    }
                     break;
             }
         }

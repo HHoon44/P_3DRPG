@@ -55,11 +55,11 @@ namespace ProjectChan.Battle
         /// </summary>
         public virtual void OnAttack()
         {
-            // -> 공격 타입에 따라 Switch문으로 나눈다
             switch (attacker.boActor.atkType)
             {
                 // -> 일반 공격
                 case AttackType.Normal:
+                case AttackType.Boss:
                     CalculateAttackRange();
 
                     var damage = attacker.boActor.atk;
@@ -123,14 +123,14 @@ namespace ProjectChan.Battle
         /// </summary>
         public void AttackIntervalUpdate()
         {
-            // -> 쿨타임을 체크 할 수없다면 컷
+            // -> 쿨타임을 체크 할 수없다면 컷 canCheckCoolTime = false 라면
             if (!canCheckCoolTime)
             {
                 return;
             }
 
-            // -> 공격 쿨타임이 아니라면 컷
-            if (!isCoolTime)
+            // -> 공격 쿨타임이 아니라면 컷 isCoolTime = false 라면
+            if (!isCoolTime) 
             {
                 return;
             }

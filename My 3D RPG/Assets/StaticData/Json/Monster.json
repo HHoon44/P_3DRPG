@@ -44,8 +44,8 @@
   {
     "index": 1002,
     "name": "ChuChuBoss",
-    "resourcePath": "Prefabs/Actor/Mosnter/ChuChuBoss",
-    "atkType": "Normal",
+    "resourcePath": "Prefabs/Actor/Monster/ChuChuBoss",
+    "atkType": "Boss",
     "dropItemRef": [
       1000
     ],
@@ -53,9 +53,9 @@
       0.8
     ],
     "moveSpeed": 5.0,
-    "detectionRange": 5.0,
-    "atkRange": 7.0,
-    "atkInterval": 1.0,
+    "detectionRange": 7.0,
+    "atkRange": 3.0,
+    "atkInterval": 2.0,
     "maxHp": 100.0,
     "atk": 40.0,
     "def": 20.0
