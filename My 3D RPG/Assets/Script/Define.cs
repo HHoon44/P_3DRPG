@@ -163,4 +163,9 @@ namespace ProjectChan.Define
         public enum QuestTab { None, Progress, Completed }
         public enum QuestOrderTab { NoProgress, Progress, Clear }
     }
+
+    public class GameSetting
+    {
+        public enum QualitySetting { None, VeryLow, Low, Mideum, High, VeryHigh, Ultra}
+    }
 }

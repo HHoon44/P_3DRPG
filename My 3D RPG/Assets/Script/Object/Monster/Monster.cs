@@ -196,8 +196,6 @@ namespace ProjectChan.Object
             patrolWaitTime = Random.Range(Define.Monster.MinPatrolWaitTime, Define.Monster.MaxPatrolWaitTime);
         }
 
-
-
         /// <summary>
         /// => 몬스터가 플레이어를 감지하도록 하는 메서드
         /// </summary>
@@ -258,7 +256,6 @@ namespace ProjectChan.Object
             attackController.canCheckCoolTime = true;
             anim.SetBool(monAnim.isAttack, false);
             SetState(ActorState.Idle);
-            ///SetState(ActorState.Walk);
         }
 
         /// <summary>

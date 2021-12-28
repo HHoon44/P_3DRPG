@@ -15,6 +15,8 @@ namespace ProjectChan
     /// </summary>
     public class ButtonController : MonoBehaviour
     {
+        public Transform OptionFrame;
+
         /// <summary>
         /// => 씬에 존재하는 버튼들을 관리함
         /// </summary>
@@ -33,6 +35,8 @@ namespace ProjectChan
 
                 // -> 옵션 버튼
                 case 2:
+                    Debug.Log("눌림");
+                    QualitySettings.SetQualityLevel(2);
                     break;
 
                 // -> 도움말 버튼

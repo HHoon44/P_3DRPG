@@ -123,14 +123,14 @@ namespace ProjectChan.Battle
         /// </summary>
         public void AttackIntervalUpdate()
         {
-            // -> 쿨타임을 체크 할 수없다면 컷
+            // -> 쿨타임을 체크 할 수없다면 컷 canCheckCoolTime = false 라면
             if (!canCheckCoolTime)
             {
                 return;
             }
 
-            // -> 공격 쿨타임이 아니라면 컷
-            if (!isCoolTime)
+            // -> 공격 쿨타임이 아니라면 컷 isCoolTime = false 라면
+            if (!isCoolTime) 
             {
                 return;
             }

@@ -65,10 +65,10 @@ namespace ProjectChan.Object
             attackController.CheckAttack();
 
             // 공격 상태면 MoveUpdate가 실행되지 않도록 return
-            ///if (State == ActorState.Attack)
-            ///{
-            ///    return;
-            ///}
+            if (State == ActorState.Attack)
+            {
+                return;
+            }
 
             MoveUpdate();
         }
@@ -198,8 +198,8 @@ namespace ProjectChan.Object
                     anim.SetBool(charAnim.isAttack, true);
 
                     // -> 랜덤으로 공격 애니메이션 실행
-                    var randAttack = UnityEngine.Random.Range(0, 7);
-                    anim.SetInteger(charAnim.randAttack, randAttack + 1);
+                    var charRandAttack = UnityEngine.Random.Range(0, 7);
+                    anim.SetInteger(charAnim.randAttack, charRandAttack + 1);
                     break;
 
                 case ActorType.Monster:
@@ -210,10 +210,11 @@ namespace ProjectChan.Object
                     anim.SetBool(monAnim.isAttack, true);
                     anim.SetBool(monAnim.isWalk, false);
 
-                    // -> 보스 몬스터라면!
+                    // -> 어택타입이 보스라면!
                     if (boActor.atkType == AttackType.Boss)
                     {
-                        anim.SetInteger(monAnim.randAttack, 1);
+                        var monRandAttack = UnityEngine.Random.Range(0, 2);
+                        anim.SetInteger(monAnim.randAttack, monRandAttack + 1);
                     }
                     break;
             }

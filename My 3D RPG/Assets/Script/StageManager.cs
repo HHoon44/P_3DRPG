@@ -249,8 +249,7 @@ namespace ProjectChan
                 var randIndex = Random.Range(0, sdStage.genMonsters.Length);
 
                 // -> 배열에 랜덤 값을 이용하여 배열안에 값을 가져온다
-                ///var genMonsterIndex = sdStage.genMonsters[randIndex];
-                var genMonsterIndex = 1002;
+                var genMonsterIndex = sdStage.genMonsters[randIndex];
 
                 // -> -1이라면 생성되는 몬스터가 없으므로 return
                 if (genMonsterIndex == -1)
@@ -258,13 +257,6 @@ namespace ProjectChan
                     return;
                 }
 
-                /// Test
-                if (monsterHolder.childCount == 1)
-                {
-                    return;
-                }
-
-                /*
                 /// 설마 보스 몬스터 인덱스 가져온거임?
                 if (genMonsterIndex == StaticData.BossIndex)
                 {
@@ -280,7 +272,6 @@ namespace ProjectChan
                         continue;
                     }
                 }
-                */
 
                 // -> 기획 데이터에 위에서 얻은 몬스터 인덱스와 같은 인덱스 값을 가진 데이터를 가져온다
                 var sdMonster = sd.sdMonsters.Where(obj => obj.index == genMonsterIndex).SingleOrDefault();
