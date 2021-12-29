@@ -28,16 +28,13 @@ namespace ProjectChan.Util
             obj.CanRecycle = true;
         }
 
-        public T GetPoolableObject()
-        {
-            return GetPoolableObject(obj => obj.CanRecycle);
-        }
-
-        public T GetPoolableObject(Func<T, bool> pred)
+        public T GetPoolableObject(Func<T, bool> pred = null)
         {
             if (!canRecycle)
             {
-                var protoObj = Pool.Find(obj => pred(obj));
+                var protoObj = pred == null ? 
+                    (Pool.Count > 0 ? Pool[0] : null) :
+                    Pool.Find(obj => pred(obj));
 
                 if (protoObj != null)
                 {
@@ -53,7 +50,9 @@ namespace ProjectChan.Util
                 }
             }
 
-            T recycleObj = Pool.Find(obj => pred(obj) && obj.CanRecycle);
+            T recycleObj = pred == null ?
+                (Pool.Count > 0 ? Pool[0] : null) : 
+                Pool.Find(obj => pred(obj) && obj.CanRecycle);
 
             if (recycleObj == null)
             { 

@@ -1,9 +1,10 @@
-팁
 1. 애니메이션 재생으로 인한 이동이 싫으면 Root Transform Position을 체크 해제하고 Center of Mass를 선택
+2. 유니티 Post Processing
+3. https://mentum.tistory.com/m/194?category=717657
+4. https://violetababel.tistory.com/416
 
  ★. Character
  -> 스킬 구현도 한 1 ~ 2개 정도
-
 
  ★. 버튼
  -> 이어하기 버튼, 옵션 버튼, 도움말 버튼 활성화 하기
@@ -15,29 +16,7 @@
  -> 이번주 금요일은 주석 정리 + 에셋 정리
 
  ★. 12월 29일 일해라 닝겐
- -> 오늘 최대한 옵션 버튼들 완성하기
-
-
-https://mentum.tistory.com/m/194?category=717657
-https://violetababel.tistory.com/416
-
-NovelGame, 
-
-이동 : ↑↓방향키
-대쉬 : 이동키 + Shift키
-점프 : SpaceBar
-공격 : 마우스 왼쪽 버튼
-변신 : P
-상호작용 : C 
-퀘스트 창 : J
-인벤토리 창 : I
-카메라 반전 : Ctrl 또는 3번 마우스 버튼
-
-
-
-
-
-
+ -> 
 
 
 
