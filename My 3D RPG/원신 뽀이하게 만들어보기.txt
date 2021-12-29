@@ -22,17 +22,6 @@ https://mentum.tistory.com/m/194?category=717657
 https://violetababel.tistory.com/416
 
 NovelGame, 
-이동 : 앞 뒤 방향키
-대쉬 : 이동키 + Shift
-
-
-변신 : P 
-상호작용 : C
-퀘스트 창 : J
-인벤토리 창 : I
-카메라 반전 : Ctrl or 3번째 마우스 버튼
-공격 : 1번째 마우스 버튼
-점프 Space바
 
 이동 : ↑↓방향키
 대쉬 : 이동키 + Shift키
