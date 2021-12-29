@@ -51,7 +51,9 @@ namespace ProjectChan.Util
         private void OnDestroy()
         {
             if (instance != this)
+            { 
                 return;
+            }
 
             instance = null;    
         }

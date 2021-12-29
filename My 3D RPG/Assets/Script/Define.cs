@@ -127,6 +127,7 @@ namespace ProjectChan.Define
 
     public class StaticData
     {
+        public const string Manual = " 안녕하세요 유니티 짱입니다!, 이동 : ↑↓방향키, 대쉬 : 이동키 + Shift키, 점프 : SpaceBar, 공격 : 마우스 왼쪽 버튼, 변신 : P, 상호작용 : C, 퀘스트 창 : J, 인벤토리 창 : I, 카메라 반전 : Ctrl키";
         public const string SDPath = "Assets/StaticData";
         public const string SDExcelPath = "Assets/StaticData/Excel";
         public const string SDJosnPath = "Assets/StaticData/Json";
@@ -164,8 +165,14 @@ namespace ProjectChan.Define
         public enum QuestOrderTab { NoProgress, Progress, Clear }
     }
 
-    public class GameSetting
+    public class Audio
     {
-        public enum QualitySetting { None, VeryLow, Low, Mideum, High, VeryHigh, Ultra}
+        public enum ClipType { StartScene, NovelGame, Village, DunGeon }
+
+        public const string StartSceneClipPath = "Video/StartSceneClip";
+        public const string NovelGameClipPath = "Video/NovelGameClip";
+        public const string VillageClipPath = "Video/VillageClip";
+        public const string DunGeonClipPath = "Video/DunGeonClip";
     }
+
 }

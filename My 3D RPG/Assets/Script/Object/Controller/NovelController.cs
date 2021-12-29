@@ -32,6 +32,7 @@ namespace ProjectChan.Novel
 
         private void Start()
         {
+            AudioManager.Instance.ChangeAudioClip(Define.Audio.ClipType.NovelGame);
             OnTalse();
         }
 
