@@ -19,7 +19,8 @@ namespace ProjectChan.Object
     {
         private float charged;                          // -> 기력을 충전하기 위한 대기시간
 
-        public bool isRun;                              // -> 플레이어는 달리는 중인가?
+        public bool canCharge;
+        public bool isRun;
         public PlayerController playerController;       // -> 캐릭터를 컨트롤 해줄 컨트롤러
         public BoCharacter boCharacter;                 // -> 현재 캐릭터가 지닌 스텟정보
 
@@ -103,7 +104,7 @@ namespace ProjectChan.Object
         /// <param name="state"> 캐릭터의 상태 </param>
         public override void SetState(ActorState state)
         {
-            var prevState = State;      // 만약 Attack이 담김
+            var prevState = State;      
 
             base.SetState(state);
 
@@ -398,21 +399,26 @@ namespace ProjectChan.Object
         /// </summary>
         private void EnergyReCharge()
         {
-            // -> 달리는 중에는 에너지 충전이 안됩니다!
-            if (isRun)
+            // -> 0보다 작다면 차지를 시작
+            if (boActor.currentEnergy <= 0)
             {
-                boActor.currentEnergy -= Time.deltaTime * 5f;
-                return;
+                canCharge = true;
             }
 
             // -> 만약 Max값을 넘어가거나 같다면!
             if (boActor.currentEnergy >= boActor.maxEnergy)
             {
                 boActor.currentEnergy = boActor.maxEnergy;
+                /// 이제 달릴 수 있습니다
+                canCharge = false;
                 return;
             }
 
-            boActor.currentEnergy += Time.deltaTime * .8f;
+            if (canCharge)
+            {
+                // -> 차지 충전
+                boActor.currentEnergy += Time.deltaTime * 5f;
+            }
         }
 
         #region 애니메이션 이벤트
