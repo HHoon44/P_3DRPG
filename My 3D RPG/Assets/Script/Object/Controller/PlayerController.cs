@@ -123,8 +123,6 @@ namespace ProjectChan.Object
 
         private void GetAxisZ(float value)
         {
-            /// 차자따 봄인!
-            /// 어쨋든 sprint를 입력하기 전까지는 0.5랑 -0.5임 결국엔
             var boActor = PlayerCharacter.boActor;
             var newDir = boActor.moveDir;
             var sprint = Define.StaticData.BaseSpeed + UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
@@ -132,8 +130,7 @@ namespace ProjectChan.Object
             // -> 처음엔 걷기
             PlayerCharacter.isRun = false;
 
-            // -> 대쉬 버튼 클릭시 달리기
-            if (UnityEngine.Input.GetAxis(Input.Sprint) != 0)
+            if (UnityEngine.Input.GetButtonDown(Input.Sprint))
             {
                 sprint += UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
                 PlayerCharacter.isRun = true;

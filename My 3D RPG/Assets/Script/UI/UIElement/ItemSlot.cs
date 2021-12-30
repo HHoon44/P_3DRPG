@@ -64,7 +64,7 @@ namespace ProjectChan.UI
             this.sdItem = sdItem;
 
             ItemAmount.text = sdItem.price.ToString();
-            ItemImage.sprite = SpriteLoader.GetSprite(Define.Resource.AtlasType.ItemAtlase, sdItem.resourcePath);
+            ItemImage.sprite = SpriteLoader.GetSprite(Define.Resource.AtlasType.ItemAtlase, sdItem.resourcePath.Remove(0, sdItem.resourcePath.LastIndexOf('/') + 1));
             ItemImage.color = Color.white;
         }
 

@@ -80,13 +80,6 @@ namespace ProjectChan.Novel
         /// </summary>
         private void NextStageLoad()
         {
-            ///var uiInfoSet = UIWindowManager.Instance.GetWindow<UIInfo>();
-            ///
-            ///if (uiInfoSet.isOpen)
-            ///{
-            ///    return;
-            ///}
-
             // -> 노벨 창을 꺼줍니다!
             UIWindowManager.Instance.GetWindow<UINovel>().Close();
 

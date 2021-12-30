@@ -63,7 +63,7 @@ namespace ProjectChan.UI
             // -> 기능 버튼을 세팅합니다!
             if (boNPC.sdNPC.npcType != Define.Actor.NPCType.Normal)
             {
-                var button = pool.GetPoolableObject();
+                var button = pool.GetPoolableObject(obj => obj.CanRecycle);
                 button.transform.SetParent(functionHolder);
                 button.SetFuntionButton();
 
@@ -72,15 +72,22 @@ namespace ProjectChan.UI
             }
 
             // -> NPC가 지닌 퀘스트가 없다면!
-            if (boNPC.quests[0] == 0)
+            if (boNPC.quests.Length == 0)
             {
                 return;
             }
             else
-            {                               
+            {
+                // -> 0번째 값이 0이면 퀘스트가 없는 것!
+                if (boNPC.quests[0] == 0)
+                {
+                    return;
+                }
+
+                // -> 가지고 있는 퀘스트 개수만큼 다이얼로그 버튼을 세팅합니다!
                 for (int i = 0; i < boNPC.quests.Length; i++)
                 {
-                    var button = pool.GetPoolableObject();
+                    var button = pool.GetPoolableObject(obj => obj.CanRecycle);
                     button.transform.SetParent(buttonHolder);
                     button.Initialize(boNPC.quests[i]);
 

@@ -258,7 +258,7 @@ namespace ProjectChan.UI
                     details.Add(sdQuest.index, questDetails);
                 }
 
-                var questSlot = pool.GetPoolableObject();
+                var questSlot = pool.GetPoolableObject(obj => obj.CanRecycle);
                 questSlot.Initialize(sdQuest, currentTab);
                 questSlot.transform.SetParent(ContentsHolder);
                 questSlot.transform.localScale = Vector3.one;

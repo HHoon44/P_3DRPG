@@ -394,30 +394,25 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 플레이어 기력을 충전해주는 메서드
+        /// => 플레이어 기력 충전 메서드
         /// </summary>
         private void EnergyReCharge()
         {
-            if (boActor.currentEnergy <= 0)
-            {
-                charged += Time.deltaTime;
-            }
-
-            // -> 달리는 중에는 기력 충전 안댐
+            // -> 달리는 중에는 에너지 충전이 안됩니다!
             if (isRun)
             {
-                boActor.currentEnergy -= Time.deltaTime * 3.0f;
+                boActor.currentEnergy -= Time.deltaTime * 5f;
                 return;
             }
 
-            // -> 만약 Max값을 넘어가거나 같다면 Max값으로 설정해줌
+            // -> 만약 Max값을 넘어가거나 같다면!
             if (boActor.currentEnergy >= boActor.maxEnergy)
             {
                 boActor.currentEnergy = boActor.maxEnergy;
                 return;
             }
 
-            boActor.currentEnergy += Time.deltaTime;
+            boActor.currentEnergy += Time.deltaTime * .8f;
         }
 
         #region 애니메이션 이벤트

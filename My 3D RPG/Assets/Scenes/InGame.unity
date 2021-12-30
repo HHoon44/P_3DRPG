@@ -1788,9 +1788,9 @@ GameObject:
   m_Component:
   - component: {fileID: 236073604}
   - component: {fileID: 236073603}
-  - component: {fileID: 236073602}
   - component: {fileID: 236073605}
   - component: {fileID: 236073606}
+  - component: {fileID: 236073602}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1862,7 +1862,7 @@ Transform:
   m_Children:
   - {fileID: 1770418243}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!114 &236073605
 MonoBehaviour:
@@ -2807,7 +2807,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &570506196
 GameObject:
@@ -6423,7 +6423,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1299584242
 MonoBehaviour:

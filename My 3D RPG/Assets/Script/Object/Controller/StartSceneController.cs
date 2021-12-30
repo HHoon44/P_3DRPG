@@ -53,12 +53,10 @@ namespace ProjectChan
                 // -> 새로하기 버튼
                 case 0:
                     SceneManager.LoadScene("FirstLoading");
-                    AM.AudioStop();
                     break;
 
                 // -> 이어하기 버튼
                 case 1:
-                    AM.AudioStop();
                     break;
 
                 // -> 옵션 버튼

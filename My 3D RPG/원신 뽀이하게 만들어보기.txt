@@ -2,21 +2,30 @@
 2. 유니티 Post Processing
 3. https://mentum.tistory.com/m/194?category=717657
 4. https://violetababel.tistory.com/416
+/*
+private void OnDrawGizmos()
+{
+ var halfExtents = new Vector3(coll.bounds.center.x, coll.bounds.center.y, coll.bounds.center.z);
+
+ Gizmos.color = Color.red;
+ Gizmos.DrawWireCube(transform.position, halfExtents);
+}
+*/
+
 
  ★. Character
  -> 스킬 구현도 한 1 ~ 2개 정도
 
  ★. 버튼
- -> 이어하기 버튼, 옵션 버튼, 도움말 버튼 활성화 하기
+ -> 이어하기 버튼
 
- ★. 할건
- -> 기력 사용은 나중에 원신 보고 한번 더 생각해봐야할듯
+ ★. 할거
+ -> 기력사용 수정
  -> CanESCClose는 쫌 내 맛대로 수정해야할듯
- -> InfoSet은 곧 지울듯
- -> 이번주 금요일은 주석 정리 + 에셋 정리
+ -> 주석 정리 + 코드 정리
 
- ★. 12월 29일 일해라 닝겐
- -> 
+ ★. 12월 30일 일해라 닝겐
+ -> 완료 퀘스트 저장 해놓는 구간 봐야할듯
 
 
 

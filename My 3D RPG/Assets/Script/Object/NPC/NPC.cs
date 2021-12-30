@@ -231,15 +231,5 @@ namespace ProjectChan.Object
 
             uiDialogue.Initialize(boNovel, boNPC);
         }
-
-        /*
-        private void OnDrawGizmos()
-        {
-            var halfExtents = new Vector3(coll.bounds.center.x, coll.bounds.center.y, coll.bounds.center.z);
-
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(transform.position, halfExtents);
-        }
-        */
     }
 }

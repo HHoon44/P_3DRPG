@@ -64,6 +64,17 @@ namespace ProjectChan
 
             currentStage = Instantiate(resourceManager.LoadObject(sdStage.resourcePath));
 
+            switch (sdStage.resourcePath.Remove(0, sdStage.resourcePath.LastIndexOf('/') + 1))
+            {
+                case "StartVillage":
+                    AudioManager.Instance.ChangeAudioClip(Audio.ClipType.Village);
+                    break;
+
+                case "DunGeon":
+                    AudioManager.Instance.ChangeAudioClip(Audio.ClipType.DunGeon);
+                    break;
+            }
+
             // -> 로딩씬을 불러오는 과정에서 로딩씬에 object들이 생성되기 때문에 InGame으로 옮겨준다
             SceneManager.MoveGameObjectToScene(currentStage, SceneManager.GetSceneByName(SceneType.InGame.ToString()));
 
@@ -297,7 +308,7 @@ namespace ProjectChan
                 monster.transform.position = centerPos + new Vector3(spawnPosX, hit.point.y, spawnPosZ);
                 monster.transform.SetParent(monsterHolder, true);
                 monster.Initialize(new BoMonster(sdMonster));
-                monster.State = Define.Actor.ActorState.None;   
+                monster.State = Define.Actor.ActorState.None;
                 battleManager.AddActor(monster);
             }
         }

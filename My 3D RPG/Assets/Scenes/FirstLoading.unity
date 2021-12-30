@@ -498,6 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a8251feb4ea2748bcbd5eca89fc7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  huntedMon: 10
   isMonReady: 0
   monsterHolder: {fileID: 0}
 --- !u!23 &578256858
@@ -617,7 +618,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905544232}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &905544234
 Camera:
   m_ObjectHideFlags: 0
