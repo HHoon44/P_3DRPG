@@ -26,6 +26,7 @@ Shader "Polytope Studio/PT_Vegetation_Opaque_Shader_VS"
 	SubShader
 	{
 		Tags{ "RenderType" = "Opaque"  "Queue" = "Geometry+0" }
+		LOD 200
 		Cull Off
 		CGINCLUDE
 		#include "UnityShaderVariables.cginc"

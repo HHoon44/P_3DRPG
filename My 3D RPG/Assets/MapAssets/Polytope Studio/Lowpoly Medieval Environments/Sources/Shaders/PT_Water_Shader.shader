@@ -30,6 +30,7 @@ Shader "Polytope Studio/PT_Water_Shader"
 	SubShader
 	{
 		Tags{ "RenderType" = "Transparent"  "Queue" = "Transparent+0" "IgnoreProjector" = "True" }
+		LOD 300
 		Cull Off
 		GrabPass{ }
 		CGPROGRAM

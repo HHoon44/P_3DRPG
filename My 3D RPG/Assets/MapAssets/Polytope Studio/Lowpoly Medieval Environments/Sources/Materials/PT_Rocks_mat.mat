@@ -11,7 +11,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: cd18bd550ff6630468660d0150eed511, type: 3}
   m_ShaderKeywords: _ANIMATEDECALEMISSIONONOFF_ON _ANIMATEEMISSIONONOFF_ON _ANIMATEOREEMISSIONONOFF_ON
     _DECALEMISSIONONOFF_ON _DECALSONOFF_ON _DETAILTEXTUREONOFF1_ON _DETAILTEXTUREONOFF_ON
-    _GRADIENTONOFF_ON _OREEMISSIONONOFF_ON _SNOWNOISEONOFF_ON
+    _GRADIENTONOFF_ON _SNOWNOISEONOFF_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -52,7 +52,7 @@ Material:
     - _DECALEMISSIONONOFF: 1
     - _DECALSONOFF: 1
     - _DETAILTEXTUREONOFF: 1
-    - _DecalEmissionIntensity: 4.44
+    - _DecalEmissionIntensity: 1
     - _DecalsOnOff: 1
     - _DetailTextureONOFF: 1
     - _DetailTextureONOFF1: 1
@@ -66,10 +66,10 @@ Material:
     - _GradientONOFF: 1
     - _GradientPower: 5.98
     - _GradientPower1: 4.57
-    - _OREEMISSIONONOFF: 1
-    - _OreEmissionIntensity: 7.23
+    - _OREEMISSIONONOFF: 0
+    - _OreEmissionIntensity: 1
     - _SNOWONOFF: 0
-    - _Smoothness: 0.321
+    - _Smoothness: 0
     - _SnowAmount: 0.215
     - _SnowCoverage: 0.272
     - _SnowFade: 0.736
@@ -96,3 +96,4 @@ Material:
     - _TopColor: {r: 2, g: 1.9716982, b: 1.9716982, a: 1}
     - _TopColor1: {r: 0.59574103, g: 0.51699895, b: 0.6981132, a: 1}
     - _Vector1: {r: 0.1, g: 1, b: 0.1, a: 0}
+  m_BuildTextureStacks: []

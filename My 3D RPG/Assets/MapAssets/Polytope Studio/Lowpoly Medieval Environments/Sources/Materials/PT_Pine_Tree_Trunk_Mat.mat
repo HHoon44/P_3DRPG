@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: PT_Pine_Tree_Trunk_Mat
   m_Shader: {fileID: 4800000, guid: 9644638587573544181f148540ce0ce0, type: 3}
-  m_ShaderKeywords: _CUSTOMWIND_ON _WINDTRUNKMASKONOFF_ON
+  m_ShaderKeywords: _CUSTOMCOLORSTINTING_ON _CUSTOMWIND_ON _WINDTRUNKMASKONOFF_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -65,8 +65,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _CUSTOMCOLORSTINTING: 0
+    - _CUSTOMCOLORSTINTING: 1
     - _CUSTOMWIND: 1
+    - _CUSTOMWIND1: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -84,7 +85,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SNOWONOFF: 0
-    - _Smoothness: 0.261
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SnowAmount: 1
     - _SnowCoverage: 0.45
@@ -97,8 +98,11 @@ Material:
     - _WINDMASKONOFF: 0
     - _WINDTRUNKMASKONOFF: 1
     - _WindDensity: 0.05
+    - _WindDensity1: 0.2
     - _WindMovement: 3
+    - _WindMovement1: 0.5
     - _WindStrength: 0.5
+    - _WindStrength1: 0.3
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
@@ -106,3 +110,4 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GroundColor: {r: 0.08490568, g: 0.05234205, b: 0.04846032, a: 1}
     - _TopColor: {r: 0.4811321, g: 0.4036026, b: 0.2382966, a: 1}
+  m_BuildTextureStacks: []

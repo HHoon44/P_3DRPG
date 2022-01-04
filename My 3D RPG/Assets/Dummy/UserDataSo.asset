@@ -15,36 +15,26 @@ MonoBehaviour:
   dtoAccount:
     errorCode: 0
     errorMessage: 
-    nickName: talse
-    gold: 0
+    nickName: Tales
+    gold: 1000
   dtoCharacter:
     errorCode: 0
     errorMessage: 
     index: 1000
-    level: 3
+    level: 1
   dtoStage:
     errorCode: 0
     errorMessage: 
     lastStageIndex: 1000
-    lastPosX: -8.669193
-    lastPosY: 4.731328
-    lastPosZ: -4.391909
+    lastPosX: -38.581303
+    lastPosY: 4.8555207
+    lastPosZ: 18.999933
   dtoItem:
     errorCode: 0
     errorMessage: 
-    dtoItems:
-    - index: 1000
-      slotIndex: 0
-      amount: 30
-      reinforceValue: 0
-      isEquip: 0
-    - index: 1001
-      slotIndex: 1
-      amount: 18
-      reinforceValue: 0
-      isEquip: 0
+    dtoItems: []
   dtoQuest:
     errorCode: 0
     errorMessage: 
     progressQuests: []
-    completeQuests: e9030000e8030000
+    completeQuests: 

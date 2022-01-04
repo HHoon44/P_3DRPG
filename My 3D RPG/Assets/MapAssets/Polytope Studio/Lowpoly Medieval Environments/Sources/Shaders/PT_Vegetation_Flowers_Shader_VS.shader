@@ -33,6 +33,7 @@ Shader "Polytope Studio/PT_Vegetation_Flowers_Shader_VS"
 	SubShader
 	{
 		Tags{ "RenderType" = "TransparentCutout"  "Queue" = "Geometry+0" }
+		LOD 200
 		Cull Off
 		CGPROGRAM
 		#include "UnityShaderVariables.cginc"

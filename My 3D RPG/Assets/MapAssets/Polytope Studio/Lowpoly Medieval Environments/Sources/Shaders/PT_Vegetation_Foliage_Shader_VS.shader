@@ -37,6 +37,7 @@ Shader "Polytope Studio/PT_Vegetation_Foliage_Shader_VS"
 	SubShader
 	{
 		Tags{ "RenderType" = "TransparentCutout"  "Queue" = "Geometry+0" "DisableBatching" = "True" }
+		LOD 200
 		Cull Off
 		CGINCLUDE
 		#include "UnityShaderVariables.cginc"
@@ -237,7 +238,7 @@ Shader "Polytope Studio/PT_Vegetation_Foliage_Shader_VS"
 		#pragma surface surf StandardCustom keepalpha fullforwardshadows exclude_path:deferred dithercrossfade vertex:vertexDataFunc 
 
 		ENDCG
-		Pass
+		/*Pass
 		{
 			Name "ShadowCaster"
 			Tags{ "LightMode" = "ShadowCaster" }
@@ -306,7 +307,7 @@ Shader "Polytope Studio/PT_Vegetation_Foliage_Shader_VS"
 				SHADOW_CASTER_FRAGMENT( IN )
 			}
 			ENDCG
-		}
+		}*/
 	}
 	Fallback "Diffuse"
 }

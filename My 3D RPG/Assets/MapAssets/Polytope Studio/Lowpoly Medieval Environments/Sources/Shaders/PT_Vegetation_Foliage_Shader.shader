@@ -37,6 +37,7 @@ Shader "Polytope Studio/PT_Vegetation_Foliage_Shader"
 	SubShader
 	{
 		Tags{ "RenderType" = "TransparentCutout"  "Queue" = "Geometry+0" "DisableBatching" = "True" }
+		LOD 200
 		Cull Off
 		CGINCLUDE
 		#include "UnityShaderVariables.cginc"

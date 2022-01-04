@@ -111,6 +111,18 @@ namespace ProjectChan.Define
                 randAttack = Animator.StringToHash("randAttack");
             }
         }
+
+        public class StartStageInfo
+        {
+            public const string CharName = "Talse";
+            public const int StartStage = 1000;
+            public const int StartChar = 1000;
+            public const int StartGold = 5000;
+            public const int StartLevel = 1;
+            public const float StartPosX = -3.1f;
+            public const float StartPosY = 5.5f;
+            public const float StartPosZ = -4.3f;
+        }
     }
 
     public class Novel
@@ -133,7 +145,7 @@ namespace ProjectChan.Define
         public const string SDJosnPath = "Assets/StaticData/Json";
         public const float BaseNovelSize = 0.7915039f;
         public const float NPCNovelSize = 1.518182f;
-        public const float ChangeFormValue = 20.0f;
+        public const float ChangeFormValue = 5.0f;
         public const float BaseSpeed = 0.5f;
         public const int BossIndex = 1002;
     }

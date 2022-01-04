@@ -255,7 +255,7 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: d9f3564d21751d046890366f3fc55400, type: 2}
-  m_TreeDistance: 5000
+  m_TreeDistance: 200
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
@@ -270,7 +270,7 @@ Terrain:
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ScaleInLightmap: 0.256
@@ -331,7 +331,7 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: b273ce15435a60644bcd2c174476a708, type: 2}
-  m_TreeDistance: 5000
+  m_TreeDistance: 200
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
@@ -346,7 +346,7 @@ Terrain:
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ScaleInLightmap: 0.256
@@ -407,7 +407,7 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: abd9fc8a29ea3f549bf82c3d3b8c843f, type: 2}
-  m_TreeDistance: 5000
+  m_TreeDistance: 200
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
@@ -422,7 +422,7 @@ Terrain:
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ScaleInLightmap: 0.256
@@ -483,7 +483,7 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 1587ce82db2499e4185b7701bf0d532b, type: 2}
-  m_TreeDistance: 5000
+  m_TreeDistance: 200
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
@@ -498,7 +498,7 @@ Terrain:
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ScaleInLightmap: 0.256
@@ -559,7 +559,7 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: f2e008cefb3ff674e8c681a3f961fb80, type: 2}
-  m_TreeDistance: 5000
+  m_TreeDistance: 200
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
@@ -574,7 +574,7 @@ Terrain:
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ScaleInLightmap: 0.256
@@ -635,7 +635,7 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 3349f3f4495a62f40895e095545b535e, type: 2}
-  m_TreeDistance: 5000
+  m_TreeDistance: 200
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
@@ -650,7 +650,7 @@ Terrain:
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ScaleInLightmap: 0.256
@@ -711,7 +711,7 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: dbe8ee5abb1344a4e8a8b80348f13db8, type: 2}
-  m_TreeDistance: 5000
+  m_TreeDistance: 200
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
@@ -726,7 +726,7 @@ Terrain:
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ScaleInLightmap: 0.256
@@ -787,7 +787,7 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: c40d5572f8d7d6843bd8d20c21f1c0be, type: 2}
-  m_TreeDistance: 5000
+  m_TreeDistance: 200
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
@@ -802,7 +802,7 @@ Terrain:
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ScaleInLightmap: 0.256
@@ -838,7 +838,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 3
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6447632263445975020
 Transform:
@@ -873,9 +873,9 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_MotionVectors: 2
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
@@ -959,7 +959,7 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: e0829138c40f356458f259edb063d67a, type: 2}
-  m_TreeDistance: 5000
+  m_TreeDistance: 200
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
@@ -976,7 +976,7 @@ Terrain:
   m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
-  m_DeringLightProbesForTrees: 1
+  m_DeringLightProbesForTrees: 0
   m_ScaleInLightmap: 0.0256
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
   m_GroupingID: 0
@@ -1345,13 +1345,53 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 40e61747f5ab72d409498dd1603b8289, type: 2}
     - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_Size
+      value: 1.2406445
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
       propertyPath: m_FadeMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
       propertyPath: m_AnimateCrossFading
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LocalReferencePoint.x
+      value: -0.11682665
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LocalReferencePoint.y
+      value: 0.33101153
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LocalReferencePoint.z
+      value: -0.1027852
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.8013585
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.44818515
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.10221866
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LODs.Array.data[0].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 2045047452767312774, guid: 82b2c64f4e2d5264bbf0f909cadda2fa, type: 3}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LODs.Array.data[1].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 242584036077982306, guid: 82b2c64f4e2d5264bbf0f909cadda2fa, type: 3}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LODs.Array.data[2].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 4725501143243743987, guid: 82b2c64f4e2d5264bbf0f909cadda2fa, type: 3}
     - target: {fileID: 6788130300613750309, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1422,6 +1462,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8839256744888191514, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
+      propertyPath: m_Size
+      value: 1.2406445
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839256744888191514, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
+      propertyPath: m_LODs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839256744888191514, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
+      propertyPath: m_AnimateCrossFading
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839256744888191514, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
+      propertyPath: m_LocalReferencePoint.x
+      value: -0.11682665
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839256744888191514, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
+      propertyPath: m_LocalReferencePoint.y
+      value: 0.33101153
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839256744888191514, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
+      propertyPath: m_LocalReferencePoint.z
+      value: -0.1027852
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839256744888191514, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.8013585
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839256744888191514, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.44818515
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839256744888191514, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
+      propertyPath: m_LODs.Array.data[2].renderers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839256744888191514, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.10221866
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839256744888191514, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
+      propertyPath: m_LODs.Array.data[0].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 2045047452767312774, guid: 82b2c64f4e2d5264bbf0f909cadda2fa, type: 3}
+    - target: {fileID: 8839256744888191514, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
+      propertyPath: m_LODs.Array.data[1].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 242584036077982306, guid: 82b2c64f4e2d5264bbf0f909cadda2fa, type: 3}
+    - target: {fileID: 8839256744888191514, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
+      propertyPath: m_LODs.Array.data[2].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 4725501143243743987, guid: 82b2c64f4e2d5264bbf0f909cadda2fa, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29c774dacdcc73240b0c71228fdc6f2c, type: 3}
 --- !u!1 &7980379953344358902 stripped
@@ -1493,6 +1585,50 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e58dbc3582eb6ff41b1bbd8a11960175, type: 2}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_Size
+      value: 1.2406445
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_AnimateCrossFading
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LocalReferencePoint.x
+      value: -0.11682665
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LocalReferencePoint.y
+      value: 0.33101153
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LocalReferencePoint.z
+      value: -0.1027852
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.8013585
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.44818515
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.10221866
+      objectReference: {fileID: 0}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LODs.Array.data[0].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 2045047452767312774, guid: 82b2c64f4e2d5264bbf0f909cadda2fa, type: 3}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LODs.Array.data[1].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 242584036077982306, guid: 82b2c64f4e2d5264bbf0f909cadda2fa, type: 3}
+    - target: {fileID: 6229498194940338806, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
+      propertyPath: m_LODs.Array.data[2].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 4725501143243743987, guid: 82b2c64f4e2d5264bbf0f909cadda2fa, type: 3}
     - target: {fileID: 6788130300613750309, guid: d90c349721b4e694fad80a76d87b2578, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1559,10 +1695,102 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5250209412832252938, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -5250209412832252938, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5250209412832252938, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5250209412832252938, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5084322462617627812, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -5084322462617627812, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5084322462617627812, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5084322462617627812, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3783610701994035237, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_MotionVectors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3783610701994035237, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3783610701994035237, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3783610701994035237, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
       propertyPath: m_Name
       value: PT_Pine_Tree_03_green
       objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_Size
+      value: 1.2406445
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_AnimateCrossFading
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_LocalReferencePoint.x
+      value: -0.11682665
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_LocalReferencePoint.y
+      value: 0.33101153
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_LocalReferencePoint.z
+      value: -0.1027852
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.8013585
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.44818515
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.10221866
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_LODs.Array.data[0].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 2045047452767312774, guid: 82b2c64f4e2d5264bbf0f909cadda2fa, type: 3}
+    - target: {fileID: 4742473837712756890, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_LODs.Array.data[1].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 242584036077982306, guid: 82b2c64f4e2d5264bbf0f909cadda2fa, type: 3}
+    - target: {fileID: 4742473837712756890, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
+      propertyPath: m_LODs.Array.data[2].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 4725501143243743987, guid: 82b2c64f4e2d5264bbf0f909cadda2fa, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2dcabc4d03cc9b4098225e59529d20d, type: 3}
 --- !u!4 &6841018534283869603 stripped

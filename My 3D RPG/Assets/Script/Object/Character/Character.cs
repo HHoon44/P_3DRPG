@@ -257,7 +257,9 @@ namespace ProjectChan.Object
         }
         public void ChangeForm()
         {
-            if (Input.GetButtonDown("FormChange") && boActor.currentEnergy > Define.StaticData.ChangeFormValue && !playerController.isPlayerAction)
+            if (Input.GetButtonDown("FormChange") &&
+                boActor.currentEnergy > Define.StaticData.ChangeFormValue &&
+                !playerController.isPlayerAction)
             {
                 boActor.currentEnergy -= Define.StaticData.ChangeFormValue;
 
@@ -399,25 +401,17 @@ namespace ProjectChan.Object
         /// </summary>
         private void EnergyReCharge()
         {
-            // -> 0보다 작다면 차지를 시작
-            if (boActor.currentEnergy <= 0)
-            {
-                canCharge = true;
-            }
-
             // -> 만약 Max값을 넘어가거나 같다면!
             if (boActor.currentEnergy >= boActor.maxEnergy)
             {
                 boActor.currentEnergy = boActor.maxEnergy;
-                /// 이제 달릴 수 있습니다
-                canCharge = false;
                 return;
             }
 
             if (canCharge)
             {
                 // -> 차지 충전
-                boActor.currentEnergy += Time.deltaTime * 5f;
+                boActor.currentEnergy += Time.deltaTime * 3f;
             }
         }
 

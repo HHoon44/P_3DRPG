@@ -127,16 +127,16 @@ namespace ProjectChan.Object
             var newDir = boActor.moveDir;
             var sprint = Define.StaticData.BaseSpeed + UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
 
-            // -> 현재 에너지 차지 상태가 아니라면
-            if (!PlayerCharacter.canCharge)
+            sprint += UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
+
+            if (sprint > .5f)
             {
-                sprint += UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
-                PlayerCharacter.boActor.currentEnergy -= Time.deltaTime * .5f;
-                PlayerCharacter.isRun = true;
+                PlayerCharacter.boActor.currentEnergy -= Time.deltaTime * .8f;
+                PlayerCharacter.canCharge = false;
             }
             else
             {
-                PlayerCharacter.isRun = false;  
+                PlayerCharacter.canCharge = true;
             }
 
             newDir.z = (sprint * value);
@@ -184,7 +184,7 @@ namespace ProjectChan.Object
             PlayerCharacter.SetState(ActorState.Attack);
         }
 
-        private void OnPressMouseRight()    
+        private void OnPressMouseRight()
         {
             canRot = true;
         }

@@ -8,10 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: "\u9970\u54C12Re"
-  m_Shader: {fileID: 4800000, guid: fe3954a9664afb042a2af588b53680b0, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: fff7cb604eb21b242b68357827f549f1, type: 3}
+  m_ShaderKeywords: SHADOWED_RIM
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -55,6 +55,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _NormalMapSampler:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -71,6 +75,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecularMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecularReflectionSampler:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -82,12 +90,16 @@ Material:
     - _DstBlend: 0
     - _EdgeThickness: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _LightCutoff: 0.5
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _RimSize: 0.5
+    - _ShadowBands: 2.5
+    - _ShadowedRim: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpecularPower: 20
@@ -96,6 +108,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Emission: {r: 0.2509804, g: 0.2509804, b: 0.2509804, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0.8, g: 0.8, b: 1, a: 1}
+    - _SpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

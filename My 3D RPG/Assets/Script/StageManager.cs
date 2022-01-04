@@ -26,7 +26,7 @@ namespace ProjectChan
         private float currentMonSpawnTime;          // -> 현재 몬스터 스폰 시간
         private float maxMonSpawnTime;              // -> 최대 몬스터 스폰 시간
 
-        public int huntedMon = 10;                       // -> 사냥한 몬스터 개수
+        public int huntedMon = 10;                  // -> 사냥한 몬스터 개수
         public bool isMonReady;                     // -> 몬스터를 생성할 준비가되었는가?
         public Transform monsterHolder;             // -> 몬스터를 자식으로 가질 부모 홀더
 
@@ -153,7 +153,6 @@ namespace ProjectChan
             // -> 캐릭터가 씬 이동이 아니라 스테이지 이동을 했다는 의미
             if (playerController.PlayerCharacter != null)
             {
-                // -> 워프한 캐릭터가 위치할 EntryPos찾기
                 var warpEntry = currentStage.transform.Find
                     ($"WarpPosHolder/{GameManager.User.boStage.prevStageIndex}/EntryPos").transform;
 

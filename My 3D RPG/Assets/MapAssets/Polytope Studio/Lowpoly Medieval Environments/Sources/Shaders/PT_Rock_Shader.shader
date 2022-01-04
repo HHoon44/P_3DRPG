@@ -48,6 +48,7 @@ Shader "Polytope Studio/PT_Rock_Shader"
 	SubShader
 	{
 		Tags{ "RenderType" = "Opaque"  "Queue" = "Geometry+0" "IsEmissive" = "true"  }
+		LOD 200
 		Cull Off
 		CGINCLUDE
 		#include "UnityShaderVariables.cginc"

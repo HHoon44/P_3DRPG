@@ -6,11 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjectChan.DB;
 using ProjectChan.Define;
+using ProjectChan.Dummy;
 using ProjectChan.SD;
 using ProjectChan.UI;
 using ProjectChan.Util;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static ProjectChan.Define.Actor;
 
 namespace ProjectChan
 {
@@ -31,7 +34,7 @@ namespace ProjectChan
             base.Awake();
 
             if (gameObject == null)
-            { 
+            {
                 return;
             }
 
@@ -39,6 +42,33 @@ namespace ProjectChan
 
             var StartController = FindObjectOfType<StartController>();
             StartController?.Initialize();
+
+            /*
+            // -> 처음 시작하는 유저라면 유저의 정보를 담을 공간생성
+            if (AssetDatabase.LoadAssetAtPath("Assets/Dummy/UserDataSo", typeof(UserDataSo)) == null)
+            {
+                UserDataSo UserDataSo = ScriptableObject.CreateInstance<UserDataSo>();
+                AssetDatabase.CreateAsset(UserDataSo, "Assets/Dummy/UserDataSo.asset");
+                AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(UserDataSo));
+
+                UserDataSo.dtoStage = new DtoStage();
+                UserDataSo.dtoStage.lastStageIndex = StartStageInfo.StartStage;
+                UserDataSo.dtoStage.lastPosX = StartStageInfo.StartPosX;
+                UserDataSo.dtoStage.lastPosY = StartStageInfo.StartPosY;
+                UserDataSo.dtoStage.lastPosZ = StartStageInfo.StartPosZ;
+
+                UserDataSo.dtoAccount = new DtoAccount();
+                UserDataSo.dtoAccount.nickName = StartStageInfo.CharName;
+                UserDataSo.dtoAccount.gold = StartStageInfo.StartGold;
+
+                UserDataSo.dtoCharacter = new DtoCharacter();
+                UserDataSo.dtoCharacter.index = StartStageInfo.StartChar;
+                UserDataSo.dtoCharacter.level = StartStageInfo.StartLevel;
+
+                DummyServer.Instance.userData = UserDataSo;
+            }
+             */
+
         }
 
         public void OnApplicationSetting()
