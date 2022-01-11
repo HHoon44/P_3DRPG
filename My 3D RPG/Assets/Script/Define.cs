@@ -145,7 +145,7 @@ namespace ProjectChan.Define
         public const string SDJosnPath = "Assets/StaticData/Json";
         public const float BaseNovelSize = 0.7915039f;
         public const float NPCNovelSize = 1.518182f;
-        public const float ChangeFormValue = 5.0f;
+        public const float ChangeFormValue = 7.0f;
         public const float BaseSpeed = 0.5f;
         public const int BossIndex = 1002;
     }

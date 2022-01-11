@@ -6,16 +6,21 @@ using System.Threading.Tasks;
 
 namespace ProjectChan.DB
 {
-    /// 변신폼 전에 현재 hp랑 현재 mana를 담아 놓을 공간
+
+    /// <summary>
+    /// => 클라이언트 내에서 사용할 PrevStat 데이터
+    /// => 작업과정에서 데이터를 확인하기 위해서 Serializable
+    /// </summary>
+    [Serializable]
     public class BoPrevStat
     {
-        public float currentHp;
-        public float currentMana;
+        public float prevHp;     // -> 변신 전 체력 값
+        public float prevEnergy;   // -> 변신 전 에너지 값
 
-        public BoPrevStat(float currenHp, float currenMana)
+        public BoPrevStat(float prevHp, float prevEnergy)
         {
-            this.currentHp = currenHp;
-            this.currentMana = currenMana;
+            this.prevHp = prevHp;
+            this.prevEnergy = prevEnergy;
         }
     }
 }

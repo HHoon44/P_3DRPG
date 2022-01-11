@@ -9,7 +9,7 @@ namespace ProjectChan.DB
 {
     /// <summary>
     /// => 클라이언트 내에서 사용할 Quest 데이터
-    /// => 작업과정에서 데이터를 확인하기 위해서 직렬화
+    /// => 작업과정에서 데이터를 확인하기 위해서 Serializable
     /// </summary>
     [Serializable]
     public class BoQuest 

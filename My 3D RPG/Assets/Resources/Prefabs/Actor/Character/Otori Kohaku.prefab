@@ -106,8 +106,6 @@ MonoBehaviour:
     atkRange: 0
     atkInterval: 0
     isGround: 0
-  canCharge: 0
-  isRun: 0
   playerController: {fileID: 0}
   boCharacter:
     level: 0
@@ -316,6 +314,10 @@ PrefabInstance:
     - target: {fileID: 2434811058968727982, guid: 0730f09e147e1f34384fe4fc8d22d822, type: 3}
       propertyPath: m_Name
       value: MountingPos
+      objectReference: {fileID: 0}
+    - target: {fileID: 2434811058968727982, guid: 0730f09e147e1f34384fe4fc8d22d822, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0730f09e147e1f34384fe4fc8d22d822, type: 3}

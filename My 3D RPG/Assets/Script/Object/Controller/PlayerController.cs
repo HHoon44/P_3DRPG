@@ -58,7 +58,7 @@ namespace ProjectChan.Object
             }
 
             // -> 플레이어가 죽은 상태라면
-            if (PlayerCharacter.State == Define.Actor.ActorState.Dead)
+            if (PlayerCharacter.State == ActorState.Dead)
             {
                 return;
             }
@@ -128,17 +128,6 @@ namespace ProjectChan.Object
             var sprint = Define.StaticData.BaseSpeed + UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
 
             sprint += UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
-
-            if (sprint > .5f)
-            {
-                PlayerCharacter.boActor.currentEnergy -= Time.deltaTime * .8f;
-                PlayerCharacter.canCharge = false;
-            }
-            else
-            {
-                PlayerCharacter.canCharge = true;
-            }
-
             newDir.z = (sprint * value);
             PlayerCharacter.boActor.moveDir = newDir;
         }

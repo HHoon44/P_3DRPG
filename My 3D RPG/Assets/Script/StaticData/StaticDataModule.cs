@@ -17,7 +17,6 @@ namespace ProjectChan.SD
         public List<SDNovel> sdNovels;
         public List<SDOriginInfo> sdOriginInfos;
         public List<SDFormInfo> sdFormInfos;
-        public List<SDWeapon> sdWeapons;
         public List<SDMonster> sdMonsters;
         public List<SDItem> sdItems;
         public List<SDNPC> sdNPCs;
@@ -33,7 +32,6 @@ namespace ProjectChan.SD
             loader.Load(out sdNovels);
             loader.Load(out sdOriginInfos);
             loader.Load(out sdFormInfos);
-            loader.Load(out sdWeapons);
             loader.Load(out sdMonsters);
             loader.Load(out sdItems);
             loader.Load(out sdNPCs);

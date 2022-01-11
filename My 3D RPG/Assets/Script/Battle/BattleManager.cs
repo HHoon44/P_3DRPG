@@ -12,7 +12,7 @@ namespace ProjectChan.Battle
     using ActorType = Define.Actor.ActorType;
 
     /// <summary>
-    /// => 인게임에서 활성화된 액터 객체들을 관리하는 클래스
+    /// => 인게임에 활성화 된 액터들을 관리하는 클래스
     /// </summary>
     public class BattleManager : Singleton<BattleManager>
     {
@@ -76,7 +76,7 @@ namespace ProjectChan.Battle
         /// <summary>
         /// => 저장된 액터들이 가지고있는 업데이트 함수를 활성화 하는 메서드
         /// </summary>
-        /// <param name="actors"> 배틀매니저에 저장되어있는 컨테이너 </param>
+        /// <param name="actors"> 업데이트 할 액터 리스트 </param>
         private void ActorUpdate(List<Actor> actors)
         {
             for (int i = 0; i < actors.Count; i++)
@@ -98,7 +98,7 @@ namespace ProjectChan.Battle
         }
 
         /// <summary>
-        /// => NPC 스크립트의 업데이트문을 배틀매니저에서 실행하는 메서드
+        /// => NPC 업데이트를 실행하는 메서드
         /// </summary>
         private void NPCUpdate()
         {
@@ -118,7 +118,7 @@ namespace ProjectChan.Battle
         }
 
         /// <summary>
-        /// => 배틀매니저에 저장되어있는 NPC들을 초기화하는 메서드
+        /// => 저장되어있는 NPC를 초기화 하는 메서드
         /// </summary>
         public void ClearNPC()
         {

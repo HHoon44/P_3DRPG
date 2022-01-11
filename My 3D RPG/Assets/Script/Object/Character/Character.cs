@@ -17,10 +17,6 @@ namespace ProjectChan.Object
 
     public class Character : Actor
     {
-        private float charged;                          // -> 기력을 충전하기 위한 대기시간
-
-        public bool canCharge;
-        public bool isRun;
         public PlayerController playerController;       // -> 캐릭터를 컨트롤 해줄 컨트롤러
         public BoCharacter boCharacter;                 // -> 현재 캐릭터가 지닌 스텟정보
 
@@ -59,10 +55,7 @@ namespace ProjectChan.Object
             boCharacter.atk = boCharacter.level * boCharacter.sdOriginInfo.atk * boCharacter.sdOriginInfo.atkFactor;
             boCharacter.def = boCharacter.level * boCharacter.sdOriginInfo.def * boCharacter.sdOriginInfo.defFactor;
 
-            var sdWeapon = GameManager.SD.sdWeapons.Where
-                (obj => obj.index == boCharacter.sdOriginInfo.weaponIndex)?.SingleOrDefault();
-
-            weaponController.Initialize(boCharacter.actorType, sdWeapon);
+            weaponController.Initialize(boCharacter.actorType);
 
             // -> 현재 활성화된 캐릭터의 Animator을 사용하기 위해 가져온다
             anim = transform.GetChild(0).GetComponent<Animator>();
@@ -89,10 +82,7 @@ namespace ProjectChan.Object
             boCharacter.atk = boCharacter.level * boCharacter.sdFormInfo.atk * boCharacter.sdFormInfo.atkFactor;
             boCharacter.def = boCharacter.level * boCharacter.sdFormInfo.def * boCharacter.sdFormInfo.defFactor;
 
-            var sdWeapon = GameManager.SD.sdWeapons.Where
-                (obj => obj.index == boCharacter.sdFormInfo.weaponIndex)?.SingleOrDefault();
-
-            weaponController.Initialize(boCharacter.actorType, sdWeapon);
+            weaponController.Initialize(boCharacter.actorType);
 
             // -> 현재 활성화된 캐릭터의 Animator을 사용하기 위해 가져온다
             anim = transform.GetChild(1).GetComponent<Animator>();
@@ -104,7 +94,7 @@ namespace ProjectChan.Object
         /// <param name="state"> 캐릭터의 상태 </param>
         public override void SetState(ActorState state)
         {
-            var prevState = State;      
+            var prevState = State;
 
             base.SetState(state);
 
@@ -120,7 +110,6 @@ namespace ProjectChan.Object
 
                     if (prevState == ActorState.Attack)
                     {
-                        Debug.Log("공격중 점프 안됩니다");
                         State = prevState;
                         return;
                     }
@@ -150,7 +139,7 @@ namespace ProjectChan.Object
         /// </summary>
         public override void MoveUpdate()
         {
-            /// => TransformDirection : 방향벡터를 로컬 좌표계 기준에서 월드 좌표꼐 기준으로 바꿔줌
+            /// => TransformDirection : 방향벡터를 로컬 좌표계 기준에서 월드 좌표계 기준으로 바꿔줌
             var velocity = boActor.moveSpeed * boActor.moveDir;
             velocity = transform.TransformDirection(velocity);
 
@@ -255,6 +244,7 @@ namespace ProjectChan.Object
                 anim.SetBool(charAnim.isJump, false);
             }
         }
+
         public void ChangeForm()
         {
             if (Input.GetButtonDown("FormChange") &&
@@ -263,7 +253,7 @@ namespace ProjectChan.Object
             {
                 boActor.currentEnergy -= Define.StaticData.ChangeFormValue;
 
-                // -> 코하쿠 >> 라이덴
+                // -> 코하쿠 --> 라이덴
                 if (transform.GetChild(0).gameObject.activeSelf == true &&
                     transform.GetChild(1).gameObject.activeSelf == false)
                 {
@@ -307,8 +297,8 @@ namespace ProjectChan.Object
             {
                 if (GameManager.User.boPrevStatDic.ContainsKey(actorType))
                 {
-                    GameManager.User.boPrevStatDic[actorType].currentHp = boCharacter.currentHp;
-                    GameManager.User.boPrevStatDic[actorType].currentMana = boCharacter.currentEnergy;
+                    GameManager.User.boPrevStatDic[actorType].prevHp = boCharacter.currentHp;
+                    GameManager.User.boPrevStatDic[actorType].prevEnergy = boCharacter.currentEnergy;
                 }
                 else
                 {
@@ -325,14 +315,14 @@ namespace ProjectChan.Object
                 {
                     var boPrevStat = GameManager.User.boPrevStatDic[actorType];
 
-                    if (boPrevStat.currentHp < 0)
+                    if (boPrevStat.prevHp < 0)
                     {
                         boCharacter.currentHp = 0;
                     }
                     else
                     {
-                        boCharacter.currentHp = boPrevStat.currentHp;
-                        boCharacter.currentEnergy = boPrevStat.currentMana;
+                        boCharacter.currentHp = boPrevStat.prevHp;
+                        boCharacter.currentEnergy = boPrevStat.prevEnergy;
                     }
                 }
                 else
@@ -350,17 +340,20 @@ namespace ProjectChan.Object
         {
             if (Input.GetButtonDown("WeaponChange"))
             {
+                // -> 땅이 아니라면!
                 if (!boActor.isGround)
                 {
                     return;
                 }
 
-                // -> 무기 바꿀땐 이동 입력이랑 이동 멈추기
+                // -> 무기를 바꿀 땐 이동 입력과 이동을 멈춥니다!
                 playerController.isPlayerAction = true;
                 playerController.PlayerCharacter.boActor.moveDir = Vector3.zero;
                 var newDir = Vector3.zero;
                 playerController.PlayerCharacter.boActor.rotDir = newDir;
 
+                // -> 장착을 하고 있는 상태라면 무기를 해제!
+                // -> 아니라면 무기를 장착!
                 if (!weaponController.isWeapon)
                 {
                     anim.SetTrigger(charAnim.InWeapon);
@@ -408,11 +401,8 @@ namespace ProjectChan.Object
                 return;
             }
 
-            if (canCharge)
-            {
-                // -> 차지 충전
-                boActor.currentEnergy += Time.deltaTime * 3f;
-            }
+            // -> 차지 충전
+            boActor.currentEnergy += Time.deltaTime * 3f;
         }
 
         #region 애니메이션 이벤트
@@ -434,6 +424,7 @@ namespace ProjectChan.Object
             weaponController.SetWeapon();
 
         }
+
         public override void OnDeadEnd()
         {
             gameObject.SetActive(false);

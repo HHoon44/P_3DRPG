@@ -19,8 +19,9 @@ namespace ProjectChan.DB
         public SDItem sdItem;       // -> 아이템이 지닌 기획 데이터 정보
 
         /// <summary>
-        /// => 서버에서 아이템 정보를 받아와 아이템을 세팅할때 호출
-        /// => 플레이어가 아이템을 습득 했을 때 처음 습득하는 아이템이면 호출
+        /// => 서버에서 아이템 정보를 받아와 아이템을 세팅할 때 
+        /// => 플레이어가 처음 습득하는 아이템일 때 
+        /// => 플레이어가 소지한 아이템을 습득 했을 때 사용하는 메서드
         /// </summary>
         /// <param name="sdItem"> 저장할 아이템의 데이터 정보 </param>
         public BoItem(SDItem sdItem)
@@ -44,7 +45,7 @@ namespace ProjectChan.DB
     }
 
     /// <summary>
-    /// => 장비 아이템의 옵션
+    /// => 장비 아이템의 옵션을 지닌 클래스
     /// </summary>
     [Serializable]
     public class BoEquipment : BoItem
@@ -53,7 +54,7 @@ namespace ProjectChan.DB
         public bool isEquip;            // -> 장비 아이템 착용 여부
 
         /// <summary>
-        /// => 아이템의 정보가 장비 아이템일때 장비 아이템 세팅
+        /// => 아이템 정보가 장비 아이템일 때 장비 아이템 정보를 담아놓는 메서드
         /// </summary>
         /// <param name="sdItem"> 저장할 아이템의 데이터 정보 </param>
         public BoEquipment(SDItem sdItem) : base(sdItem)

@@ -20,13 +20,13 @@ namespace ProjectChan.DB
         public int gold;            // -> Dto에 저장되어있는 플레이어 골드
 
         /// <summary>
-        /// => 서버를 통해 받은 DtoAccount 데이터를 BoAccount데이터로 변환해주는 메서드
+        /// => 서버를 통해 받은 DtoAccount 데이터를 BoAccount데이터로 변환하는 메서드
         /// </summary>
-        /// <param name="dtoAccount"> 서버를 통해 받은 DtoAccount 데이턴 </param>
+        /// <param name="dtoAccount"> 서버를 통해 받은 DtoAccount 데이터 </param>
         public BoAccount(DtoAccount dtoAccount)
         {
-            this.nickName = dtoAccount.nickName;
-            this.gold = dtoAccount.gold;
+            nickName = dtoAccount.nickName;
+            gold = dtoAccount.gold;
         }
     }
 }

@@ -18,13 +18,15 @@ namespace ProjectChan.Object
 {
     public class Monster : Actor, IPoolableObject
     {
+        public BoMonster boMonster;             // -> 몬스터의 정보가 담겨있는 Bo데이터
+
         private float currentPatrolWaitTime;    // -> 현재 정찰 대기시간
         private float patrolWaitTime;           // -> 정찰 대기시간 최대값
         private Vector3 destPos;                // -> 목적지 위치 (정찰 위치, 타겟 위치)
-        public BoMonster boMonster;             // -> 몬스터의 정보가 담겨있는 Bo데이터
-        private NavMeshAgent agent;             // -> NavMesh 위에서 움직일 대상 (몬스터)
-        private NavMeshPath path;               // -> 에이전트가 돌아다닐 경로
         private GameObject itemHolder;          // -> 몬스터가 떨군 아이템을 자식으로 달아놓을 게임오브젝트
+        private NavMeshPath path;               // -> 에이전트가 돌아다닐 경로
+        private NavMeshAgent agent;             // -> NavMesh 위에서 움직일 대상 (몬스터)
+       
 
         public bool CanRecycle { get; set; } = true;
 
