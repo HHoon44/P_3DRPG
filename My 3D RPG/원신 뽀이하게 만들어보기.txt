@@ -42,6 +42,8 @@ EX) 애니메이션 이벤트로 사용되며~
 
 Actor까지 봤음
 
+7. 기획 데이터 -> string, string[], enum, int[], int, float[], float
+아이템 기획 데이터 순서 수정
 
 
 

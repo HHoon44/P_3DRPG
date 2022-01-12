@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ProjectChan.SD
 {
     /// <summary>
-    /// => 아이템의 SD데이터 클래스
+    /// => 아이템 기본 세팅에 사용할 기획 데이터
     /// </summary>
     [Serializable]
     public class SDItem : StaticData

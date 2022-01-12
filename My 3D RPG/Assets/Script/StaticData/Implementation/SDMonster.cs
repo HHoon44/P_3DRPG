@@ -8,7 +8,7 @@ using static ProjectChan.Define.Actor;
 namespace ProjectChan.SD
 {
     /// <summary>
-    /// => 몬스터의 SD데이터 클래스
+    /// => 몬스터 기본 세팅에 사용할 기획 데이터
     /// </summary>
     [Serializable]
     public class SDMonster : StaticData

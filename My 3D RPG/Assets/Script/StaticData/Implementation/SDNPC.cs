@@ -8,7 +8,7 @@ using static ProjectChan.Define.Actor;
 namespace ProjectChan.SD
 {
     /// <summary>
-    /// => NPC의 기획 데이터가 담긴 클래스
+    /// => NPC 기본 세팅에 사용할 기획 데이터
     /// </summary>
     [Serializable]
     public class SDNPC : StaticData

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ProjectChan.SD
 {
     /// <summary>
-    /// => 변신폼의 스텟 SD데이터 클래스
+    /// => 변신폼 세팅에 사용할 기획 데이터
     /// </summary>
     [Serializable]
     public class SDFormInfo : StaticData

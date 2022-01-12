@@ -9,7 +9,7 @@ using static ProjectChan.Define.Actor;
 namespace ProjectChan.SD
 {
     /// <summary>
-    /// => 기본 캐릭터의 SD 데이터 클래스
+    /// => 캐릭터의 기본 세팅에 사용할 기획 데이터
     /// </summary>
     [Serializable]
     public class SDCharacter : StaticData

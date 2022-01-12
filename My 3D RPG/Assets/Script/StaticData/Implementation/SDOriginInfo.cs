@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ProjectChan.SD
 {
     /// <summary>
-    /// => 기본 캐릭터의 스텟의 SD데이터
+    /// => 기존 캐릭터 세팅에 사용할 기획 데이터
     /// </summary>
     [Serializable]
     public class SDOriginInfo : StaticData

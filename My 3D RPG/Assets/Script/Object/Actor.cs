@@ -248,6 +248,9 @@ namespace ProjectChan.Object
             }
         }
 
+        /// <summary>
+        /// => 데미지 상태로 변경 시 한번 호출되는 메서드
+        /// </summary>
         protected virtual void OnDamage()
         {
             switch (boActor.actorType)
@@ -262,6 +265,9 @@ namespace ProjectChan.Object
             }
         }
 
+        /// <summary>
+        /// => 죽음 상태로 변경 시 한번 호출되는 메서드
+        /// </summary>
         protected virtual void OnDead()
         {
             switch (boActor.actorType)

@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Logo : MonoBehaviour
+namespace ProjectChan
 {
     /// <summary>
-    /// => 로고 이벤트 메서드
+    /// => 로고씬을 관리하는 클래스
     /// </summary>
-    public void LoadStartScene()    
+    public class Logo : MonoBehaviour
     {
-        SceneManager.LoadScene("StartScene");
+        /// <summary>
+        /// => 로고 이벤트 메서드
+        /// </summary>
+        public void LoadStartScene()
+        {
+            SceneManager.LoadScene("StartScene");
+        }
     }
 }

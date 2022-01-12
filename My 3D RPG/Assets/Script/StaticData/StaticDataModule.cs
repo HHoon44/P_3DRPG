@@ -9,6 +9,10 @@ using UnityEngine;
 
 namespace ProjectChan.SD
 {
+    /// <summary>
+    /// => 모든 기획데이터를 들고 있는 클래스
+    /// => 데이터를 로드하고 들고 있기만 하는 것이므로 모노를 상속받을 필요가 없음
+    /// </summary>
     [Serializable]
     public class StaticDataModule
     {
@@ -39,6 +43,9 @@ namespace ProjectChan.SD
             loader.Load(out sdQuestSpeechs);
         }
 
+        /// <summary>
+        /// => 기획 데이터를 불러올 로더 클래스
+        /// </summary>
         private class StaticDataLoader
         {
             private string path;
@@ -48,9 +55,15 @@ namespace ProjectChan.SD
                 path = $"{Application.dataPath}/StaticData/Json";
             }
 
+            /// <summary>
+            /// => 지정된 경로에 파일을 작성하는 메서드
+            /// </summary>
+            /// <typeparam name="T"> 기획 데이터 타입 </typeparam>
+            /// <param name="data"> 기획 데이터 </param>
             public void Load<T>(out List<T> data)
                 where T : StaticData
             {
+                // -> 파일이름이 타입이름에서 SD만 제거하면 동일하다는 규칙을 이용합니다!
                 var fileName = typeof(T).Name.Remove(0, "SD".Length);
                 var json = File.ReadAllText($"{path}/{fileName}.json");
                 data = SerializationUtil.FromJson<T>(json);
