@@ -16,13 +16,16 @@ using static ProjectChan.Define.Resource;
 
 namespace ProjectChan.Novel
 {
+    /// <summary>
+    /// => 노벨 게임씬을 관리하는 컨트롤러 메서드
+    /// </summary>
     public class NovelController : MonoBehaviour
     {
+        public Image novelGround;           // -> 뒷 배경
+
         private int speechIndex;            // -> 현재 대화 진행도 인덱스
         private int currentNovelIndex;      // -> 현재 대화 인덱스
         private SDNovel sdNovel;            // -> 현재 진행할 대화 데이터
-
-        public Image novelGround;           // -> 뒷 배경
 
         private void Awake()
         {
@@ -32,7 +35,10 @@ namespace ProjectChan.Novel
 
         private void Start()
         {
+            // -> 오디오를 노벨 게임 오디오로 변경
             AudioManager.Instance.ChangeAudioClip(Define.Audio.ClipType.NovelGame);
+
+            // -> 노벨 시작
             OnTalse();
         }
 
@@ -67,7 +73,7 @@ namespace ProjectChan.Novel
         /// <param name="path"> 배경 경로 </param>
         private void SetNovelGround(string path)
         {
-            // -> 경로가 존재한다면
+            // -> 경로가 존재한다면!
             if (path.Length > 1)
             {
                 var stage = SpriteLoader.GetSprite(AtlasType.SchoolImage, path);
@@ -92,7 +98,6 @@ namespace ProjectChan.Novel
 
         private void Update()
         {
-            // -> 이게 노벨게임 씬에서만 작동하게 설정해야할듯
             if (Input.GetButtonDown(Define.Input.Interaction))
             {
                 OnTalse();

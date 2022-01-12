@@ -10,14 +10,17 @@ using UnityEditor;
 
 namespace ProjectChan.Dummy
 {
+    /// <summary>
+    /// => 더미 서버를 지닌 클래스
+    /// </summary>
     public class DummyServer : Singleton<DummyServer>
     {
-        public UserDataSo userData;
-
-        public INetworkClient dummyModule;
+        public INetworkClient dummyModule;      // -> 더미 서버가 가지고 있는 유저의 데이터
+        public UserDataSo userData;             // -> ServerModuleFactory에서 생산되며 프로토콜 메서드를 사용할 수 있음
 
         public void Initialize()
         {
+            // -> 프로토콜 함수가 선언 되어 있는 모듈더미를 사용하기 위해서 만들어 줍니다!
             dummyModule = new ServerModuleDummy(this);
         }
 

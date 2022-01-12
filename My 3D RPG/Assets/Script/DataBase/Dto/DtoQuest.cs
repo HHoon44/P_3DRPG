@@ -16,7 +16,7 @@ namespace ProjectChan.DB
     public class DtoQuest : DtoBase
     {
         public DtoQuestProgress[] progressQuests;     // -> 현재 진행중인 퀘스트의 데이터
-        public int[] completeQuests;                  // -> 클리어한 퀘스트들의 인덱스 데이터
+        public int[] completeQuests;                  // -> 완료한 퀘스트들의 인덱스 데이터
     }
 
 

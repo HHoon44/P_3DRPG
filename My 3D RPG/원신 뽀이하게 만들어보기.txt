@@ -15,9 +15,9 @@ private void OnDrawGizmos()
  -> 이어하기 버튼
 
  ★. 할거
- -> 기력사용 수정
  -> CanESCClose는 쫌 내 맛대로 수정해야할듯
  -> 주석 정리 + 코드 정리
+ -> OnPhase 부분은 UI다 정리하고 ㄱㄱ
 
 
 
@@ -36,7 +36,11 @@ EX) 애니메이션 이벤트로 사용되며~
     /// => 작업과정에서 데이터를 확인하기 위해서 Serializable
 	 서버를 통해 받은 DtoAccount 데이터를 BoAccount데이터로 변환하는 메서드
 
+5. /**/ 또는 긴 설명
 
+6. if는 ~~한다면!
+
+Actor까지 봤음
 
 
 

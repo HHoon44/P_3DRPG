@@ -11,16 +11,20 @@ using Random = UnityEngine.Random;
 
 namespace ProjectChan.Object
 {
+    /// <summary>
+    /// => NPC 객체가 지닐 클래스
+    /// </summary>
     public class NPC : MonoBehaviour
     {
+        public Animator anim;           // -> NPC 애니메이션
+
         private float currentAnimTime;  // -> 현재 애니메이션 실행 시간
         private float maxAnimTime;      // -> 최대 애니메이션 실행 시간
         private BoNPC boNPC;            // -> NPC Bo데이터
         private Collider coll;          // -> NPC가 가진 콜라이더
-        public Animator anim;           // -> NPC 애니메이션
 
         /// <summary>
-        /// => NPC 첫 세팅
+        /// => NPC 첫 세팅 메서드
         /// </summary>
         /// <param name="boNPC"> NPC 정보 </param>
         public void Initialize(BoNPC boNPC)
@@ -28,7 +32,7 @@ namespace ProjectChan.Object
             this.boNPC = boNPC;
             coll ??= transform.Find("Area").GetComponent<Collider>();
 
-            // -> SD데이터에 있는 Position 값과 Rotation 값을 가지고 온다
+            // -> SD데이터에 있는 Position 값과 Rotation 값을 이용하여 Position과 Rotation을 세팅합니다!
             var npcPos = new Vector3(boNPC.sdNPC.npcPos[0], boNPC.sdNPC.npcPos[1], boNPC.sdNPC.npcPos[2]);
             var npcRot = new Vector3(boNPC.sdNPC.npcRot[0], boNPC.sdNPC.npcRot[1], boNPC.sdNPC.npcRot[2]);
 
@@ -84,6 +88,7 @@ namespace ProjectChan.Object
         /// </summary>
         private void CheckInteraction()
         {
+            // -> NPC의 상호작용 에리어에 플레이어가 닿았는지 확인합니다!
             var colls = Physics.OverlapBox
                 (coll.bounds.center, coll.bounds.extents, transform.rotation, 1 << LayerMask.NameToLayer("Player"));
 
@@ -105,10 +110,10 @@ namespace ProjectChan.Object
                 character.boActor.rotDir = newDir;
 
                 // -> 현재 NPC와 대화하는 플레이어를 담아둡니다!
-                boNPC.actor = playerController;
-
                 // -> 플레이어가 행동을 합니다!
+                boNPC.actor = playerController;
                 boNPC.actor.isPlayerAction = true;
+
 
                 #region NPC 대화 퀘스트 작업 처리!
 
@@ -130,12 +135,13 @@ namespace ProjectChan.Object
 
                 if (conversationQuest != -1)
                 {
-                    // -> 대화 대상이 현재 NPC인지 확인하는 작업 입니다!
+                    // -> 대화 퀘스트 대상이 현재 NPC인지 확인하는 작업 입니다!
                     for (int i = 0; i < boProgressQuests[conversationQuest].sdQuest.target.Length; i++)
                     {
-                        // -> 만약 대상목록에 현재 NPC가 포함 되어있다면!
+                        // -> 만약 대화 퀘스트 대상목록에 현재 NPC가 포함 되어있다면!
                         if (boProgressQuests[conversationQuest].sdQuest.target[i] == boNPC.sdNPC.index)
                         {
+                            // -> 퀘스트 디테일 값을 세팅 합니다!
                             boProgressQuests[conversationQuest].details[i] = boNPC.sdNPC.index;
 
                             var dummyServer = DummyServer.Instance;
@@ -147,12 +153,14 @@ namespace ProjectChan.Object
 
                 #endregion
 
+
                 OnDialogue();
             }
             else if (Input.GetButtonDown(Define.Input.Interaction) && playerController.isPlayerAction)
             {
                 var uiWindowManager = UIWindowManager.Instance;
 
+                // -> 상점을 닫을려고 한다면!
                 if (uiWindowManager.GetWindow<UIStore>().isOpen)
                 {
                     return;
@@ -176,12 +184,13 @@ namespace ProjectChan.Object
         {
             var uiDialogue = UIWindowManager.Instance.GetWindow<UIDialogue>();
 
+
             #region 퀘스트 인덱스 걸러내기 작업!
 
             var boQuests = GameManager.User.boQuest;
             var sdQuests = GameManager.SD.sdQuests;
 
-            // -> NPC가 지닌 퀘스트 목록에서 완료한 퀘스트를 지웁니다!
+            // -> NPC가 지닌 퀘스트 목록에서 Bo에 저장 되어있는 완료 퀘스트 목록과 같은 인덱스 들을 지웁니다!
             var canOrderQuest = boNPC.sdNPC.questIndex.Except(boQuests.completedQuests.Select(obj => obj.index));
 
             // -> 남은 데이터를 리스트로 저장합니다!
@@ -196,8 +205,7 @@ namespace ProjectChan.Object
                     continue;
                 }
 
-                // -> 퀘스트 기획 데이터중 조건을 통해 얻어낸 퀘스트 데이터와 같은 인덱스를 가진 데이터를 가져옵니다!
-                //    그리고 그 데이터의 선행 퀘스트 목록을 가져옵니다!
+                // -> resultsQuests와 같은 인덱스를 가진 퀘스트 기획 데이터를 가져온 뒤 그 기획 데이터의 선행 퀘스트 목록을 가져옵니다!
                 var antencedentIndex = sdQuests.Where(obj => obj.index == resultQusts[i])?.SingleOrDefault().antecedentQuest;
 
                 // -> 만약 선행 퀘스트 목록의 첫번째 값이 0이라면!
@@ -221,6 +229,7 @@ namespace ProjectChan.Object
             boNPC.quests = resultQusts.ToArray();
 
             #endregion
+
 
             // -> NPC가 지닌 기본 대화 배열의 길이를 이용하여 랜덤 값을 구합니다!
             // -> 랜덤 값을 통해 기본 대화 데이터를 가져와서 다이얼로그를 세팅합니다!

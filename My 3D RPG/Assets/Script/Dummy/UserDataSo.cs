@@ -14,7 +14,7 @@ namespace ProjectChan.Dummy
     [CreateAssetMenu(menuName ="ProjectChan/UserData")]
     public class UserDataSo : ScriptableObject
     {
-        public DtoAccount dtoAccount;           // -> 데이터 베이스에 저장되어있는 값 데이터
+        public DtoAccount dtoAccount;           // -> 데이터 베이스에 저장되어있는 유저 데이터
         public DtoCharacter dtoCharacter;       // -> 데이터 베이스에 저장되어있는 캐릭터 데이터
         public DtoStage dtoStage;               // -> 데이터 베이스에 저장되어있는 스테이지 데이터
         public DtoItem dtoItem;                 // -> 데이터 베이스에 저장되어있는 아이템 데이터

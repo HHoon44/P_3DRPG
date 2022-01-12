@@ -15,10 +15,13 @@ namespace ProjectChan.Object
     using ActorState = Define.Actor.ActorState;
     using static ProjectChan.Define.Actor;
 
+    /// <summary>
+    /// => 플레이어 캐릭터 오브젝트의 클래스
+    /// </summary>
     public class Character : Actor
     {
-        public PlayerController playerController;       // -> 캐릭터를 컨트롤 해줄 컨트롤러
-        public BoCharacter boCharacter;                 // -> 현재 캐릭터가 지닌 스텟정보
+        public PlayerController playerController;       // -> 캐릭터를 컨트롤 하는 컨트롤러
+        public BoCharacter boCharacter;                 // -> 현재 캐릭터의 스텟정보
 
         public override void Initialize(BoActor boActor)
         {
@@ -30,15 +33,16 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 기존의 플레이어 스텟을 설정
+        /// => 플레이어 스텟을 설정하는 메서드
         /// </summary>
         public override void SetStats()
         {
             weaponController.PosClear();
 
-            // -> 캐릭터 정보 넣기
+            // -> 캐릭터 정보를 넣습니다!
             var sdCharacter = boCharacter.sdCharacter;
 
+            // -> 레벨의 영향을 받지않는 스텟을 설정합니다!
             boCharacter.actorType = ActorType.Character;
             boCharacter.atkType = sdCharacter.atkType;
             boCharacter.moveSpeed = sdCharacter.moveSpeed;
@@ -46,50 +50,49 @@ namespace ProjectChan.Object
             boCharacter.atkInterval = sdCharacter.atkInterval;
             boCharacter.jumpForce = sdCharacter.jumpForce;
 
-            // -> 기본 상태 스텟
+            // -> 레벨의 영향을 받는 스텟을 설정합니다!
             boCharacter.currentHp =
                 boCharacter.maxHp = boCharacter.level * boCharacter.sdOriginInfo.maxHp * boCharacter.sdOriginInfo.maxHpFactor;
             boCharacter.currentEnergy =
                 boCharacter.maxEnergy = boCharacter.level * boCharacter.sdOriginInfo.maxMana * boCharacter.sdOriginInfo.maxManaFactor;
-
             boCharacter.atk = boCharacter.level * boCharacter.sdOriginInfo.atk * boCharacter.sdOriginInfo.atkFactor;
             boCharacter.def = boCharacter.level * boCharacter.sdOriginInfo.def * boCharacter.sdOriginInfo.defFactor;
 
+            // -> 현재 활성화된 캐릭터의 웨폰 정보를 가져오기 위해서 캐릭터 타입을 보내줍니다!
             weaponController.Initialize(boCharacter.actorType);
 
-            // -> 현재 활성화된 캐릭터의 Animator을 사용하기 위해 가져온다
+            // -> 현재 활성화된 캐릭터의 애니메이터를 사용하기 위해서 가져옵니다!
             anim = transform.GetChild(0).GetComponent<Animator>();
         }
 
         /// <summary>
-        /// => 변신 스텟 설정
+        /// => 변신 상태의 스텟을 설정하는 메서드
         /// </summary>
         public void ChangeStats()
         {
             weaponController.PosClear();
 
-            //boCharacter.atkType = sdFormStat.atkType;      
+            // -> 레벨의 영향을 받지않는 스텟을 설정합니다!
             boCharacter.actorType = ActorType.Form;
             boCharacter.moveSpeed = boCharacter.sdFormInfo.moveSpeed;
             boCharacter.atkRange = boCharacter.sdFormInfo.atkRange;
 
-            // -> 변신 상태 스텟
+            // -> 레벨의 영햐을 받는 스텟을 설정합니다!
             boCharacter.currentHp =
                 boCharacter.maxHp = boCharacter.level * boCharacter.sdFormInfo.maxHp * boCharacter.sdFormInfo.maxHpFactor;
             boCharacter.currentEnergy =
                 boCharacter.maxEnergy = boCharacter.level * boCharacter.sdFormInfo.maxMana * boCharacter.sdFormInfo.maxManaFactor;
-
             boCharacter.atk = boCharacter.level * boCharacter.sdFormInfo.atk * boCharacter.sdFormInfo.atkFactor;
             boCharacter.def = boCharacter.level * boCharacter.sdFormInfo.def * boCharacter.sdFormInfo.defFactor;
 
             weaponController.Initialize(boCharacter.actorType);
 
-            // -> 현재 활성화된 캐릭터의 Animator을 사용하기 위해 가져온다
+            // -> 현재 활성화된 캐릭터의 애니메이터를 사용하기 위해서 가져옵니다!
             anim = transform.GetChild(1).GetComponent<Animator>();
         }
 
         /// <summary>
-        /// 캐릭터의 상태를 설정
+        /// => 현재 캐릭터의 상태를 설정하는 메서드
         /// </summary>
         /// <param name="state"> 캐릭터의 상태 </param>
         public override void SetState(ActorState state)
@@ -146,7 +149,7 @@ namespace ProjectChan.Object
             transform.localPosition += velocity * Time.fixedDeltaTime;
             transform.Rotate(boActor.rotDir * Define.Camera.CamRotSpeed);
 
-            // -> 점프 상태는 예외 처리
+            // -> 달릴려고 하는데 점프 상태라면!
             if (State == ActorState.Jump)
             {
                 return;
@@ -170,20 +173,19 @@ namespace ProjectChan.Object
         {
             if (Input.GetButtonDown(Define.Input.Jump))
             {
-                // -> 점프 키를 눌렀을 때 점프 실행
+                // -> 점프 키를 눌렀을 때 점프를 실행합니다!
                 SetState(ActorState.Jump);
             }
 
-            // -> 착지 애니메이션
             OutJump();
         }
 
         /// <summary>
-        /// => 플레이어의 위치가 Floor인지 체크하는 메서드
+        /// => 플레이어가 그라운드 위에 있는지 체크하는 메서드
         /// </summary>
         private void CheckGround()
         {
-            // -> 레이를 이용하여 Floor를 확인한다
+            // -> 레이를 이용하여 그라운드를 확인합니다!
             if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, .05f, 1 << LayerMask.NameToLayer("Floor")))
             {
                 Debug.DrawRay(transform.position, Vector3.down * .05f, Color.red);
@@ -193,17 +195,17 @@ namespace ProjectChan.Object
             }
             else
             {
-                // -> 레이가 Floor를 인지 하지 못했다면 아직 땅에 닿지 않은 상태
+                // -> 레이가 그라운드를 인지 하지 못했다면 아직 그라운드에 닿지 않은 상태 입니다!
                 boActor.isGround = false;
             }
 
-            // -> 플레이어의 상태가 점프가 아니라면
+            // -> 플레이어의 상태가 점프가 아니라면!
             if (State != ActorState.Jump)
             {
                 return;
             }
 
-            // -> 점프 상태이지만 플레이어의 위치가 땅에 닿은 상태라면
+            // -> 점프 상태이지만 플레이어의 위치가 그라운드에 닿은 상태라면!
             if (boActor.isGround)
             {
                 SetState(ActorState.Idle);
@@ -215,19 +217,19 @@ namespace ProjectChan.Object
         /// </summary>
         public void OnJump()
         {
-            // -> 플레이어가 땅에 없다면
+            // -> 플레이어가 땅에 없다면!
             if (!boActor.isGround)
             {
                 return;
             }
 
-            // -> 플레이어의 상태가 공격이라면
+            // -> 플레이어의 상태가 공격이라면!
             if (State == ActorState.Attack)
             {
                 return;
             }
 
-            // -> 리지드바디에 힘을 가하여 플레이어를 점프 시킨다
+            // -> 리지드바디에 힘을 가하여 플레이어를 점프 시킵니다!
             rigid.AddForce(Vector3.up * boCharacter.jumpForce, ForceMode.Impulse);
             anim.SetBool(charAnim.isJump, true);
         }
@@ -237,14 +239,17 @@ namespace ProjectChan.Object
         /// </summary>
         public void OutJump()
         {
-            // -> 리지드바디의 벨로시티의 Y값이 음수라면 플레이어가 하강 중이므로, 하강 애니메이션 실행
-            // -> 또한 플레이어가 땅에 없어야 한다
+            // -> 리지드바디의 벨로시티의 Y값이 음수라면 플레이어가 하강 중이므로, 하강 애니메이션을 실행 합니다!
+            // -> 또한 플레이어가 땅에 없어야 합니다!
             if (rigid.velocity.y < 0 && !boActor.isGround)
             {
                 anim.SetBool(charAnim.isJump, false);
             }
         }
 
+        /// <summary>
+        /// => 플레이어가 변신 하는 메서드
+        /// </summary>
         public void ChangeForm()
         {
             if (Input.GetButtonDown("FormChange") &&
@@ -254,47 +259,44 @@ namespace ProjectChan.Object
                 boActor.currentEnergy -= Define.StaticData.ChangeFormValue;
 
                 // -> 코하쿠 --> 라이덴
-                if (transform.GetChild(0).gameObject.activeSelf == true &&
-                    transform.GetChild(1).gameObject.activeSelf == false)
+                if (transform.GetChild(0).gameObject.activeSelf == true && transform.GetChild(1).gameObject.activeSelf == false)
                 {
-                    // -> 코하쿠 상태의 Hp와 Mana를 Dic에 담아놓는다
-                    // -> Dic에 key값이 존재한다면 그냥 key값을 이용하여 저장한다
+                    // -> 코하쿠 상태의 Hp와 Mana를 Dic에 저장합니다!
                     SavePrevStat(boCharacter.actorType);
 
-                    // -> 코하쿠 모델은 false
-                    // -> 라이덴 모델은 true
+                    // -> 코하쿠 모델은 꺼주고 라이덴 모델을 켜줍니다!
                     transform.GetChild(0).gameObject.SetActive(false);
                     transform.GetChild(1).gameObject.SetActive(true);
 
+                    // -> 라이덴 스텟으로 설정해줍니다!
                     ChangeStats();
 
-                    // -> 라이덴으로 변신했을때 전에 사용하고 저장해뒀던 라이덴 폼의 스탯을 재설정해준다
-                    // -> key값이 없으면 그냥 풀피 ( key값이 없다는건 라이덴 폼에서 코하쿠로 돌아온적이 아직 없다 )
-                    SetPrevStat(boCharacter.actorType);
+                    // -> 전에 사용하고 저장해둔 라이덴 모델의 스텟이 있다면 그 스텟으로 재설정 해줍니다!
+                    GetPrevStat(boCharacter.actorType);
                 }
-                // -> 라이덴 >> 코하쿠
-                else if (transform.GetChild(1).gameObject.activeSelf == true &&
-                         transform.GetChild(0).gameObject.activeSelf == false)
+                // -> 라이덴 --> 코하쿠
+                else if (transform.GetChild(1).gameObject.activeSelf == true && transform.GetChild(0).gameObject.activeSelf == false)
                 {
-                    // -> 라이덴 상태의 Hp와 Mana를 Dic에 담아놓는다
-                    // -> Dic에 key값이 존재한다면 그냥 key값을 이용하여 저장한다
+                    // -> 라이덴 상태의 Hp와 Mana를 Dic에 저장합니다!
                     SavePrevStat(boCharacter.actorType);
 
+                    // -> 라이덴 모델은 꺼주고 라이덴 모델을 켜줍니다!
                     transform.GetChild(1).gameObject.SetActive(false);
                     transform.GetChild(0).gameObject.SetActive(true);
 
+                    // -> 코하쿠 스텟으로 설정해줍니다!
                     SetStats();
 
-                    // -> 코하쿠로 돌아왔을때 전에 사용하고 저장해뒀던 코하쿠의 스탯을 재설정해준다
-                    // -> key값이 없으면 그냥 풀피 ( key값이 없다는건 코하쿠에서 라이덴 폼으로 변신한적이 아직 없다 )
-                    SetPrevStat(boCharacter.actorType);
+                    // -> 전에 사용하고 저장해둔 코하쿠 모델의 스텟이 있다면 그 스텟으로 재설정 해줍니다!
+                    GetPrevStat(boCharacter.actorType);
                 }
             }
 
-            // -> 코하쿠에서 라이덴으로 변신할때 이전의 코하쿠 스텟을 저장해놓는 작업
-            // -> 라이덴에서 코하쿠로 변신할때 이전의 라이덴 스텟을 저장해놓는 작업
+            // -> 코하쿠에서 라이덴으로 변신할 때 이전의 코하쿠 스텟을 저장해놓는 작업
+            // -> 라이덴에서 코하쿠로 변신할 때 이전의 라이덴 스텟을 저장해놓는 작업
             void SavePrevStat(ActorType actorType)
             {
+                // -> Dic에 key값이 존재한다면 그냥 key값을 이용하여 저장한다
                 if (GameManager.User.boPrevStatDic.ContainsKey(actorType))
                 {
                     GameManager.User.boPrevStatDic[actorType].prevHp = boCharacter.currentHp;
@@ -307,10 +309,10 @@ namespace ProjectChan.Object
                 }
             }
 
-            // -> 코하쿠에서 라이덴으로 변신할때 이전에 저장해놓은 라이덴 스텟을 적용하는 작업
-            // -> 라이덴에서 코하쿠로 변신할때 이전에 저장해놓은 코하쿠 스텟을 적용하는 작업
-            void SetPrevStat(ActorType actorType)
+            // -> 변신 후 이전에 사용 한 스텟이 있다면 가져와서 세팅하는 로컬 메서드
+            void GetPrevStat(ActorType actorType)
             {
+                // -> key값이 없으면 그냥 풀피 ( key값이 없다는건 라이덴 폼에서 코하쿠로 돌아온적이 아직 없다 )
                 if (GameManager.User.boPrevStatDic.ContainsKey(actorType))
                 {
                     var boPrevStat = GameManager.User.boPrevStatDic[actorType];
@@ -334,7 +336,7 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 플레이어가 무기 착용을 실행하는 메서드
+        /// => 플레이어가 무기를 착용하거나 해제하는 메서드
         /// </summary>
         public void ChangeWeapon()
         {
@@ -401,17 +403,23 @@ namespace ProjectChan.Object
                 return;
             }
 
-            // -> 차지 충전
+            // -> 차지를 충전합니다!
             boActor.currentEnergy += Time.deltaTime * 3f;
         }
 
         #region 애니메이션 이벤트
 
+        /// <summary>
+        /// => 공격 애니메이션이 시작할 때 실행될 메서드
+        /// </summary>
         public override void OnAttackHit()
         {
             attackController.OnAttack();
         }
 
+        /// <summary>
+        /// => 공격 내이메이션이 끝날 때 실행될 메서드
+        /// </summary>
         public override void OnAttackEnd()
         {
             attackController.canCheckCoolTime = true;
@@ -419,35 +427,33 @@ namespace ProjectChan.Object
             SetState(ActorState.Idle);
         }
 
+        /// <summary>
+        /// => 무기 애니메이션이 시작할 때 실행될 메서드
+        /// </summary>
         public void OnChangeWeapon()
         {
             weaponController.SetWeapon();
 
         }
 
-        public override void OnDeadEnd()
-        {
-            gameObject.SetActive(false);
-
-            base.OnDeadEnd();
-        }
-
+        /// <summary>
+        /// => 무기 애니메이션이 끝날 때 실행될 메서드
+        /// </summary>
         public void OnChangeWeaponEnd()
         {
             // -> 무기 바꾸는게 끝나면 움직일 수 있다!
             playerController.isPlayerAction = false;
         }
 
-        public void OnJumpStart()
+        /// <summary>
+        /// => 플레이어가 죽으면 실행될 메서드
+        /// </summary>
+        public override void OnDeadEnd()
         {
+            gameObject.SetActive(false);
 
+            base.OnDeadEnd();
         }
-
-        public void OnJumpEnd()
-        {
-
-        }
-
 
         #endregion
     }

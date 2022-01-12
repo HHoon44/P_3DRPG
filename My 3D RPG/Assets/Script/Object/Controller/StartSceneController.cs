@@ -13,6 +13,9 @@ using UnityEngine.UI;
 
 namespace ProjectChan
 {
+    /// <summary>
+    /// => StartScene에 존재하는 UI들을 관리하는 컨트롤러 클래스
+    /// </summary>
     public class StartSceneController : MonoBehaviour
     {
         public Transform ButtonFrame;       // -> 게임에 관련 버튼이 설정 되어있는 창
@@ -21,18 +24,19 @@ namespace ProjectChan
         public Slider slider;               // -> 오디오 볼륨을 조절할 슬라이더
 
         private AudioManager AM;            // -> 오디오 매니저
-        private TextMeshProUGUI helpText;
+        private TextMeshProUGUI helpText;   // -> 도움말 텍스트
 
         private void Start()
         {
-            // -> 많이 사용할거 같으니깐 필드로 담아두기
             AM = AudioManager.Instance;
 
-            // -> 오디오 볼륨을 조절하는 슬라이더
+            // -> 슬라이더의 값을 오디오 소스의 볼륨 값으로 설정합니다!
             slider.value = AM.audio.volume;
 
+            // -> 현재 오디오 소스의 클립을 설정합니다!
             AM.ChangeAudioClip(Define.Audio.ClipType.StartScene);
 
+            // -> 도움말 텍스트를 세팅합니다!
             helpText = HelpFrame.GetComponentInChildren<TextMeshProUGUI>();
 
             var manual = StaticData.Manual.Split(',');
@@ -44,7 +48,7 @@ namespace ProjectChan
         }
 
         /// <summary>
-        /// => 씬에 존재하는 버튼들을 관리함
+        /// => 씬에 존재하는 버튼을 관리하는 메서드
         /// </summary>
         public void ButtonOption()
         {

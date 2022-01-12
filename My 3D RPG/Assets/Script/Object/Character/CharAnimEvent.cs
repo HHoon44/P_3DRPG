@@ -8,6 +8,9 @@ using UnityEngine;
 
 namespace ProjectChan
 {
+    /// <summary>
+    /// => 캐릭터 클래스가 지닌 애니메이션 이벤트를 지닌 클래스
+    /// </summary>
     public class CharAnimEvent : MonoBehaviour
     {
         private Character myParent;     // -> Character를 가진 부모 객체를 가져온다
@@ -27,20 +30,6 @@ namespace ProjectChan
             myParent.OnAttackEnd();
         }
 
-        public void OnJumpStart()
-        {
-
-        }
-
-        public void OnJumpEnd()
-        {
-        }
-
-        public void OnDeadEnd() 
-        {
-            myParent.OnDeadEnd();
-        }
-        
         public void OnChangeWeapon()
         {
             myParent.OnChangeWeapon();
@@ -49,6 +38,11 @@ namespace ProjectChan
         public void OnChangeWeaponEnd()
         {
             myParent.OnChangeWeaponEnd();
+        }
+
+        public void OnDeadEnd() 
+        {
+            myParent.OnDeadEnd();
         }
     }
 }

@@ -14,9 +14,9 @@ namespace ProjectChan.DB
     [Serializable]
     public class DtoStage : DtoBase
     {
-        public int lastStageIndex;      // -> 마지막으로 존재했던 스테이지의 인덱스
         public float lastPosX;          // -> 플레이어가 마지막으로 위치한 X좌표
         public float lastPosY;          // -> 플레이어가 마지막으로 위치한 Y좌표
         public float lastPosZ;          // -> 플레이어가 마지막으로 위치한 Z좌표
+        public int lastStageIndex;      // -> 마지막으로 존재했던 스테이지의 인덱스
     }
 }
