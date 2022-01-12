@@ -18,7 +18,8 @@ private void OnDrawGizmos()
  -> CanESCClose는 쫌 내 맛대로 수정해야할듯
  -> 주석 정리 + 코드 정리
  -> OnPhase 부분은 UI다 정리하고 ㄱㄱ
-
+ -> UIBattle에 AddMonHpBar부분에서 오류
+ -> UIDialogue에서 퀘스트 버튼 생성하는 부분 한번 봐보셈
 
 
 주석 작성할 때 신경 쓸 것
@@ -47,7 +48,7 @@ Actor까지 봤음
 
 
 
-
+ 
 
 
 

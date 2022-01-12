@@ -12,16 +12,15 @@ using UnityEngine;
 namespace ProjectChan.UI
 {
     /// <summary>
-    /// => 대화창을 관리할 클래스
+    /// => 대화 창을 관리하는 클래스
     /// </summary>
     public class UIDialogue : UIWindow
     {
-        private UINovel uiNovelSet;                 // -> 대화창 셋
-        private BoNovel boNovel;                    // -> 대화창을 세팅할때 사용할 데이터
-
-
         public Transform buttonHolder;              // -> 다이얼로그 버튼들이 생성될 홀더
         public Transform functionHolder;            // -> 기능 버튼들이 생성될 홀더
+
+        private UINovel uiNovelSet;                 // -> 대화창 셋
+        private BoNovel boNovel;                    // -> 대화창을 세팅할때 사용할 데이터
 
         /// <summary>
         /// => 현재 플레이어와 대화 중인 NPC의 Bo데이터
@@ -71,6 +70,7 @@ namespace ProjectChan.UI
                 button.gameObject.SetActive(true);
             }
 
+            /// -> 여기 이상해~
             // -> NPC가 지닌 퀘스트가 없다면!
             if (boNPC.quests.Length == 0)
             {
@@ -78,7 +78,7 @@ namespace ProjectChan.UI
             }
             else
             {
-                // -> 0번째 값이 0이면 퀘스트가 없는 것!
+                // -> 0번째 값이 0이라면!
                 if (boNPC.quests[0] == 0)
                 {
                     return;
@@ -103,7 +103,7 @@ namespace ProjectChan.UI
 
             var pool = ObjectPoolManager.Instance.GetPool<DialogueButton>(Define.PoolType.DialogueButton);
 
-            // -> 가져왔던 버튼들을 다시 돌려줍니다1
+            // -> 가져왔던 버튼들을 다시 돌려줍니다!
             for (int i = 0; i < dialogueButtons.Count; i++)
             {
                 pool.ReturnPoolableObject(dialogueButtons[i]);

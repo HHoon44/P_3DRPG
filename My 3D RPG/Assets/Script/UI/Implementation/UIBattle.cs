@@ -11,7 +11,7 @@ namespace ProjectChan.UI
 {
     public class UIBattle : UIWindow
     {
-        public PlayerController playerController;       // -> PlayerController
+        public PlayerController playerController;       // -> 플레이어 컨트롤러
         public BubbleGauge hpBubbleGauge;               // -> Hp 게이지 컴포넌트
         public BubbleGauge energyBubbleGauge;           // -> Energy 게이지 컴포넌트
         public Canvas worldCanvas;                      // -> 월드 컨버스 객체
@@ -45,11 +45,13 @@ namespace ProjectChan.UI
         /// </summary>
         public void BillboardUpdate()
         {
+            // -> 월드 캔버스가 없다면!
             if (worldCanvas == null)
             {
                 return;
             }
 
+            // -> 플레이어를 따라다니는 카메라의 트랜스폼을 가져옵니다!
             var camTrans = CameraController.Cam.transform;
 
             for (int i = 0; i < worldCanvas.transform.childCount; i++)
@@ -68,7 +70,7 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 플레이어의 Hp, Mana 버블 게이지를 관리하는 메서드
+        /// => 플레이어의 Hp, Energy의 버블 게이지를 관리하는 메서드
         /// </summary>
         private void BubbleGaugeUpdate()
         {
@@ -103,7 +105,7 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 몬스터 체력바를 관리하는 메서드
+        /// => 몬스터 체력바를 업데이트하는 메서드
         /// </summary>
         public void MonHpBarUpdate()
         {
@@ -114,19 +116,18 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 스테이지 전환 시, 현재 스테이지에 있는 모든 체력바 객체를 풀에 반환하는 메서드
+        /// => 스테이지 전환 시 현재 스테이지에 있는 모든 체력바 객체를 풀에 반환하는 메서드
         /// </summary>
         public void Clear()
         {
-            // -> 몬스터 체력바 풀을 가져온다
             var monHpBarPool = ObjectPoolManager.Instance.GetPool<MonHpBar>(Define.PoolType.MonHpBar);
 
-            // -> allMonHpBar에 저장된 풀들을 다 반환
             for (int i = 0; i < allMonHpBar.Count; i++)
             {
                 monHpBarPool.ReturnPoolableObject(allMonHpBar[i]);
             }
 
+            // -> UIBattle의 몬스터 체력바 리스트를 청소 해줍니다!
             allMonHpBar.Clear();
         }
     }

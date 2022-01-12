@@ -12,13 +12,16 @@ using static ProjectChan.Define.Actor;
 
 namespace ProjectChan.UI
 {
+    /// <summary>
+    /// => 노벨 UI가 지닐 클래스
+    /// </summary>
     public class UINovel : UIWindow
     {
-        private AspectRatioFitter arf;          // -> 초상화 크기 설정
-
         public TextMeshProUGUI speakerName;     // -> 현재 말하는 캐릭터 이름
         public TextMeshProUGUI dialogue;        // -> 현재 말하는 캐릭터의 대사
         public Image portrait;                  // -> 현재 말하는 캐릭터의 이미지
+
+        private AspectRatioFitter arf;          // -> 초상화 크기 설정
 
         public override void Start()
         {
@@ -44,7 +47,7 @@ namespace ProjectChan.UI
                     SetImageSize(boNovel.sdNovel.charType);
 
                     // -> 초상화가 존재하는 경로가 있다면 !
-                    if (boNovel.sdNovel.portraitPath.Length > 1 )
+                    if (boNovel.sdNovel.portraitPath.Length > 1)
                     {
                         // -> 이전 나레이션 때문에 현재 알파값이 0이라면!
                         if (portrait.color.a == 0)
@@ -79,14 +82,6 @@ namespace ProjectChan.UI
                     arf.aspectRatio = Define.StaticData.NPCNovelSize;
                     break;
             }
-        }
-
-        /// <summary>
-        /// => 노벨 창을 닫아주는 메서드 (컽)
-        /// </summary>
-        public void EndNovel()
-        {
-            Close();
         }
     }
 }
