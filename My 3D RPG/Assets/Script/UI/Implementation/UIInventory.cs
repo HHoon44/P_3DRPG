@@ -18,7 +18,7 @@ namespace ProjectChan.UI
     /// </summary>
     public class UIInventory : UIWindow, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        public Button sortButton;               // -> 정렬 버튼
+        public Button sortButton;               // -> 정렬 버튼S
         public TextMeshProUGUI playerGold;      // -> 플레이어가 지닌 금액
 
         private Transform itemSlotHolder;       // -> 아이템 슬롯 홀더를 담을 필드
@@ -183,8 +183,7 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 인벤토리에 존재하는 슬롯에 아이템 정보를 담기전 
-        ///    가지고 있는 슬롯들을 초기화 하는 메서드
+        /// => 인벤토리에 존재하는 슬롯을 한번 초기화 하는 메서드
         /// </summary>
         private void InitItemSlots()
         {
@@ -195,11 +194,10 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 게임 매니저가 지닌 BoItem 데이터를 슬롯에 세팅하는 메서드
+        /// => 슬롯에 아이템을 세팅하는 메서드
         /// </summary>
         private void InitInventory()
         {
-            // -> 게임매니저에 저장되어있는 BoItem 데이터를 가져온다
             var userBoItems = GameManager.User.boItems;
 
             for (int i = 0; i < userBoItems.Count; i++)
@@ -209,12 +207,12 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 인벤토리에 이미 존재하는 아이템의 수량을 올리는 메서드
+        /// => 이미 슬롯에 존재하는 아이템이라면 수량을 증가시키는 메서드
         /// </summary>
         /// <param name="boItem"> 개수가 증가된 아이템 데이터 </param>
         public void IncreaseItem(BoItem boItem)
         {
-            // -> ItemSlot에 존재하는 AmounUpdate를 통해서 텍스트에 아이템 개수를 재설정한다
+            // -> 이미 존재하는 슬롯에 아이템 개수를 증가시킵니다!
             itemSlots[boItem.slotIndex].AmountUpdate(boItem);
         }
 
@@ -330,20 +328,25 @@ namespace ProjectChan.UI
 
             var boItems = GameManager.User.boItems;
 
-            // -> 이전 슬롯에 존재하는 Bo데이터를 복사
+            // -> 이전 슬롯에 존재하는 아이템 데이터를 복사합니다!
             var tempBoItem = dragSlot.BoItem.ObjcetCopy();
 
-            // -> 옮기려는 슬롯의 Bo데이터는 삭제
-            // -> 위에서 복사한 데이터를 저장
+            // -> 드래그한 슬롯의 아이템 데이터는 GM에 존재하는 Bo 데이터 목록에서 제거합니다!
             boItems.Remove(dragSlot.BoItem);
+
+            // -> 그리고 위에서 복사한 데이터를 목록에 추가합니다!
             boItems.Add(tempBoItem);
 
-            // -> 목적지에 존재하는 데이터를 옮기려는 슬롯에 세팅
+            // -> 목적지에 존재하는 아이템 데이터를 드래그 슬롯에 세팅 합니다!
             dragSlot.SetSlot(destSlot.BoItem);
+
+            // -> 슬롯 인덱스를 재설정합니다!
             SetSlotIndex(dragSlot);
 
-            // -> 목적지 슬롯에는 옮겼던 슬롯의 데이터를 저장
+            // -> 목적지 슬롯에는 드래그 슬롯에 있던 아이템 데이터를 저장합니다!
             destSlot.SetSlot(tempBoItem);
+
+            // -> 슬롯 인덱스를 재설정합니다!
             SetSlotIndex(destSlot);
 
             DummyServer.Instance.userData.dtoItem = new DtoItem(boItems);

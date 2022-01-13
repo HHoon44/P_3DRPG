@@ -47,9 +47,9 @@ namespace ProjectChan
         }
 
         /// <summary>
-        /// => 오디오 소스 클립을 설정하는 메서드
+        /// => 오디오 소스 클립을 세팅하는 메서드
         /// </summary>
-        /// <param name="clipType"></param>
+        /// <param name="clipType"> 키고자 하는 클립 타입 </param>
         public void ChangeAudioClip(ClipType clipType)
         {
             switch (clipType)

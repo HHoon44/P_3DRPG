@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace ProjectChan.UI
 {
+    /// <summary>
+    /// => 게임을 시작할 때 UI들을 관리할 클래스
+    /// </summary>
     public class UIStart : MonoBehaviour
     {
         public Text loadStateDesc;          // -> 로딩바 텍스트
@@ -23,7 +26,6 @@ namespace ProjectChan.UI
             backImage.sprite = selectSprite;
         }
 
-
         public void SetLoadStateDescription(string loadState)
         {
             loadStateDesc.text = $"Load{loadState}...";
@@ -31,7 +33,7 @@ namespace ProjectChan.UI
 
         public IEnumerator LoadGaugeUpdate(float loadPer)
         {
-            // fillAmount값과 파라미터로 받은 loadPer을 비교하여 같아질때까지 반복
+            // -> FillAmount값과 파라미터로 받은 loadPer이 같아질 때 까지 반복합니다!
             while (!Mathf.Approximately(loadFillGauge.fillAmount, loadPer))
             {
                 loadFillGauge.fillAmount = Mathf.Lerp(loadFillGauge.fillAmount, loadPer, Time.deltaTime * 2f);

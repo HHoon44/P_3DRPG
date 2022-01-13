@@ -20,6 +20,11 @@ private void OnDrawGizmos()
  -> OnPhase 부분은 UI다 정리하고 ㄱㄱ
  -> UIBattle에 AddMonHpBar부분에서 오류
  -> UIDialogue에서 퀘스트 버튼 생성하는 부분 한번 봐보셈
+ -> UIQuest에 Open부분 수정 해야할듯
+ -> UIQuest에 SetQuestSlot부분 완료한 퀘스트도 들어가고 있음
+ -> 컨텐츠 창 info로 바꾸기
+ -> 몬스터가 죽고 풀에 반활 될 때 Dead상태로 들어가면
+     나중에 재사용할 때 BM에서 Dead상태로 인식해서 업데이트를 안해줌
 
 
 주석 작성할 때 신경 쓸 것

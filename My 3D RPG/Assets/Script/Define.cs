@@ -172,7 +172,7 @@ namespace ProjectChan.Define
 
     public class Quest
     {
-        public enum QuestWindow { None, Order, List, Content }
+        public enum QuestWindow { None, Order, List, Info }
         public enum QuestTab { None, Progress, Completed }
         public enum QuestOrderTab { NoProgress, Progress, Clear }
     }

@@ -36,15 +36,24 @@ namespace ProjectChan.UI
         public Transform orderWindow;               // -> 퀘스트 오더 창
         public QuestOrderTab orderTab;              // -> 오더창에 올릴 퀘스트가 진행중인 퀘스트 또는 아직 미진행 퀘스트
 
-        [Header("Quest Content Window Filed")]
-        public Button BackBtn;                      // -> 컨텐츠 창에 존재하는 뒤로 가는 버튼
-        public TextMeshProUGUI contentTitle;        // -> 진행중인 퀘스트의 타이틀
-        public TextMeshProUGUI contentDescription;  // -> 진행중인 퀘스트이 내용
-        public TextMeshProUGUI questDetail;         // -> 진행중인 퀘스트의 디테일 내용
-        public Transform contentWindow;             // -> 퀘스트 컨텐츠 창
 
-        private List<QuestSlot> slots = new List<QuestSlot>();                  // -> 퀘스트 슬롯이 저장될 공간
-        private Dictionary<int, int[]> details = new Dictionary<int, int[]>();  // -> 현재 슬롯에 저장된 퀘스트 디테일이 저장될 공간
+        [Header("Quest Info Window Filed")]
+        public Button BackBtn;                      // -> 정보 창에 존재하는 뒤로 가는 버튼
+        public TextMeshProUGUI infoTitle;           // -> 진행중인 퀘스트의 타이틀
+        public TextMeshProUGUI infoDescription;     // -> 진행중인 퀘스트이 내용
+        public TextMeshProUGUI questDetail;         // -> 진행중인 퀘스트의 디테일 내용
+        public Transform infoWindow;                // -> 퀘스트 정보 창
+
+
+        /// <summary>
+        /// => 퀘스트 창에 존재하는 퀘스트 슬롯들을 담아놓을 리스트
+        /// </summary>
+        private List<QuestSlot> slots = new List<QuestSlot>();
+
+        /// <summary>
+        /// => 진행중인 퀘스트의 인덱스와 디테일 값을 담아놓을 딕셔너리
+        /// </summary>
+        private Dictionary<int, int[]> details = new Dictionary<int, int[]>();
 
         public override void Start()
         {
@@ -52,46 +61,48 @@ namespace ProjectChan.UI
 
             acceptBtnTitle = acceptBtn.GetComponentInChildren<TextMeshProUGUI>();
 
-            // -> 거절 버튼, 2개의 탭 버튼 클릭 시 이벤트 바인딩
+            // -> 탭 버튼에 이벤트를 바인딩 합니다!
             progressTabBtn.onClick.AddListener(() => { OnClickTab(QuestTab.Progress); });
             completedTabBtn.onClick.AddListener(() => { OnClickTab(QuestTab.Completed); });
         }
 
         private void Update()
         {
-            // -> 퀘스트 창 키 입력 시 퀘스트 리스트 오픈
             if (Input.GetButtonDown(Define.Input.Quest))
             {
-                // -> 만약 이미 창이 켜져있는데 버튼을 누른거라면 창을 꺼준다
+                // -> 이미 창이 켜져있다면!
                 if (isOpen)
                 {
+                    // -> 창을 끕니다!
                     Close(true);
                     return;
                 }
 
+                // -> 리스트 창을 켜줍니다!
                 Open(QuestWindow.List);
             }
-
         }
 
         /// <summary>
-        /// => QuestList창을 열지 QuestOrder창을 열지 정하는 메서드
+        /// => QuestWindow에 따라 퀘스트 창을 키는 메서드
         /// </summary>
         /// <param name="questWindow"> 현재 열고자 하는 창 </param>
         /// <param name="sdQuest"> 현재 퀘스트 기획 데이터 </param>
         public void Open(QuestWindow questWindow, SDQuest sdQuest = null)
         {
+            /// 수정
             // -> 이미 다른 창이 열린 상태에서 컨텐츠 창이 아닌 다른 창을 연다면
             // -> 컨텐츠 창은 리스트 창이 열린 상태에서도 열릴 수 있기 때문에
-            if (isOpen && questWindow != QuestWindow.Content)
+            if (isOpen && questWindow != QuestWindow.Info)
             {
                 // -> 그치만 컨텐츠 창에서 리스트 창으로 돌아가는 경우도 있으므로
-                if (currentWindow != QuestWindow.Content)
+                if (currentWindow != QuestWindow.Info)
                 {
                     return;
                 }
             }
 
+            // -> 현재 활성화 할려는 윈도우 창을 담아놓습니다!
             currentWindow = questWindow;
 
             // -> 창 타입에 따라 창 활성화
@@ -101,13 +112,15 @@ namespace ProjectChan.UI
                     SetOrderWindow(sdQuest);
                     orderWindow.gameObject.SetActive(true);
                     break;
+
                 case QuestWindow.List:
                     SetListWindow();
                     listWindow.gameObject.SetActive(true);
                     break;
-                case QuestWindow.Content:
-                    SetContentWindow(sdQuest);
-                    contentWindow.gameObject.SetActive(true);
+
+                case QuestWindow.Info:
+                    SetInfoWindow(sdQuest);
+                    infoWindow.gameObject.SetActive(true);
                     break;
             }
 
@@ -122,12 +135,12 @@ namespace ProjectChan.UI
         {
             base.Close(force);
 
-            // -> 여기 쫌 수정해야할듯
+            // -> 퀘스트 창을 닫는다면 켜져있는 창들은 모두 닫습니다!
             if (listWindow.gameObject.activeSelf) { listWindow.gameObject.SetActive(!listWindow.gameObject.activeSelf); }
-            if (contentWindow.gameObject.activeSelf) { contentWindow.gameObject.SetActive(!contentWindow.gameObject.activeSelf); }
+            if (infoWindow.gameObject.activeSelf) { infoWindow.gameObject.SetActive(!infoWindow.gameObject.activeSelf); }
             if (orderWindow.gameObject.activeSelf) { orderWindow.gameObject.SetActive(!orderWindow.gameObject.activeSelf); }
 
-            // -> 퀘스트 창을 닫으면서 창에 있던 QuestSlot들을 다 정리한다
+            // -> 창을 닫으면서 창에 존재하는 QuestSlot들을 정리 합니다!
             ClearSlots();
         }
 
@@ -139,28 +152,30 @@ namespace ProjectChan.UI
         {
             orderTitle.text = sdQuest.name;
 
-            // -> 수락 버튼 이벤트 바인딩
-            /// -> 수락 버튼을 누를 때 마다 실행 시킬 기능 자체는 똑같은데, 전달되는 데이터가 달라져야한다
-            /// -> 수락 버튼을 눌렀을 때 수락한 퀘스트를 유저 DB에 저장하는 기능은 같은데 어떤 퀘스트인지 데이터가 달라지기 때문에
+            /*
+             *  수락 버튼 이벤트 바인딩
+             *  1. 수락 버튼을 누를 때 마다 실행 시킬 기능 자체는 똑같은데 전달되는 데이터가 달라져야한다
+             *  2. 수락 버튼을 눌렀을 때 수락한 퀘스트를 유저 DB에 저장하는 기능은 같은데 어떤 퀘스트인지 데이터가 달라지기 때문에
+             */
 
             // -> 버튼에 바인딩된 이벤트를 전부 제거 합니다!
             acceptBtn.onClick.RemoveAllListeners();
+            refuseBtn.onClick.RemoveAllListeners();
 
-            // -> 미진행 퀘스트, 진행 퀘스트, 완료 퀘스트 별로 나누어놨습니다!
+            // -> 현재 퀘스트의 진행도 상태에 따라 오더창을 나눕니다!
             switch (orderTab)
             {
                 // -> 미진행
                 case QuestOrderTab.NoProgress:
-
                     acceptBtnTitle.text = "수락";
 
-                    // -> 수락 버튼 클릭시 이벤트 바인딩
+                    // -> 수락 버튼에 이벤트를 바인딩합니다!
                     acceptBtn.onClick.AddListener(() =>
                     {
-                        // -> 수락한 퀘스트를 DtoQuest에 저장하는 작업
+                        // -> 수락한 퀘스트를 DB에 저장합니다!
                         ServerManager.Server.AddQuest(0, sdQuest.index, new ResponsHandler<DtoQuestProgress>(dtoQeustProgress =>
                         {
-                            // -> 핸들러를 통해서 받은 Dto데이터를를 Bo데이터로 변환 후 게임매니저에 저장합니다!
+                            // -> 핸들러를 통해서 받은 Dto데이터를를 Bo데이터로 변환 후 GM에 저장합니다!
                             var boQuestProgress = new BoQuestProgress(dtoQeustProgress);
                             GameManager.User.boQuest.progressQuests.Add(boQuestProgress);
 
@@ -171,19 +186,14 @@ namespace ProjectChan.UI
                         failed => { }));
                     });
 
-                    refuseBtn.onClick.RemoveAllListeners();
                     refuseBtn.onClick.AddListener(() =>
                     {
                         Close();
                     });
-
-                    orderDescription.text = GameManager.SD.sdQuestSpeechs.
-                        Where(obj => obj.index == sdQuest.description)?.SingleOrDefault().kr;
                     break;
 
                 // -> 진행중
                 case QuestOrderTab.Progress:
-
                     acceptBtnTitle.text = "확인";
 
                     acceptBtn.onClick.AddListener(() =>
@@ -191,14 +201,10 @@ namespace ProjectChan.UI
                         Close();
                     });
 
-                    /// 퀘스트 삭제도 한번
                     refuseBtn.onClick.AddListener(() =>
                     {
                         Close();
                     });
-
-                    orderDescription.text = GameManager.SD.sdQuestSpeechs.
-                        Where(obj => obj.index == sdQuest.description)?.SingleOrDefault().kr;
                     break;
 
                 // -> 클리어
@@ -209,11 +215,10 @@ namespace ProjectChan.UI
                     {
                         OnClickClearQuest(sdQuest);
                     });
-
-                    // -> 완료시 대사 입니다!
-                    orderDescription.text = "아리가또~";
                     break;
             }
+
+            orderDescription.text = GameManager.SD.sdQuestSpeechs.Where(obj => obj.index == sdQuest.description)?.SingleOrDefault().kr;
         }
 
         /// <summary>
@@ -221,14 +226,13 @@ namespace ProjectChan.UI
         /// </summary>
         private void SetListWindow()
         {
-            // -> 퀘스트 리스트창에 띄울 슬롯들의 풀을 가져온다
             var pool = ObjectPoolManager.Instance.GetPool<QuestSlot>(Define.PoolType.QuestSlot);
 
             // -> 현재 탭 별로 퀘스트 슬롯 설정
             switch (currentTab)
             {
                 case QuestTab.Progress:
-                    // -> 진행 탭을 누르면 Bo에 저장되어있는 BoQuestProgress에 대한 정보를 띄운다
+                    // -> 진행중인 퀘스트 목록을 가져옵니다!
                     var boProgressQuests = GameManager.User.boQuest.progressQuests;
 
                     for (int i = 0; i < boProgressQuests.Count; i++)
@@ -238,7 +242,7 @@ namespace ProjectChan.UI
                     break;
 
                 case QuestTab.Completed:
-                    // -> 완료 탭을 누르면 Bo에 저장되어있는 BoQuestCompleted에 대한 정보를 띄운다
+                    // -> 완료한 퀘스트 목록을 가져옵니다!
                     var boCompletedQuests = GameManager.User.boQuest.completedQuests;
 
                     for (int i = 0; i < boCompletedQuests.Count; i++)
@@ -248,13 +252,13 @@ namespace ProjectChan.UI
                     break;
             }
 
-            // -> 중복되는 작업은 로컬함수
+            /// 수정
             void SetQuestSlot(SDQuest sdQuest, params int[] questDetails)
             {
-                // -> 현재 퀘스트 디테일을 필드에 저장
-
                 if (!details.ContainsKey(sdQuest.index))
                 {
+
+                    // -> 진행중인 퀘스트의 인덱스와 디테일을 컨텐츠 창에서 사용하기 위해 담아둡니다!
                     details.Add(sdQuest.index, questDetails);
                 }
 
@@ -272,23 +276,24 @@ namespace ProjectChan.UI
         /// => 컨텐츠 창 활성화 메서드
         /// </summary>
         /// <param name="progressQuest"> 현재 진행중인 퀘스트의 기획데이터 </param>
-        private void SetContentWindow(SDQuest progressQuest)
+        private void SetInfoWindow(SDQuest progressQuest)
         {
-            // -> 컨텐츠 창을 키면서 리스트 창에 있던 슬롯들을 풀에 반환한다
+            // -> 컨텐츠 창을 활성화 화면서 리스트 창에 있던 슬롯들은 풀에 반환합니다!
             ClearSlots();
 
-            // -> 받은 데이터로 컨텐츠 창 세팅
-            contentTitle.text = progressQuest.name;
-            contentDescription.text =
+            // -> 받은 데이터로 컨텐츠 창을 세팅합니다!
+            infoTitle.text = progressQuest.name;
+            infoDescription.text =
                 GameManager.SD.sdQuestSpeechs.Where(obj => obj.index == progressQuest.description)?.SingleOrDefault().kr;
 
             questDetail.text = string.Empty;
 
+            // -> 진행중인 퀘스트의 퀘스트 타입에 따라 디테일 텍스트를 세팅합니다!
             switch (progressQuest.questType)
             {
                 case Define.QuestType.Collection:
                 case Define.QuestType.Hunt:
-                    // -> 퀘스트의 디테일 정보를 출력하기 위한 작업 입니다!
+                    // -> 퀘스트의 디테일 정보를 세팅하는 작업입니다!
                     for (int i = 0; i < progressQuest.target.Length; i++)
                     {
                         var targetName = GameManager.SD.sdMonsters.Where(obj => obj.index == progressQuest.target[i])?.SingleOrDefault().name;
@@ -306,16 +311,18 @@ namespace ProjectChan.UI
             }
 
 
-            // -> 컨텐츠 창에 존재하는 뒤로가기 버튼에 이벤트 바인딩
+            // -> 퀘스트 정보창에 존재하는 뒤로가기 버튼에 이벤트 바인딩
             BackBtn.onClick.AddListener(() =>
             {
-                contentWindow.gameObject.SetActive(false);
+                infoWindow.gameObject.SetActive(false);
+
+                // -> 뒤로가기 버튼을 누르면 다시 리스트 창으로 돌아갑니다!
                 Open(QuestWindow.List);
             });
         }
 
         /// <summary>
-        /// => 퀘스트를 완료 후 컨텐츠 창의 완료 버튼을 세팅하는 메서드
+        /// => 퀘스트를 완료 후 오더 창에 존재하는 완료 버튼에 바인딩할 메서드
         /// </summary>
         /// <param name="currentQuest"> 방금 클리어한 퀘스트의 데이터 </param>
         private void OnClickClearQuest(SDQuest currentQuest)
@@ -330,7 +337,7 @@ namespace ProjectChan.UI
             {
                 if (boQuest.progressQuests[i].sdQuest.index == currentQuest.index)
                 {
-                    // -> 진행 퀘스트 목록에 저장 되어있는 클리어한 퀘스트 값 입니다!
+                    // -> 진행 퀘스트 목록에 저장 되어있는 클리어한 퀘스트 위치 값 입니다!
                     progressIndex = i;
                     break;
                 }
@@ -342,10 +349,9 @@ namespace ProjectChan.UI
             // -> 진행 퀘스트 목록에서 빵꾸가 났으니 정렬을 한번 합니다!
             boQuest.progressQuests.Sort();
 
-            // -> 진행 퀘스트 인덱스는 완료 퀘스트 목록에 저장 합니다!
+            // -> 퀘스트를 완료 했으므로 완료 퀘스트 목록에 저장 합니다!
             boQuest.completedQuests.Add(currentQuest);
 
-            // -> Bo데이터에 변동이 생겼으므로 Dto에 Bo데이터를 새롭게 저장합니다!
             var dummyServer = DummyServer.Instance;
 
             // -> 진행 퀘스트가 하나 줄었으므로 Dto의 진행 퀘스트 목록 길이는 1을 뺍니다!
@@ -380,42 +386,39 @@ namespace ProjectChan.UI
                 sdItems.Add(GameManager.SD.sdItems.Where(obj => obj.index == currentQuest.compensation[i])?.SingleOrDefault());
             }
 
-            // -> 이미 존재한 아이템인지 비교 하거나 새로운 아이템이라면 추가하기 위해서
-            //    게임매니저가 가지고 있는 BoItem 데이터를 가져온다
             var userBoItems = GameManager.User.boItems;
-
-            // -> 아이템 슬롯에 접근하기 위해서 인벤토리를 가져온다
             var userInventory = UIWindowManager.Instance.GetWindow<UIInventory>();
 
-            // -> 자 드가자~
+            // -> 소지한 아이템인지 소지하지 않은 아이템인지
+            //    장비 아이템인지 소비 아이템인지 판별하는 작업입니다!
             for (int i = 0; i < sdItems.Count(); i++)
             {
-                // -> 아이템이 장비 아이템인지 판단
+                // -> 보상 목록의 아이템이 장비 아이템인지 확인합니다!
                 var isEquip = sdItems[i].itemType == Define.ItemType.Equipment;
 
-                // -> 장비 아이템이 아니라면
+                // -> 장비 아이템이 아니라면!
                 if (!isEquip)
                 {
-                    // -> 이미 가지고 있는 아이템인지 판단
+                    // -> 이미 가지고 있는 아이템인지 확인합니다!
                     var sameItem = userBoItems.Where(obj => obj.sdItem.index == sdItems[i].index)?.SingleOrDefault();
 
-                    // -> 이미 가지고 있는 아이템이 라면
+                    // -> 이미 가지고 있는 아이템이 라면!
                     if (sameItem != null)
                     {
-                        // -> 개수값을 증가시켜주고 슬롯이 지닌 개수 텍스트 업데이트
+                        // -> 아이템 개수를 업데이트 해줍니다!
                         sameItem.amount += currentQuest.compensationDetail[i];
                         userInventory.IncreaseItem(sameItem);
                     }
-                    // -> 이미 가지고 있는 아이템이 아니라면
+                    // -> 처음 얻은 아이템이라면!
                     else
                     {
-                        // -> 새롭게 추가한다
+                        // -> 새롭게 추가해줍니다!
                         SetItem(new BoItem(sdItems[i]));
                     }
                 }
                 else
                 {
-                    // -> 장비 아이템은 무조건 한칸을 차지하므로 새롭게 추가한다
+                    // -> 장비 아이템은 무조건 한칸을 차지하므로 새롭게 추가합니다!
                     SetItem(new BoEquipment(sdItems[i]));
                 }
 
@@ -425,7 +428,7 @@ namespace ProjectChan.UI
                     userBoItems.Add(boItem);
                 }
 
-                // -> BoItem의 데이터에 변동이 생겼으므로 다시 DtoItem에 넣어주는 작업을 한다(나중에 변동된 데이터만 들어가게 설정하는 작업 해보도록)
+                // -> DB에 새로운 아이템 정보를 업데이트 합니다!
                 DummyServer.Instance.userData.dtoItem = new DtoItem(GameManager.User.boItems);
             }
 
@@ -457,13 +460,11 @@ namespace ProjectChan.UI
         /// </summary>
         private void ClearSlots()
         {
-            // -> 저장된 슬롯이 없다면 
             if (slots.Count == 0)
             {
                 return;
             }
 
-            // -> 풀에 반환하기 위해서 QuestSlot풀을 가져온다
             var pool = ObjectPoolManager.Instance.GetPool<QuestSlot>(Define.PoolType.QuestSlot);
 
             for (int i = 0; i < slots.Count; i++)

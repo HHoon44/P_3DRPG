@@ -9,6 +9,9 @@ using UnityEngine;
 
 namespace ProjectChan.UI
 {
+    /// <summary>
+    /// => 플레이어가 게임을 플레이할 때 필요한 UI들을 관리할 클래스
+    /// </summary>
     public class UIBattle : UIWindow
     {
         public PlayerController playerController;       // -> 플레이어 컨트롤러
@@ -96,6 +99,7 @@ namespace ProjectChan.UI
         /// <param name="target"> 체력바를 달아줄 몬스터 </param>
         public void AddMonHpBar(Actor target)
         {
+            /// 수정
             var monHpBar = ObjectPoolManager.Instance.GetPool<MonHpBar>(Define.PoolType.MonHpBar).GetPoolableObject();
             monHpBar.transform.SetParent(worldCanvas.transform);
             monHpBar.Initialize(target);

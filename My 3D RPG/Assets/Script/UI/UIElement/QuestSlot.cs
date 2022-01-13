@@ -20,9 +20,11 @@ namespace ProjectChan.UI
         public TextMeshProUGUI title;       // -> 퀘스트 슬롯 타이틀
         public Button btn;                  // -> 퀘스트 슬롯 버튼 기능
 
+        /// <summary>
+        /// => 재사용 가능한지
+        /// </summary>
         public bool CanRecycle { get; set; } = true;
 
-        // -> 아직 디테일 안넣었는데
         public void Initialize(SDQuest sdQuest, QuestTab currentTab)
         {
             title.text = sdQuest.name;
@@ -30,20 +32,23 @@ namespace ProjectChan.UI
             // -> 이전에 들어있는 기능들 다 삭제
             btn.onClick.RemoveAllListeners();
 
+            // -> 현재 리스스 탭이 진행중인 리스트라면!
             if (currentTab == QuestTab.Progress)
             {
+                // -> 슬롯에 이벤트를 바인딩 해줍니다!
                 btn.onClick.AddListener(() => { OpenQuestWindow(sdQuest); });
             }
         }
 
         /// <summary>
-        /// => 퀘스트 슬롯 버튼을 눌렀을 시 이벤트 바인딩 멧더ㅡ
+        /// => 진행중인 퀘스트의 슬롯을 눌렀을 시 이벤트 바인딩 메서드
         /// </summary>
         /// <param name="sdQuest"> 이벤트에 보내줄 퀘스트 기획 데이터 </param>
         private void OpenQuestWindow(SDQuest sdQuest)
         {
+            // -> 퀘스트 정보 창을 열어줍니다!
             var uiQuest = UIWindowManager.Instance.GetWindow<UIQuest>();
-            uiQuest.Open(Define.Quest.QuestWindow.Content, sdQuest);
+            uiQuest.Open(QuestWindow.Info, sdQuest);
             uiQuest.listWindow.gameObject.SetActive(!uiQuest.listWindow.gameObject.activeSelf);
         }
     }
