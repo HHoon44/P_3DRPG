@@ -15,6 +15,9 @@ using static ProjectChan.Define.Quest;
 
 namespace ProjectChan.UI
 {
+    /// <summary>
+    /// => 퀘스트 UI가 지닐 클래스
+    /// </summary>
     public class UIQuest : UIWindow
     {
         public QuestWindow currentWindow;           // -> 현재 윈도우 창
@@ -90,12 +93,10 @@ namespace ProjectChan.UI
         /// <param name="sdQuest"> 현재 퀘스트 기획 데이터 </param>
         public void Open(QuestWindow questWindow, SDQuest sdQuest = null)
         {
-            /// 수정
-            // -> 이미 다른 창이 열린 상태에서 컨텐츠 창이 아닌 다른 창을 연다면
-            // -> 컨텐츠 창은 리스트 창이 열린 상태에서도 열릴 수 있기 때문에
+            // -> 다른 퀘스트 창이 열린 상태에서 정보 창이 아닌 다른 창을 연다면!
             if (isOpen && questWindow != QuestWindow.Info)
             {
-                // -> 그치만 컨텐츠 창에서 리스트 창으로 돌아가는 경우도 있으므로
+                // -> 현재 창이 정보 창이 아니라면!
                 if (currentWindow != QuestWindow.Info)
                 {
                     return;
@@ -238,6 +239,13 @@ namespace ProjectChan.UI
                     for (int i = 0; i < boProgressQuests.Count; i++)
                     {
                         SetQuestSlot(boProgressQuests[i].sdQuest, boProgressQuests[i].details);
+
+                        if (!details.ContainsKey(boProgressQuests[i].sdQuest.index))
+                        {
+                            // -> 진행중인 퀘스트의 인덱스와 디테일을
+                            //    퀘스트 정보 창에서 사용하기 위해 담아둡니다!
+                            details.Add(boProgressQuests[i].sdQuest.index, boProgressQuests[i].details);
+                        }
                     }
                     break;
 
@@ -252,16 +260,8 @@ namespace ProjectChan.UI
                     break;
             }
 
-            /// 수정
             void SetQuestSlot(SDQuest sdQuest, params int[] questDetails)
             {
-                if (!details.ContainsKey(sdQuest.index))
-                {
-
-                    // -> 진행중인 퀘스트의 인덱스와 디테일을 컨텐츠 창에서 사용하기 위해 담아둡니다!
-                    details.Add(sdQuest.index, questDetails);
-                }
-
                 var questSlot = pool.GetPoolableObject(obj => obj.CanRecycle);
                 questSlot.Initialize(sdQuest, currentTab);
                 questSlot.transform.SetParent(ContentsHolder);

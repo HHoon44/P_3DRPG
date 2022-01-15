@@ -19,9 +19,13 @@ namespace ProjectChan
 {
     using Monster = ProjectChan.Object.Monster;
 
+    /// <summary>
+    /// => 스테이지 관련 기능들을 수행할 클래스
+    /// => 스테이지 전환 시 처리 작업을 수행함(해당 스테이지에 필요한 리소스 로드 및 인스턴스 생성)
+    /// </summary>
     public class StageManager : Singleton<StageManager>
     {
-        public int huntedMon = 10;                  // -> 사냥한 몬스터 개수
+        public int huntedMon;                       // -> 사냥한 몬스터 개수
         public bool isMonReady;                     // -> 몬스터를 생성할 준비가되었는가?
         public Transform monsterHolder;             // -> 몬스터를 자식으로 가질 부모 홀더
 
@@ -162,30 +166,35 @@ namespace ProjectChan
                 return;
             }
 
-            // -> 캐릭터가 씬 이동이 아니라 스테이지 이동을 했다는 의미
+            // -> 플레이어 컨트롤러가 있다면!
             if (playerController.PlayerCharacter != null)
             {
+                // -> 씬 이동이 아니라 스테이지를 이동 했다는 의미입니다!
                 var warpEntry = currentStage.transform.Find
                     ($"WarpPosHolder/{GameManager.User.boStage.prevStageIndex}/EntryPos").transform;
 
-                // -> 캐릭터 Pos 설정
+                // -> 캐릭터의 Position을 설정합니다
                 playerController.PlayerCharacter.transform.position = warpEntry.position;
                 playerController.PlayerCharacter.transform.forward = warpEntry.forward;
 
-                // -> 캐릭터 이동에 따라 카메라도 이동시켜줌
+                // -> 캐릭터 이동에 따라 카메라도 이동시켜줍니다!
                 playerController.cameraController.SetForceStandarView();
                 return;
             }
 
+            // -> 씬 이동을 했다면 캐릭터가 아직 생성 되어있지 않았으므로 생성 해줍니다!
             var characterObj = Instantiate(ResourceManager.Instance.LoadObject
                 (GameManager.User.boCharacter.sdCharacter.resourcePath));
             characterObj.transform.position = GameManager.User.boStage.prevPos;
 
+            // -> 생성한 캐릭터를 초기화 해줍니다!
             var playerCharacter = characterObj.GetComponent<Character>();
             playerCharacter.Initialize(GameManager.User.boCharacter);
 
+            // -> 컨트롤러에 캐릭터를 저장합니다!
             playerController.Initialize(playerCharacter);
 
+            // -> 배틀 매니저에 등록합니다!
             BattleManager.Instance.AddActor(playerCharacter);
         }
 
@@ -194,14 +203,13 @@ namespace ProjectChan
         /// </summary>
         private void SpawnNPC()
         {
-            // -> 홀더가 없다면 생성하고 Pos를 초기화
+            // -> NPC홀더가 존재하지 않는다면!
             if (NPCHolder == null)
             {
+                // -> 홀더를 생성합니다!
                 NPCHolder = new GameObject("NPCHolder").transform;
                 NPCHolder.position = Vector3.zero;
             }
-
-            // -> NPC 생성할때 특정 퀘스트에서만 생성되는 NPC가 있다면 예외처리 해야함 아직 안함 
 
             var stageIndex = GameManager.User.boStage.sdStage.index;
             var npcs = GameManager.SD.sdNPCs.Where(obj => obj.stageIndex == stageIndex)?.ToList();
@@ -212,7 +220,11 @@ namespace ProjectChan
                 var npcObj = Instantiate(ResourceManager.Instance.LoadObject(npcs[i].resourcePath), NPCHolder);
                 var npc = npcObj?.GetComponent<NPC>();
                 var boNPC = new BoNPC(npcs[i]);
+
+                // -> 생성한 NPC를 세팅합니다!
                 npc.Initialize(boNPC);
+
+                // -> 생성한 NPC를 배틀 매니저에 등록합니다!
                 battleManager.AddNPC(npc);
             }
         }
@@ -250,52 +262,59 @@ namespace ProjectChan
         /// </summary>
         private void SpawnMonster()
         {
+            // -> 홀더가 없다면!
             if (monsterHolder == null)
             {
+                // -> 없다면 생성해줍니다!
                 monsterHolder = new GameObject("MonsterHolder").transform;
                 monsterHolder.position = Vector3.zero;
             }
 
-            // -> 현재 스테이지 정보를 가져온다
             var sd = GameManager.SD;
             var sdStage = GameManager.User.boStage.sdStage;
 
-            // -> 생성할 몬스터 갯수
+            // -> 몬스터 생성 개수와 홀더에 존재하는 ChildCount가 같다면!
+            if (monsterHolder.childCount == sdStage.stageMonCount)
+            {
+                // -> 생성 작업을 멈춥니다!
+                return;
+            }
+
+            // -> 생성할 몬스터 개수를 정해줍니다!
             var monsterSpawnCnt = Random.Range(Spawn.MinMonsterSpawnCnt, Spawn.MaxMonsterSpawnCnt);
             var monsterPool = ObjectPoolManager.Instance.GetPool<Monster>(PoolType.Monster);
             var battleManager = BattleManager.Instance;
 
             for (int i = 0; i < monsterSpawnCnt; i++)
             {
-                // -> 현재 스테이지에서 생성되는 몬스터 배열의 길이를 이용하여 랜덤 값을 하나 생성
+                // -> 현재 스테이지에서 생성되는 몬스터 배열의 길이를 이용해서 랜덤 값을 하나 생성 합니다!
                 var randIndex = Random.Range(0, sdStage.genMonsters.Length);
 
-                // -> 배열에 랜덤 값을 이용하여 배열안에 값을 가져온다
+                // -> 랜덤 값을 이용하여 생성할 몬스터 인덱스를 가져옵니다!
                 var genMonsterIndex = sdStage.genMonsters[randIndex];
 
-                // -> -1이라면 생성되는 몬스터가 없으므로 return
+                // -> 생성할 몬스터가 없다면!
                 if (genMonsterIndex == -1)
                 {
                     return;
                 }
 
-                /// 설마 보스 몬스터 인덱스 가져온거임?
+                // -> 가져온 인덱스가 보스 인덱스라면!
                 if (genMonsterIndex == StaticData.BossIndex)
                 {
-                    /// 근데 보스 몬스터 소환 할려면 몬스터 10마리 이상은 잡아야하는데 괜춘?
-                    if (huntedMon >= 10)
+                    // -> 보스 생성 조건을 만족했다면!
+                    if (huntedMon >= StaticData.BossSpawn)
                     {
-                        /// 뭐야 잡아놨네 그러면 보스 몬스터 소환 ㄱㄱ
                         huntedMon = 0;
                     }
                     else
                     {
-                        /// 뭐야 아직 못잡았네 다시 위로 올라가셈~
+                        // -> 위로 올라갑니다!
                         continue;
                     }
                 }
 
-                // -> 기획 데이터에 위에서 얻은 몬스터 인덱스와 같은 인덱스 값을 가진 데이터를 가져온다
+                // -> 가져온 몬스터 인덱스를 이용하여 기획 데이터를 가져옵니다!
                 var sdMonster = sd.sdMonsters.Where(obj => obj.index == genMonsterIndex).SingleOrDefault();
                 var monster = monsterPool.GetPoolableObject(obj => obj.name == sdMonster.name);
 
@@ -305,17 +324,18 @@ namespace ProjectChan
                     continue;
                 }
 
+                // -> 어디에 스폰될지를 정해줍니다!
                 var bounds = spawnAreaBounds[sdStage.spawnArea[randIndex]];
                 var spawnPosX = Random.Range(-bounds.size.x * 0.5f, bounds.size.x * 0.5f);
                 var spawnPosZ = Random.Range(-bounds.size.z * 0.5f, bounds.size.z * 0.5f);
                 var centerPos = new Vector3(bounds.center.x, 0, bounds.center.z);
 
-                // -> 몬스터가 생성될 위치에 Ray를 쏴서 그 지점의 Y값을 얻으려는 작업
+                // -> 몬스터가 생성될 위치에 레이를 쏴 그 지점의 Y값을 얻으려는 작업입니다!
                 transform.position = centerPos + new Vector3(spawnPosX, 50f, spawnPosZ);
                 Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 55f, 1 << LayerMask.NameToLayer("Floor"));
                 Debug.DrawRay(transform.position, Vector3.down * 55f, Color.red);
 
-                // -> 만약 레이에 닿은 터레인이 있다면 몬스터 생성
+                // -> 만약 레이에 닿은 터레인이 있다면 몬스터를 생성합니다!
                 monster.transform.position = centerPos + new Vector3(spawnPosX, hit.point.y, spawnPosZ);
                 monster.transform.SetParent(monsterHolder, true);
                 monster.Initialize(new BoMonster(sdMonster));
@@ -331,16 +351,14 @@ namespace ProjectChan
         /// <returns></returns>
         public Vector3 GetRandPosInArea(int monsterIndex)
         {
-            // -> 현재 스테이지 정보를 가져옴
             var sdStage = GameManager.User.boStage.sdStage;
 
             var arrayIndex = -1;
 
-            // -> 현재 스테이지에서 생성되는 몬스터의 인덱스를 지니고 있는 배열의 길이만큼 배열을 돌려
-            //    i번째 몬스터 배열에 저장되어있는 인덱스 값과 파라미터로 받은 인덱스값이 같다면 arrayIndex에
-            //    i값을 대입하고 반복문을 멈춘다
+            // -> 목적지를 받을 몬스터의 인덱스가 현재 스테이지에 포함되어 있는지 확인하는 작업입니다!
             for (int i = 0; i < sdStage.genMonsters.Length; i++)
             {
+                // -> 같은 값이 존재한다면!
                 if (sdStage.genMonsters[i] == monsterIndex)
                 {
                     arrayIndex = i;
@@ -348,7 +366,7 @@ namespace ProjectChan
                 }
             }
 
-            // -> SdStage에 저장된 spawnArea 배열의 arrayIndex번째 값을 이용하여 Bounds 정보를 가져온다
+            // -> 딕셔너리에 저장되어 있는 Bounds 정보를 가져옵니다!
             var bounds = spawnAreaBounds[sdStage.spawnArea[arrayIndex]];
             var spawnPosX = Random.Range(-bounds.size.x * .5f, bounds.size.x * .5f);
             var spawnPosZ = Random.Range(-bounds.size.z * .5f, bounds.size.z * .5f);
@@ -357,6 +375,7 @@ namespace ProjectChan
             Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 55f, 1 << LayerMask.NameToLayer("Floor"));
             Debug.DrawRay(transform.position, Vector3.down * 55f, Color.red);
 
+            // -> 목적지를 반환해줍니다!
             return new Vector3(spawnPosX, hit.point.y, spawnPosZ);
         }
 

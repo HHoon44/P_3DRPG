@@ -99,8 +99,11 @@ namespace ProjectChan.UI
         /// <param name="target"> 체력바를 달아줄 몬스터 </param>
         public void AddMonHpBar(Actor target)
         {
-            /// 수정
-            var monHpBar = ObjectPoolManager.Instance.GetPool<MonHpBar>(Define.PoolType.MonHpBar).GetPoolableObject();
+
+            // -> 몬스터 Hp바를 가져옵니다!
+            var monHpBar = 
+                ObjectPoolManager.Instance.GetPool<MonHpBar>(Define.PoolType.MonHpBar).GetPoolableObject(obj => obj.CanRecycle);
+
             monHpBar.transform.SetParent(worldCanvas.transform);
             monHpBar.Initialize(target);
             monHpBar.gameObject.SetActive(true);

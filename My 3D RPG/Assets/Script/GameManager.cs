@@ -17,17 +17,27 @@ using static ProjectChan.Define.Actor;
 
 namespace ProjectChan
 {
+    /// <summary>
+    /// => 게임에 사용하는 모든 데이터를 관리하는 클래스
+    /// => 추가로 게임의 씬 변경등과 같은 큰 흐름들을 컨트롤하기도 함
+    /// </summary>
     public class GameManager : Singleton<GameManager>
     {
         public bool useDummyServer;                             // -> DummyServer을 사용하고 있는가?
         public float loadProgress;                              // -> 다음씬이 얼마나 준비되었는지에 대한 값
 
+        /// <summary>
+        /// => 기획 데이터를 관리함
+        /// </summary>
         [SerializeField]
         private StaticDataModule sd = new StaticDataModule();
-        public static StaticDataModule SD => Instance.sd;       // -> SD데이터 연결고리가 되어주는 프로퍼티
+        public static StaticDataModule SD => Instance.sd;       
 
+        /// <summary>
+        /// => 유저 데이터를 관리함
+        /// </summary>
         private BoUser boUser = new BoUser();
-        public static BoUser User => Instance.boUser;           // -> BO데이터의 연결고리가 되어주는 프로퍼티
+        public static BoUser User => Instance.boUser;          
 
         protected override void Awake()
         {
@@ -38,43 +48,25 @@ namespace ProjectChan
                 return;
             }
 
+            // -> 씬이 변경되어도 객체가 파괴되지 않도록 합니다!
             DontDestroyOnLoad(this);
 
             var StartController = FindObjectOfType<StartController>();
             StartController?.Initialize();
-
-            /*
-            // -> 처음 시작하는 유저라면 유저의 정보를 담을 공간생성
-            if (AssetDatabase.LoadAssetAtPath("Assets/Dummy/UserDataSo", typeof(UserDataSo)) == null)
-            {
-                UserDataSo UserDataSo = ScriptableObject.CreateInstance<UserDataSo>();
-                AssetDatabase.CreateAsset(UserDataSo, "Assets/Dummy/UserDataSo.asset");
-                AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(UserDataSo));
-
-                UserDataSo.dtoStage = new DtoStage();
-                UserDataSo.dtoStage.lastStageIndex = StartStageInfo.StartStage;
-                UserDataSo.dtoStage.lastPosX = StartStageInfo.StartPosX;
-                UserDataSo.dtoStage.lastPosY = StartStageInfo.StartPosY;
-                UserDataSo.dtoStage.lastPosZ = StartStageInfo.StartPosZ;
-
-                UserDataSo.dtoAccount = new DtoAccount();
-                UserDataSo.dtoAccount.nickName = StartStageInfo.CharName;
-                UserDataSo.dtoAccount.gold = StartStageInfo.StartGold;
-
-                UserDataSo.dtoCharacter = new DtoCharacter();
-                UserDataSo.dtoCharacter.index = StartStageInfo.StartChar;
-                UserDataSo.dtoCharacter.level = StartStageInfo.StartLevel;
-
-                DummyServer.Instance.userData = UserDataSo;
-            }
-             */
-
         }
 
+        /// <summary>
+        /// => 앱의 기본 설정입니다!
+        /// </summary>
         public void OnApplicationSetting()
         {
+            // -> 수직 동기화를 꺼줍니다!
             QualitySettings.vSyncCount = 0;
+
+            // -> 랜덤 프래임을 60으로 설정합니다!
             Application.targetFrameRate = 60;
+
+            // -> 앱 실행 중 장시간 대기 시에도 화면이 꺼지지 않게합니다!
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
         }
 
@@ -90,18 +82,26 @@ namespace ProjectChan
 
             IEnumerator WaitForLoad()
             {
+                // -> 로딩 진행 상태를 나타냅니다!
                 loadProgress = 0;
 
+                // -> 비동기를 이용해서 로딩 씬을 전환 합니다!
                 yield return SceneManager.LoadSceneAsync(SceneType.Loading.ToString());
 
+                // -> 변경하고자 하는 씬을 담습니다!
                 var asyncOper = SceneManager.LoadSceneAsync(sceneName.ToString(), LoadSceneMode.Additive);
+
+                // -> 방금 추가한 씬을 비활성화 합니다!
                 asyncOper.allowSceneActivation = false;
 
+                // -> 변경하고자 하는 씬에 필요한 작업이 있다면!
                 if (loadCoroutine != null)
                 {
+                    // -> 해당 작업이 완료될 때 까지 대기합니다!
                     yield return StartCoroutine(loadCoroutine);
                 }
 
+                // -> 비동기로 로드한 씬이 활성화가 완료되지 않았따면 특정 작업을 반복합니다!
                 while (!asyncOper.isDone)
                 {
                     if (loadProgress >= .9f)
@@ -114,12 +114,15 @@ namespace ProjectChan
                     }
                     else
                     {
+                        // -> loadProgress 값을 이용해서 사용자한테 로딩바를 통해 진행 상태를 알려줍니다!
                         loadProgress = asyncOper.progress;
                     }
 
+                    // -> 코루틴 내에서 반복문 사용 시 로직을 한 번 실행 후 메인 로직을 실행할 수 있게 yield return을 해줍니다!
                     yield return null;
                 }
 
+                // -> 로딩 씬에서 다음 씬에 필요한 작업을 전부 수행 했으므로 로딩씬을 비활성화 시킵니다!
                 yield return SceneManager.UnloadSceneAsync(SceneType.Loading.ToString());
 
                 loadComplete?.Invoke();
@@ -143,7 +146,7 @@ namespace ProjectChan
 
                 var asyncOper = SceneManager.LoadSceneAsync(SceneType.Loading.ToString(), LoadSceneMode.Additive);
 
-                #region Loading Bar
+                #region 로딩바 진행상태 처리
 
                 while (!asyncOper.isDone)
                 {
@@ -159,6 +162,7 @@ namespace ProjectChan
                     yield return null;
                 }
 
+                // -> 인게임씬에서 활성화된 상태로 카메라가 존재하기 때문에 로딩씬 카메라를 비활성화 해줍니다!
                 uiLoading.cam.enabled = false;
                 loadProgress = 1f;
 
@@ -166,7 +170,7 @@ namespace ProjectChan
 
                 yield return new WaitForSeconds(.5f);
 
-                #region Stage Change
+                #region 스테이지 전환 시 필요한 작업
 
                 if (loadCoroutine != null)
                 {
@@ -177,7 +181,7 @@ namespace ProjectChan
 
                 yield return new WaitForSeconds(.5f);
 
-                #region Stage Complete
+                #region 스테이지 전환 완료 후 실행할 작업
 
                 yield return SceneManager.UnloadSceneAsync(SceneType.Loading.ToString());
                 loadComplete?.Invoke();

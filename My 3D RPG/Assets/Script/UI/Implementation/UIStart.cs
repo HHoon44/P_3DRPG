@@ -26,11 +26,20 @@ namespace ProjectChan.UI
             backImage.sprite = selectSprite;
         }
 
+        /// <summary>
+        /// => 현재 진행 상태를 알려줄 띄울 코루틴
+        /// </summary>
+        /// <param name="loadState"></param>
         public void SetLoadStateDescription(string loadState)
         {
             loadStateDesc.text = $"Load{loadState}...";
         }
 
+        /// <summary>
+        /// => 현재 진행 상태를 게이지로 표현할 코루틴
+        /// </summary>
+        /// <param name="loadPer"> 현재 진행 상태 </param>
+        /// <returns></returns>
         public IEnumerator LoadGaugeUpdate(float loadPer)
         {
             // -> FillAmount값과 파라미터로 받은 loadPer이 같아질 때 까지 반복합니다!

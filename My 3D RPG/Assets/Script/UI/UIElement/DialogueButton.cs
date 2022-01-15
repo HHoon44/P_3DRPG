@@ -36,22 +36,6 @@ namespace ProjectChan.UI
         {
             icon.sprite = SpriteLoader.GetSprite(Define.Resource.AtlasType.UIAtlase, "exclamation");
 
-            // -> 플레이어의 진행중인 퀘스트 목록을 가져옵니다!
-            var progressQuests = GameManager.User.boQuest.progressQuests;
-            var progressQuestIndex = -1;
-
-            // -> 버튼이 지닌 퀘스트 데이터가
-            //    플레이어가 진행중인 퀘스트 데이터 인지 확인하는 작업입니다!
-            for (int i = 0; i < progressQuests.Count; i++)
-            {
-                // -> 진행중인 퀘스트의 인덱스와 버튼의 퀘스트 인덱스가 같다면!
-                if (progressQuests[i].sdQuest.index == questIndex)
-                {
-                    // -> i번째에 버튼이 지닐 퀘스트가 있습니다!
-                    progressQuestIndex = i;
-                    break;
-                }
-            }
             /// <summary>
             /// => NPC가 지닌 퀘스트 다이얼로그 버튼에 바인딩될 메서드
             /// </summary>
@@ -61,7 +45,7 @@ namespace ProjectChan.UI
             var sdQuest = GameManager.SD.sdQuests.Where(obj => obj.index == questIndex)?.SingleOrDefault();
 
             title.text = sdQuest.name;
-            btn.onClick.AddListener(() => { OnClickQuest(sdQuest, progressQuestIndex); });
+            btn.onClick.AddListener(() => { OnClickQuest(sdQuest); });
         }
 
         /// <summary>
@@ -69,11 +53,28 @@ namespace ProjectChan.UI
         /// </summary>
         /// <param name="sdQuest"> 버튼이 지닐 퀘스트 기획 데이터 </param>
         /// <param name="progressQuestIndex"> 진행중인 퀘스트 목록중 버튼이 지닐 퀘스트가 있는 위치 값 </param>
-        private void OnClickQuest(SDQuest sdQuest, int progressQuestIndex)
+        private void OnClickQuest(SDQuest sdQuest)
         {
             // -> 다이얼로그 창을 닫습니다!
             var uiWindowManager = UIWindowManager.Instance;
             uiWindowManager.GetWindow<UIDialogue>().Close();
+
+            // -> 플레이어의 진행중인 퀘스트 목록을 가져옵니다!
+            var progressQuests = GameManager.User.boQuest.progressQuests;
+            var progressQuestIndex = -1;
+
+            // -> 버튼이 지닌 퀘스트 데이터가
+            //    플레이어가 진행중인 퀘스트 데이터 인지 확인하는 작업입니다!
+            for (int i = 0; i < progressQuests.Count; i++)
+            {
+                // -> 진행중인 퀘스트의 인덱스와 버튼의 퀘스트 인덱스가 같다면!
+                if (progressQuests[i].sdQuest.index == sdQuest.index)
+                {
+                    // -> i번째에 버튼이 지닐 퀘스트가 있습니다!
+                    progressQuestIndex = i;
+                    break;
+                }
+            }
 
             // -> 버튼이 지닐 퀘스트가 진행중인 퀘스트가 아니라면!
             if (progressQuestIndex == -1)

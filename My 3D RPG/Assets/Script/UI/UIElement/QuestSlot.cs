@@ -13,7 +13,7 @@ using static ProjectChan.Define.Quest;
 namespace ProjectChan.UI
 {
     /// <summary>
-    /// => 퀘스트 슬롯을 관리하는 메서드
+    /// => 퀘스트 슬롯을 관리하는 클래스
     /// </summary>
     public class QuestSlot : MonoBehaviour, IPoolableObject
     {

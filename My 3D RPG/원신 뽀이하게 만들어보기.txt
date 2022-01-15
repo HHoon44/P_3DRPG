@@ -1,59 +1,8 @@
-1. 애니메이션 재생으로 인한 이동이 싫으면 Root Transform Position을 체크 해제하고 Center of Mass를 선택
-2. 유니티 Post Processing
-3. https://mentum.tistory.com/m/194?category=717657
-4. https://violetababel.tistory.com/416
-/*
-private void OnDrawGizmos()
-{
- var halfExtents = new Vector3(coll.bounds.center.x, coll.bounds.center.y, coll.bounds.center.z);
 
- Gizmos.color = Color.red;
- Gizmos.DrawWireCube(transform.position, halfExtents);
-}
-*/
- ★. 버튼
- -> 이어하기 버튼
-
- ★. 할거
- -> CanESCClose는 쫌 내 맛대로 수정해야할듯
- -> 주석 정리 + 코드 정리
- -> OnPhase 부분은 UI다 정리하고 ㄱㄱ
- -> UIBattle에 AddMonHpBar부분에서 오류
- -> UIDialogue에서 퀘스트 버튼 생성하는 부분 한번 봐보셈
- -> UIQuest에 Open부분 수정 해야할듯
- -> UIQuest에 SetQuestSlot부분 완료한 퀘스트도 들어가고 있음
- -> 컨텐츠 창 info로 바꾸기
- -> 몬스터가 죽고 풀에 반활 될 때 Dead상태로 들어가면
-     나중에 재사용할 때 BM에서 Dead상태로 인식해서 업데이트를 안해줌
-
-
-주석 작성할 때 신경 쓸 것
-1. 애니메이션 이벤트에서 사용되는 메서드는 애니메이션 이벤트에서 사용된다고 작성할것!
-EX) 애니메이션 이벤트로 사용되며~
-
-2. 클래스 위에는 무슨 클래스 인지 설명 작성
-
-3. public, private
-
-4. string, float, int, bool 
-
-
-    /// => 클라이언트 내에서 사용할 Account 데이터
-    /// => 작업과정에서 데이터를 확인하기 위해서 Serializable
-	 서버를 통해 받은 DtoAccount 데이터를 BoAccount데이터로 변환하는 메서드
-
-5. /**/ 또는 긴 설명
-
-6. if는 ~~한다면!
-
-Actor까지 봤음
-
-7. 기획 데이터 -> string, string[], enum, int[], int, float[], float
-아이템 기획 데이터 순서 수정
-
-
-
- 
+ 0. Logo -> StartScene -> FirstLoading -> NovelGame -> 
+ 1. GM이 현재 플레이어가 플레이하는 게임 모드 새로하기 or 이어하기를 하고있는지 들고 있도록 한다
+ 2. 이제 처음 UserData가 사용되는 부분에서 만약에 새로하기라면 Define에 선언해놨던 새로하기 데이터를 넣은 Dto를 만들어줘서 사용하도록 하고
+ 3. 만약에 이어하기를 했다면 그대로 이어하도록 그리고 노벨 게임 씬은 바로 넘어가도록 한다 이렇게 하면 될거같은데?
 
 
 
@@ -73,36 +22,6 @@ Actor까지 봤음
 
 
 
-
-
-
-
-
-
-
- - 게임 클라이언트 프로그래머 면접 검색해서 면접 후기 같은거 보면서
-   면접 키워드 중에 모르는 거 있으면 공부
-
-자기소개서 수정하기
-1. 성장과정
-- 단점이 보이는 곳 지우기
- -> 하지만 거기 부분 지워야할듯
-- 그리고 뒤에 부분을 늘려야 할듯
- -> 자료구조 같은거 배운 것도 쓰고 + 엔진에서 어떤 기능을 사용해 봤는지 보충
-
-2. 지원동기
-- 내가 이 회사에서 무엇을 할 수 있다고 생각해서 지원했다
-- 내가 알고 있는 어떤 프로그래밍 지식들을 사용할 수 있는지
-- 내가 비주얼 노벨을 좋아하게 되어서 비주얼 노벨을 포함한 포토폴리오를 제작했다 라는 경험
- 
-3. 입사 후 포부
-
- - 비주얼 노벨을 좋아했음
- - 게임 프로그래머를 장래희망으로 정함
- - 수많은 게임 장르 중에서 내가 제일 좋아하는 비주얼 노벨 장르를 선택함
- - 그래서 이 것을 이루기 위해서 노력을 함
--> 어떤 노력을 했는지에 대해서 도 구체적으로 적고 어떤 것을 공부했고 공부한 것을
-바탕으로 어떤 결과물을 만들ㅇ ㅓ냈는지 내가 뭘 할 수 있는지 를 적는게 좋을듯
 
 
 

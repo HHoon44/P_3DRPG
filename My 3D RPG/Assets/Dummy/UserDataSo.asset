@@ -16,7 +16,7 @@ MonoBehaviour:
     errorCode: 0
     errorMessage: 
     nickName: Tales
-    gold: 1000
+    gold: 400
   dtoCharacter:
     errorCode: 0
     errorMessage: 
@@ -25,16 +25,30 @@ MonoBehaviour:
   dtoStage:
     errorCode: 0
     errorMessage: 
-    lastStageIndex: 1000
-    lastPosX: -38.821323
-    lastPosY: 4.765956
-    lastPosZ: 0.66528594
+    lastPosX: -82.26813
+    lastPosY: 1.5096658
+    lastPosZ: 2.0990438
+    lastStageIndex: 1001
   dtoItem:
     errorCode: 0
     errorMessage: 
-    dtoItems: []
+    dtoItems:
+    - index: 1000
+      slotIndex: 0
+      amount: 3
+      reinforceValue: 0
+      isEquip: 0
+    - index: 1001
+      slotIndex: 1
+      amount: 2
+      reinforceValue: 0
+      isEquip: 0
   dtoQuest:
     errorCode: 0
     errorMessage: 
-    progressQuests: []
-    completeQuests: 
+    progressQuests:
+    - errorCode: 0
+      errorMessage: 
+      index: 1000
+      details: 0000000000000000
+    completeQuests: e9030000

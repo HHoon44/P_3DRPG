@@ -148,6 +148,7 @@ namespace ProjectChan.Define
         public const float ChangeFormValue = 7.0f;
         public const float BaseSpeed = 0.5f;
         public const int BossIndex = 1002;
+        public const int BossSpawn = 3;
     }
 
     public class ItemData

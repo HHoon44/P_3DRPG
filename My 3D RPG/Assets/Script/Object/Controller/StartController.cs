@@ -54,28 +54,34 @@ namespace ProjectChan
         }
 
         /// <summary>
-        /// => 현재 페이즈에 대한 로직 실행
+        /// => 현재 페이즈에 대한 로직을 실행하는 메서드
         /// </summary>
         /// <param name="phase"> 진행시키고자 하는 현재 페이즈 </param>
         private void OnPhase(IntroPhase phase)
         {
+            // -> 현재 진행 상태를 띄웁니다!
             uiStart.SetLoadStateDescription(phase.ToString());
 
+            // -> 이미 실행중인 코루틴을 또 실행시킨다면?
             if (loadGaugeUpdateCoroutine != null)
             {
+                // -> 오류가 발생하므로 
+                //    일단 멈춘 후에 새로 변경된 로딩 게이지 퍼센트를 넘겨 코루틴을 다시 시작하게 합니다!
                 StopCoroutine(loadGaugeUpdateCoroutine);
                 loadGaugeUpdateCoroutine = null;
             }
 
+            // -> 아직 페이즈가 모두 완료되지 않았다면!
             if (phase != IntroPhase.Complete)
             {
+                // -> 현재 로딩 게이지 퍼센트를 구해서 코루틴에 보내줍니다!
                 var loadPer = (float)phase / (float)IntroPhase.Complete;
 
                 loadGaugeUpdateCoroutine = StartCoroutine(uiStart.LoadGaugeUpdate(loadPer));
             }
             else
             {
-                /// 완료 되었다면 Image의 fillAmount값을 1로 설정해준다
+                // -> 완료되었다면 로딩 게이지를 완료 게이지 퍼센트로 설정해줍니다!
                 uiStart.loadFillGauge.fillAmount = 1f;
             }
 
