@@ -21,6 +21,11 @@ namespace ProjectChan.Editor
 
         }
 
+        private static void ImportNewOrModified(string[] importedAssets)
+        {
+            ExcelToJson(importedAssets, false);
+        }
+
         private static void Delete(string[] deletedAssets)
         {
             ExcelToJson(deletedAssets, true);
@@ -32,11 +37,6 @@ namespace ProjectChan.Editor
             ImportNewOrModified(movedAssets);
         }
 
-        private static void ImportNewOrModified(string[] importedAssets)
-        {
-            ExcelToJson(importedAssets, false);
-        }
-
         private static void ExcelToJson(string[] assets, bool isDeleted)
         {
             List<string> staticDataAssets = new List<string>();
@@ -44,7 +44,9 @@ namespace ProjectChan.Editor
             foreach (var asset in assets)
             {
                 if (IsStaticData(asset, isDeleted))
+                {
                     staticDataAssets.Add(asset);
+                }
             }
 
             foreach (var staticDataAsset in staticDataAssets)
@@ -59,8 +61,8 @@ namespace ProjectChan.Editor
 
                     var fileFullPath = $"{rootPath}/{staticDataAsset}";
 
-                    var excelToJsonConvert = new ExcelToJsonConvert(fileFullPath,
-                        $"{rootPath}/{Define.StaticData.SDJosnPath}");
+                    var excelToJsonConvert = 
+                        new ExcelToJsonConvert(fileFullPath, $"{rootPath}/{Define.StaticData.SDJosnPath}");
 
                     if (excelToJsonConvert.SaveJsonFiles() > 0)
                     {
@@ -76,17 +78,18 @@ namespace ProjectChan.Editor
                         string.Format("Couldn't convert assets = {0}", staticDataAsset), "OK");
                 }
             }
-
         }
 
         private static bool IsStaticData(string path, bool isDeleted)
         {
             if (path.EndsWith(".xlsx") == false)
+            {
                 return false;
+            }
 
             var absolutePath = Application.dataPath + path.Remove(0, "Assets".Length);
 
-            return ((isDeleted || File.Exists(absolutePath)) && path.StartsWith(Define.StaticData.SDExcelPath));
+            return ((isDeleted || File.Exists(absolutePath)) && (path.StartsWith(Define.StaticData.SDExcelPath)));
         }
     }
 }
