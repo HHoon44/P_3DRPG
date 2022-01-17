@@ -381,6 +381,7 @@ namespace ProjectChan.UI
             var sdItems = new List<SDItem>();
 
             // -> 현재 퀘스트의 보상과 같은 아이템 기획 데이터를 찾는 작업
+            // -> 
             for (int i = 0; i < currentQuest.compensation.Length; i++)
             {
                 sdItems.Add(GameManager.SD.sdItems.Where(obj => obj.index == currentQuest.compensation[i])?.SingleOrDefault());
@@ -413,7 +414,10 @@ namespace ProjectChan.UI
                     else
                     {
                         // -> 새롭게 추가해줍니다!
-                        SetItem(new BoItem(sdItems[i]));
+
+                        var boItem = new BoItem(sdItems[i]);
+                        boItem.amount = currentQuest.compensationDetail[i];
+                        SetItem(boItem);
                     }
                 }
                 else

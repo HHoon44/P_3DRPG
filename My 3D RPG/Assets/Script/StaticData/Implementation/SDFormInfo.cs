@@ -17,8 +17,8 @@ namespace ProjectChan.SD
         public float atkRange;          // -> 변신폼의 공격 범위
         public float maxHp;             // -> 변신폼의 체력
         public float maxHpFactor;       // -> 변신폼의 실제 체력
-        public float maxMana;           // -> 변신폼의 마나
-        public float maxManaFactor;     // -> 변신폼의 실제 마나
+        public float maxEnergy;         // -> 변신폼의 마나
+        public float maxEnergyFactor;   // -> 변신폼의 실제 마나
         public float atk;               // -> 변신폼의 공격력
         public float atkFactor;         // -> 변신폼의 실제 공격력
         public float def;               // -> 변신폼의 방어력

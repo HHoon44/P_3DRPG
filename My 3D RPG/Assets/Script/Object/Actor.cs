@@ -257,6 +257,8 @@ namespace ProjectChan.Object
             {
                 case ActorType.Character:
                 case ActorType.Form:
+                    attackController.isCoolTime = false;
+                    anim.SetBool(charAnim.isAttack, false);
                     anim.SetTrigger(charAnim.isDamage);
                     break;
 

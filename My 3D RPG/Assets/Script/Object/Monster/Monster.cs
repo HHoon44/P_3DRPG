@@ -219,7 +219,7 @@ namespace ProjectChan.Object
                 1 << LayerMask.NameToLayer("Player"));
 
             // -> 감지한 플레이어가 없다면!
-            if (colls.Length == 0)
+            if (colls.Length == 0 || colls[0].GetComponent<Character>().State == ActorState.Dead)
             {
                 attackController.hasTarget = false;
                 return;

@@ -15,8 +15,8 @@ MonoBehaviour:
   dtoAccount:
     errorCode: 0
     errorMessage: 
-    nickName: Tales
-    gold: 400
+    nickName: Myung
+    gold: 4400
   dtoCharacter:
     errorCode: 0
     errorMessage: 
@@ -25,30 +25,26 @@ MonoBehaviour:
   dtoStage:
     errorCode: 0
     errorMessage: 
-    lastPosX: -82.26813
-    lastPosY: 1.5096658
-    lastPosZ: 2.0990438
-    lastStageIndex: 1001
+    lastPosX: -39.819023
+    lastPosY: 4.8458815
+    lastPosZ: -3.4483705
+    lastStageIndex: 1000
   dtoItem:
     errorCode: 0
     errorMessage: 
     dtoItems:
     - index: 1000
       slotIndex: 0
-      amount: 3
+      amount: 6
       reinforceValue: 0
       isEquip: 0
     - index: 1001
       slotIndex: 1
-      amount: 2
+      amount: 4
       reinforceValue: 0
       isEquip: 0
   dtoQuest:
     errorCode: 0
     errorMessage: 
-    progressQuests:
-    - errorCode: 0
-      errorMessage: 
-      index: 1000
-      details: 0000000000000000
-    completeQuests: e9030000
+    progressQuests: []
+    completeQuests: e9030000e8030000

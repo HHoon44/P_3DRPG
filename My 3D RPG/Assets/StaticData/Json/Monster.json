@@ -17,8 +17,8 @@
     "atkRange": 1.0,
     "atkInterval": 2.0,
     "maxHp": 45.0,
-    "atk": 20.0,
-    "def": 20.0
+    "atk": 7.0,
+    "def": 10.0
   },
   {
     "index": 1001,
@@ -38,8 +38,8 @@
     "atkRange": 1.0,
     "atkInterval": 2.0,
     "maxHp": 40.0,
-    "atk": 20.0,
-    "def": 20.0
+    "atk": 7.0,
+    "def": 10.0
   },
   {
     "index": 1002,
@@ -52,12 +52,12 @@
     "dropItemPer": [
       0.8
     ],
-    "moveSpeed": 5.0,
-    "detectionRange": 7.0,
+    "moveSpeed": 3.0,
+    "detectionRange": 4.0,
     "atkRange": 3.0,
     "atkInterval": 2.0,
-    "maxHp": 100.0,
-    "atk": 40.0,
-    "def": 20.0
+    "maxHp": 50.0,
+    "atk": 10.0,
+    "def": 15.0
   }
 ]

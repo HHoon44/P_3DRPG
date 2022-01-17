@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectChan.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,8 +51,6 @@ namespace ProjectChan.Define
         public const float MinMonsterSpawnTime = 10f;
         public const float MaxMonsterSpawnTime = 20f;
     }
-
-
     public class Actor
     {
         public enum ActorType { None, Character, Monster, Form, Boss }
@@ -146,6 +145,7 @@ namespace ProjectChan.Define
         public const float BaseNovelSize = 0.7915039f;
         public const float NPCNovelSize = 1.518182f;
         public const float ChangeFormValue = 7.0f;
+        public const float WeaponValue = 5.0f;
         public const float BaseSpeed = 0.5f;
         public const int BossIndex = 1002;
         public const int BossSpawn = 3;
@@ -188,4 +188,35 @@ namespace ProjectChan.Define
         public const string DunGeonClipPath = "Video/DunGeonClip";
     }
 
+    public class NewPlayerData
+    {
+        public enum GameType { None, New, Continue }
+
+        public DtoAccount newStartDA;
+        public DtoCharacter newStartDC;
+        public DtoStage newStartDS;
+        public DtoItem newStartDI;
+        public DtoQuest newStartDQ;
+
+        public NewPlayerData()
+        {
+            newStartDA = new DtoAccount();
+            newStartDA.nickName = "Myung";
+            newStartDA.gold = 5000;
+
+            newStartDC = new DtoCharacter();
+            newStartDC.index = 1000;
+            newStartDC.level = 1;
+
+            newStartDS = new DtoStage();
+            newStartDS.lastStageIndex = 1000;
+            newStartDS.lastPosX = -39.99055f;
+            newStartDS.lastPosY = 4.76709f;
+            newStartDS.lastPosZ = 0.7138443f;
+
+            //newStartDI = new DtoItem();
+            //newStartDI.dtoItems = new List<DtoItemElement>();
+        }
+        /// -> 뉴 게임 할 때 사용할 Dto 데이터 정보들 담아놓기ㄴ
+    }
 }

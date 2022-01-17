@@ -19,7 +19,7 @@ namespace ProjectChan
     /// </summary>
     public class StartController : MonoBehaviour
     {
-        public UIStart uiStart;                                                       
+        public UIStart uiStart;
 
         private bool allLoaded;                                 // -> 로드가 모두 되었는지
         private IntroPhase introPhase = IntroPhase.Start;       // -> 현재 페이즈
@@ -50,6 +50,8 @@ namespace ProjectChan
         /// </summary>
         public void Initialize()
         {
+            // -> 유저 데이터를 초기 설정합니다!
+            UserManager.Instance.Initialize();
             OnPhase(introPhase);
         }
 
@@ -122,7 +124,18 @@ namespace ProjectChan
                     break;
 
                 case IntroPhase.Complete:
-                    SceneManager.LoadScene(SceneType.NovelGame.ToString());
+                    switch (UserManager.Instance.currentGameType)
+                    {
+                        case NewPlayerData.GameType.New:
+                            SceneManager.LoadScene(SceneType.NovelGame.ToString());
+                            break;
+
+                        case NewPlayerData.GameType.Continue:
+                            GameManager.Instance.LoadScene
+                                (SceneType.InGame, StageManager.Instance.ChangeStage(), StageManager.Instance.OnChangeStageComplete);
+                            break;
+                    }
+
                     allLoaded = true;
                     LoadComplete = true;
                     break;

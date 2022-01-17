@@ -262,6 +262,13 @@ namespace ProjectChan.UI
                     // -> 현재 드래그를 할 슬롯에 담아놓습니다!
                     dragSlot = results[i].gameObject.GetComponent<ItemSlot>();
 
+                    // -> 드래그 할 슬롯이 그냥 빈 슬롯이라면!
+                    if (dragSlot.BoItem == null)
+                    {
+                        dragSlot = null;
+                        return;
+                    }
+                    
                     // -> 그리고 현재 위치를 담아놓습니다!
                     dragSlotOriginVec = dragSlot.ItemImage.transform.position;
                     break;
@@ -292,6 +299,12 @@ namespace ProjectChan.UI
         /// <param name="eventData"> 마우스의 정보를 담고 있는 데이터 </param>
         public void OnEndDrag(PointerEventData eventData)
         {
+            // -> 옮기려는 슬롯이 없다면!
+            if (dragSlot == null)
+            {
+                return;
+            }
+
             // -> 드래그를 끝낸 지점에서 한번 더 레이 캐스트를 사용합니다!
             var results = new List<RaycastResult>();
 

@@ -18,7 +18,7 @@
     "index": 1001,
     "name": "첫번째 던전",
     "resourcePath": "Prefabs/Stage/DunGeon",
-    "stageMonCount": 10,
+    "stageMonCount": 8,
     "genMonsters": [
       1000,
       1001,

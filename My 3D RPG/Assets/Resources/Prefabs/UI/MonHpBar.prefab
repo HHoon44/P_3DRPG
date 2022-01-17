@@ -68,7 +68,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: ffa4c536861302e46a81d91e57436b98, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706727c1053bb254eac9cae93ec47aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpGauge: {fileID: 7440679027931274240}
 --- !u!1 &7440679027931274301
 GameObject:
   m_ObjectHideFlags: 0

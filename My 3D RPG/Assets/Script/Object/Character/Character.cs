@@ -54,7 +54,7 @@ namespace ProjectChan.Object
             boCharacter.currentHp =
                 boCharacter.maxHp = boCharacter.level * boCharacter.sdOriginInfo.maxHp * boCharacter.sdOriginInfo.maxHpFactor;
             boCharacter.currentEnergy =
-                boCharacter.maxEnergy = boCharacter.level * boCharacter.sdOriginInfo.maxMana * boCharacter.sdOriginInfo.maxManaFactor;
+                boCharacter.maxEnergy = boCharacter.level * boCharacter.sdOriginInfo.maxEnergy * boCharacter.sdOriginInfo.maxEnergyFactor;
             boCharacter.atk = boCharacter.level * boCharacter.sdOriginInfo.atk * boCharacter.sdOriginInfo.atkFactor;
             boCharacter.def = boCharacter.level * boCharacter.sdOriginInfo.def * boCharacter.sdOriginInfo.defFactor;
 
@@ -81,7 +81,7 @@ namespace ProjectChan.Object
             boCharacter.currentHp =
                 boCharacter.maxHp = boCharacter.level * boCharacter.sdFormInfo.maxHp * boCharacter.sdFormInfo.maxHpFactor;
             boCharacter.currentEnergy =
-                boCharacter.maxEnergy = boCharacter.level * boCharacter.sdFormInfo.maxMana * boCharacter.sdFormInfo.maxManaFactor;
+                boCharacter.maxEnergy = boCharacter.level * boCharacter.sdFormInfo.maxEnergy * boCharacter.sdFormInfo.maxEnergyFactor;
             boCharacter.atk = boCharacter.level * boCharacter.sdFormInfo.atk * boCharacter.sdFormInfo.atkFactor;
             boCharacter.def = boCharacter.level * boCharacter.sdFormInfo.def * boCharacter.sdFormInfo.defFactor;
 
@@ -343,7 +343,7 @@ namespace ProjectChan.Object
             if (Input.GetButtonDown("WeaponChange"))
             {
                 // -> 땅이 아니라면!
-                if (!boActor.isGround)
+                if (!boActor.isGround || boActor.currentEnergy < Define.StaticData.WeaponValue)
                 {
                     return;
                 }
@@ -353,6 +353,8 @@ namespace ProjectChan.Object
                 playerController.PlayerCharacter.boActor.moveDir = Vector3.zero;
                 var newDir = Vector3.zero;
                 playerController.PlayerCharacter.boActor.rotDir = newDir;
+
+                boActor.currentEnergy -= Define.StaticData.WeaponValue;
 
                 // -> 장착을 하고 있는 상태라면 무기를 해제!
                 // -> 아니라면 무기를 장착!

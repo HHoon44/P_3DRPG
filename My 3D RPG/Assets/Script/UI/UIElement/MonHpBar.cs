@@ -15,8 +15,9 @@ namespace ProjectChan.UI
     /// </summary>
     public class MonHpBar : MonoBehaviour, IPoolableObject
     {
+        public Image hpGauge;       // -> 체력바에 존재하는 이미지 컴포넌트
+
         private Actor target;       // -> 따라다닐 대상
-        private Image hpGauge;      // -> 체력바에 존재하는 이미지 컴포넌트
 
         /// <summary>
         /// => 재사용이 가능한지
@@ -30,11 +31,10 @@ namespace ProjectChan.UI
         /// <param name="target"> 따라다닐 대상 </param>
         public void Initialize(Actor target)
         {
-            hpGauge = GetComponent<Image>();
-
             this.target = target;
 
             hpGauge.fillAmount = 1f;
+            hpGauge.type = Image.Type.Filled;
             transform.localScale = Vector3.one;
         }
 

@@ -6,9 +6,9 @@
     "atkRange": 5.0,
     "maxHp": 5.0,
     "maxHpFactor": 5.0,
-    "maxMana": 5.0,
-    "maxManaFactor": 5.0,
-    "atk": 5.0,
+    "maxEnergy": 3.0,
+    "maxEnergyFactor": 3.0,
+    "atk": 4.0,
     "atkFactor": 5.0,
     "def": 2.0,
     "defFactor": 3.0

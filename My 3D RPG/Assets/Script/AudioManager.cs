@@ -16,16 +16,18 @@ namespace ProjectChan
         /// </summary>
         public AudioSource audio { get; private set; }
 
-        void Awake()
+        protected override void Awake()
         {
             audio = GetComponent<AudioSource>();
 
             // -> 씬 변경 떄 파괴되지 않도록!
             if (gameObject != null)
-            { 
+            {
                 DontDestroyOnLoad(this);
             }
         }
+
+        #region 오디오 관련
 
         /// <summary>
         /// => 오디오 소스의 볼륨 값을 설정하는 메서드
@@ -36,7 +38,6 @@ namespace ProjectChan
             audio.volume = value;
         }
 
-        #region 오디오 관련
 
         /// <summary>
         /// => 오디오를 정지 하는 메서드

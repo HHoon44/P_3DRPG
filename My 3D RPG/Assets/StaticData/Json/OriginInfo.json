@@ -4,13 +4,11 @@
     "weaponIndex": 1001,
     "maxHp": 3.0,
     "maxHpFactor": 3.0,
-    "maxMana": 3.0,
-    "maxManaFactor": 3.0,
+    "maxEnergy": 3.0,
+    "maxEnergyFactor": 3.0,
     "atk": 3.0,
     "atkFactor": 3.0,
     "def": 2.0,
-    "defFactor": 2.0,
-    "behaviour": 3.0,
-    "behaviourFactor": 3.0
+    "defFactor": 2.0
   }
 ]

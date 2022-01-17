@@ -273,8 +273,8 @@ namespace ProjectChan
             var sd = GameManager.SD;
             var sdStage = GameManager.User.boStage.sdStage;
 
-            // -> 몬스터 생성 개수와 홀더에 존재하는 ChildCount가 같다면!
-            if (monsterHolder.childCount == sdStage.stageMonCount)
+            // -> 스테이지에 생성된 몬스터의 개수와 생성 제한 값이 같다면!
+            if (monsterHolder.childCount >= sdStage.stageMonCount)
             {
                 // -> 생성 작업을 멈춥니다!
                 return;

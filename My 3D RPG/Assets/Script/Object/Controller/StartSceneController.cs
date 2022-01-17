@@ -57,10 +57,17 @@ namespace ProjectChan
                 // -> 새로하기 버튼
                 case 0:
                     SceneManager.LoadScene("FirstLoading");
+
+                    // -> 새로운 게임을 합니다!
+                    UserManager.Instance.currentGameType = NewPlayerData.GameType.New;
                     break;
 
                 // -> 이어하기 버튼
                 case 1:
+                    SceneManager.LoadScene("FirstLoading");
+
+                    // - 게임을 이어서 합니다!
+                    UserManager.Instance.currentGameType = NewPlayerData.GameType.Continue;
                     break;
 
                 // -> 옵션 버튼

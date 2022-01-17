@@ -19,7 +19,6 @@ namespace ProjectChan.DB
         public int[] completeQuests;                  // -> 완료한 퀘스트들의 인덱스 데이터
     }
 
-
     /// <summary>
     /// => 현재 진행중인 Quest를 담아놓을 데이터
     /// => 작업 과정에서 확인하기 위해서 Serializable
