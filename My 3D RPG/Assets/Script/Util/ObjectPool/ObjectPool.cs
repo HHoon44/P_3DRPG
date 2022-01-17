@@ -56,6 +56,7 @@ namespace ProjectChan.Util
             // -> 재사용 할 수 없다면!
             if (!canRecycle)
             {
+                // ->                           True      False
                 var protoObj = Pool.Count > 0 ? Pool[0] : null;
 
                 if (protoObj != null)

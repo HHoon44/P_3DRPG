@@ -65,7 +65,10 @@ namespace ProjectChan.SD
             {
                 // -> 파일이름이 타입이름에서 SD만 제거하면 동일하다는 규칙을 이용합니다!
                 var fileName = typeof(T).Name.Remove(0, "SD".Length);
+
+                // -> 경로에 있는 모든 Json 파일을 읽어옵니다!
                 var json = File.ReadAllText($"{path}/{fileName}.json");
+
                 data = SerializationUtil.FromJson<T>(json);
             }
         }
