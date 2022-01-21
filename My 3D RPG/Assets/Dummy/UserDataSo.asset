@@ -16,7 +16,7 @@ MonoBehaviour:
     errorCode: 0
     errorMessage: 
     nickName: Myung
-    gold: 4400
+    gold: 5000
   dtoCharacter:
     errorCode: 0
     errorMessage: 
@@ -25,26 +25,21 @@ MonoBehaviour:
   dtoStage:
     errorCode: 0
     errorMessage: 
-    lastPosX: -39.819023
-    lastPosY: 4.8458815
-    lastPosZ: -3.4483705
-    lastStageIndex: 1000
+    lastPosX: 2.0779536
+    lastPosY: 3.008113
+    lastPosZ: -25.672615
+    lastStageIndex: 1001
   dtoItem:
     errorCode: 0
     errorMessage: 
     dtoItems:
     - index: 1000
       slotIndex: 0
-      amount: 6
-      reinforceValue: 0
-      isEquip: 0
-    - index: 1001
-      slotIndex: 1
-      amount: 4
+      amount: 1
       reinforceValue: 0
       isEquip: 0
   dtoQuest:
     errorCode: 0
     errorMessage: 
     progressQuests: []
-    completeQuests: e9030000e8030000
+    completeQuests: 

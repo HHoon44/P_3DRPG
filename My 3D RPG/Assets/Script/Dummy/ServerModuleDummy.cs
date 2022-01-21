@@ -22,12 +22,14 @@ namespace ProjectChan.Dummy
             this.serverData = serverData;
         }
 
-        // -> 혼자 다 한다 
-        // -> 1. 더미 서버 이므로 실제로 클라이언트에서 클라이언트의 요청을 처리하는 것과 같음
-        // -> 2. 통신 요청에 대한 실패가 발생할 일이 일반적으로 없음
-        // -> 3. 강제로 요청 성공 메서드를 실행 시킴
-        // -> 4. DtoAccount 값을 ToJson을 통해 json 파일로 변형 후 handleSuccess에 인자로 전달
-        // -> 5. 실패가 없으므로 강제로 성공 메서드를 부른다
+        /*
+         *  혼자 다 한다
+         *  1. 더미 서버 이므로 실제로 클라이언트에서 클라이언트의 요청을 처리하는 것과 같음
+         *  2. 통신 요청에 대한 실패가 발생할 일이 일반적으로 없음
+         *  3. 강제로 요청 성공 메서드를 실행 시킴
+         *  4. DtoAcocunt 값을 ToJson을 통해 Json 파일로 변형 후 HandlerSuccess에 인자로 전달
+         *  5. 실패가 없으므로 강제로 성공 메서드를 부른다
+         */
 
         public void GetAccount(int uniqueId, ResponsHandler<DtoAccount> responsHandler)
         {
@@ -77,9 +79,11 @@ namespace ProjectChan.Dummy
             // -> 퀘스트의 디테일 정보는 현재 퀘스트의 종류에 따라 달라집니다!
             switch (sdQuest.questType)
             {
-                // -> 사냥 : 몇 종류의 몬스터를 몇마리 잡아라
-                // -> 수집 : 몇 종류의 아이템을 몇개 가져와라
-                // -> 대화 : 어떤 NPC와 대화를 해라
+                /*
+                 *  사냥 : 몇 종류의 몬스터를 몇마리 잡아와라!
+                 *  수집 : 몇 종류의 아이템을 몇개정도 가져와라!
+                 *  대화 : 특정 NPC와 대화를 해라!
+                 */
                 case Define.QuestType.Collection:
                 case Define.QuestType.Hunt:
                 case Define.QuestType.Conversation:
@@ -90,7 +94,7 @@ namespace ProjectChan.Dummy
                     Array.ForEach(dtoQuestProgress.details, obj => obj = 0);
                     break;
             }
-            
+
             // -> DtoProgressQuest에 현재 퀘스트를 추가 해야하기 때문에 
             //    현재 진행중인 퀘스트 목록의 길이에 저장할 공간을 추가 합니다!
             var length = serverData.userData.dtoQuest.progressQuests.Length + 1;
