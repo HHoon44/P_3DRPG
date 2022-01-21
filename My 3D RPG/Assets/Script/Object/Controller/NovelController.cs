@@ -102,13 +102,6 @@ namespace ProjectChan.Novel
             {
                 OnTalse();
             }
-
-            /// 테스트입니다
-            if (Input.GetButtonDown(Define.Input.Quest.ToString()))
-            {
-                OnTalse();
-                speechIndex = 76;
-            }
         }
     }
 }
