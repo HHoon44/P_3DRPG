@@ -25,10 +25,10 @@ MonoBehaviour:
   dtoStage:
     errorCode: 0
     errorMessage: 
-    lastPosX: -40.581886
-    lastPosY: 4.819469
-    lastPosZ: -1.9971256
-    lastStageIndex: 1000
+    lastPosX: -4.5531797
+    lastPosY: 3.008113
+    lastPosZ: -11.55881
+    lastStageIndex: 1001
   dtoItem:
     errorCode: 0
     errorMessage: 
