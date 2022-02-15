@@ -14,13 +14,15 @@ namespace ProjectChan.Battle
     /// </summary>
     public class AttackController : MonoBehaviour
     {
-        public bool hasTarget;                              // -> 공격 대상이 있는지?
-        public bool canCheckCoolTime;                       // -> 공격 쿨타임을 체크할 수있는지? ( 공격 모션이 끝나기 전에는 쿨타임 체크를 막는다 )
-        public bool isCoolTime;                             // -> 공격 쿨타임인지?
-        public bool canAtk;                                 // -> 공격 가능 상태인지?
+        // public 
+        public bool hasTarget;                  // -> 공격 대상이 있는지?
+        public bool canCheckCoolTime;           // -> 공격 쿨타임을 체크할 수있는지? ( 공격 모션이 끝나기 전에는 쿨타임 체크를 막는다 )
+        public bool isCoolTime;                 // -> 공격 쿨타임인지?
+        public bool canAtk;                     // -> 공격 가능 상태인지?
 
-        private float currentAtkInterval;                   // -> 현재 공격 쿨타임을 체크하는 값
-        private Actor attacker;                             // -> 공격자 ( 해당 어택 컨트롤러 인스턴스를 갖는 액터 )
+        // private
+        private float currentAtkInterval;       // -> 현재 공격 쿨타임을 체크하는 값
+        private Actor attacker;                 // -> 공격자 ( 해당 어택 컨트롤러 인스턴스를 갖는 액터 )
 
         /// <summary>
         /// => 현재 타겟을 넣어 놓을 리스트
@@ -33,7 +35,7 @@ namespace ProjectChan.Battle
         }
 
         /// <summary>
-        /// => 공격 사능 상태일 때 공격자의 상태를 변경 하는 메서드
+        /// => 공격 가능 상태일 때 공격자의 상태를 변경 하는 메서드
         /// </summary>
         public void CheckAttack()
         {

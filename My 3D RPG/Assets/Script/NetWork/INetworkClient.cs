@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ProjectChan.NetWork
 {
     /// <summary>
-    /// => 서버와 통신하는 프로토콜(서버와 클라이언트 사이의 통신에 사용되는 API) 메서드를 갖는 인터페이스
+    /// => 서버와 통신하는 프로토콜(서버와 클라이언트 사이의 통신에 사용되는 API)메서드를 갖는 인터페이스
     /// </summary>
     public interface INetworkClient
     {

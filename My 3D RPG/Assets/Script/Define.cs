@@ -213,10 +213,6 @@ namespace ProjectChan.Define
             newStartDS.lastPosX = -39.99055f;
             newStartDS.lastPosY = 4.76709f;
             newStartDS.lastPosZ = 0.7138443f;
-
-            //newStartDI = new DtoItem();
-            //newStartDI.dtoItems = new List<DtoItemElement>();
         }
-        /// -> 뉴 게임 할 때 사용할 Dto 데이터 정보들 담아놓기ㄴ
     }
 }

@@ -16,6 +16,7 @@ namespace ProjectChan.SD
     [Serializable]
     public class StaticDataModule
     {
+        // public 
         public List<SDCharacter> sdCharacters;
         public List<SDStage> sdStages;
         public List<SDNovel> sdNovels;
@@ -29,6 +30,7 @@ namespace ProjectChan.SD
 
         public void Initialize()
         {
+            // -> 기획 데이터 로더를 하나 생성
             var loader = new StaticDataLoader();
 
             loader.Load(out sdCharacters);
@@ -48,7 +50,8 @@ namespace ProjectChan.SD
         /// </summary>
         private class StaticDataLoader
         {
-            private string path;
+            // private
+            private string path;    // -> 읽어올 파일이 존재하는 경로
 
             public StaticDataLoader()
             {

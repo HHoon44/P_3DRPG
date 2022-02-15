@@ -16,7 +16,7 @@ namespace ProjectChan
     /// </summary>
     public class UserManager : Singleton<UserManager>
     {
-        public GameType currentGameType;        // -> 현재 게임 타입 EX) 새로운 게임 or 이어하기
+        public GameType currentGameType;        // -> 현재 유저가 선택한 게임 타입 EX) 새로운 게임 or 이어하기
 
         protected override void Awake()
         {
@@ -26,20 +26,25 @@ namespace ProjectChan
             }
         }
 
+        /// <summary>
+        /// => UserManager 초기화 메서드
+        /// </summary>
         public void Initialize()
         {
             // -> 현재 게임 타입에 따라서 유저 데이터 설정합니다!
             switch (currentGameType)
             {
                 case GameType.New:
-                    // -> 초기 DtoAccount를 생성합니다!
+                    // -> Define에 미리 생성 작성해놓은 초기 유저 데이터를 생성한다
                     var playerData = new NewPlayerData();
-                    var dummyServer = DummyServer.Instance;
 
+                    // -> Scriptable Object로 생성해놓은 유저 데이터를 가져와서 위에서 생성한 데이터를 세팅
+                    var dummyServer = DummyServer.Instance;
                     dummyServer.userData.dtoAccount = playerData.newStartDA;
                     dummyServer.userData.dtoCharacter = playerData.newStartDC;
                     dummyServer.userData.dtoStage = playerData.newStartDS;
                     dummyServer.userData.dtoItem.dtoItems.Clear();
+
                     Array.Resize(ref dummyServer.userData.dtoQuest.progressQuests, 0);
                     Array.Resize(ref dummyServer.userData.dtoQuest.completeQuests, 0);
                     break;

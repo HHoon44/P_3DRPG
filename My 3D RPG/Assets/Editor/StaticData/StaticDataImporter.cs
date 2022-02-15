@@ -10,15 +10,24 @@ using UnityEngine;
 
 namespace ProjectChan.Editor
 {
+    /// <summary>
+    /// => 에셋을 임포트 했을때 실행할 메서드를 지니고 있는 클래스
+    /// </summary>
     public class StaticDataImporter
     {
+        /// <summary>
+        /// => 에셋을 임포트하면 실행되는 메서드
+        /// </summary>
+        /// <param name="importedAssets"></param>
+        /// <param name="deletedAssets"></param>
+        /// <param name="movedAssets"></param>
+        /// <param name="movedFromAssetPaths"></param>
         public static void Import(string[] importedAssets, string[] deletedAssets,
             string[] movedAssets, string[] movedFromAssetPaths)
         {
             ImportNewOrModified(importedAssets);
             Delete(deletedAssets);
             Move(movedAssets, movedFromAssetPaths);
-
         }
 
         private static void ImportNewOrModified(string[] importedAssets)
@@ -37,6 +46,11 @@ namespace ProjectChan.Editor
             ImportNewOrModified(movedAssets);
         }
 
+        /// <summary>
+        /// => 엑셀 파일을 제이슨 파일로 변형 시켜주는 메서드
+        /// </summary>
+        /// <param name="assets"></param>
+        /// <param name="isDeleted"></param>
         private static void ExcelToJson(string[] assets, bool isDeleted)
         {
             List<string> staticDataAssets = new List<string>();
@@ -61,9 +75,11 @@ namespace ProjectChan.Editor
 
                     var fileFullPath = $"{rootPath}/{staticDataAsset}";
 
+                    // -> ExcelToJsonConvert를 이용해서 엑셀 파일을 제이슨 파일로 변형
                     var excelToJsonConvert = 
                         new ExcelToJsonConvert(fileFullPath, $"{rootPath}/{Define.StaticData.SDJosnPath}");
 
+                    // -> 변형이 성공했다면 에셋에 제이슨 파일을 저장한다
                     if (excelToJsonConvert.SaveJsonFiles() > 0)
                     {
                         AssetDatabase.ImportAsset($"{Define.StaticData.SDJosnPath}/{fileName}.json");
