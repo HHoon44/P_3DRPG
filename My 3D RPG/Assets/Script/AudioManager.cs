@@ -38,7 +38,6 @@ namespace ProjectChan
             audio.volume = value;
         }
 
-
         /// <summary>
         /// => 오디오를 정지 하는 메서드
         /// </summary>
