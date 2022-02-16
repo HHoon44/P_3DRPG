@@ -11,10 +11,10 @@ namespace ProjectChan.UI
     /// </summary>
     public class UIStart : MonoBehaviour
     {
+        // pulbic
         public Text loadStateDesc;          // -> 로딩바 텍스트
         public Image loadFillGauge;         // -> 로딩바 이미지
         public Image backImage;             // -> 설정할 백 이미지
-
         private void Start()
         {
             // -> 백 이미지를 설정하는 작업 입니다!
@@ -25,6 +25,8 @@ namespace ProjectChan.UI
 
             backImage.sprite = selectSprite;
         }
+
+        #region Public Method
 
         /// <summary>
         /// => 현재 진행 상태를 알려줄 띄울 코루틴
@@ -49,5 +51,7 @@ namespace ProjectChan.UI
                 yield return null;
             }
         }
+
+        #endregion
     }
 }

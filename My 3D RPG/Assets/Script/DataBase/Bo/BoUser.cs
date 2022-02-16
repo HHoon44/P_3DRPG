@@ -13,13 +13,14 @@ namespace ProjectChan.DB
     [Serializable]
     public class BoUser
     {
+        // public 
         public BoAccount boAccount;         // -> 유저의 계정 정보
         public BoCharacter boCharacter;     // -> 유저의 캐릭터 정보
         public BoStage boStage;             // -> 유저의 스테이지 정보
         public BoQuest boQuest;             // -> 유저가 지닌 퀘스트 정보
 
         /// <summary>
-        /// 아이템 정보가 담길 리스트
+        /// => 아이템 정보가 담길 리스트
         /// </summary>
         public List<BoItem> boItems;
 

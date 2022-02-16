@@ -16,9 +16,11 @@ namespace ProjectChan.UI
     /// </summary>
     public class UIDialogue : UIWindow
     {
+        // public 
         public Transform buttonHolder;              // -> 다이얼로그 버튼들이 생성될 홀더
         public Transform functionHolder;            // -> 기능 버튼들이 생성될 홀더
 
+        // private
         private UINovel uiNovelSet;                 // -> 대화창 셋
         private BoNovel boNovel;                    // -> 대화창을 세팅할때 사용할 데이터
 

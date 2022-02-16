@@ -1770,7 +1770,7 @@ RectTransform:
   - {fileID: 1997803658}
   - {fileID: 62088787}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1787,10 +1787,9 @@ GameObject:
   m_Component:
   - component: {fileID: 236073604}
   - component: {fileID: 236073603}
-  - component: {fileID: 236073605}
   - component: {fileID: 236073606}
   - component: {fileID: 236073602}
-  - component: {fileID: 236073607}
+  - component: {fileID: 236073605}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1937,21 +1936,6 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
---- !u!114 &236073607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 236073601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3fe523b49c84348a9f5d075077aaaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 236073603}
-  mat: {fileID: 2100000, guid: 957b93610f4d44a4bb6eaf68313714a7, type: 2}
-  myRenderTexture: {fileID: 0}
 --- !u!1 &301968179
 GameObject:
   m_ObjectHideFlags: 0
@@ -6241,7 +6225,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1224665307
 GameObject:
@@ -6440,7 +6424,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1299584242
 MonoBehaviour:

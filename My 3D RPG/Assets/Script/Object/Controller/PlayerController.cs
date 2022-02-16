@@ -12,7 +12,6 @@ namespace ProjectChan.Object
     using CamView = Define.Camera.CamView;
     using Input = Define.Input;
 
-
     /*
      *  플레이어 캐릭터의 입력 처리
      *  캐릭터 클래스에서 처리 안하는 이유
@@ -31,11 +30,12 @@ namespace ProjectChan.Object
     /// </summary>
     public class PlayerController : MonoBehaviour
     {
+        // public
         public CameraController cameraController;       // -> 카메라를 관리하는 카메라 컨트롤러
 
+        // private
         private Transform pointingTarget;               // -> 마우스 포인터에 걸린 타겟
         private bool canRot;                            // -> 캐릭터 회천 여부
-
 
         /// <summary>
         /// => 컨트롤러를 지닐 캐릭터

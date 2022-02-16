@@ -25,10 +25,12 @@ namespace ProjectChan
     /// </summary>
     public class StageManager : Singleton<StageManager>
     {
+        // public
         public int huntedMon;                       // -> 사냥한 몬스터 개수
         public bool isMonReady;                     // -> 몬스터를 생성할 준비가되었는가?
         public Transform monsterHolder;             // -> 몬스터를 자식으로 가질 부모 홀더
 
+        // private
         private GameObject currentStage;            // -> 현재 스테이지 객체
         private Transform NPCHolder;                // -> NPC를 자식으로 가질 부모 홀더
         private float currentMonSpawnTime;          // -> 현재 몬스터 스폰 시간
@@ -50,6 +52,8 @@ namespace ProjectChan
             // -> 몬스터 스폰 타입을 계속 업데이트 해줍니다!
             CheckSpawnTime();
         }
+
+        #region Public Method
 
         /// <summary>
         /// => 프리팹으로 저장된 스테이지를 불러오는 메서드
@@ -152,7 +156,45 @@ namespace ProjectChan
             isMonReady = true;
         }
 
-        #region 오브젝트 생성 작업
+        /// <summary>
+        /// => 에이전트의 목적지(destPos)를 반환해주는 메서드
+        /// </summary>
+        /// <param name="monsterIndex"> 생성될 몬스터 인덱스 값 </param>
+        /// <returns></returns>
+        public Vector3 GetRandPosInArea(int monsterIndex)
+        {
+            var sdStage = GameManager.User.boStage.sdStage;
+
+            var arrayIndex = -1;
+
+            // -> 목적지를 받을 몬스터의 인덱스가 현재 스테이지에 포함되어 있는지 확인하는 작업입니다!
+            for (int i = 0; i < sdStage.genMonsters.Length; i++)
+            {
+                // -> 같은 값이 존재한다면!
+                if (sdStage.genMonsters[i] == monsterIndex)
+                {
+                    arrayIndex = i;
+                    break;
+                }
+            }
+
+            // -> 딕셔너리에 저장되어 있는 Bounds 정보를 가져옵니다!
+            var bounds = spawnAreaBounds[sdStage.spawnArea[arrayIndex]];
+            var spawnPosX = Random.Range(-bounds.size.x * .5f, bounds.size.x * .5f);
+            var spawnPosZ = Random.Range(-bounds.size.z * .5f, bounds.size.z * .5f);
+
+            transform.position = new Vector3(spawnPosX, 50f, spawnPosZ);
+            Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 55f, 1 << LayerMask.NameToLayer("Floor"));
+            Debug.DrawRay(transform.position, Vector3.down * 55f, Color.red);
+
+            // -> 목적지를 반환해줍니다!
+            return new Vector3(spawnPosX, hit.point.y, spawnPosZ);
+        }
+
+        #endregion
+
+
+        #region Private Method
 
         /// <summary>
         /// => 캐릭터 생성 또는 스테이지 이동 시 캐릭터 위치를 재설정 해주는 메서드
@@ -342,41 +384,6 @@ namespace ProjectChan
                 monster.State = Define.Actor.ActorState.None;
                 battleManager.AddActor(monster);
             }
-        }
-
-        /// <summary>
-        /// => 에이전트의 목적지(destPos)를 반환해주는 메서드
-        /// </summary>
-        /// <param name="monsterIndex"> 생성될 몬스터 인덱스 값 </param>
-        /// <returns></returns>
-        public Vector3 GetRandPosInArea(int monsterIndex)
-        {
-            var sdStage = GameManager.User.boStage.sdStage;
-
-            var arrayIndex = -1;
-
-            // -> 목적지를 받을 몬스터의 인덱스가 현재 스테이지에 포함되어 있는지 확인하는 작업입니다!
-            for (int i = 0; i < sdStage.genMonsters.Length; i++)
-            {
-                // -> 같은 값이 존재한다면!
-                if (sdStage.genMonsters[i] == monsterIndex)
-                {
-                    arrayIndex = i;
-                    break;
-                }
-            }
-
-            // -> 딕셔너리에 저장되어 있는 Bounds 정보를 가져옵니다!
-            var bounds = spawnAreaBounds[sdStage.spawnArea[arrayIndex]];
-            var spawnPosX = Random.Range(-bounds.size.x * .5f, bounds.size.x * .5f);
-            var spawnPosZ = Random.Range(-bounds.size.z * .5f, bounds.size.z * .5f);
-
-            transform.position = new Vector3(spawnPosX, 50f, spawnPosZ);
-            Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 55f, 1 << LayerMask.NameToLayer("Floor"));
-            Debug.DrawRay(transform.position, Vector3.down * 55f, Color.red);
-
-            // -> 목적지를 반환해줍니다!
-            return new Vector3(spawnPosX, hit.point.y, spawnPosZ);
         }
 
         #endregion

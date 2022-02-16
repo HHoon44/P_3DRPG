@@ -77,7 +77,7 @@ namespace ProjectChan
         /// <param name="loadCoroutine"> StageManager.OnChangeStage </param>
         /// <param name="loadComplete"> StageManager.OnChangeStageComplete </param>
         public void LoadScene(SceneType sceneName, IEnumerator loadCoroutine = null, Action loadComplete = null)
-        {
+        { 
             StartCoroutine(WaitForLoad());
 
             IEnumerator WaitForLoad()

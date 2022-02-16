@@ -17,10 +17,12 @@ namespace ProjectChan.UI
     /// </summary>
     public class UINovel : UIWindow
     {
+        // public
         public TextMeshProUGUI speakerName;     // -> 현재 말하는 캐릭터 이름
         public TextMeshProUGUI dialogue;        // -> 현재 말하는 캐릭터의 대사
         public Image portrait;                  // -> 현재 말하는 캐릭터의 이미지
 
+        // private
         private AspectRatioFitter arf;          // -> 초상화 크기 설정
 
         public override void Start()

@@ -15,8 +15,10 @@ namespace ProjectChan.Object
     /// </summary>
     public class CameraController : MonoBehaviour
     {
+        // public
         public CamView camView;         // -> 현재 카메라 뷰
 
+        // private
         private Transform standardPos;  // -> 기본 카메라 포지션
         private Transform frontPos;     // -> 정면 카메라 포지션
         private Transform target;       // -> 카메라가 따라 다닐 타겟
@@ -52,6 +54,8 @@ namespace ProjectChan.Object
             }
         }
 
+        #region Public Method
+
         /// <summary>
         /// => 기본 카메라 뷰로 설정하는 메서드
         /// </summary>
@@ -82,6 +86,11 @@ namespace ProjectChan.Object
             transform.forward = standardPos.forward;
         }
 
+        #endregion
+
+
+        #region Private Method
+
         /// <summary>
         /// => 파라미터로 받는 카메라 Pos에따라 카메라를 세팅하는 메서드
         /// </summary>
@@ -91,5 +100,7 @@ namespace ProjectChan.Object
             transform.position = viewPos.position;
             transform.forward = viewPos.forward;
         }
+
+        #endregion
     }
 }

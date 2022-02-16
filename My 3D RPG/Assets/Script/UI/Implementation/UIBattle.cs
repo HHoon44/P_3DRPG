@@ -14,6 +14,7 @@ namespace ProjectChan.UI
     /// </summary>
     public class UIBattle : UIWindow
     {
+        // public 
         public PlayerController playerController;       // -> 플레이어 컨트롤러
         public BubbleGauge hpBubbleGauge;               // -> Hp 게이지 컴포넌트
         public BubbleGauge energyBubbleGauge;           // -> Energy 게이지 컴포넌트
@@ -34,14 +35,7 @@ namespace ProjectChan.UI
             MonHpBarUpdate();
         }
 
-        /// <summary>
-        /// => 플레이어의 커서를 상황에 따라 바꿔주는 메서드
-        /// </summary>
-        private void PlayerCursorUpdate()
-        {
-            Cursor.SetCursor
-                (playerController.HasPointTarget ? targetPointCursor : normalCursor, new Vector2(20, 1), CursorMode.Auto);
-        }
+        #region Public
 
         /// <summary>
         /// => 월드 컨버스 안에 존재하는 객체들이 플레이어를 바라 보도록 설정하는 메서드
@@ -70,26 +64,6 @@ namespace ProjectChan.UI
                 newRot.z = 0;
                 child.eulerAngles = newRot;
             }
-        }
-
-        /// <summary>
-        /// => 플레이어의 Hp, Energy의 버블 게이지를 관리하는 메서드
-        /// </summary>
-        private void BubbleGaugeUpdate()
-        {
-            var actor = playerController.PlayerCharacter?.boActor;
-
-            // -> 액터가 없다면
-            if (actor == null)
-            { 
-                return;
-            }
-
-            var currentHp = actor.currentHp / actor.maxHp;
-            var currentEnergy = actor.currentEnergy / actor.maxEnergy;
-
-            hpBubbleGauge.SetGauge(currentHp);
-            energyBubbleGauge.SetGauge(currentEnergy);
         }
 
         /// <summary>
@@ -137,5 +111,41 @@ namespace ProjectChan.UI
             // -> UIBattle의 몬스터 체력바 리스트를 청소 해줍니다!
             allMonHpBar.Clear();
         }
+
+        #endregion
+
+
+        #region Private
+
+        /// <summary>
+        /// => 플레이어의 커서를 상황에 따라 바꿔주는 메서드
+        /// </summary>
+        private void PlayerCursorUpdate()
+        {
+            Cursor.SetCursor
+                (playerController.HasPointTarget ? targetPointCursor : normalCursor, new Vector2(20, 1), CursorMode.Auto);
+        }
+
+        /// <summary>
+        /// => 플레이어의 Hp, Energy의 버블 게이지를 관리하는 메서드
+        /// </summary>
+        private void BubbleGaugeUpdate()
+        {
+            var actor = playerController.PlayerCharacter?.boActor;
+
+            // -> 액터가 없다면
+            if (actor == null)
+            { 
+                return;
+            }
+
+            var currentHp = actor.currentHp / actor.maxHp;
+            var currentEnergy = actor.currentEnergy / actor.maxEnergy;
+
+            hpBubbleGauge.SetGauge(currentHp);
+            energyBubbleGauge.SetGauge(currentEnergy);
+        }
+
+        #endregion
     }
 }

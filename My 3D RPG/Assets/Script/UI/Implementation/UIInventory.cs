@@ -18,9 +18,11 @@ namespace ProjectChan.UI
     /// </summary>
     public class UIInventory : UIWindow, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        public Button sortButton;               // -> 정렬 버튼S
+        // public
+        public Button sortButton;               // -> 정렬 버튼
         public TextMeshProUGUI playerGold;      // -> 플레이어가 지닌 금액
 
+        // private
         private Transform itemSlotHolder;       // -> 아이템 슬롯 홀더를 담을 필드
         private GraphicRaycaster gr;            // -> 컨버스안을 탐지하기 위한 레이캐스트
         private ItemSlot dragSlot;              // -> 옮기려는 아이템 슬롯

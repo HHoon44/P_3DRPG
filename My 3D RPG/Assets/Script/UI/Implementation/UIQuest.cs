@@ -20,6 +20,7 @@ namespace ProjectChan.UI
     /// </summary>
     public class UIQuest : UIWindow
     {
+        // public
         public QuestWindow currentWindow;           // -> 현재 윈도우 창
         public QuestTab currentTab;                 // -> 현재 탭 창
 
@@ -46,7 +47,6 @@ namespace ProjectChan.UI
         public TextMeshProUGUI infoDescription;     // -> 진행중인 퀘스트이 내용
         public TextMeshProUGUI questDetail;         // -> 진행중인 퀘스트의 디테일 내용
         public Transform infoWindow;                // -> 퀘스트 정보 창
-
 
         /// <summary>
         /// => 퀘스트 창에 존재하는 퀘스트 슬롯들을 담아놓을 리스트

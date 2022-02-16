@@ -17,10 +17,12 @@ namespace ProjectChan.UI
     /// </summary>
     public class UIStore : UIWindow, IPointerClickHandler
     {
+        // public
         public TextMeshProUGUI storeName;       // -> 현재 상점의 이름
         public Transform ConfirmFrame;          // -> 아이템 구매 여부를 물어보는 창
         public Button closeBtn;                 // -> 상점 창 닫기 버튼
 
+        // private
         private Transform storeSlotHolder;      // -> 상점 슬롯이 담겨잇는 홀더
         private GraphicRaycaster gr;            // -> 컨버스안을 탐지하기 위한 레이캐스터
         private ItemSlot currentClickSlost;     // -> 현재 플레이어가 클릭한 상점 슬롯 

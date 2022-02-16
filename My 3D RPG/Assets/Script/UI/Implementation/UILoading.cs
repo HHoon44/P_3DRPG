@@ -15,13 +15,15 @@ namespace ProjectChan.UI
     /// </summary>
     public class UILoading : UIWindow
     {
-        private static string dot = string.Empty;
-        private static string loadStateDescription = "로딩 중입니다";
-
-        public Camera cam;      // -> 로딩씬 카메라          
+        // public
         public TextMeshProUGUI loadStateDesc;        
         public Image loadGauge;                     
         public Image loadImage;                     
+        public Camera cam;                      // -> 로딩씬 카메라          
+
+        // private
+        private static string dot = string.Empty;
+        private static string loadStateDescription = "로딩 중입니다";
 
         public override void Start()
         {

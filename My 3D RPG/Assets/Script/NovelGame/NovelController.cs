@@ -57,6 +57,7 @@ namespace ProjectChan.Novel
 
                 // -> 대화를 하기 위한 세팅을 합니다! (배경설정, 노벨 세팅, 대화 인덱스 증가)
                 SetNovelGround(boNovel.sdNovel.stagePath);
+
                 UIWindowManager.Instance.GetWindow<UINovel>().SetNovel(boNovel);
                 speechIndex++;
             }

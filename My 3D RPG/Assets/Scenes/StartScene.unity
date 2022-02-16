@@ -553,7 +553,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1763868015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProjectChan.StartSceneController, Assembly-CSharp
         m_MethodName: ButtonOption
         m_Mode: 1
@@ -1319,7 +1319,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1763868015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProjectChan.StartSceneController, Assembly-CSharp
         m_MethodName: HelpButtonFun
         m_Mode: 1
@@ -1741,7 +1741,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1763868015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProjectChan.StartSceneController, Assembly-CSharp
         m_MethodName: ButtonOption
         m_Mode: 1
@@ -2284,7 +2284,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1763868015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProjectChan.StartSceneController, Assembly-CSharp
         m_MethodName: SetAudioVolume
         m_Mode: 1
@@ -2703,7 +2703,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1763868015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProjectChan.StartSceneController, Assembly-CSharp
         m_MethodName: ButtonOption
         m_Mode: 1
@@ -3357,7 +3357,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1763868013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8a67019678f0a24da7f4ae674175263, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c6282a2a0d31e74a82198c203efa0e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonFrame: {fileID: 1673099868}
@@ -3872,7 +3872,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1763868015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProjectChan.StartSceneController, Assembly-CSharp
         m_MethodName: OptionButtoFun
         m_Mode: 1
@@ -4005,7 +4005,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1763868015}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ProjectChan.StartSceneController, Assembly-CSharp
         m_MethodName: ButtonOption
         m_Mode: 1
