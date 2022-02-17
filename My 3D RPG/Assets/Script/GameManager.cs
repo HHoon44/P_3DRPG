@@ -13,7 +13,6 @@ using ProjectChan.Util;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static ProjectChan.Define.Actor;
 
 namespace ProjectChan
 {

@@ -14,8 +14,10 @@ namespace ProjectChan.Battle
     /// </summary>
     public class WeaponController : MonoBehaviour
     {
+        // public
         public bool isWeapon;           // -> 플레이어는 현재 무기를 가지고 있는가?
 
+        // private
         private ActorType actorType;    // -> 캐릭터 타입
 
         /// <summary>

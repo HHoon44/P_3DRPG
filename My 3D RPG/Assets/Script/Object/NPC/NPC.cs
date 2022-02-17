@@ -16,8 +16,10 @@ namespace ProjectChan.Object
     /// </summary>
     public class NPC : MonoBehaviour
     {
+        // public 
         public Animator anim;           // -> NPC 애니메이션
 
+        // private
         private float currentAnimTime;  // -> 현재 애니메이션 실행 시간
         private float maxAnimTime;      // -> 최대 애니메이션 실행 시간
         private BoNPC boNPC;            // -> NPC Bo데이터

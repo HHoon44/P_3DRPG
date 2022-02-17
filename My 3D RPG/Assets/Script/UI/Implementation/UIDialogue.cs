@@ -72,7 +72,6 @@ namespace ProjectChan.UI
                 button.gameObject.SetActive(true);
             }
 
-            /// -> 수정
             // -> NPC가 지닌 퀘스트가 없다면!
             if (boNPC.quests.Length == 0)
             {
