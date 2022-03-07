@@ -21,8 +21,10 @@ namespace ProjectChan.Novel
     /// </summary>
     public class NovelController : MonoBehaviour
     {
+        // public
         public Image novelGround;           // -> 뒷 배경
 
+        // private
         private int speechIndex;            // -> 현재 대화 진행도 인덱스
         private int currentNovelIndex;      // -> 현재 대화 인덱스
         private SDNovel sdNovel;            // -> 현재 진행할 대화 데이터
@@ -91,7 +93,7 @@ namespace ProjectChan.Novel
             UIWindowManager.Instance.GetWindow<UINovel>().Close();
 
             var stageManager = StageManager.Instance;
-
+            
             // -> 다음 씬을 불러옵니다!
             GameManager.Instance.LoadScene
                 (Define.SceneType.InGame, stageManager.ChangeStage(), stageManager.OnChangeStageComplete);

@@ -17,8 +17,11 @@ namespace ProjectChan.Object
     /// </summary>
     public class Item : MonoBehaviour, IPoolableObject
     {
-        private SDItem sdItem;              // -> 현재 아이템의 기획 데이터
+        // public
         public MeshRenderer meshRender;     // -> 아이템에 세팅할 머티리얼
+
+        // private
+        private SDItem sdItem;              // -> 현재 아이템의 기획 데이터
 
         /// <summary>
         /// => 재사용 가능 여부

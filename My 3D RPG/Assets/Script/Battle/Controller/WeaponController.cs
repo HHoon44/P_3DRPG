@@ -52,10 +52,11 @@ namespace ProjectChan.Battle
             }
 
             /*
-                -> 무기를 장착한 상태에서 변신 했다가 다시 변신을 하게 되었을 때 
-                   이미 무기를 장착한 상태이므로 무기를 장착한 상태라고 알려주는 작업
-                   GetChild(0)는 무기를 의미
-            */
+             *  무기를 장착한 상태에서 변신 했다가, 다시 변신을 하게 되었을 때
+             *  이미 무기를 장착한 상태 이므로 무기를 장착한 상태라고 알려주는 작업
+             *  GetChild(0)는 무기를 의미
+             */
+
             if (weaponDic.ContainsKey(actorType))
             {
                 if (weaponDic[actorType][0].transform.GetChild(0).gameObject.activeSelf)

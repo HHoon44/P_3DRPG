@@ -21,8 +21,10 @@ namespace ProjectChan.Object
     /// </summary>
     public class Monster : Actor, IPoolableObject
     {
+        // public
         public BoMonster boMonster;             // -> 몬스터의 정보가 담겨있는 Bo데이터
 
+        // private
         private float currentPatrolWaitTime;    // -> 현재 정찰 대기시간
         private float patrolWaitTime;           // -> 정찰 대기시간 최대값
         private Vector3 destPos;                // -> 목적지 위치 (정찰 위치, 타겟 위치)
@@ -38,7 +40,7 @@ namespace ProjectChan.Object
 
             boMonster = boActor as BoMonster;
 
-            SetStats();
+            OriginStats();
             InitPatrolWaitTime();
             SetAnimParam(boActor.actorType);
 
@@ -58,7 +60,7 @@ namespace ProjectChan.Object
         /// <summary>
         /// => 몬스터 스탯을 설정하는 메서드
         /// </summary>
-        public override void SetStats()
+        public override void OriginStats()
         {
             if (boMonster == null)
             {

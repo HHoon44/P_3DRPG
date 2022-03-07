@@ -13,6 +13,7 @@ namespace ProjectChan
     /// </summary>
     public class CharAnimEvent : MonoBehaviour
     {
+        // private
         private Character myParent;     // -> Character를 가진 부모 객체를 가져온다
 
         private  void Start()

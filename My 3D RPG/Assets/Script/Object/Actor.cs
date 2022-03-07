@@ -14,6 +14,7 @@ namespace ProjectChan.Object
     /// </summary>
     public abstract class Actor : MonoBehaviour
     {
+        // public 
         public BoActor boActor;                 // -> 이 스크립트를 가지고 있는 액터
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace ProjectChan.Object
         /// <summary>
         /// => 액터 스텟 설정 추상 메서드
         /// </summary>
-        public virtual void SetStats() { }
+        public virtual void OriginStats() { }
 
         /// <summary>
         /// => 이동 업데이트 추상 메서드

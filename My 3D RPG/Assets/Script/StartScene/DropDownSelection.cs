@@ -9,7 +9,7 @@ namespace ProjectChan.Object
     /// <summary>
     /// => 퀄리티 드롭박스의 클래스
     /// </summary>
-    public class DropDownSelection : MonoBehaviour
+    public class DropdownSelection : MonoBehaviour
     {
         private Dropdown dropDown;      // -> 드롭다운 컴포넌트
 

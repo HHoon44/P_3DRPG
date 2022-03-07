@@ -54,8 +54,6 @@ namespace ProjectChan.Object
             }
         }
 
-        #region Public Method
-
         /// <summary>
         /// => 기본 카메라 뷰로 설정하는 메서드
         /// </summary>
@@ -86,11 +84,6 @@ namespace ProjectChan.Object
             transform.forward = standardPos.forward;
         }
 
-        #endregion
-
-
-        #region Private Method
-
         /// <summary>
         /// => 파라미터로 받는 카메라 Pos에따라 카메라를 세팅하는 메서드
         /// </summary>
@@ -100,7 +93,5 @@ namespace ProjectChan.Object
             transform.position = viewPos.position;
             transform.forward = viewPos.forward;
         }
-
-        #endregion
     }
 }

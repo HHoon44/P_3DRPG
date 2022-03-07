@@ -26,11 +26,12 @@ namespace ProjectChan.Battle
 
         /// <summary>
         /// => 현재 타겟을 넣어 놓을 리스트
-        /// </summary>
+        /// </summary>-
         private List<Actor> targets = new List<Actor>();
 
         public void Initialize(Actor attacker)
         {
+            // - 공격자 설정
             this.attacker = attacker;
         }
 

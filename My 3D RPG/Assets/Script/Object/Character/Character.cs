@@ -20,6 +20,7 @@ namespace ProjectChan.Object
     /// </summary>
     public class Character : Actor
     {
+        // public 
         public PlayerController playerController;       // -> 캐릭터를 컨트롤 하는 컨트롤러
         public BoCharacter boCharacter;                 // -> 현재 캐릭터의 스텟정보
 
@@ -28,14 +29,14 @@ namespace ProjectChan.Object
             base.Initialize(boActor);
             boCharacter = boActor as BoCharacter;
 
-            SetStats();
+            OriginStats();
             SetAnimParam(boActor.actorType);
         }
 
         /// <summary>
         /// => 플레이어 스텟을 설정하는 메서드
         /// </summary>
-        public override void SetStats()
+        public override void OriginStats()
         {
             weaponController.PosClear();
 
@@ -68,7 +69,7 @@ namespace ProjectChan.Object
         /// <summary>
         /// => 변신 상태의 스텟을 설정하는 메서드
         /// </summary>
-        public void ChangeStats()
+        public void FormStats()
         {
             weaponController.PosClear();
 
@@ -269,7 +270,7 @@ namespace ProjectChan.Object
                     transform.GetChild(1).gameObject.SetActive(true);
 
                     // -> 라이덴 스텟으로 설정해줍니다!
-                    ChangeStats();
+                    FormStats();
 
                     // -> 전에 사용하고 저장해둔 라이덴 모델의 스텟이 있다면 그 스텟으로 재설정 해줍니다!
                     GetPrevStat(boCharacter.actorType);
@@ -285,7 +286,7 @@ namespace ProjectChan.Object
                     transform.GetChild(0).gameObject.SetActive(true);
 
                     // -> 코하쿠 스텟으로 설정해줍니다!
-                    SetStats();
+                    OriginStats();
 
                     // -> 전에 사용하고 저장해둔 코하쿠 모델의 스텟이 있다면 그 스텟으로 재설정 해줍니다!
                     GetPrevStat(boCharacter.actorType);
