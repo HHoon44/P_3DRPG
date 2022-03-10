@@ -35,8 +35,6 @@ namespace ProjectChan.UI
             MonHpBarUpdate();
         }
 
-        #region Public
-
         /// <summary>
         /// => 월드 컨버스 안에 존재하는 객체들이 플레이어를 바라 보도록 설정하는 메서드
         /// </summary>
@@ -112,11 +110,6 @@ namespace ProjectChan.UI
             allMonHpBar.Clear();
         }
 
-        #endregion
-
-
-        #region Private
-
         /// <summary>
         /// => 플레이어의 커서를 상황에 따라 바꿔주는 메서드
         /// </summary>
@@ -145,7 +138,5 @@ namespace ProjectChan.UI
             hpBubbleGauge.SetGauge(currentHp);
             energyBubbleGauge.SetGauge(currentEnergy);
         }
-
-        #endregion
     }
 }
