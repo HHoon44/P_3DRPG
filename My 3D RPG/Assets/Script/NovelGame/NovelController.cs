@@ -17,17 +17,17 @@ using static ProjectChan.Define.Resource;
 namespace ProjectChan.Novel
 {
     /// <summary>
-    /// => 노벨 게임씬을 관리하는 컨트롤러 메서드
+    /// 노벨 게임을 관리하는 컨트롤러 메서드
     /// </summary>
     public class NovelController : MonoBehaviour
     {
         // public
-        public Image novelGround;           // -> 뒷 배경
+        public Image novelGround;           // 노벨 씬 배경
 
         // private
-        private int speechIndex;            // -> 현재 대화 진행도 인덱스
-        private int currentNovelIndex;      // -> 현재 대화 인덱스
-        private SDNovel sdNovel;            // -> 현재 진행할 대화 데이터
+        private int currentNovelIndex;      // 현재 대화 인덱스
+        private int speechIndex;            // 현재 대화 진행도 인덱스
+        private SDNovel sdNovel;            // 현재 대화 기획 데이터
 
         private void Awake()
         {
@@ -37,64 +37,56 @@ namespace ProjectChan.Novel
 
         private void Start()
         {
-            // -> 오디오를 노벨 게임 오디오로 변경
+            // 노벨 씬에 맞는 오디오 클립으로 설정
             AudioManager.Instance.ChangeAudioClip(Define.Audio.ClipType.NovelGame);
 
-            // -> 노벨 시작
+            // 대화를 시작
             OnTalse();
         }
 
         /// <summary>
-        /// => 노벨을 시작하는 메서드
+        /// 대화를 시작하는 메서드
         /// </summary>
         private void OnTalse()
         {
-            // -> 다음 스테이지로 넘어가기 위한 값보다 작다면!
+            // 모든 대화가 안 끝났다면
             if (currentNovelIndex + speechIndex < Define.Novel.nextStageLoadIndex)
             {
+                // 현재 대화 인덱스와 대화 진행 인덱스를 더한 값과 같은 인덱스의 기획 데이터를 가져온다
                 sdNovel = GameManager.SD.sdNovels.Where(obj => obj.index == currentNovelIndex + speechIndex)?.SingleOrDefault();
 
-                // -> 노벨 기획 데이터로 새로운 Bo데이터를 만듭니다!
+                // 노벨 기획 데이터로 새로운 Bo데이터를 만든다
                 BoNovel boNovel = new BoNovel(sdNovel);
 
-                // -> 대화를 하기 위한 세팅을 합니다! (배경설정, 노벨 세팅, 대화 인덱스 증가)
-                SetNovelGround(boNovel.sdNovel.stagePath);
+                // 노벨 씬 배경을 설정한다
+                if (boNovel.sdNovel.stagePath.Length > 1)
+                {
+                    var stage = SpriteLoader.GetSprite(AtlasType.SchoolImage, boNovel.sdNovel.stagePath);
+                    novelGround.sprite = stage;
+                }
 
+                // 노벨 씬의 노벨 UI를 세팅한다
                 UIWindowManager.Instance.GetWindow<UINovel>().SetNovel(boNovel);
                 speechIndex++;
             }
             else
             {
-                // -> 다음 스테이지로 넘어갑니다!
+                // 다음 스테이지로 넘어간다
                 NextStageLoad();
             }
         }
 
         /// <summary>
-        /// => 노벨 배경을 설정하는 메서드
-        /// </summary>
-        /// <param name="path"> 배경 경로 </param>
-        private void SetNovelGround(string path)
-        {
-            // -> 경로가 존재한다면!
-            if (path.Length > 1)
-            {
-                var stage = SpriteLoader.GetSprite(AtlasType.SchoolImage, path);
-                novelGround.sprite = stage;
-            }
-        }
-
-        /// <summary>
-        /// => 노벨 캐릭터가 더이상 없을 때 다음 스테이지로 넘어갈 세팅을 하는 메서드
+        /// 대화가 끝났을 때, 다음 스테이지로 넘어가도록 하는 메서드
         /// </summary>
         private void NextStageLoad()
         {
-            // -> 노벨 창을 꺼줍니다!
+            // 현재 노벨 UI를 닫는다
             UIWindowManager.Instance.GetWindow<UINovel>().Close();
 
             var stageManager = StageManager.Instance;
             
-            // -> 다음 씬을 불러옵니다!
+            // 게임 매니저를 이용해서 다음 씬을 불러온다
             GameManager.Instance.LoadScene
                 (Define.SceneType.InGame, stageManager.ChangeStage(), stageManager.OnChangeStageComplete);
         }

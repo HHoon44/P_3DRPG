@@ -12,58 +12,62 @@ using UnityEngine;
 namespace ProjectChan.UI
 {
     /// <summary>
-    /// => 대화 창을 관리하는 클래스
+    /// NPC 대화 창 UI를 관리하는 클래스
     /// </summary>
     public class UIDialogue : UIWindow
     {
         // public 
-        public Transform buttonHolder;              // -> 다이얼로그 버튼들이 생성될 홀더
-        public Transform functionHolder;            // -> 기능 버튼들이 생성될 홀더
+        public Transform buttonHolder;              // 다이얼로그 버튼들이 생성될 홀더
+        public Transform functionHolder;            // 기능 버튼들이 생성될 홀더
 
         // private
-        private UINovel uiNovelSet;                 // -> 대화창 셋
-        private BoNovel boNovel;                    // -> 대화창을 세팅할때 사용할 데이터
+        private UINovel uiNovelSet;                 // 대화창 셋
+        private BoNovel boNovel;                    // 대화창을 세팅할때 사용할 데이터
 
         /// <summary>
-        /// => 현재 플레이어와 대화 중인 NPC의 Bo데이터
+        /// 현재 플레이어와 대화 중인 NPC 정보
         /// </summary>
         public BoNPC boNPC { get; private set; }
 
         /// <summary>
-        /// => 현재 활성화된 다이얼 로그 버튼들을 저장해놓는 곳
+        /// => 활성화 된 다이얼로그 버튼을 담아놓을 리스트
         /// </summary>
         private List<DialogueButton> dialogueButtons = new List<DialogueButton>();
 
         /// <summary>
-        /// => UIDialogue를 초기 설정하는 메서드
+        /// 다이얼로그를 초기화 하는 메서드
         /// </summary>
-        /// <param name="boNovel"> 노벨셋에 사용할 Bo데이터 </param>
-        /// <param name="boNPC"> 현재 대화하는 NPC Bo데이터 </param>
-        /// <param name="actor"> 현재 NPC와 대화하는 플레이어 </param>
+        /// <param name="boNovel">  노벨셋에 사용할 Bo데이터 </param>
+        /// <param name="boNPC">    현재 대화하는 NPC Bo데이터 </param>
+        /// <param name="actor">    현재 NPC와 대화하는 플레이어 </param>
         public void Initialize(BoNovel boNovel, BoNPC boNPC)
         {
             this.boNovel = boNovel;
             this.boNPC = boNPC;
 
+            // NPC의 대사와 일러스트를 보여주기 위해, 인 게임의 노벨 UI를 세팅
             uiNovelSet = transform.Find("NovelSet").GetComponent<UINovel>();
-
             uiNovelSet.SetNovel(this.boNovel);
 
+            // 다이얼로그 버튼 활성화
             OnDialogueButton();
 
+            // 다이얼로그 창 활성화
             Open();
         }
 
         /// <summary>
-        /// => 다이얼로그 버튼을 활성화하는 메서드
+        /// 다이얼로그 버튼을 활성화 하는 메서드
         /// </summary>
         private void OnDialogueButton()
         {
+            // 다이얼로그 버튼의 풀을 가져온다
             var pool = ObjectPoolManager.Instance.GetPool<DialogueButton>(Define.PoolType.DialogueButton);
 
-            // -> 기능 버튼을 세팅합니다!
+            // NPC가 기능을 가진 NPC라면
             if (boNPC.sdNPC.npcType != Define.Actor.NPCType.Normal)
             {
+                // 기능 버튼을 세팅
                 var button = pool.GetPoolableObject(obj => obj.CanRecycle);
                 button.transform.SetParent(functionHolder);
                 button.SetFuntionButton();
@@ -72,7 +76,7 @@ namespace ProjectChan.UI
                 button.gameObject.SetActive(true);
             }
 
-            // -> NPC가 지닌 퀘스트가 없다면!
+            // NPC가 지닌 퀘스트가 없다면
             if (boNPC.quests.Length == 0)
             {
                 return;
@@ -85,9 +89,10 @@ namespace ProjectChan.UI
                     return;
                 }
 
-                // -> 가지고 있는 퀘스트 개수만큼 다이얼로그 버튼을 세팅합니다!
+                // NPC가 지닌 퀘스트 만큼 버튼을 세팅하는 작업
                 for (int i = 0; i < boNPC.quests.Length; i++)
                 {
+                    // 퀘스트 버튼을 세팅
                     var button = pool.GetPoolableObject(obj => obj.CanRecycle);
                     button.transform.SetParent(buttonHolder);
                     button.Initialize(boNPC.quests[i]);
@@ -102,15 +107,15 @@ namespace ProjectChan.UI
         {
             base.Close(force);
 
+            // 다이얼로그 버튼을 풀로 반환하기 위해, 풀을 가져옴
             var pool = ObjectPoolManager.Instance.GetPool<DialogueButton>(Define.PoolType.DialogueButton);
 
-            // -> 가져왔던 버튼들을 다시 돌려줍니다!
+            // 버튼을 풀로 반환하는 작업
             for (int i = 0; i < dialogueButtons.Count; i++)
             {
                 pool.ReturnPoolableObject(dialogueButtons[i]);
             }
 
-            // -> 청소!
             dialogueButtons.Clear();
         }
     }

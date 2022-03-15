@@ -10,60 +10,65 @@ using static ProjectChan.Define.Actor;
 namespace ProjectChan.Battle
 {
     /// <summary>
-    /// => 공격을 관리할 클래스
+    /// 공격을 관리하는 클래스
     /// </summary>
     public class AttackController : MonoBehaviour
     {
         // public 
-        public bool hasTarget;                  // -> 공격 대상이 있는지?
-        public bool canCheckCoolTime;           // -> 공격 쿨타임을 체크할 수있는지? ( 공격 모션이 끝나기 전에는 쿨타임 체크를 막는다 )
-        public bool isCoolTime;                 // -> 공격 쿨타임인지?
-        public bool canAtk;                     // -> 공격 가능 상태인지?
+        public bool hasTarget;                  // 공격 대상이 존재하는가?
+        public bool canCheckCoolTime;           // 공격 쿨타임을 체크해도 되는가? ( 공격 모션이 끝나기 전에는 쿨타임 체크를 막는다 )
+        public bool isCoolTime;                 // 공격 쿨타임인가?
+        public bool canAtk;                     // 공격 가능 상태인가?
 
         // private
-        private float currentAtkInterval;       // -> 현재 공격 쿨타임을 체크하는 값
-        private Actor attacker;                 // -> 공격자 ( 해당 어택 컨트롤러 인스턴스를 갖는 액터 )
+        private float currentAtkInterval;       // 현재 공격 쿨타임을 체크하는 값
+        private Actor attacker;                 // 공격자 ( 해당 어택 컨트롤러 인스턴스를 갖는 액터 )
 
         /// <summary>
-        /// => 현재 타겟을 넣어 놓을 리스트
-        /// </summary>-
+        /// 타겟을 담아놓을 공간
+        /// </summary>
         private List<Actor> targets = new List<Actor>();
 
+        /// <summary>
+        /// AttackController의 초기화하는 메서드
+        /// </summary>
+        /// <param name="attacker"></param>
         public void Initialize(Actor attacker)
         {
-            // - 공격자 설정
+            // 공격자를 설정
             this.attacker = attacker;
         }
 
         /// <summary>
-        /// => 공격 가능 상태일 때 공격자의 상태를 변경 하는 메서드
+        /// 공격 조건을 만족한다면, 공격을 요청하는 메서드
         /// </summary>
         public void CheckAttack()
         {
-            // -> 타겟이 없다면!
+            // 타겟이 없다면
             if (!hasTarget)
             {
                 return;
             }
 
-            // -> 공격 쿨타임이라면!
+            // 공격 쿨타임이라면
             if (isCoolTime)
             {
                 return;
             }
 
-            // -> 공격 불가능이라면!
+            // 공격 불가능이라면
             if (!canAtk)
             {
                 return;
             }
 
-            // -> 공격을 합니다!
+            // 플레이어의 상태를 공격 상태로변경
             attacker.SetState(ActorState.Attack);
         }
 
         /// <summary>
-        /// => 애니메이션 이벤트로 사용되며 공격을 실행할 때 사용될 메서드
+        /// 애니메이션 이벤트로 사용
+        /// 공격이 실행될 때 타겟을 감지하고 데미지를 처리하도록 하는 메서드
         /// </summary>
         public virtual void OnAttack()
         {
@@ -85,7 +90,7 @@ namespace ProjectChan.Battle
         }
 
         /// <summary>
-        /// => 공격 범위에 적이 존재하는지 확인하는 메서드
+        /// 공격 범위에 타겟이 존재하는지 확인하는 메서드
         /// </summary>
         public virtual void CalculateAttackRange()
         {
@@ -108,7 +113,7 @@ namespace ProjectChan.Battle
         }
 
         /// <summary>
-        /// => 데미지 연산을 통해 타겟에게 데미지를 입히는 메서드
+        /// 타겟에게 데미지 작업을 하는 메서드
         /// </summary>
         /// <param name="damage"> 타겟에게 입힐 데미지 값 </param>
         /// <param name="target"> 데미지 처리를 할 타겟 </param>
@@ -132,17 +137,17 @@ namespace ProjectChan.Battle
         }
 
         /// <summary>
-        /// => 공격 쿨타임을 업데이트 하는 메서드
+        /// 공격 쿨타임을 업데이트 하는 메서드
         /// </summary>
         public void AttackIntervalUpdate()
         {
-            // -> 쿨타입을 체크 할 수 없다면!
+            // 쿨타입을 체크 할 수 없다면
             if (!canCheckCoolTime)
             {
                 return;
             }
 
-            // -> 지금 공격 쿨타임이 아니라면!
+            // 지금 공격 쿨타임이 아니라면
             if (!isCoolTime)
             {
                 return;
@@ -157,7 +162,7 @@ namespace ProjectChan.Battle
         }
 
         /// <summary>
-        /// => 공격 쿨타임을 초기화 하는 메서드
+        /// 공격 쿨타임을 초기화 하는 메서드
         /// </summary>
         public void IniAttackInterval()
         {

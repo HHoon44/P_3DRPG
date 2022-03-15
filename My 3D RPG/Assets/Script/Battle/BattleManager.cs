@@ -17,23 +17,23 @@ namespace ProjectChan.Battle
     public class BattleManager : Singleton<BattleManager>
     {
         /// <summary>
-        /// => 현재 필드 위에 있는 캐릭터 
+        /// 인 게임에 존재하는 캐릭터
         /// </summary>
         public List<Actor> Characters { get; private set; } = new List<Actor>();
 
         /// <summary>
-        /// => 현재 필드 위에 있는 몬스터
+        /// 인 게임에 존재하는 몬스터
         /// </summary>
         public List<Actor> Monsters { get; private set; } = new List<Actor>();
 
         /// <summary>
-        /// 현재 필드 위에 있는 NPC
+        /// 인 게임에 존재하는 NPC
         /// </summary>
         public List<NPC> NPCs { get; private set; } = new List<NPC>();
 
         /// <summary>
-        /// => 활성화된 액터들을 배틀매니저에 등록하는 메서드
-        /// => 리스트에 등록된 액터만 업데이트가 된다
+        /// 활성화된 액터들을 배틀 매니저에 등록하는 메서드
+        /// 리스트에 등록된 액터만 업데이트가 된다
         /// </summary>
         /// <param name="actor"></param>
         public void AddActor(Actor actor)
@@ -56,15 +56,19 @@ namespace ProjectChan.Battle
             actor.gameObject.SetActive(true);
         }
 
+        /// <summary>
+        /// 활성화 된 NPC를 배틀 매니저에 저장하는 메서드
+        /// </summary>
+        /// <param name="npc"></param>
         public void AddNPC(NPC npc)
         {
             NPCs.Add(npc);
         }
 
         /// <summary>
-        /// => 특정 객체의 클래스 안에서 Update 콜백메서드를 직접적으로 갖는 것보다
-        ///    특정 객체들을 담을 컨테이너를 만들고, 해당 컨테이너에 객체들을 하나의 
-        ///    업데이트 콜백메서드에서 처리하는 것이 성능면에서 우수하다
+        /// 특정 객체의 클래스 안에서 Update 콜백메서드를 직접적으로 갖는 것보다
+        /// 특정 객체들을 담을 컨테이너를 만들고, 해당 컨테이너에 객체들을 하나의 
+        /// 업데이트 콜백메서드에서 처리하는 것이 성능면에서 우수하다
         /// </summary>
         private void FixedUpdate()
         {
@@ -74,21 +78,22 @@ namespace ProjectChan.Battle
         }
 
         /// <summary>
-        /// => 저장된 액터들이 가지고있는 업데이트 함수를 활성화 하는 메서드
+        /// 저장된 액터들이 가지고있는 업데이트 함수를 실행하는 메서드
         /// </summary>
         /// <param name="actors"> 업데이트 할 액터 리스트 </param>
         private void ActorUpdate(List<Actor> actors)
         {
             for (int i = 0; i < actors.Count; i++)
             {
-                // -> 저장된 액터가 죽지 않았다면 계속 업데이트를 해줍니다!
+                // 액터의 상태가 Dead가 아니라면
                 if (actors[i].State != Define.Actor.ActorState.Dead)
                 {
+                    // 액터가 지닌 업데이트 문을 실행
                     actors[i].ActorUpdate();
                 }
                 else
                 {
-                    // -> 만약 죽었다면 액터를 제거 해줍니다!
+                    // 배틀매니저에서 삭제
                     actors.RemoveAt(i);
                     i--;
 
@@ -101,7 +106,7 @@ namespace ProjectChan.Battle
         }
 
         /// <summary>
-        /// => NPC 업데이트를 실행하는 메서드
+        /// NPC 업데이트를 실행하는 메서드
         /// </summary>
         private void NPCUpdate()
         {
@@ -109,11 +114,12 @@ namespace ProjectChan.Battle
             {
                 if (NPCs[i] != null)
                 {
-                    // -> NPC 업데이트 돌리기
+                    // NPC의 업데이트 실행
                     NPCs[i].NPCUpdate();
                 }
                 else
                 {
+                    // 배틀매니저에서 NPC 삭제
                     NPCs.RemoveAt(i);
                     i--;
                 }
@@ -121,7 +127,7 @@ namespace ProjectChan.Battle
         }
 
         /// <summary>
-        /// => 저장되어있는 NPC를 초기화 하는 메서드
+        /// 저장되어있는 NPC를 삭제 하는 메서드
         /// </summary>
         public void ClearNPC()
         {

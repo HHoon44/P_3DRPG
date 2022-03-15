@@ -11,20 +11,20 @@ namespace ProjectChan.Object
     using CamView = Define.Camera.CamView;
 
     /// <summary>
-    /// => 인게임 카메라를 컨트롤 하는 클래스
+    /// 인 게임 카메라를 컨트롤 하는 클래스
     /// </summary>
     public class CameraController : MonoBehaviour
     {
         // public
-        public CamView camView;         // -> 현재 카메라 뷰
+        public CamView camView;         // 현재 카메라 뷰
 
         // private
-        private Transform standardPos;  // -> 기본 카메라 포지션
-        private Transform frontPos;     // -> 정면 카메라 포지션
-        private Transform target;       // -> 카메라가 따라 다닐 타겟
+        private Transform standardPos;  // 기본 카메라 포지션
+        private Transform frontPos;     // 정면 카메라 포지션
+        private Transform target;       // 카메라가 따라 다닐 타겟
 
         /// <summary>
-        /// => 카메라 컴포넌트
+        /// 씬에 존재하는 카메라
         /// </summary>
         public static Camera Cam { get; private set; }
 
@@ -55,15 +55,17 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 기본 카메라 뷰로 설정하는 메서드
+        /// 요청에 따라 카메라의 위치를 변경하는 메서드
         /// </summary>
-        public void SetForceStandarView()
+        /// <param name="viewPos"> 카메라 Pos </param>
+        private void SetPosition(Transform viewPos)
         {
-            SetPosition(standardPos);
+            transform.position = viewPos.position;
+            transform.forward = viewPos.forward;
         }
 
         /// <summary>
-        /// => 카메라가 따라 다닐 타겟을 설정하는 메서드
+        /// 카메라가 따라 다닐 타겟을 설정하는 메서드
         /// </summary>
         /// <param name="target"> 타겟 </param>
         public void SetTarget(Transform target)
@@ -85,13 +87,11 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 파라미터로 받는 카메라 Pos에따라 카메라를 세팅하는 메서드
+        /// 기본 카메라로 설정하는 메서드
         /// </summary>
-        /// <param name="viewPos"> 카메라 Pos </param>
-        private void SetPosition(Transform viewPos)
+        public void SetForceStandarView()
         {
-            transform.position = viewPos.position;
-            transform.forward = viewPos.forward;
+            SetPosition(standardPos);
         }
     }
 }

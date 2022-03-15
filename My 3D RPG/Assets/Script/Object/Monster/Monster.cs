@@ -40,7 +40,7 @@ namespace ProjectChan.Object
 
             boMonster = boActor as BoMonster;
 
-            OriginStats();
+            SetActorStat();
             InitPatrolWaitTime();
             SetAnimParam(boActor.actorType);
 
@@ -60,7 +60,7 @@ namespace ProjectChan.Object
         /// <summary>
         /// => 몬스터 스탯을 설정하는 메서드
         /// </summary>
-        public override void OriginStats()
+        public override void SetActorStat()
         {
             if (boMonster == null)
             {

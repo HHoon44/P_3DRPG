@@ -16,27 +16,31 @@ namespace ProjectChan.Object
     using static ProjectChan.Define.Actor;
 
     /// <summary>
-    /// => 플레이어 캐릭터 오브젝트의 클래스
+    /// 인 게임의 캐릭터 클래스
     /// </summary>
     public class Character : Actor
     {
         // public 
-        public PlayerController playerController;       // -> 캐릭터를 컨트롤 하는 컨트롤러
-        public BoCharacter boCharacter;                 // -> 현재 캐릭터의 스텟정보
+        public PlayerController playerController;       // 캐릭터를 컨트롤 하는 컨트롤러
+        public BoCharacter boCharacter;                 // 현재 캐릭터의 스탯정보
 
+        /// <summary>
+        /// 캐릭터를 초기화 하는 메서드
+        /// </summary>
+        /// <param name="boActor"></param>
         public override void Initialize(BoActor boActor)
         {
             base.Initialize(boActor);
             boCharacter = boActor as BoCharacter;
 
-            OriginStats();
+            SetActorStat();
             SetAnimParam(boActor.actorType);
         }
 
         /// <summary>
-        /// => 플레이어 스텟을 설정하는 메서드
+        /// 플레이어 스탯을 세팅하는 메서드
         /// </summary>
-        public override void OriginStats()
+        public override void SetActorStat()
         {
             weaponController.PosClear();
 
@@ -67,33 +71,7 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 변신 상태의 스텟을 설정하는 메서드
-        /// </summary>
-        public void FormStats()
-        {
-            weaponController.PosClear();
-
-            // -> 레벨의 영향을 받지않는 스텟을 설정합니다!
-            boCharacter.actorType = ActorType.Form;
-            boCharacter.moveSpeed = boCharacter.sdFormInfo.moveSpeed;
-            boCharacter.atkRange = boCharacter.sdFormInfo.atkRange;
-
-            // -> 레벨의 영햐을 받는 스텟을 설정합니다!
-            boCharacter.currentHp =
-                boCharacter.maxHp = boCharacter.level * boCharacter.sdFormInfo.maxHp * boCharacter.sdFormInfo.maxHpFactor;
-            boCharacter.currentEnergy =
-                boCharacter.maxEnergy = boCharacter.level * boCharacter.sdFormInfo.maxEnergy * boCharacter.sdFormInfo.maxEnergyFactor;
-            boCharacter.atk = boCharacter.level * boCharacter.sdFormInfo.atk * boCharacter.sdFormInfo.atkFactor;
-            boCharacter.def = boCharacter.level * boCharacter.sdFormInfo.def * boCharacter.sdFormInfo.defFactor;
-
-            weaponController.Initialize(boCharacter.actorType);
-
-            // -> 현재 활성화된 캐릭터의 애니메이터를 사용하기 위해서 가져옵니다!
-            anim = transform.GetChild(1).GetComponent<Animator>();
-        }
-
-        /// <summary>
-        /// => 현재 캐릭터의 상태를 설정하는 메서드
+        /// 현재 캐릭터의 상태를 세팅하는 메서드
         /// </summary>
         /// <param name="state"> 캐릭터의 상태 </param>
         public override void SetState(ActorState state)
@@ -123,10 +101,6 @@ namespace ProjectChan.Object
             }
         }
 
-        /// <summary>
-        /// => 플레이어 업데이트 메서드
-        /// => 계속해서 도는 중
-        /// </summary>
         public override void ActorUpdate()
         {
             CheckGround();
@@ -139,7 +113,7 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 플레이어 이동에 관련된 업데이트 메서드
+        /// 캐릭터 이동을 담당하는 메서드
         /// </summary>
         public override void MoveUpdate()
         {
@@ -150,7 +124,7 @@ namespace ProjectChan.Object
             transform.localPosition += velocity * Time.fixedDeltaTime;
             transform.Rotate(boActor.rotDir * Define.Camera.CamRotSpeed);
 
-            // -> 달릴려고 하는데 점프 상태라면!
+            // 점프 상태라면
             if (State == ActorState.Jump)
             {
                 return;
@@ -168,13 +142,39 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 플레이어의 점프에 관련된 메서드
+        /// 변신 스탯을 세팅하는 메서드
+        /// </summary>
+        public void FormStats()
+        {
+            weaponController.PosClear();
+
+            // -> 레벨의 영향을 받지않는 스텟을 설정합니다!
+            boCharacter.actorType = ActorType.Form;
+            boCharacter.moveSpeed = boCharacter.sdFormInfo.moveSpeed;
+            boCharacter.atkRange = boCharacter.sdFormInfo.atkRange;
+
+            // -> 레벨의 영햐을 받는 스텟을 설정합니다!
+            boCharacter.currentHp =
+                boCharacter.maxHp = boCharacter.level * boCharacter.sdFormInfo.maxHp * boCharacter.sdFormInfo.maxHpFactor;
+            boCharacter.currentEnergy =
+                boCharacter.maxEnergy = boCharacter.level * boCharacter.sdFormInfo.maxEnergy * boCharacter.sdFormInfo.maxEnergyFactor;
+            boCharacter.atk = boCharacter.level * boCharacter.sdFormInfo.atk * boCharacter.sdFormInfo.atkFactor;
+            boCharacter.def = boCharacter.level * boCharacter.sdFormInfo.def * boCharacter.sdFormInfo.defFactor;
+
+            weaponController.Initialize(boCharacter.actorType);
+
+            // -> 현재 활성화된 캐릭터의 애니메이터를 사용하기 위해서 가져옵니다!
+            anim = transform.GetChild(1).GetComponent<Animator>();
+        }
+
+        /// <summary>
+        /// 캐릭터의 점프를 담당하는 메서드
         /// </summary>
         public void JumpUpdate()
         {
             if (Input.GetButtonDown(Define.Input.Jump))
             {
-                // -> 점프 키를 눌렀을 때 점프를 실행합니다!
+                // 점프 실행
                 SetState(ActorState.Jump);
             }
 
@@ -182,7 +182,7 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 플레이어가 그라운드 위에 있는지 체크하는 메서드
+        /// 플레이어가 땅 위에 있는지 확인하는 메서드
         /// </summary>
         private void CheckGround()
         {
@@ -214,7 +214,7 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 플레이어 점프 시작 메서드
+        /// 플레이어 점프 시작 메서드
         /// </summary>
         public void OnJump()
         {
@@ -236,7 +236,7 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 플레이어의 착지 시작 메서드
+        /// 플레이어의 착지 메서드
         /// </summary>
         public void OutJump()
         {
@@ -249,7 +249,7 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 플레이어가 변신 하는 메서드
+        /// 캐릭터 변신을 담당하는 메서드
         /// </summary>
         public void ChangeForm()
         {
@@ -286,7 +286,7 @@ namespace ProjectChan.Object
                     transform.GetChild(0).gameObject.SetActive(true);
 
                     // -> 코하쿠 스텟으로 설정해줍니다!
-                    OriginStats();
+                    SetActorStat();
 
                     // -> 전에 사용하고 저장해둔 코하쿠 모델의 스텟이 있다면 그 스텟으로 재설정 해줍니다!
                     GetPrevStat(boCharacter.actorType);
@@ -337,7 +337,7 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 플레이어가 무기를 착용하거나 해제하는 메서드
+        /// => 플레이어가 무기를 착용/해제하는 메서드
         /// </summary>
         public void ChangeWeapon()
         {
@@ -371,7 +371,7 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 아이템 키의 입력을 받는 메서드
+        /// => 아이템을 사용을 요청하는 메서드
         /// </summary>
         /// 
         private void ItemUsed()
@@ -395,7 +395,7 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 플레이어 기력 충전 메서드
+        /// 캐릭터의 기력 충전을 담당하는 메서드
         /// </summary>
         private void EnergyReCharge()
         {

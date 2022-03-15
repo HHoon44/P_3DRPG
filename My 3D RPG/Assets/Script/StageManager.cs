@@ -26,58 +26,56 @@ namespace ProjectChan
     public class StageManager : Singleton<StageManager>
     {
         // public
-        public int huntedMon;                       // -> 사냥한 몬스터 개수
-        public bool isMonReady;                     // -> 몬스터를 생성할 준비가되었는가?
-        public Transform monsterHolder;             // -> 몬스터를 자식으로 가질 부모 홀더
+        public int huntedMon;                       // 사냥한 몬스터 개수
+        public bool isMonReady;                     // 몬스터를 생성할 준비가되었는가?
+        public Transform monsterHolder;             // 몬스터를 자식으로 가질 부모 홀더
 
         // private
-        private GameObject currentStage;            // -> 현재 스테이지 객체
-        private Transform NPCHolder;                // -> NPC를 자식으로 가질 부모 홀더
-        private float currentMonSpawnTime;          // -> 현재 몬스터 스폰 시간
-        private float maxMonSpawnTime;              // -> 최대 몬스터 스폰 시간
+        private GameObject currentStage;            // 현재 스테이지 객체
+        private Transform NPCHolder;                // NPC를 자식으로 가질 부모 홀더
+        private float currentMonSpawnTime;          // 현재 몬스터 스폰 시간
+        private float maxMonSpawnTime;              // 최대 몬스터 스폰 시간
 
         /// <summary>
-        /// => 몬스터를 생성할 스폰 지역
+        /// 몬스터를 스폰 지역
         /// </summary>
         private Dictionary<int, Bounds> spawnAreaBounds = new Dictionary<int, Bounds>();
 
         private void Update()
         {
-            // -> 몬스터를 생성할 준비가 되어있지 않다면!
+            // 몬스터를 생성할 준비가 되어있지 않다면!
             if (!isMonReady)
             {
                 return;
             }
 
-            // -> 몬스터 스폰 타입을 계속 업데이트 해줍니다!
+            // 몬스터 스폰 타입을 계속 업데이트 해줍니다!
             CheckSpawnTime();
         }
 
-        #region Public Method
-
         /// <summary>
-        /// => 프리팹으로 저장된 스테이지를 불러오는 메서드
+        /// 프리팹으로 저장된 스테이지를 불러오는 메서드
         /// </summary>
         /// <returns></returns>
         public IEnumerator ChangeStage()
         {
-            // -> 아직 몬스터 생성 준비가 되어있지 않습니다!
+            // 아직 몬스터 생성 준비가 되어있지 않습니다!
             isMonReady = false;
 
             var sdStage = GameManager.User.boStage.sdStage;
             var resourceManager = ResourceManager.Instance;
             var objectPoolManager = ObjectPoolManager.Instance;
 
-            // -> 현재 스테이지가 존재한다면!
+            // 현재 스테이지가 존재한다면!
             if (currentStage != null)
             {
                 Destroy(currentStage);
             }
 
-            // -> ResourceManager의 LoadObject와 스테이지 기획 데이터를 이용하여 현재 스테이지를 생성합니다!
+            // ResourceManager의 LoadObject와 스테이지 기획 데이터를 이용하여 현재 스테이지를 생성합니다!
             currentStage = Instantiate(resourceManager.LoadObject(sdStage.resourcePath));
 
-            // -> 현재 스테이지의 오디오 클립을 설정합니다!
+            // 현재 스테이지의 오디오 클립을 설정합니다!
             switch (sdStage.resourcePath.Remove(0, sdStage.resourcePath.LastIndexOf('/') + 1))
             {
                 case "StartVillage":
@@ -89,29 +87,31 @@ namespace ProjectChan
                     break;
             }
 
-            // -> 로딩 씬을 보여주는 과정에서 로딩 씬에 오브젝트들이 생성되기 때문에 InGame으로 오브젝트를 옮겨줍니다!
+            // 로딩 씬을 보여주는 과정에서 로딩 씬에 오브젝트들이 생성되기 때문에 InGame으로 오브젝트를 옮겨줍니다!
             SceneManager.MoveGameObjectToScene(currentStage, SceneManager.GetSceneByName(SceneType.InGame.ToString()));
 
             spawnAreaBounds.Clear();
 
-            // -> 몬스터 및 NPC를 삭제
+            // 몬스터 풀을 삭제
             objectPoolManager.ClearPool<Monster>(PoolType.Monster);
 
             var battleManager = BattleManager.Instance;
+
+            // 배틀 매니저에 등록 되어있는 몬스터와 NPC를 삭제
             battleManager.Monsters.Clear();
             battleManager.ClearNPC();
 
             var sdMonsters = GameManager.SD.sdMonsters;
 
-            // -> 몬스터를 Pool에 넣어놓는 작업
+            // 생성한 몬스터를 Pool에 저장
             for (int i = 0; i < sdStage.genMonsters.Length; i++)
             {
                 var sdMonster = sdMonsters.Where(obj => obj.index == sdStage.genMonsters[i]).SingleOrDefault();
 
-                // -> 현재 스테이지에 생성할 몬스터가 존재한다면!
+                // 생성할 몬스터가 존재한다면
                 if (sdMonster != null)
                 {
-                    // -> 풀에 몬스터를 만들어줍니다!
+                    // 풀에 등록할 몬스터를 생성
                     resourceManager.LoadPoolableObject<Monster>(PoolType.Monster, sdMonster.resourcePath, 5);
                 }
                 else
@@ -119,10 +119,10 @@ namespace ProjectChan
                     continue;
                 }
 
-                // -> 스테이지 기획 데이터에서 스폰할 지역의 인덱스 값을 가져옵니다!
+                // SDStage의 몬스터 스폰 지역 인덱스를 가져온다
                 var spawnAreaIndex = sdStage.spawnArea[i];
 
-                // -> 스폰 지역이 존재한다면!
+                // 스폰 지역이 존재한다면
                 if (spawnAreaIndex != -1)
                 {
                     if (!spawnAreaBounds.ContainsKey(spawnAreaIndex))
@@ -190,11 +190,6 @@ namespace ProjectChan
             // -> 목적지를 반환해줍니다!
             return new Vector3(spawnPosX, hit.point.y, spawnPosZ);
         }
-
-        #endregion
-
-
-        #region Private Method
 
         /// <summary>
         /// => 캐릭터 생성 또는 스테이지 이동 시 캐릭터 위치를 재설정 해주는 메서드
@@ -385,7 +380,5 @@ namespace ProjectChan
                 battleManager.AddActor(monster);
             }
         }
-
-        #endregion
     }
 }

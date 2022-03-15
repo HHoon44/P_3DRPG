@@ -10,8 +10,8 @@ using UnityEngine;
 namespace ProjectChan.SD
 {
     /// <summary>
-    /// => 모든 기획데이터를 들고 있는 클래스
-    /// => 데이터를 로드하고 들고 있기만 하는 것이므로 모노를 상속받을 필요가 없음
+    /// 모든 기획데이터를 들고 있는 클래스
+    /// 기획 데이터를 로드하고 들고 있기만 하는 것이므로 모노를 상속받을 필요가 없음
     /// </summary>
     [Serializable]
     public class StaticDataModule
@@ -28,11 +28,15 @@ namespace ProjectChan.SD
         public List<SDQuest> sdQuests;
         public List<SDQuestSpeech> sdQuestSpeechs;
 
+        /// <summary>
+        /// 기획 데이터 초기화 메서드
+        /// </summary>
         public void Initialize()
         {
-            // -> 기획 데이터 로더를 하나 생성
+            // 기획 데이터를 불러오는 로더를 생성
             var loader = new StaticDataLoader();
 
+            // out 키워드를 이용해서 데이터를 저장한다
             loader.Load(out sdCharacters);
             loader.Load(out sdStages);
             loader.Load(out sdNovels);
@@ -46,7 +50,7 @@ namespace ProjectChan.SD
         }
 
         /// <summary>
-        /// => 기획 데이터를 불러올 로더 클래스
+        /// 기획 데이터를 불러올 로더 클래스
         /// </summary>
         private class StaticDataLoader
         {
@@ -59,19 +63,19 @@ namespace ProjectChan.SD
             }
 
             /// <summary>
-            /// => 지정된 경로에 파일을 작성하는 메서드
+            /// 작성해놓은 기획 데이터를 가져오는 메서드
             /// </summary>
-            /// <typeparam name="T"> 기획 데이터 타입 </typeparam>
-            /// <param name="data"> 기획 데이터 </param>
-            public void Load<T>(out List<T> data)
-                where T : StaticData
+            /// <typeparam name="T">    기획 데이터 타입 </typeparam>
+            /// <param name="data">     기획 데이터 </param>
+            public void Load<T>(out List<T> data) where T : StaticData
             {
-                // -> 파일이름이 타입이름에서 SD만 제거하면 동일하다는 규칙을 이용합니다!
+                // T타입의 이름에서 SD를 제거하면, 파일이름과 동일하다는 규칙을 이용
                 var fileName = typeof(T).Name.Remove(0, "SD".Length);
 
-                // -> 경로에 있는 모든 Json 파일을 읽어옵니다!
+                // 경로에 존재하는 fileName의 Json 파일을 모두 읽어온다
                 var json = File.ReadAllText($"{path}/{fileName}.json");
 
+                // 읽어온 Json 파일을 역직렬화 하여 저장한다
                 data = SerializationUtil.FromJson<T>(json);
             }
         }

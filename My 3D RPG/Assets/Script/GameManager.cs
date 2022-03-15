@@ -26,14 +26,14 @@ namespace ProjectChan
         public float loadProgress;                              // -> 다음씬이 얼마나 준비되었는지에 대한 값
 
         /// <summary>
-        /// => 기획 데이터를 관리함
+        /// 게임에 사용할 기획 데이터
         /// </summary>
         [SerializeField]
         private StaticDataModule sd = new StaticDataModule();
         public static StaticDataModule SD => Instance.sd;       
 
         /// <summary>
-        /// => 유저 데이터를 관리함
+        /// 클라이언트에서 사용할 유저 데이터
         /// </summary>
         private BoUser boUser = new BoUser();
         public static BoUser User => Instance.boUser;          
@@ -47,15 +47,16 @@ namespace ProjectChan
                 return;
             }
 
-            // -> 씬이 변경되어도 객체가 파괴되지 않도록 합니다!
+            // 씬이 변경 되어도 파괴되지 않도록
             DontDestroyOnLoad(this);
 
+            // 초기 세팅을 시작
             var StartController = FindObjectOfType<StartController>();
             StartController?.Initialize();
         }
 
         /// <summary>
-        /// => 앱의 기본 설정입니다!
+        /// 앱의 기본 설정입니다!
         /// </summary>
         public void OnApplicationSetting()
         {
@@ -70,11 +71,11 @@ namespace ProjectChan
         }
 
         /// <summary>
-        /// => 씬을 이동하는 메서드
+        /// 씬을 이동하는 메서드
         /// </summary>
-        /// <param name="sceneName"> 이동할 씬의 이름 </param>
-        /// <param name="loadCoroutine"> StageManager.OnChangeStage </param>
-        /// <param name="loadComplete"> StageManager.OnChangeStageComplete </param>
+        /// <param name="sceneName">        이동할 씬의 이름 </param>
+        /// <param name="loadCoroutine">    StageManager.OnChangeStage </param>
+        /// <param name="loadComplete">     StageManager.OnChangeStageComplete </param>
         public void LoadScene(SceneType sceneName, IEnumerator loadCoroutine = null, Action loadComplete = null)
         { 
             StartCoroutine(WaitForLoad());

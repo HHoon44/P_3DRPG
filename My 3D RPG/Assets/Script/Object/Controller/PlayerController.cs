@@ -26,35 +26,39 @@ namespace ProjectChan.Object
      */
 
     /// <summary>
-    /// => 캐릭터를 컨트롤하는 클래스
+    /// 캐릭터를 컨트롤하는 클래스
     /// </summary>
     public class PlayerController : MonoBehaviour
     {
         // public
-        public CameraController cameraController;       // -> 카메라를 관리하는 카메라 컨트롤러
+        public CameraController cameraController;       // 카메라를 관리하는 카메라 컨트롤러
 
         // private
-        private Transform pointingTarget;               // -> 마우스 포인터에 걸린 타겟
-        private bool canRot;                            // -> 캐릭터 회천 여부
+        private Transform pointingTarget;               // 마우스 포인터에 걸린 타겟
+        private bool canRot;                            // 캐릭터 회천 여부
 
         /// <summary>
-        /// => 컨트롤러를 지닐 캐릭터
+        /// 컨트롤러를 지닐 캐릭터
         /// </summary>
         public Character PlayerCharacter { get; private set; }
 
         /// <summary>
-        /// => 현재 플레이어의 행동 여부
+        /// 현재 플레이어의 행동 여부
         /// </summary>
         public bool isPlayerAction { get; set; }
 
         /// <summary>
-        /// => 타겟이 감지 되었는지에 대한 여부
+        /// 타겟이 감지 되었는지에 대한 여부
         /// </summary>
         public bool HasPointTarget { get; private set; }
 
         private Dictionary<string, InputHandler.AxisHandler> inputAxisDic;
         private Dictionary<string, InputHandler.ButtonHandler> inputButtonDic;
 
+        /// <summary>
+        /// 컨트롤러를 초기화 하는 메서드
+        /// </summary>
+        /// <param name="character"></param>
         public void Initialize(Character character)
         {
             character.playerController = transform.GetComponent<PlayerController>();
@@ -63,17 +67,17 @@ namespace ProjectChan.Object
 
             PlayerCharacter = character;
 
-            // -> 카메라 추적 타겟을 설정합니다!
+            // 현재 컨트롤러를 카메라가 추적하도록 한다
             cameraController.SetTarget(PlayerCharacter.transform);
 
-            // 축 관리
+            // 축 입력 관리
             inputAxisDic = new Dictionary<string, InputHandler.AxisHandler>();
             inputAxisDic.Add(Input.AxisX, new InputHandler.AxisHandler(GetAxisX));
             inputAxisDic.Add(Input.AxisZ, new InputHandler.AxisHandler(GetAxisZ));
             inputAxisDic.Add(Input.MouseX, new InputHandler.AxisHandler(GetMouseX));
             inputAxisDic.Add(Input.MouseY, new InputHandler.AxisHandler(GetMouseY));
 
-            // 버튼, 마우스 관리
+            // 버튼 입력 관리
             inputButtonDic = new Dictionary<string, InputHandler.ButtonHandler>();
             inputButtonDic.Add(Input.MouseLeft, new InputHandler.ButtonHandler(OnPressMouseLeft, null));
             inputButtonDic.Add(Input.MouseRight, new InputHandler.ButtonHandler(OnPressMouseRight, OnNotMouseRight));
@@ -82,19 +86,19 @@ namespace ProjectChan.Object
 
         private void FixedUpdate()
         {
-            // -> 컨트롤러에 플레이어가 없다면!
+            // 컨트롤러가 지닌 캐릭터가 없다면
             if (PlayerCharacter == null)
             {
                 return;
             }
 
-            // -> 플레이어가 죽은 상태라면!
+            // 캐릭터가 죽었다면
             if (PlayerCharacter.State == ActorState.Dead)
             {
                 return;
             }
 
-            // -> 플레이어가 행동을 취하는 중이라면!
+            // 캐릭터가 어떠한 행동을 하는 중이라면
             if (isPlayerAction)
             {
                 return;
@@ -105,7 +109,7 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 키 입력 함수들을 실행
+        /// 입력 함수들을 실행하는 메서드
         /// </summary>
         private void InputUpdate()
         {

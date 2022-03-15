@@ -8,7 +8,7 @@ using UnityEngine;
 namespace ProjectChan.Object
 {
     /// <summary>
-    /// => 워프 오브젝트의 클래스
+    /// 스테이지를 넘어가는 포탈 클래스
     /// </summary>
     public class Warp : MonoBehaviour
     {
@@ -22,10 +22,10 @@ namespace ProjectChan.Object
             var warpStageIndex = int.Parse(transform.parent.name);
             var user = GameManager.User;
 
-            // -> 스테이지 이동을 하므로 현재 스테이지 인덱스를 BoStage에 저장해놓습니다!
+            // 스테이지 이동을 하므로, 이전 스테이지의 Index를 Bo에 저장한다
             user.boStage.prevStageIndex = user.boStage.sdStage.index;
 
-            // -> 새로 이동하는 스테이지의 기획 데이터를 받아옵니다!
+            // 이동할 스테이지의 기획 데이터를 가져온다
             user.boStage.sdStage = GameManager.SD.sdStages.Where(obj => obj.index == warpStageIndex)?.SingleOrDefault();
 
             var stageManager = StageManager.Instance;

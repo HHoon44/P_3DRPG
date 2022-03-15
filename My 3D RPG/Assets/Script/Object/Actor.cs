@@ -65,7 +65,7 @@ namespace ProjectChan.Object
         /// <summary>
         /// => 액터 스텟 설정 추상 메서드
         /// </summary>
-        public virtual void OriginStats() { }
+        public virtual void SetActorStat() { }
 
         /// <summary>
         /// => 이동 업데이트 추상 메서드

@@ -10,20 +10,20 @@ using UnityEngine;
 namespace ProjectChan.UI
 {
     /// <summary>
-    /// => 플레이어가 게임을 플레이할 때 필요한 UI들을 관리할 클래스
+    /// 인 게임 플레이를 할 때 사용되는 UI를 관리하는 클래스
     /// </summary>
     public class UIBattle : UIWindow
     {
         // public 
-        public PlayerController playerController;       // -> 플레이어 컨트롤러
-        public BubbleGauge hpBubbleGauge;               // -> Hp 게이지 컴포넌트
-        public BubbleGauge energyBubbleGauge;           // -> Energy 게이지 컴포넌트
-        public Canvas worldCanvas;                      // -> 월드 컨버스 객체
-        public Texture2D normalCursor;                  // -> 기본 마우스 커서 이미지
-        public Texture2D targetPointCursor;             // -> 몬스터 타겟팅 커서 이미지
+        public PlayerController playerController;       // 플레이어 컨트롤러
+        public BubbleGauge hpBubbleGauge;               // Hp 게이지 컴포넌트
+        public BubbleGauge energyBubbleGauge;           // Energy 게이지 컴포넌트
+        public Canvas worldCanvas;                      // 월드 컨버스 객체
+        public Texture2D normalCursor;                  // 기본 마우스 커서 이미지
+        public Texture2D targetPointCursor;             // 몬스터 타겟팅 커서 이미지
 
         /// <summary>
-        /// => 현재 몬스터가 지니고 있는 체력바
+        /// 필드 위의 몬스터들이 지닌 체력바
         /// </summary>
         private List<MonHpBar> allMonHpBar = new List<MonHpBar>();
 
@@ -36,19 +36,19 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 월드 컨버스 안에 존재하는 객체들이 플레이어를 바라 보도록 설정하는 메서드
+        /// 월드 컨버스의 하위 객체들이 플레이어를 바라 보도록 설정하는 메서드
         /// </summary>
         public void BillboardUpdate()
         {
-            // -> 월드 캔버스가 없다면!
             if (worldCanvas == null)
             {
                 return;
             }
 
-            // -> 플레이어를 따라다니는 카메라의 트랜스폼을 가져옵니다!
+            // 플레이어를 타겟으로 하는 카메라의 Transform을 가져온다
             var camTrans = CameraController.Cam.transform;
 
+            // 하위 객체들이 카메라를 바라보도록 하는 작업
             for (int i = 0; i < worldCanvas.transform.childCount; i++)
             {
                 var child = worldCanvas.transform.GetChild(i);
@@ -65,14 +65,32 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 몬스터에게 달아줄 체력바를 생성하는 메서드
-        ///    배틀매니저에 몬스터가 등록될때 생성해준다
+        /// 플레이어의 현재 체력/기력을 게이지에 업데이트하는 메서드
+        /// </summary>
+        private void BubbleGaugeUpdate()
+        {
+            var actor = playerController.PlayerCharacter?.boActor;
+
+            // 캐릭터가 없다면
+            if (actor == null)
+            {
+                return;
+            }
+
+            var currentHp = actor.currentHp / actor.maxHp;
+            var currentEnergy = actor.currentEnergy / actor.maxEnergy;
+
+            hpBubbleGauge.SetGauge(currentHp);
+            energyBubbleGauge.SetGauge(currentEnergy);
+        }
+
+        /// <summary>
+        /// 몬스터에게 체력바를 달아주는 메서드
         /// </summary>
         /// <param name="target"> 체력바를 달아줄 몬스터 </param>
         public void AddMonHpBar(Actor target)
         {
-
-            // -> 몬스터 Hp바를 가져옵니다!
+            // 풀에서 사용가능한 몬스터 체력바를 가져온다
             var monHpBar = 
                 ObjectPoolManager.Instance.GetPool<MonHpBar>(Define.PoolType.MonHpBar).GetPoolableObject(obj => obj.CanRecycle);
 
@@ -80,11 +98,21 @@ namespace ProjectChan.UI
             monHpBar.Initialize(target);
             monHpBar.gameObject.SetActive(true);
 
+            // 리스트에 넣어둔다
             allMonHpBar.Add(monHpBar);
         }
 
         /// <summary>
-        /// => 몬스터 체력바를 업데이트하는 메서드
+        /// 인 게임 커서를 상황에 맞게 업데이트 해주는 메서드
+        /// </summary>
+        private void PlayerCursorUpdate()
+        {
+            Cursor.SetCursor
+                (playerController.HasPointTarget ? targetPointCursor : normalCursor, new Vector2(20, 1), CursorMode.Auto);
+        }
+
+        /// <summary>
+        /// 몬스터의 현재 체력을 체력바에 업데이트 하는 메서드
         /// </summary>
         public void MonHpBarUpdate()
         {
@@ -95,48 +123,21 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 스테이지 전환 시 현재 스테이지에 있는 모든 체력바 객체를 풀에 반환하는 메서드
+        /// 스테이지 전환 시, 현재 스테이지에 존재하는 체력바 객체를 풀에 반환하는 메서드
         /// </summary>
         public void Clear()
         {
+            // 몬스터 체력바 풀을 가져온다
             var monHpBarPool = ObjectPoolManager.Instance.GetPool<MonHpBar>(Define.PoolType.MonHpBar);
 
+            // 풀에 체력바를 반환하는 작업
             for (int i = 0; i < allMonHpBar.Count; i++)
             {
                 monHpBarPool.ReturnPoolableObject(allMonHpBar[i]);
             }
 
-            // -> UIBattle의 몬스터 체력바 리스트를 청소 해줍니다!
+            // 몬스터 체력바 담겨있었던 리스트를 청소한다
             allMonHpBar.Clear();
-        }
-
-        /// <summary>
-        /// => 플레이어의 커서를 상황에 따라 바꿔주는 메서드
-        /// </summary>
-        private void PlayerCursorUpdate()
-        {
-            Cursor.SetCursor
-                (playerController.HasPointTarget ? targetPointCursor : normalCursor, new Vector2(20, 1), CursorMode.Auto);
-        }
-
-        /// <summary>
-        /// => 플레이어의 Hp, Energy의 버블 게이지를 관리하는 메서드
-        /// </summary>
-        private void BubbleGaugeUpdate()
-        {
-            var actor = playerController.PlayerCharacter?.boActor;
-
-            // -> 액터가 없다면
-            if (actor == null)
-            { 
-                return;
-            }
-
-            var currentHp = actor.currentHp / actor.maxHp;
-            var currentEnergy = actor.currentEnergy / actor.maxEnergy;
-
-            hpBubbleGauge.SetGauge(currentHp);
-            energyBubbleGauge.SetGauge(currentEnergy);
         }
     }
 }
