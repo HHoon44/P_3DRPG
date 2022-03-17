@@ -82,26 +82,24 @@ namespace ProjectChan
 
             IEnumerator WaitForLoad()
             {
-                // -> 로딩 진행 상태를 나타냅니다!
+                // 로딩 진행 상태를 나타낸다
                 loadProgress = 0;
 
-                // -> 비동기를 이용해서 로딩 씬을 전환 합니다!
+                // 다음 씬으로 넘어가기 위한 작업을 진행하기 전, 로딩 씬을 띄워놓음
                 yield return SceneManager.LoadSceneAsync(SceneType.Loading.ToString());
 
-                // -> 변경하고자 하는 씬을 담습니다!
+                // 불러오고자 하는 씬을 가져오고 비활성화
                 var asyncOper = SceneManager.LoadSceneAsync(sceneName.ToString(), LoadSceneMode.Additive);
-
-                // -> 방금 추가한 씬을 비활성화 합니다!
                 asyncOper.allowSceneActivation = false;
 
-                // -> 변경하고자 하는 씬에 필요한 작업이 있다면!
+                // 다음 씬을 준비하는 작업이 있다면
                 if (loadCoroutine != null)
                 {
-                    // -> 해당 작업이 완료될 때 까지 대기합니다!
+                    // 해당 작업이 완료될 떄 까지 대기
                     yield return StartCoroutine(loadCoroutine);
                 }
 
-                // -> 비동기로 로드한 씬이 활성화가 완료되지 않았따면 특정 작업을 반복합니다!
+                // 씬 호출이 아직 끝나지 않았다면 특정 작업을 반복
                 while (!asyncOper.isDone)
                 {
                     if (loadProgress >= .9f)
@@ -110,32 +108,37 @@ namespace ProjectChan
 
                         yield return new WaitForSeconds(1f);
 
+                        // 불러온 씬을 활성화
                         asyncOper.allowSceneActivation = true;
                     }
                     else
                     {
-                        // -> loadProgress 값을 이용해서 사용자한테 로딩바를 통해 진행 상태를 알려줍니다!
+                        // laodProgress값을 로딩 씬의 UI에 띄워서 진행 상태를 알려줌
                         loadProgress = asyncOper.progress;
                     }
 
-                    // -> 코루틴 내에서 반복문 사용 시 로직을 한 번 실행 후 메인 로직을 실행할 수 있게 yield return을 해줍니다!
+                    // 코루틴 내에서 반복문 사용 시
+                    // 로직을 한 번 실행 후 메인 로직을 실행할 수 있게 yield return
                     yield return null;
                 }
 
-                // -> 로딩 씬에서 다음 씬에 필요한 작업을 전부 수행 했으므로 로딩씬을 비활성화 시킵니다!
+                // 다음 씬을 위한 준비 작업을 전부 수행 했으므로, 로딩 씬을 비활성화
                 yield return SceneManager.UnloadSceneAsync(SceneType.Loading.ToString());
 
+                // 준비 작업이 끝난 뒤 실행 시킬 작업이 있다면 실행
                 loadComplete?.Invoke();
+
+                // RPG 씬에서 필요한 UI를 활성화
                 UIWindowManager.Instance.GetWindow<UIBattle>().Open();
             }
         }
 
         /// <summary>
-        /// => 로딩씬을 이용하여 실제 씬을 이동하는 것처럼 보이게 해주는 메서드
-        /// => 로딩씬이 실행되는 동안 필요한 리소스들을 불러오는 작업을 함
+        /// 로딩 씬을 이용하여 실제로 씬을 이동하는 것처럼 보이게 해주는 메서드
+        /// 로딩 씬이 실행되는 동안 필요한 리소스들을 불러오는 작업을 함
         /// </summary>
-        /// <param name="loadCoroutine"> StageManager.ChangeStage </param>
-        /// <param name="loadComplete"> StageManager.OnChangeStageComplete </param>
+        /// <param name="loadCoroutine">    StageManager.ChangeStage </param>
+        /// <param name="loadComplete">     StageManager.OnChangeStageComplete </param>
         public void OnAddtiveLoadingScene(IEnumerator loadCoroutine = null, Action loadComplete = null)
         {
             StartCoroutine(WaitForLoad());
@@ -162,7 +165,7 @@ namespace ProjectChan
                     yield return null;
                 }
 
-                // -> 인게임씬에서 활성화된 상태로 카메라가 존재하기 때문에 로딩씬 카메라를 비활성화 해줍니다!
+                // 인 게임 씬에서 활성화된 상태로 카메라가 존재하기 때문에, 로딩 씬 카메라를 비활성화
                 uiLoading.cam.enabled = false;
                 loadProgress = 1f;
 

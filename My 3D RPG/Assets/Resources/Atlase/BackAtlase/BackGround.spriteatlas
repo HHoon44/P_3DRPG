@@ -44,7 +44,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: ab4f0f5f2920a9b4db2226aa1c3d83d7, type: 3}
-    totalSpriteSurfaceArea: 48592031
+    totalSpriteSurfaceArea: 46357006
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -68,7 +68,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9fba2d6b2f0244b4aa9d146f42d3cec4, type: 3}
   - {fileID: 21300000, guid: 0f9acdcbaf6dcbc4a8011af18ec2723e, type: 3}
   - {fileID: 21300000, guid: 9d33a7fc152cc6e4c87019b5eaa4c1f7, type: 3}
-  - {fileID: 21300000, guid: 245bf4be1e373864590ac58fad390dce, type: 3}
   - {fileID: 21300000, guid: c95f18de4a4bb294c8730def06298dbf, type: 3}
   - {fileID: 21300000, guid: 0ce8d3af24b5cc742916fed98059cf03, type: 3}
   - {fileID: 21300000, guid: 07f511bfa2b48e246ae4175628ccc8ae, type: 3}
@@ -92,7 +91,6 @@ SpriteAtlas:
   - Back Ground5
   - Back Ground3
   - Back Ground8
-  - Back Ground19
   - Back Ground6
   - Back Ground4
   - Back Ground21

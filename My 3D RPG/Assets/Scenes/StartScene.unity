@@ -553,7 +553,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1763868015}
         m_TargetAssemblyTypeName: ProjectChan.StartSceneController, Assembly-CSharp
         m_MethodName: ButtonOption
         m_Mode: 1
@@ -1741,7 +1741,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1763868015}
         m_TargetAssemblyTypeName: ProjectChan.StartSceneController, Assembly-CSharp
         m_MethodName: ButtonOption
         m_Mode: 1
@@ -2703,7 +2703,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1763868015}
         m_TargetAssemblyTypeName: ProjectChan.StartSceneController, Assembly-CSharp
         m_MethodName: ButtonOption
         m_Mode: 1
@@ -4005,7 +4005,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1763868015}
         m_TargetAssemblyTypeName: ProjectChan.StartSceneController, Assembly-CSharp
         m_MethodName: ButtonOption
         m_Mode: 1

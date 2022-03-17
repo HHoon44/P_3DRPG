@@ -14,14 +14,14 @@ namespace ProjectChan.UI
     public class UIWindowManager : Singleton<UIWindowManager>
     {
         /// <summary>
-        /// UM에 등록된 UIWindow를 담아놓을 객체 리스트
-        /// </summary>
-        private List<UIWindow> totalUIWindows = new List<UIWindow>();
-
-        /// <summary>
         /// 활성화 상태의 UIWindow를 갖는 객체 리스트
         /// </summary>
         private List<UIWindow> totalOpenWindows = new List<UIWindow>();
+
+        /// <summary>
+        /// UM에 등록된 UIWindow를 담아놓을 객체 리스트
+        /// </summary>
+        private List<UIWindow> totalUIWindows = new List<UIWindow>();
 
         /// <summary>
         /// UM에 UIWindow 등록 시, 캐싱하여 담아둘 딕셔너리
@@ -40,6 +40,20 @@ namespace ProjectChan.UI
         public void Initialize()
         {
             InitAllWindow();
+        }
+
+        /// <summary>
+        /// UM에 등록된 모든 UIWindow를 초기화 하는 메서드
+        /// </summary>
+        public void InitAllWindow()
+        {
+            for (int i = 0; i < totalUIWindows.Count; i++)
+            {
+                if (totalUIWindows[i] != null)
+                {
+                    totalUIWindows[i].InitWindow();
+                }
+            }
         }
 
         /// <summary>
@@ -93,30 +107,6 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// 활성화 된 UIWindow를 리스트에 추가하는 메서드
-        /// </summary>
-        /// <param name="uiWindow"> 활성화 할 UIWindow </param>
-        public void AddOpenWindow(UIWindow uiWindow)
-        {
-            if (!totalOpenWindows.Contains(uiWindow))
-            {
-                totalOpenWindows.Add(uiWindow);
-            }
-        }
-
-        /// <summary>
-        /// 비활성화 된 UIWIndow를 리스트에서 제거하는 메서드
-        /// </summary>
-        /// <param name="uiWindow"> 비활성화 할 UIWindow </param>
-        public void RemoveOpenWindow(UIWindow uiWindow)
-        {
-            if (totalOpenWindows.Contains(uiWindow))
-            {
-                totalOpenWindows.Remove(uiWindow);
-            }
-        }
-
-        /// <summary>
         /// UM에 등록된 UIWindow 인스턴스를 반환하는 메서드
         /// </summary>
         /// <typeparam name="T"> 반환 받을 UIWindow의 타입 </typeparam>
@@ -148,16 +138,26 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// UM에 등록된 모든 UIWindow를 초기화 하는 메서드
+        /// 활성화 된 UIWindow를 리스트에 추가하는 메서드
         /// </summary>
-        public void InitAllWindow()
+        /// <param name="uiWindow"> 활성화 할 UIWindow </param>
+        public void AddOpenWindow(UIWindow uiWindow)
         {
-            for (int i = 0; i < totalUIWindows.Count; i++)
+            if (!totalOpenWindows.Contains(uiWindow))
             {
-                if (totalUIWindows[i] != null)
-                {
-                    totalUIWindows[i].InitWindow();
-                }
+                totalOpenWindows.Add(uiWindow);
+            }
+        }
+
+        /// <summary>
+        /// 비활성화 된 UIWIndow를 리스트에서 제거하는 메서드
+        /// </summary>
+        /// <param name="uiWindow"> 비활성화 할 UIWindow </param>
+        public void RemoveOpenWindow(UIWindow uiWindow)
+        {
+            if (totalOpenWindows.Contains(uiWindow))
+            {
+                totalOpenWindows.Remove(uiWindow);
             }
         }
     }

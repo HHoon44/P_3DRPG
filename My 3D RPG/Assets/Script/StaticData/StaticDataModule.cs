@@ -11,7 +11,6 @@ namespace ProjectChan.SD
 {
     /// <summary>
     /// 모든 기획데이터를 들고 있는 클래스
-    /// 기획 데이터를 로드하고 들고 있기만 하는 것이므로 모노를 상속받을 필요가 없음
     /// </summary>
     [Serializable]
     public class StaticDataModule
@@ -36,7 +35,7 @@ namespace ProjectChan.SD
             // 기획 데이터를 불러오는 로더를 생성
             var loader = new StaticDataLoader();
 
-            // out 키워드를 이용해서 데이터를 저장한다
+            // out 키워드를 이용해서 데이터를 저장
             loader.Load(out sdCharacters);
             loader.Load(out sdStages);
             loader.Load(out sdNovels);
@@ -72,10 +71,10 @@ namespace ProjectChan.SD
                 // T타입의 이름에서 SD를 제거하면, 파일이름과 동일하다는 규칙을 이용
                 var fileName = typeof(T).Name.Remove(0, "SD".Length);
 
-                // 경로에 존재하는 fileName의 Json 파일을 모두 읽어온다
+                // 경로에 존재하는 fileName의 Json 파일을 모두 읽음
                 var json = File.ReadAllText($"{path}/{fileName}.json");
 
-                // 읽어온 Json 파일을 역직렬화 하여 저장한다
+                // 읽어온 Json 파일을 역직렬화 하여 저장
                 data = SerializationUtil.FromJson<T>(json);
             }
         }
