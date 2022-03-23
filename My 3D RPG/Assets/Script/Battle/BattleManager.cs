@@ -12,7 +12,7 @@ namespace ProjectChan.Battle
     using ActorType = Define.Actor.ActorType;
 
     /// <summary>
-    /// => 인게임에 활성화 된 액터들을 관리하는 클래스
+    /// 인게임에 활성화 된 액터들을 관리하는 클래스
     /// </summary>
     public class BattleManager : Singleton<BattleManager>
     {
@@ -38,8 +38,8 @@ namespace ProjectChan.Battle
         /// <param name="actor"></param>
         public void AddActor(Actor actor)
         {
-            // -> 파라미터로 받은 액터안의 액터타입에 접근하여 
-            //    액터 타입에 따라 리스트에 저장함
+            // 파라미터로 받은 액터안의 액터타입에 접근하여 
+            // 액터 타입에 따라 리스트에 저장함
             switch (actor)
             {
                 case var character when actor.boActor.actorType == ActorType.Character:
@@ -96,14 +96,14 @@ namespace ProjectChan.Battle
                     // 배틀매니저에서 삭제
                     actors.RemoveAt(i);
                     i--;
-
-                    /*
-                     *  반복되는 곳에서 리스트 안의 원소를 지울 땐 
-                     *  증감 연산자 ++로 사용할 현재 인덱스에서 --를 해줘야 다음 원소로 넘어갑니다!
-                     */
                 }
             }
         }
+
+        /*
+         *  반복되는 곳에서 리스트 안의 원소를 지울 땐 
+         *  증감 연산자 ++로 사용할 현재 인덱스에서 --를 해줘야 다음 원소로 넘어갑니다!
+         */
 
         /// <summary>
         /// NPC 업데이트를 실행하는 메서드
