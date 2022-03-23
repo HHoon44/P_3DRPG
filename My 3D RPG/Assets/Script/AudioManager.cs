@@ -46,11 +46,31 @@ namespace ProjectChan
             audio.Stop();
         }
 
+        public void ChangeAudioClip(string clipName)
+        {
+            switch (clipName)
+            {
+                case "StartVillage":
+                    ChangeAudioClip(Audio.ClipType.Village);
+                    break;
+
+                case "DunGeon":
+                    ChangeAudioClip(Audio.ClipType.DunGeon);
+                    break;
+                case "StartScene":
+                    ChangeAudioClip(Audio.ClipType.StartScene);
+                    break;
+                case "NovelGame":
+                    ChangeAudioClip(Audio.ClipType.NovelGame);
+                    break;
+            }
+        }
+
         /// <summary>
         /// => 오디오 소스 클립을 세팅하는 메서드
         /// </summary>
         /// <param name="clipType"> 키고자 하는 클립 타입 </param>
-        public void ChangeAudioClip(ClipType clipType)
+        private void ChangeAudioClip(ClipType clipType)
         {
             switch (clipType)
             {

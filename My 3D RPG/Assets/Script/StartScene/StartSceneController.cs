@@ -34,7 +34,7 @@ namespace ProjectChan
             slider.value = AM.audio.volume;
 
             // -> 현재 오디오 소스의 클립을 설정합니다!
-            AM.ChangeAudioClip(Define.Audio.ClipType.StartScene);
+            AM.ChangeAudioClip(SceneManager.GetActiveScene().name);
 
             // -> 도움말 텍스트를 세팅합니다!
             helpText = HelpFrame.GetComponentInChildren<TextMeshProUGUI>();

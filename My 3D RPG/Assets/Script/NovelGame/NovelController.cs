@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static ProjectChan.Define.Resource;
 
@@ -38,7 +39,7 @@ namespace ProjectChan.Novel
         private void Start()
         {
             // 노벨 씬에 맞는 오디오 클립으로 설정
-            AudioManager.Instance.ChangeAudioClip(Define.Audio.ClipType.NovelGame);
+            AudioManager.Instance.ChangeAudioClip(SceneManager.GetActiveScene().name);
 
             // 대화를 시작
             OnTalse();
