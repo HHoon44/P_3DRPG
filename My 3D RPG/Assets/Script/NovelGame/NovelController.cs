@@ -53,10 +53,10 @@ namespace ProjectChan.Novel
             // 모든 대화가 안 끝났다면
             if (currentNovelIndex + speechIndex < Define.Novel.nextStageLoadIndex)
             {
-                // 현재 대화 인덱스와 대화 진행 인덱스를 더한 값과 같은 인덱스의 기획 데이터를 가져온다
+                // 현재 대화 인덱스와 대화 진행 인덱스를 더한 값과 같은 인덱스의 기획 데이터를 가져옴
                 sdNovel = GameManager.SD.sdNovels.Where(obj => obj.index == currentNovelIndex + speechIndex)?.SingleOrDefault();
 
-                // 노벨 기획 데이터로 새로운 Bo데이터를 만든다
+                // 노벨 기획 데이터로 새로운 Bo데이터를 만듬
                 BoNovel boNovel = new BoNovel(sdNovel);
 
                 // 노벨 씬 배경을 설정한다
@@ -66,13 +66,13 @@ namespace ProjectChan.Novel
                     novelGround.sprite = stage;
                 }
 
-                // 노벨 씬의 노벨 UI를 세팅한다
+                // 노벨 씬의 노벨 UI를 세팅
                 UIWindowManager.Instance.GetWindow<UINovel>().SetNovel(boNovel);
                 speechIndex++;
             }
             else
             {
-                // 다음 스테이지로 넘어간다
+                // 다음 스테이지로
                 NextStageLoad();
             }
         }
@@ -82,12 +82,12 @@ namespace ProjectChan.Novel
         /// </summary>
         private void NextStageLoad()
         {
-            // 현재 노벨 UI를 닫는다
+            // 현재 노벨 UI를 닫음
             UIWindowManager.Instance.GetWindow<UINovel>().Close();
 
             var stageManager = StageManager.Instance;
             
-            // 게임 매니저를 이용해서 다음 씬을 불러온다
+            // 게임 매니저를 이용해서 다음 씬을 불러옴
             GameManager.Instance.LoadScene
                 (Define.SceneType.InGame, stageManager.ChangeStage(), stageManager.OnChangeStageComplete);
         }

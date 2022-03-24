@@ -53,10 +53,10 @@ namespace ProjectChan.UI
             {
                 var child = worldCanvas.transform.GetChild(i);
 
-                /// => LookAt : 지정된 오브젝트들이 파라미터로 들어간 Target을 바라보게 해줌
+                /// LookAt : 지정된 오브젝트들이 파라미터로 들어간 Target을 바라보게 해줌
                 child.LookAt(camTrans, Vector3.up);
 
-                /// => 표류하지 않거나 의도하지 않은 회전을 일으킬 수 있기때문에 직접적으로 바꾸지 않음 
+                /// 표류하지 않거나 의도하지 않은 회전을 일으킬 수 있기때문에 직접적으로 바꾸지 않음 
                 var newRot = child.eulerAngles;
                 newRot.x = 0;
                 newRot.z = 0;
@@ -91,8 +91,8 @@ namespace ProjectChan.UI
         public void AddMonHpBar(Actor target)
         {
             // 풀에서 사용가능한 몬스터 체력바를 가져온다
-            var monHpBar = 
-                ObjectPoolManager.Instance.GetPool<MonHpBar>(Define.PoolType.MonHpBar).GetPoolableObject(obj => obj.CanRecycle);
+            var monHpBar = ObjectPoolManager.Instance.GetPool<MonHpBar>
+                (Define.PoolType.MonHpBar).GetPoolableObject(obj => obj.CanRecycle);
 
             monHpBar.transform.SetParent(worldCanvas.transform);
             monHpBar.Initialize(target);

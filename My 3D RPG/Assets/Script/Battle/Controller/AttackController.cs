@@ -30,7 +30,7 @@ namespace ProjectChan.Battle
         private List<Actor> targets = new List<Actor>();
 
         /// <summary>
-        /// AttackController의 초기화하는 메서드
+        /// 공격자를 설정하는 메서드
         /// </summary>
         /// <param name="attacker"></param>
         public void Initialize(Actor attacker)
@@ -94,18 +94,18 @@ namespace ProjectChan.Battle
         /// </summary>
         public virtual void CalculateAttackRange()
         {
-            // -> 오브젝트의 레이어와 공격자의 액터 타입을 이용하여 타겟이 존재하는지 확인합니다!
+            // 타겟의 레이어를 구한다
             var targetLayer = attacker.boActor.actorType !=
                 ActorType.Monster ? LayerMask.NameToLayer("Monster") : LayerMask.NameToLayer("Player");
 
-            // -> 구체를 발사해서 구체에 맞은 객체가 존재하는지 확인합니다!
+            // 구체를 발사해서 구체에 맞은 객체가 존재하는지 확인
             var hits = Physics.SphereCastAll(attacker.transform.position, .5f, attacker.transform.forward,
                 attacker.boActor.atkRange, 1 << targetLayer);
 
-            // -> 새로운 타겟 정보를 얻었으니 저장 되어있는 타겟 정보를 지웁니다!
+            // 새로운 타겟 정보를 얻었으니 저장 되어있는 타겟 정보를 삭제
             targets.Clear();
 
-            // -> 새로 얻은 타겟 정보를 저장합니다!
+            // 새로 얻은 타겟 정보를 저장
             for (int i = 0; i < hits.Length; i++)
             {
                 targets.Add(hits[i].transform.GetComponent<Actor>());
@@ -119,18 +119,18 @@ namespace ProjectChan.Battle
         /// <param name="target"> 데미지 처리를 할 타겟 </param>
         public virtual void CalculateDamage(float damage, Actor target)
         {
-            // -> Mathf 함수를 이용하여 데미지를 계산합니다!
+            // Mathf 함수를 이용하여 데미지를 계산
             var calDamage = Mathf.Max(damage - target.boActor.def, 0);
 
-            // -> 계산된 데미지를 타겟의 Hp에서 빼줍니다!
+            // 계산된 데미지를 타겟의 Hp에서 빼줌
             target.boActor.currentHp = Mathf.Max(target.boActor.currentHp - calDamage, 0);
 
             target.SetState(ActorState.Damage);
 
-            // -> 연산 후 타겟의 Hp가 0이거나 0보다 작다면!
+            // 데미지 처리 후 타겟의 Hp가 0이거나 0보다 작다면
             if (target.boActor.currentHp <= 0)
             {
-                // -> 타겟은 죽었습니다!
+                // 타겟은 죽음
                 target.boActor.currentHp = 0;
                 target.SetState(ActorState.Dead);
             }

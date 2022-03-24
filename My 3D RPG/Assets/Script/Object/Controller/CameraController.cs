@@ -35,13 +35,13 @@ namespace ProjectChan.Object
 
         private void FixedUpdate()
         {
-            // -> 타겟이 없다면!
+            // 조종 타겟이 없다면
             if (target == null)
             {
                 return;
             }
 
-            // -> 타겟이 존재한다면 CamView에 따라 캠을 설정합니다!
+            // CamView에 따라 캠 각도를 설정
             switch (camView)
             {
                 case CamView.Standard:
@@ -72,7 +72,7 @@ namespace ProjectChan.Object
         {
             this.target = target;
 
-            // -> ResourceManager를 이용하여 CamPos들을 가져온다
+            // 리소스 폴더에 있는 CamPos 프리팹을 가져옴
             var camPos = Instantiate(ResourceManager.Instance.LoadObject(Define.Camera.CamPosPath)).transform;
 
             camPos.parent = this.target.transform;
@@ -81,7 +81,7 @@ namespace ProjectChan.Object
             standardPos = camPos.Find("StandardPos");
             frontPos = camPos.Find("FrontPos");
 
-            // -> StandardPos로 설정합니다!
+            // 기본 카메라 포지션으로 설정
             transform.position = standardPos.position;
             transform.forward = standardPos.forward;
         }

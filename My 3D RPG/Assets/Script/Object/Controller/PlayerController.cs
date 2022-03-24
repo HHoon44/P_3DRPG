@@ -113,19 +113,22 @@ namespace ProjectChan.Object
         /// </summary>
         private void InputUpdate()
         {
+            // 축 입력을 확인하는 작업
             foreach (var input in inputAxisDic)
             {
-                // -> GetAxis 함수에 Dic에 저장된 Key 값을 전달해서 실수값을 반환 받습니다!
+                // 축 입력에 대한 실수값을 반환 받음
                 var value = UnityEngine.Input.GetAxis(input.Key);
 
-                // -> GetAxisZ(value)에 축 입력 값을 전달합니다!
+                // 축 입력 시, 실행 시킬 델리게이트에게 실수값을 전달
                 input.Value.GetAxisValue(value);
             }
 
+            // 버튼 입력을 확인하는 작업
             foreach (var input in inputButtonDic)
             {
                 if (UnityEngine.Input.GetButton(input.Key))
                 {
+                    // 버튼 입력 시, 실행 시킬 델리게이트 실행
                     input.Value.OnPress();
                 }
                 else
@@ -136,24 +139,21 @@ namespace ProjectChan.Object
         }
 
         /// <summary>
-        /// => 마우스 포인터를 기준으로 레이를 사용하여 타겟을 찾아내는 메서드
+        /// 마우스 포인터를 기준으로 레이를 사용하여 타겟을 찾아내는 메서드
         /// </summary>
         private void CheckMousePointTarget()
         {
-            // -> 현재 씬에서 사용하는 카메라에서 스크린 좌표계의 마우스의 위치로 레이를 생성합니다!
-            /// => ScreenPointToRay : 스크린 좌표를 인수로 넘겨주면 카메라에서 시작하여 스크린 좌표에 해당하는 3차원의 좌표로 Ray를 생성
+            /// ScreenPointToRay : 스크린 좌표를 인수로 넘겨주면 카메라에서 시작하여 스크린 좌표에 해당하는 3차원의 좌표로 Ray를 생성
+            // 현재 씬의 카메라에서 스크린 좌표계의 마우스 위치로 레이를 생성
             var ray = CameraController.Cam.ScreenPointToRay(UnityEngine.Input.mousePosition);
 
-            // -> 생성한 레이를 통해 해당 레이 방향에 몬스터가 존재 하는지 체크합니다!
+            // 생성한 레이를 통해 해당 레이 방향에 몬스터가 존재 하는지 체크
             var hits = Physics.RaycastAll(ray, 1000f, 1 << LayerMask.NameToLayer("Monster"));
 
-            // -> HasPointTarget이 True라면 hits에서 제일 첫번째 녀석의 Transform값을 가져옴
-
-            // -> 결과가 담긴 배열의 길이가 0이 아니라면 타겟이 존재 합니다!
+            // 타겟이 존재한다면 True
             HasPointTarget = hits.Length != 0;
 
-            // -> 캐릭터를 타겟 쪽으로 회전 시키기 위해서 타겟의 트랜스폼을 받는 것이므로
-            //    맨 앞에 있는 타겟의 트랜스폼을 넣어줍니다!
+            // 캐릭터를 타겟 쪽으로 회전 시키기 위해, 0번째 타겟의 트랜스폼을 가져옴
             pointingTarget = HasPointTarget ? hits[0].transform : null;
         }
 
@@ -168,15 +168,17 @@ namespace ProjectChan.Object
         {
             var boActor = PlayerCharacter.boActor;
             var newDir = boActor.moveDir;
-            var sprint = Define.StaticData.BaseSpeed + UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
+            var sprint = Define.StaticData.BaseSpeed + 
+                UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
 
             sprint += UnityEngine.Input.GetAxis(Input.Sprint) * Define.StaticData.BaseSpeed;
             newDir.z = (sprint * value);
             PlayerCharacter.boActor.moveDir = newDir;
         }
 
-        private void GetMouseX(float value)     // -> Y축 회전
+        private void GetMouseX(float value)
         {
+            // Y축 회전
             var newDir = PlayerCharacter.boActor.rotDir;
             newDir.y = canRot ? value : 0;
             PlayerCharacter.boActor.rotDir = newDir;
@@ -187,29 +189,34 @@ namespace ProjectChan.Object
 
         }
 
-        private void OnPressFrontCam()      // -> 캠 회전
+        private void OnPressFrontCam()
         {
+            // 캠 회전
             cameraController.camView = CamView.Front;
         }
 
-        private void OnNotPressFrontCam()   // -> 베이스 캠
+        private void OnNotPressFrontCam()
         {
+            // 베이스 캠
             cameraController.camView = CamView.Standard;
         }
 
-        private void OnPressMouseLeft()     // -> 공격 키
+        private void OnPressMouseLeft()
         {
-            // -> 마우스가 가리키는 객체의 정보가 존재한다면!
+            // 공격 키
+            // 마우스 레이로 타겟을 찾았다면
             if (pointingTarget != null)
             {
-                // -> Y축 회전만 실행하고 나머지 축은 기존 회전값을 보존한 채로 몬스터 쪽으로 회전 합니다!
+                // Y축 회전만 실행하고
+                // 나머지 축은 기존 회전값을 보존한 채로 몬스터 쪽으로 회전
 
+                // 캐릭터의 이전 회전값
                 var originRot = PlayerCharacter.transform.eulerAngles;
 
-                // -> 플레이어가 타겟을 바라보도록 합니다!
+                // 캐릭터가 타겟을 바라보도록 설정
                 PlayerCharacter.transform.LookAt(pointingTarget);
 
-                // -> 변경된 X, Z축 회전 값을 원래 회전 값으로 변경합니다!
+                // 변경된 X,Z축 회전 값을 원래 회전 값으로 변경
                 var newRot = PlayerCharacter.transform.eulerAngles;
                 newRot.x = originRot.x;
                 newRot.z = originRot.z;
@@ -253,16 +260,19 @@ namespace ProjectChan.Object
         private class InputHandler
         {
             /// <summary>
-            /// => 축 타입의 키 입력 시 실행할 메서드를 대리할 델리게이트
+            /// 축 타입의 키 입력 시, 실행할 메서드를 대리할 델리게이트
             /// </summary>
             /// <param name="value"> 축 값</param>
             public delegate void InputAxisDel(float value);
 
             /// <summary>
-            /// => 버튼 타입의 키 입력 시 실행할 메서드를 대리할 델리게이트
+            /// 버튼 타입의 키 입력 시, 실행할 메서드를 대리할 델리게이트
             /// </summary>
             public delegate void InputButtonDel();
 
+            /// <summary>
+            /// 축 입력 핸들러
+            /// </summary>
             public class AxisHandler
             {
                 private InputAxisDel axisDel;
@@ -278,6 +288,9 @@ namespace ProjectChan.Object
                 }
             }
 
+            /// <summary>
+            /// 버튼 입력 핸들러
+            /// </summary>
             public class ButtonHandler
             {
                 private InputButtonDel pressDel;
