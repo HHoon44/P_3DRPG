@@ -116,24 +116,29 @@ namespace ProjectChan.UI
             // T 타입으로 Key 값을 설정
             string key = typeof(T).Name;
 
-            // Key 값이 캐싱 Dic에 없다면
+            // Key 값이 모든 UI캐싱 Dic에 없다면
             if (!cachedTotalUIWindowDic.ContainsKey(key))
             {
                 return null;
             }
+            
+            // 현재 메서드를 통해 접근하는 UIWindow는 모두 최종적으로 인스턴스 딕셔너리에 등록
 
             // 인스턴스 시 담아둘 딕셔너리에 키 값이 없다면
             if (!cachedInstanceDic.ContainsKey(key))
             {
-                // 값이 지정된 개체와 동일한 지정된 형식의 개체를 Key값과 Dic에 저장
+                // 모든 UI의 인스턴스가 담겨있는 Dic에서 키 값의 UI 인스턴스를 T타입으로 캐스팅 후 등록
                 cachedInstanceDic.Add(key, (T)Convert.ChangeType(cachedTotalUIWindowDic[key], typeof(T)));
             }
             else if (cachedInstanceDic[key].Equals(null))
             {
-                // 값이 지정된 개체와 동일한 지정된 형식의 개체를 Dic에 저장
+                // 모든 UI의 인스턴스가 담겨있는 Dic에서 키 값의 UI 인스턴스를 T타입으로 캐스팅 후 등록
                 cachedInstanceDic[key] = (T)Convert.ChangeType(cachedTotalUIWindowDic[key], typeof(T));
             }
 
+
+            // UIWindow 형태가 아니라 최종 파생 클래스형태로 반환
+            //return (T)cachedTotalUIWindowDic[key];
             return (T)cachedInstanceDic[key];
         }
 

@@ -72,7 +72,6 @@ namespace ProjectChan.Battle
         /// </summary>
         public virtual void OnAttack()
         {
-            // -> 현재 공격자의 공격 타입에 따라 처리합니다!
             switch (attacker.boActor.atkType)
             {
                 case AttackType.Normal:
@@ -90,11 +89,11 @@ namespace ProjectChan.Battle
         }
 
         /// <summary>
-        /// 공격 범위에 타겟이 존재하는지 확인하는 메서드
+        /// 공격자의 공격 범위에 적이 존재하는지 확인하는 메서드
         /// </summary>
         public virtual void CalculateAttackRange()
         {
-            // 타겟의 레이어를 구한다
+            // 적이라고 감지할 적의 레이어를 구함
             var targetLayer = attacker.boActor.actorType !=
                 ActorType.Monster ? LayerMask.NameToLayer("Monster") : LayerMask.NameToLayer("Player");
 
