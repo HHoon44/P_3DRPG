@@ -16,7 +16,7 @@ using static ProjectChan.Define.Quest;
 namespace ProjectChan.UI
 {
     /// <summary>
-    /// => 퀘스트 UI가 지닐 클래스
+    /// 퀘스트 창의 UI를 관리하는 클래스
     /// </summary>
     public class UIQuest : UIWindow
     {

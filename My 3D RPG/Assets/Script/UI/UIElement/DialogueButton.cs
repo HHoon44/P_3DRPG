@@ -15,33 +15,29 @@ using static ProjectChan.Define.Quest;
 namespace ProjectChan.UI
 {
     /// <summary>
-    /// => 다이얼로그 버튼을 세팅하는 클래스
+    /// 다이얼로그 버튼을 관리하는 클래스
     /// </summary>
     public class DialogueButton : MonoBehaviour, IPoolableObject
     {
-        public Image icon;                  // -> 다이얼로그 버튼의 아이콘
-        public TextMeshProUGUI title;       // -> 다이얼로그 버튼의 텍스트
-        public Button btn;                  // -> 다이얼로그 버튼의 버튼 기능
+        // public
+        public Image icon;                  // 버튼의 아이콘
+        public TextMeshProUGUI title;       // 버튼의 텍스트
+        public Button btn;                  // 버튼의 버튼 기능
 
         /// <summary>
-        /// => 재사용 가능한지
+        /// 재사용 가능 여부
         /// </summary>
         public bool CanRecycle { get; set; } = true;
 
         /// <summary>
-        /// => 다이얼로그 버튼을 세팅하는 메서드
+        /// 다이얼로그 버튼을 초기화 하는 메서드
         /// </summary>
-        /// <param name="questIndex"> NPC가 지닌 퀘스트 인덱스 </param>
+        /// <param name="questIndex"> 버튼이 지닐 퀘스트 인덱스 </param>
         public void Initialize(int questIndex)
         {
             icon.sprite = SpriteLoader.GetSprite(Define.Resource.AtlasType.UIAtlase, "exclamation");
 
-            /// <summary>
-            /// => NPC가 지닌 퀘스트 다이얼로그 버튼에 바인딩될 메서드
-            /// </summary>
-            /// <param name="sdQuest"> 다이얼로그 버튼이 지닌 기획 데이터 </param>
-
-            // -> 버튼이 지닐 퀘스트 데이터 입니다!
+            // 버튼이 지닐 퀘스트 기획 데이터
             var sdQuest = GameManager.SD.sdQuests.Where(obj => obj.index == questIndex)?.SingleOrDefault();
 
             title.text = sdQuest.name;
@@ -49,71 +45,59 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => NPC가 지닌 다이얼로그 버튼에 바인딩될 메서드
+        /// 퀘스트 다이얼로그 버튼에 바인딩될 메서드
         /// </summary>
-        /// <param name="sdQuest"> 버튼이 지닐 퀘스트 기획 데이터 </param>
-        /// <param name="progressQuestIndex"> 진행중인 퀘스트 목록중 버튼이 지닐 퀘스트가 있는 위치 값 </param>
+        /// <param name="sdQuest"> 버튼이 지닌 퀘스트 기획 데이터 </param>
         private void OnClickQuest(SDQuest sdQuest)
         {
-            // -> 다이얼로그 창을 닫습니다!
             var uiWindowManager = UIWindowManager.Instance;
+
+            // 다이얼로그 창을 닫음
             uiWindowManager.GetWindow<UIDialogue>().Close();
 
-            // -> 플레이어의 진행중인 퀘스트 목록을 가져옵니다!
+            // 진행중인 퀘스트 목록
             var progressQuests = GameManager.User.boQuest.progressQuests;
-            var progressQuestIndex = -1;
 
-            // -> 버튼이 지닌 퀘스트 데이터가
-            //    플레이어가 진행중인 퀘스트 데이터 인지 확인하는 작업입니다!
-            for (int i = 0; i < progressQuests.Count; i++)
-            {
-                // -> 진행중인 퀘스트의 인덱스와 버튼의 퀘스트 인덱스가 같다면!
-                if (progressQuests[i].sdQuest.index == sdQuest.index)
-                {
-                    // -> i번째에 버튼이 지닐 퀘스트가 있습니다!
-                    progressQuestIndex = i;
-                    break;
-                }
-            }
+            // 버튼의 퀘스트가 진행중인 퀘스트 목록에 존재하는지 확인하는 작업
+            var progressQuest = progressQuests.Where(obj => obj.sdQuest.index == sdQuest.index).SingleOrDefault();
 
-            // -> 버튼이 지닐 퀘스트가 진행중인 퀘스트가 아니라면!
-            if (progressQuestIndex == -1)
+            if (progressQuest == null)
             {
+                // 새로운 퀘스트 이므로 수락/거절 창을 활성화
                 uiWindowManager.GetWindow<UIQuest>().orderTab = QuestOrderTab.NoProgress;
             }
             else
             {
-                // -> 진행중인 퀘스트 입니다!
+                // 진행중인 퀘스트 이므로 진행도를 나타내는 창을 활성화
                 uiWindowManager.GetWindow<UIQuest>().orderTab = QuestOrderTab.Progress;
 
-                // -> 버튼이 지닌 퀘스트가 있는 진행중인 퀘스트를 가져옵니다!
-                // -> sdQuest == progressQuest
-                var progressQuest = GameManager.User.boQuest.progressQuests[progressQuestIndex];
-                var detailsLength = sdQuest.questDetail.Length;
+                var progressQuestDetailLength = progressQuest.sdQuest.questDetail.Length;
 
-                // -> 진행중인 퀘스트의 완료한 디테일 개수 입니다!
+                // 몇개의 조건을 완료 했는지를 저장하는 변수
                 var progressDetail = 0;
 
-                // -> 진행중인 퀘스트가 이제 막 완료한 퀘스트 인지 확인하는 작업입니다!
-                for (int i = 0; i < detailsLength; i++)
+                // 진행중인 퀘스트이지만 완료조건을 만족한 퀘스트인지 확인하는 작업
+                for (int i = 0; i < progressQuestDetailLength; i++)
                 {
-                    // -> 기획 데이터 안의 디테일 값과 진행중인 퀘스트의 디테일 값이 같다면!
-                    if (sdQuest.questDetail[i] == progressQuest.details[i])
+                    // 완료 조건의 값과 진행중인 퀘스트의 디테일 값이 같다면
+                    if (progressQuest.sdQuest.questDetail[i] == progressQuest.details[i])
                     {
+                        // 조건 완료를 나타내는 변수에 +1을 함
                         progressDetail++;
                     }
                 }
 
-                if (detailsLength == progressDetail)
+                // 디테일 배열의 길이와 몇개의 조건을 완료 했는지에 대한 변수가 같다면
+                if (progressQuestDetailLength == progressDetail)
                 {
-                    // -> 이제 막 클리어한 퀘스트 입니다!
+                    // 완료조건을 만족하고 클리어한 퀘스트 이므로 클리어 창을 활성화
                     uiWindowManager.GetWindow<UIQuest>().orderTab = QuestOrderTab.Clear;
                 }
             }
 
-            // -> 플레이어는 행동을 멈춥니다!
+            // 퀘스트 창 활성화
             uiWindowManager.GetWindow<UIDialogue>().boNPC.actor.isPlayerAction = false;
-            uiWindowManager.GetWindow<UIQuest>().Open(QuestWindow.Order, sdQuest);
+            uiWindowManager.GetWindow<UIQuest>().Open(QuestWindow.Order, progressQuest.sdQuest);
         }
 
         /// <summary>

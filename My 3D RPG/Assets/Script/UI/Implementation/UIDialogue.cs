@@ -30,7 +30,7 @@ namespace ProjectChan.UI
         public BoNPC boNPC { get; private set; }
 
         /// <summary>
-        /// => 활성화 된 다이얼로그 버튼을 담아놓을 리스트
+        /// 활성화 된 다이얼로그 버튼을 담아놓을 리스트
         /// </summary>
         private List<DialogueButton> dialogueButtons = new List<DialogueButton>();
 
@@ -83,7 +83,6 @@ namespace ProjectChan.UI
             }
             else
             {
-                // -> 0번째 값이 0이라면!
                 if (boNPC.quests[0] == 0)
                 {
                     return;
