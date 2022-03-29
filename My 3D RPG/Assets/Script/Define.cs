@@ -175,7 +175,7 @@ namespace ProjectChan.Define
     {
         public enum QuestWindow { None, Order, List, Info }
         public enum QuestTab { None, Progress, Completed }
-        public enum QuestOrderTab { NoProgress, Progress, Clear }
+        public enum OrderQuestType { NoProgress, Progress, Clear }
     }
 
     public class Audio

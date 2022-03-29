@@ -61,7 +61,6 @@ namespace ProjectChan.UI
         /// </summary>
         private void OnDialogueButton()
         {
-            // 다이얼로그 버튼의 풀을 가져온다
             var pool = ObjectPoolManager.Instance.GetPool<DialogueButton>(Define.PoolType.DialogueButton);
 
             // NPC가 기능을 가진 NPC라면
@@ -88,12 +87,14 @@ namespace ProjectChan.UI
                     return;
                 }
 
-                // NPC가 지닌 퀘스트 만큼 버튼을 세팅하는 작업
+                // NPC가 지닌 퀘스트 개수만큼 다이얼로그 버튼을 세팅하는 작업
                 for (int i = 0; i < boNPC.quests.Length; i++)
                 {
-                    // 퀘스트 버튼을 세팅
+                    // 풀에서 사용가능한 다이얼로그 버튼의 오브젝트를 가져옴
                     var button = pool.GetPoolableObject(obj => obj.CanRecycle);
                     button.transform.SetParent(buttonHolder);
+
+                    // 버튼에 NPC가 지닌 퀘스트 데이터를 전달
                     button.Initialize(boNPC.quests[i]);
 
                     dialogueButtons.Add(button);

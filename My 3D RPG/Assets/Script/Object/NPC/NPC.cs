@@ -185,7 +185,7 @@ namespace ProjectChan.Object
         {
             var uiDialogue = UIWindowManager.Instance.GetWindow<UIDialogue>();
 
-            #region 퀘스트 인덱스 걸러내기 작업!
+            #region 퀘스트 인덱스 걸러내기 작업
 
             var boQuests = GameManager.User.boQuest;
             var sdQuests = GameManager.SD.sdQuests;
@@ -215,8 +215,7 @@ namespace ProjectChan.Object
                     continue;
                 }
 
-                // 선행 퀘스트 목록의 길이와 가져온 선행 퀘스트 목록과 클리어한 퀘스트 목록의 교집합 개수가
-                // 같지 않다면
+                // 선행 퀘스트 목록의 길이와 가져온 선행 퀘스트 목록과 클리어한 퀘스트 목록의 교집합 개수가 같지 않다면
                 if (antencedentIndex.Length !=
                     antencedentIndex.Intersect(boQuests.completedQuests.Select(obj => obj.index)).Count())
                 {

@@ -64,16 +64,16 @@ namespace ProjectChan.UI
             if (progressQuest == null)
             {
                 // 새로운 퀘스트 이므로 수락/거절 창을 활성화
-                uiWindowManager.GetWindow<UIQuest>().orderTab = QuestOrderTab.NoProgress;
+                uiWindowManager.GetWindow<UIQuest>().orderQuestType = OrderQuestType.NoProgress;
             }
             else
             {
                 // 진행중인 퀘스트 이므로 진행도를 나타내는 창을 활성화
-                uiWindowManager.GetWindow<UIQuest>().orderTab = QuestOrderTab.Progress;
+                uiWindowManager.GetWindow<UIQuest>().orderQuestType = OrderQuestType.Progress;
 
                 var progressQuestDetailLength = progressQuest.sdQuest.questDetail.Length;
 
-                // 몇개의 조건을 완료 했는지를 저장하는 변수
+                // 완료한 디테일 개수
                 var progressDetail = 0;
 
                 // 진행중인 퀘스트이지만 완료조건을 만족한 퀘스트인지 확인하는 작업
@@ -87,21 +87,21 @@ namespace ProjectChan.UI
                     }
                 }
 
-                // 디테일 배열의 길이와 몇개의 조건을 완료 했는지에 대한 변수가 같다면
+                // 디테일 배열의 길이와 완료한 디테일 개수에 대한 변수가 같다면
                 if (progressQuestDetailLength == progressDetail)
                 {
-                    // 완료조건을 만족하고 클리어한 퀘스트 이므로 클리어 창을 활성화
-                    uiWindowManager.GetWindow<UIQuest>().orderTab = QuestOrderTab.Clear;
+                    // 클리어한 퀘스트 이므로 클리어 창을 활성화
+                    uiWindowManager.GetWindow<UIQuest>().orderQuestType = OrderQuestType.Clear;
                 }
             }
 
             // 퀘스트 창 활성화
             uiWindowManager.GetWindow<UIDialogue>().boNPC.actor.isPlayerAction = false;
-            uiWindowManager.GetWindow<UIQuest>().Open(QuestWindow.Order, progressQuest.sdQuest);
+            uiWindowManager.GetWindow<UIQuest>().Open(QuestWindow.Order, sdQuest);
         }
 
         /// <summary>
-        /// => 기능 NPC가 지닐 버튼에 바인딩될 메서드
+        /// NPC가 지닌 기능에 대한 버튼을 설정하는 메서드
         /// </summary>
         public void SetFuntionButton()
         {
@@ -123,16 +123,17 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// => 상점 버튼에 바인딩될 메서드
+        /// 상점 버튼에 바인딩될 메서드
         /// </summary>
         /// <param name="boNPC"> 상점 NPC 데이터 </param>
         private void OnClickShop(BoNPC boNPC)
         {
-            // -> 다이얼로그 창을 닫습니다!
             var uiWindowManager = UIWindowManager.Instance;
+
+            // 다이얼로그 창을 닫음
             uiWindowManager.GetWindow<UIDialogue>().Close();
 
-            // -> 상점 창을 엽니다!
+            // 상점 창을 오픈
             uiWindowManager.GetWindow<UIStore>().Open(boNPC);
         }
     }

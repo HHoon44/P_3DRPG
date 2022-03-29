@@ -25,9 +25,9 @@ MonoBehaviour:
   dtoStage:
     errorCode: 0
     errorMessage: 
-    lastPosX: -41.655148
-    lastPosY: 4.7313266
-    lastPosZ: -1.8832262
+    lastPosX: -40.55188
+    lastPosY: 4.8077717
+    lastPosZ: -1.3950847
     lastStageIndex: 1000
   dtoItem:
     errorCode: 0
