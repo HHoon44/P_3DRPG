@@ -1002,6 +1002,8 @@ MonoBehaviour:
   isOpen: 0
   storeName: {fileID: 1901553492}
   ConfirmFrame: {fileID: 799125190}
+  buyBtn: {fileID: 0}
+  noBuyBtn: {fileID: 0}
   closeBtn: {fileID: 2077029577}
 --- !u!225 &62088789
 CanvasGroup:
@@ -9357,18 +9359,18 @@ MonoBehaviour:
   completedTabBtn: {fileID: 1731436173}
   ContentsHolder: {fileID: 1886115193}
   listWindow: {fileID: 446078984}
+  BackBtn: {fileID: 958958482}
+  infoTitle: {fileID: 36724033}
+  infoDescription: {fileID: 1821208906}
+  questDetail: {fileID: 1354386313}
+  infoWindow: {fileID: 1005418261}
   acceptBtn: {fileID: 1501766408}
   refuseBtn: {fileID: 1497094678}
   orderTitle: {fileID: 668888889}
   orderDescription: {fileID: 118243793}
   acceptBtnTitle: {fileID: 2117068385}
   orderWindow: {fileID: 2008106436}
-  orderTab: 0
-  BackBtn: {fileID: 958958482}
-  infoTitle: {fileID: 36724033}
-  infoDescription: {fileID: 1821208906}
-  questDetail: {fileID: 1354386313}
-  infoWindow: {fileID: 1005418261}
+  orderQuestType: 0
 --- !u!225 &1997803662
 CanvasGroup:
   m_ObjectHideFlags: 0

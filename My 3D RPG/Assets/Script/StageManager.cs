@@ -319,7 +319,7 @@ namespace ProjectChan
             var monsterPool = ObjectPoolManager.Instance.GetPool<Monster>(PoolType.Monster);
             var battleManager = BattleManager.Instance;
 
-            // 개수만큼 몬스터를 생성
+            // 개수만큼 몬스터를 생성하는 
             for (int i = 0; i < monsterSpawnCnt; i++)
             {
                 // 스테이지에 생성 가능한 몬스터의 배열 길이를 이용해서 랜덤 값 생성

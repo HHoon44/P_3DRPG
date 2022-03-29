@@ -129,8 +129,6 @@ namespace ProjectChan
                 loadComplete?.Invoke();
 
                 // RPG 씬에서 필요한 UI를 활성화
-                var qwe = UIWindowManager.Instance.GetWindow<UIBattle>();
-                var lsdlf = 123;
                 UIWindowManager.Instance.GetWindow<UIBattle>().Open();
             }
         }

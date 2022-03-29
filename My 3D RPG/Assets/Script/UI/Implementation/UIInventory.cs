@@ -20,10 +20,10 @@ namespace ProjectChan.UI
     {
         // public
         public Button sortButton;               // 인벤토리 정렬 버튼
-        public TextMeshProUGUI playerGold;      // 플레이어가 지닌 금액
+        public TextMeshProUGUI playerGold;      // 소지한 지닌 금액
 
         // private
-        private Transform itemSlotHolder;       // 아이템 슬롯 홀더를 담을 필드
+        private Transform itemSlotHolder;       // 아이템 슬롯 홀더
         private GraphicRaycaster gr;            // 컨버스안을 탐지하기 위한 레이캐스트
         private ItemSlot dragSlot;              // 옮기려는 아이템 슬롯
         private Vector3 dragSlotOriginVec;      // 옮기려는 아이템 슬롯의 원 위치
@@ -51,6 +51,7 @@ namespace ProjectChan.UI
 
             // 플레이어가 소지한 아이템을 인벤토리에 세팅
             InitInventory();
+
             MyGoldUpdate();
 
             // 정렬 버튼 이벤트 바인딩 작업
@@ -83,8 +84,8 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// 새로운 아이템을 습득시 새로운 아이템을 아이템 슬롯에 추가하거나
-        /// 기존의 아이템을 습득시 아이템의 수량을 증가시켜 아이템 슬롯에 재설정하는 메서드
+        /// 새로운 아이템을 습득 시 새로운 아이템을 아이템 슬롯에 추가하거나
+        /// 기존의 아이템을 습득 시 아이템의 수량을 증가시켜 아이템 슬롯에 재설정하는 메서드
         /// </summary>
         /// <param name="boItem"> 플레이어가 습득한 아이템 정보 </param>
         public void AddItem(BoItem boItem)
@@ -111,7 +112,7 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// 아이템을 사용 요청 시, 아이템을 사용하는 메서드
+        /// 아이템 사용 요청 시, 아이템을 사용하는 메서드
         /// </summary>
         /// <param name="boActor">      현재 아이템을 사용할 액터의 정보 </param>
         /// <param name="slotIndex">    몇번째 키입력인지 </param>
