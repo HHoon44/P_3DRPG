@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace ProjectChan.NetWork
 {
     /// <summary>
-    /// => 로그인 시 필요한 데이터를 서버에 요청기능을 하는 클래스
+    /// 로그인 시 필요한 데이터들을 서버에 요청하는 기능을 가진 클래스
     /// </summary>
     public class LoginHandler
     {
-        // -> 리스폰스 핸들러를 이용하여 데이터를 받아 처리합니다!
+        // 리스폰스 핸들러를 이용해서 데이터를 받아 처리
         public ResponsHandler<DtoAccount> accountHandler;
         public ResponsHandler<DtoCharacter> characterHandler;
         public ResponsHandler<DtoStage> stageHandler;
@@ -34,66 +34,62 @@ namespace ProjectChan.NetWork
         /// </summary>
         public void Connect()
         {
-            // -> 계정 정보를 요청합니다!
+            // 계정 정보 요청
             ServerManager.Server.GetAccount(0, accountHandler);
         }
 
         /// <summary>
-        /// => 계정 정보 받아오기를 성공 했을 때 실행할 메서드
+        /// 계정 정보 요청 성공 시 실행할 메서드
         /// </summary>
-        /// <param name="dtoAccount"> 서버에서 받은 계정 데이터 </param>
+        /// <param name="dtoAccount"> 서버에서 보내준 계정 데이터 </param>
         public void GetAccountSuccess(DtoAccount dtoAccount)
         {
-            // -> 서버에서 받은 DtoAccount 데이터를 Bo 데이터로 변환 후
-            //    GM이 BoAccount를 들고 있게 합니다!
+            // 서버에서 받은 Dto 데이터를 Bo 데이터로 변환 후
+            // 게임 매니저가 모든 Bo 데이터 관리 객체( User )를 들고 있도록 함
             GameManager.User.boAccount = new BoAccount(dtoAccount);
 
-            // -> 다음으로 스테이지 정보를 요청합니다!
+            // 다음으로 스테이지 정보를 요청
             ServerManager.Server.GetStage(0, stageHandler);
         }
 
         /// <summary>
-        /// => 스테이지 정보 받아오기를 성공 했을 때 실행할 메서드
+        /// 스테이지 정보 요청 성공 시 실행할 메서드
         /// </summary>
-        /// <param name="dtoStage"> 서버에서 받은 계정 데이터 </param>
+        /// <param name="dtoStage"> 서버에서 보내준 스테이지 데이터 </param>
         public void GetStageSuccess(DtoStage dtoStage)
         {
-            // -> 서버에서 받은 DtoStage 데이터를 Bo 데이터로 변환 후
-            //    GM이 BoStage를 들고 있게 합니다!
             GameManager.User.boStage = new BoStage(dtoStage);
 
-            // -> 다음으로 아이템 정보를 요청합니다!
+            // 다음으로 아이템 정보를 요청
             ServerManager.Server.GetItem(0, itemHandler);
         }
 
         /// <summary>
-        /// => 아이템 정보 받아오기를 성공 했을 때 실행할 메서드
+        /// 아이템 정보 요청 성공 시 실행할 메서드
         /// </summary>
         /// <param name="dtoItem"> 서버에서 받은 아이템 데이터 </param>
         public void GetItemSuccess(DtoItem dtoItem)
         {
-            // -> 새로운 BoItem 리스트를 생성해서 GM이 들고 있게 합니다!
             GameManager.User.boItems = new List<BoItem>();
 
             var boItems = GameManager.User.boItems;
 
-            // -> DB에 저장된 아이템 개수만큼 반복합니다!
             for (int i = 0; i < dtoItem.dtoItems.Count; i++)
             {
+                // 소지한 아이템을 담을 공간
                 var dtoItemElement = dtoItem.dtoItems[i];
 
-                // -> DB에 저장할 Item 정보를 지닐 새로운 공간 입니다!
+                // Dto 데이터를 전환해서 담아둘 공간
                 BoItem boItem = null;
 
-                // -> i번째 아이템 데이터의 인덱스와 일치한 SDItem 데이터를 가져 옵니다!
+                // 소지한 아이템의 인덱스와 같은 인덱스의 기획 데이터를 가져옴
                 var sdItem = GameManager.SD.sdItems.Where(obj => obj.index == dtoItemElement.index)?.SingleOrDefault();
 
-                // -> 장비 아이템 이라면!
+                // 장비 아이템이라면
                 if (sdItem.itemType == Define.ItemType.Equipment)
                 {
                     boItem = new BoEquipment(sdItem);
 
-                    // -> 부모 클래스를 자식 클래스로 형변환 합니다!
                     var boEquipment = boItem as BoEquipment;
                     boEquipment.reinforceValue = dtoItemElement.reinforceValue;
                     boEquipment.isEquip = dtoItemElement.isEquip;
@@ -105,7 +101,7 @@ namespace ProjectChan.NetWork
 
                 SetBoItem(boItem, dtoItemElement);
 
-                // -> Bo 아이템 리스트에 저장합니다!
+                // BoItem 목록에 저장
                 boItems.Add(boItem);
             }
 
@@ -115,21 +111,19 @@ namespace ProjectChan.NetWork
                 boItem.amount = dtoItemEquipment.amount;
             }
 
-            // -> 다음으로 캐릭터 정보를 요청합니다!
+            // 다음으로 캐릭터 정보 요청
             ServerManager.Server.GetCharacter(0, characterHandler);
         }
 
         /// <summary>
-        /// => 캐릭터 정보 받아오기를 성공 했을 때 실행할 메서드
+        /// 캐릭터 정보 요청 성공 시 실행할 메서드
         /// </summary>
         /// <param name="dtoCharacter"> 서버에서 받은 캐릭터 데이터 </param>
         public void GetCharacterSuccess(DtoCharacter dtoCharacter)
         {
-            // -> 서버에서 받은 DtoCharacter 데이터를 Bo 데이터로 변환 후
-            //    GM이 BoCharacter를 들고 있게 합니다!
             GameManager.User.boCharacter = new BoCharacter(dtoCharacter);
 
-            // -> 다음으로 퀘스트 정보를 요청합니다!
+            // 다음으로 퀘스트 정보 요청
             ServerManager.Server.GetQuest(0, questHandler);
         }
 
@@ -139,15 +133,13 @@ namespace ProjectChan.NetWork
         /// <param name="dtoQuest"> 서버에서 보내준 퀘스트 정보 </param>
         public void GetQuestSuccess(DtoQuest dtoQuest)
         {
-            // -> 서버에서 받은 DtoQuest 데이터를 Bo 데이터로 변환 후
-            //    GM이 BoQuest를 들고 있게 합니다!
             GameManager.User.boQuest = new BoQuest(dtoQuest);
 
             OnLoginFinished();
         }
 
         /// <summary>
-        /// => 모든 로그인 절차가 끝나고 실행할 메서드
+        /// 모든 로그인 절차가 끝나고 실행할 메서드
         /// </summary>
         private void OnLoginFinished()
         {
@@ -163,7 +155,6 @@ namespace ProjectChan.NetWork
                 return;
             }
 
-            // -> 로그인 성공후 다음으로 넘어 갑니다!
             startController.LoadComplete = true;
         }
 

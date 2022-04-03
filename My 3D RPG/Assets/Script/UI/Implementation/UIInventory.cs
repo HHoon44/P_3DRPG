@@ -84,7 +84,7 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// 새로운 아이템을 습득 시 새로운 아이템을 아이템 슬롯에 추가하거나
+        /// 새로운 아이템을 습득 시 아이템을 아이템 슬롯에 추가하거나
         /// 기존의 아이템을 습득 시 아이템의 수량을 증가시켜 아이템 슬롯에 재설정하는 메서드
         /// </summary>
         /// <param name="boItem"> 플레이어가 습득한 아이템 정보 </param>
@@ -112,7 +112,7 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// 아이템 사용 요청 시, 아이템을 사용하는 메서드
+        /// 아이템 사용 요청 시 아이템을 사용하는 메서드
         /// </summary>
         /// <param name="boActor">      현재 아이템을 사용할 액터의 정보 </param>
         /// <param name="slotIndex">    몇번째 키입력인지 </param>
@@ -150,7 +150,6 @@ namespace ProjectChan.UI
                     DiminishAmount();
                 }
 
-                // 로컬 함수
                 void DiminishAmount()
                 {
                     // 사용된 슬롯의 아이템 개수를 감소
@@ -159,7 +158,7 @@ namespace ProjectChan.UI
                     // 슬롯의 아이템을 다 소비했다면
                     if (itemSlots[slotIndex].BoItem.amount == 0)
                     {
-                        // 슬롯에 존재하는 아이템 정보를 제거하고 빈 슬롯으로 세팅한다
+                        // 슬롯에 존재하는 아이템 정보를 제거하고 빈 슬롯으로 세팅
                         GameManager.User.boItems.Remove(itemSlots[slotIndex].BoItem);
                         ItemSlot itemSlot = new ItemSlot();
                         itemSlots[slotIndex].SetSlot(itemSlot.BoItem);
@@ -205,7 +204,7 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// 중복 아이템 획득 시, 아이템 수량을 증가하는 메서드
+        /// 중복 아이템 획득 시 아이템 수량을 증가하는 메서드
         /// </summary>
         /// <param name="boItem"> 개수가 증가된 아이템 데이터 </param>
         public void IncreaseItem(BoItem boItem)
@@ -238,7 +237,7 @@ namespace ProjectChan.UI
         }
 
         /// <summary>
-        /// 드래그 시작 시, 호출되는 메서드
+        /// 드래그 시작 시 호출되는 메서드
         /// </summary>
         /// <param name="eventData"> 마우스의 정보를 담고 있는 데이터 </param>
         public void OnBeginDrag(PointerEventData eventData)
@@ -293,7 +292,6 @@ namespace ProjectChan.UI
         /// <param name="eventData"> 마우스의 정보를 담고 있는 데이터 </param>
         public void OnEndDrag(PointerEventData eventData)
         {
-            // 드래그 슬롯이 없다면
             if (dragSlot == null)
             {
                 return;
@@ -312,22 +310,21 @@ namespace ProjectChan.UI
 
             for (int i = 0; i < results.Count; i++)
             {
-                // 레이캐스르로 감지한 슬롯중, 드래그 슬롯과 같은 슬롯이 있다면
+                // 레이캐스르로 감지한 슬롯 중 드래그 슬롯과 같은 슬롯이 있다면
                 if (results[i].gameObject == dragSlot.gameObject)
                 {
                     continue;
                 }
 
-                // 감지한 슬롯중, 드래그 슬롯과는 다른 ItemSlot이 있다면
+                // 감지한 슬롯 중 드래그 슬롯과는 다른 ItemSlot이 있다면
                 if (results[i].gameObject.name.Contains("ItemSlot"))
                 {
-                    // -> 그 지점의 드래그 슬롯 정보를 변수에 담아 놓습니다!
+                    // 목적지 지점의 ItemSlot을 담아둠
                     destSlot = results[i].gameObject.GetComponent<ItemSlot>();
                     break;
                 }
             }
 
-            // -> 조건에 맞는 데이터가 없다면!
             if (destSlot == null)
             {
                 return;
@@ -335,25 +332,25 @@ namespace ProjectChan.UI
 
             var boItems = GameManager.User.boItems;
 
-            // -> 이전 슬롯에 존재하는 아이템 데이터를 복사합니다!
+            // 이전 슬롯의 아이템 데이터를 복사
             var tempBoItem = dragSlot.BoItem.ObjcetCopy();
 
-            // -> 드래그한 슬롯의 아이템 데이터는 GM에 존재하는 Bo 데이터 목록에서 제거합니다!
+            // 이전 슬롯의 아이템 데이터를 BoItem 목록에서 삭제
             boItems.Remove(dragSlot.BoItem);
 
-            // -> 그리고 위에서 복사한 데이터를 목록에 추가합니다!
+            // 복사한 데이터를 BoItem 목록에 추가
             boItems.Add(tempBoItem);
 
-            // -> 목적지에 존재하는 아이템 데이터를 드래그 슬롯에 세팅 합니다!
+            // 목적지의 아이템 슬롯의 데이터를 이전 슬롯에 세팅
             dragSlot.SetSlot(destSlot.BoItem);
 
-            // -> 슬롯 인덱스를 재설정합니다!
+            // 이전 슬롯의 위치 인덱스를 재설정
             SetSlotIndex(dragSlot);
 
-            // -> 목적지 슬롯에는 드래그 슬롯에 있던 아이템 데이터를 저장합니다!
+            // 이전 아이템 슬롯의 데이터를 목적지 슬롯에 세팅
             destSlot.SetSlot(tempBoItem);
 
-            // -> 슬롯 인덱스를 재설정합니다!
+            // 목적지 슬롯의 위치 인덱스를 재설정
             SetSlotIndex(destSlot);
 
             DummyServer.Instance.userData.dtoItem = new DtoItem(boItems);
@@ -366,7 +363,7 @@ namespace ProjectChan.UI
                     return;
                 }
 
-                // -> 정규식을 이용하여 오브젝트 이름에서 SlotIndex를 가져오는 작업
+                // 정규식을 이용해서 오브젝트 이름에서 SlotIndex를 가져옴
                 var index = Regex.Replace(itemSlot.gameObject.name, @"[^\d]", "");
                 itemSlot.BoItem.slotIndex = int.Parse(index);
             }

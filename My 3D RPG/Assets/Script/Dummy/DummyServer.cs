@@ -11,21 +11,21 @@ using UnityEditor;
 namespace ProjectChan.Dummy
 {
     /// <summary>
-    /// => 더미 서버를 지닌 클래스
+    /// 더미 서버를 관리하는 클래스
     /// </summary>
     public class DummyServer : Singleton<DummyServer>
     {
-        public INetworkClient dummyModule;      // -> 더미 서버가 가지고 있는 유저의 데이터
-        public UserDataSo userData;             // -> ServerModuleFactory에서 생산되며 프로토콜 메서드를 사용할 수 있음
+        public UserDataSo userData;             // 더미서버에서 갖는 유저 데이터 ( 더미서버에서의 유저 DB )    
+        public INetworkClient dummyModule;      
 
         public void Initialize()
         {
-            // -> 프로토콜 함수가 선언 되어 있는 모듈더미를 사용하기 위해서 만들어 줍니다!
             dummyModule = new ServerModuleDummy(this);
         }
 
         /// <summary>
-        /// => 유저의 Dto데이터를 저장하는 메서드
+        /// 더미 유저 데이터를 저장하는 메서드
+        /// 서버와 통신 후에 UserDataSo에 통신 데이터를 저장하고 해당 파일을 저장
         /// </summary>
         public void Save()
         {
@@ -40,13 +40,22 @@ namespace ProjectChan.Dummy
 
             StartCoroutine(OnSaveProgress());
 
-            /// => SaveAssets : 함수가 호출되면 더티 플래그가 선 오브젝트와 에셋 오브젝트인 경우에 에셋을 업데이트 한다
-            /// => SetDirty   : 파라미터로 받은 오브젝트에 더티 플래그를 설정하여 디스크에 저장될 수 있도록 해주는 메서드
-            /// => 더티 플래그 : 하나하나의 요소가 변경될 때 마다 저장하는 것은 너무 값이 비싸니 변경된 요소에 표시를 해놓고
-            ///                 나중에 저장할 떄 마다 표시가 있는 것만 저장하는 작업
+            /// SaveAssets : 함수가 호출되면 더티 플래그가 선 오브젝트와 에셋 오브젝트인 경우에 에셋을 업데이트 한다
+            /// SetDirty   : 파라미터로 받은 오브젝트에 더티 플래그를 설정하여 디스크에 저장될 수 있도록 해주는 메서드
+            /// 더티 플래그 : 하나하나의 요소가 변경될 때 마다 저장하는 것은 너무 값이 비싸니 변경된 요소에 표시를 해놓고
+            ///              나중에 저장할 떄 마다 표시가 있는 것만 저장하는 작업
 
             IEnumerator OnSaveProgress()
             {
+                /*
+                 *  저장시킬 유저데이터를 더티 플래그로 설정
+                 *  더티?
+                 *  유니티에서 런타임 시 ( 프리팹 또는 스크립터블 오브젝트 ) 에서 사용되는 데이터들은
+                 *  일반적으로 휘발성 데이터 (Volatile Data)
+                 *  하지만 런타임 시 사용되던 데이터를 저장하고 싶을 때 디스크에서 쓸 수 있게
+                 *  더티 플래그를 설정하면 된다
+                 */
+
                 EditorUtility.SetDirty(userData);
                 AssetDatabase.SaveAssets();
 
