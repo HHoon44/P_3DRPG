@@ -19,9 +19,9 @@ namespace ProjectChan.DB
         public int gold;            // Dto에 저장되어있는 플레이어 골드
 
         /// <summary>
-        /// 서버에서 보내준 Dto 데이터를 Bo 데이터로 변환
+        /// 서버에서 보내준 통신 데이터( Dto )를 유저 데이터( Bo )로 변환
         /// </summary>
-        /// <param name="dtoAccount"> 서버에서 보내준 Account 데이터 </param>
+        /// <param name="dtoAccount"> 서버에서 보낸 통신 데이터 </param>
         public BoAccount(DtoAccount dtoAccount)
         {
             nickName = dtoAccount.nickName;

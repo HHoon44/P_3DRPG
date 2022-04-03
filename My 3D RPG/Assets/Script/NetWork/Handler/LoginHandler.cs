@@ -21,6 +21,7 @@ namespace ProjectChan.NetWork
 
         public LoginHandler()
         {
+            // 성공 / 실패 시 실행할 메서드를 전달
             accountHandler = new ResponsHandler<DtoAccount>(GetAccountSuccess, OnFailed);
             characterHandler = new ResponsHandler<DtoCharacter>(GetCharacterSuccess, OnFailed);
             stageHandler = new ResponsHandler<DtoStage>(GetStageSuccess, OnFailed);
@@ -29,11 +30,12 @@ namespace ProjectChan.NetWork
         }
 
         /// <summary>
-        /// => 서버와 연결 시작
-        /// => INetworkClient를 지닌 Module에 접근하여 로그인 작업 메서드
+        /// 서버와 연결 시작을 시작하는 메서드
         /// </summary>
         public void Connect()
         {
+            // ServerModuleDummy에 데이터 요청 메서드 실행
+
             // 계정 정보 요청
             ServerManager.Server.GetAccount(0, accountHandler);
         }

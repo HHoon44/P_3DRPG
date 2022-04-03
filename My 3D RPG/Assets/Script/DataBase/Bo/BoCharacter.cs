@@ -18,9 +18,9 @@ namespace ProjectChan.DB
         public SDFormInfo sdFormInfo;       // 레벨에 영향을 받는 변신 캐릭터 스탯
 
         /// <summary>
-        /// 서버에서 보내준 Dto 데이터를 Bo 데이터로 변환
+        /// 서버에서 보내준 통신 데이터( Dto )를 유저 데이터( Bo )로 변환
         /// </summary>
-        /// <param name="dtoCharacter"></param>
+        /// <param name="dtoCharacter"> 서버에서 보낸 통신 데이터 </param>
         public BoCharacter(DtoCharacter dtoCharacter)
         {
             sdCharacter = GameManager.SD.sdCharacters.Where(obj => obj.index == dtoCharacter.index).SingleOrDefault();

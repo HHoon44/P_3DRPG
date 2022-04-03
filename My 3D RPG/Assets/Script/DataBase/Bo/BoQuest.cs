@@ -16,6 +16,10 @@ namespace ProjectChan.DB
         public List<BoQuestProgress> progressQuests;    // 현재 진행중인 퀘스트 데이터 목록
         public List<SDQuest> completedQuests;           // 완료한 퀘스트 데이터 목록
 
+        /// <summary>
+        /// 서버에서 보내준 통신 데이터( Dto )를 유저 데이터( Bo )로 변환
+        /// </summary>
+        /// <param name="dtoQuest"> 서버에서 보낸 통신 데이터 </param>
         public BoQuest(DtoQuest dtoQuest)
         {
             progressQuests = new List<BoQuestProgress>();
@@ -43,10 +47,6 @@ namespace ProjectChan.DB
         public int[] details;       // 진행중인 퀘스트의 디테일 목록
         public SDQuest sdQuest;     // 진행중인 퀘스트의 기획 데이터
 
-        /// <summary>
-        /// Dto의 진행중인 퀘스트를 Bo 데이터로 변환하는 생성자
-        /// </summary>
-        /// <param name="dtoQuestProgress"> Dto 진행중인 퀘스트 데이터 </param>
         public BoQuestProgress(DtoQuestProgress dtoQuestProgress)
         {
             details = (int[])dtoQuestProgress.details.Clone();

@@ -26,7 +26,7 @@ namespace ProjectChan.Dummy
          *  1. 더미 서버 이므로 실제로 클라이언트에서 클라이언트의 요청을 처리하는 것과 같음
          *  2. 통신 요청에 대한 실패가 발생할 일이 일반적으로 없음
          *  3. 강제로 요청 성공 메서드를 실행 시킴
-         *  4. DtoAcocunt 값을 ToJson을 통해 Json 파일로 변형 후 HandlerSuccess에 인자로 전달
+         *  4. Dto 데이터를 ToJson을 통해 Json 파일로 변형 후 HandlerSuccess에 인자로 전달
          *  5. 실패가 없으므로 강제로 성공 메서드를 부른다
          */
 

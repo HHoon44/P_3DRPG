@@ -18,6 +18,10 @@ namespace ProjectChan.DB
         public Vector3 prevPos;         // 플레이어가 마지막으로 위치한 좌표
         public SDStage sdStage;         // 플레이어가 마지막으로 위치한 스테이지의 기획 데이터
 
+        /// <summary>
+        /// 서버에서 보내준 통신 데이터( Dto )를 유저 데이터( Bo )로 변환
+        /// </summary>
+        /// <param name="dtoStage"> 서버에서 보낸 통신 데이터 </param>
         public BoStage(DtoStage dtoStage)
         {
             sdStage = GameManager.SD.sdStages.Where(obj => obj.index == dtoStage.lastStageIndex)?.SingleOrDefault();

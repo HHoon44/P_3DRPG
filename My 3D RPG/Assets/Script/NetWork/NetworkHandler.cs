@@ -85,6 +85,7 @@ namespace ProjectChan.NetWork
                 }
 
                 // 요청 성공 시 실행할 델리게이트가 존재 한다면 실행
+                // EX : GetAccountSuccess
                 successDel?.Invoke(data);
             }
         }

@@ -15,7 +15,7 @@ namespace ProjectChan.Dummy
      */
 
     /// <summary>
-    /// 데이터 베이스 역할을 하는 클래스
+    /// 데이터 베이스 역할을 하는 클래스 ( 현재 DB가 없으므로 해당 클래스가 DB 역할)
     /// </summary>
     [CreateAssetMenu(menuName ="ProjectChan/UserData")]
     public class UserDataSo : ScriptableObject
