@@ -1,6 +1,7 @@
 ﻿using ProjectChan.DB;
 using ProjectChan.Object;
 using ProjectChan.Resource;
+using ProjectChan.SD;
 using ProjectChan.Util;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,6 @@ namespace ProjectChan.UI
 
         // private
         private UINovel uiNovelSet;                 // 대화창 셋
-        private BoNovel boNovel;                    // 대화창을 세팅할때 사용할 데이터
 
         /// <summary>
         /// 현재 플레이어와 대화 중인 NPC 정보
@@ -40,14 +40,13 @@ namespace ProjectChan.UI
         /// <param name="boNovel">  노벨셋에 사용할 Bo데이터 </param>
         /// <param name="boNPC">    현재 대화하는 NPC Bo데이터 </param>
         /// <param name="actor">    현재 NPC와 대화하는 플레이어 </param>
-        public void Initialize(BoNovel boNovel, BoNPC boNPC)
+        public void Initialize(SDNovel sdNovel, BoNPC boNPC)
         {
-            this.boNovel = boNovel;
             this.boNPC = boNPC;
 
             // NPC의 대사와 일러스트를 보여주기 위해, 인 게임의 노벨 UI를 세팅
             uiNovelSet = transform.Find("NovelSet").GetComponent<UINovel>();
-            uiNovelSet.SetNovel(this.boNovel);
+            uiNovelSet.SetNovel(sdNovel);
 
             // 다이얼로그 버튼 활성화
             OnDialogueButton();

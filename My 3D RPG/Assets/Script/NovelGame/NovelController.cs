@@ -28,7 +28,6 @@ namespace ProjectChan.Novel
         // private
         private int currentNovelIndex;      // 현재 대화 인덱스
         private int speechIndex;            // 현재 대화 진행도 인덱스
-        private SDNovel sdNovel;            // 현재 대화 기획 데이터
 
         private void Awake()
         {
@@ -50,24 +49,24 @@ namespace ProjectChan.Novel
         /// </summary>
         private void OnTalse()
         {
+            /// 다시 지울겁니다.
+            currentNovelIndex = Define.Novel.nextStageLoadIndex;
+
             // 모든 대화가 안 끝났다면
             if (currentNovelIndex + speechIndex < Define.Novel.nextStageLoadIndex)
             {
                 // 현재 대화 인덱스와 대화 진행 인덱스를 더한 값과 같은 인덱스의 기획 데이터를 가져옴
-                sdNovel = GameManager.SD.sdNovels.Where(obj => obj.index == currentNovelIndex + speechIndex)?.SingleOrDefault();
-
-                // 노벨 기획 데이터로 새로운 Bo데이터를 만듬
-                BoNovel boNovel = new BoNovel(sdNovel);
+                var sdNovel = GameManager.SD.sdNovels.Where(obj => obj.index == currentNovelIndex + speechIndex)?.SingleOrDefault();
 
                 // 노벨 씬 배경을 설정한다
-                if (boNovel.sdNovel.stagePath.Length > 1)
+                if (sdNovel.stagePath.Length > 1)
                 {
-                    var stage = SpriteLoader.GetSprite(AtlasType.SchoolImage, boNovel.sdNovel.stagePath);
+                    var stage = SpriteLoader.GetSprite(AtlasType.SchoolImage, sdNovel.stagePath);
                     novelGround.sprite = stage;
                 }
 
                 // 노벨 씬의 노벨 UI를 세팅
-                UIWindowManager.Instance.GetWindow<UINovel>().SetNovel(boNovel);
+                UIWindowManager.Instance.GetWindow<UINovel>().SetNovel(sdNovel);
                 speechIndex++;
             }
             else

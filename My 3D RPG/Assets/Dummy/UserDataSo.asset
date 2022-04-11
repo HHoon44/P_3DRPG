@@ -25,9 +25,9 @@ MonoBehaviour:
   dtoStage:
     errorCode: 0
     errorMessage: 
-    lastPosX: -40.55188
-    lastPosY: 4.8077717
-    lastPosZ: -1.3950847
+    lastPosX: -39.99055
+    lastPosY: 4.767209
+    lastPosZ: 0.7138152
     lastStageIndex: 1000
   dtoItem:
     errorCode: 0
@@ -36,9 +36,5 @@ MonoBehaviour:
   dtoQuest:
     errorCode: 0
     errorMessage: 
-    progressQuests:
-    - errorCode: 0
-      errorMessage: 
-      index: 1001
-      details: 00000000
+    progressQuests: []
     completeQuests: 

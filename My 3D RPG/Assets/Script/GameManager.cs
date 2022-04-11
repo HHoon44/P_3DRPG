@@ -17,13 +17,13 @@ using UnityEngine.SceneManagement;
 namespace ProjectChan
 {
     /// <summary>
-    /// => 게임에 사용하는 모든 데이터를 관리하는 클래스
-    /// => 추가로 게임의 씬 변경등과 같은 큰 흐름들을 컨트롤하기도 함
+    /// 게임에 사용하는 모든 데이터를 관리하는 클래스
+    /// 추가로 게임의 씬 변경등과 같은 큰 흐름들을 컨트롤하기도 함
     /// </summary>
     public class GameManager : Singleton<GameManager>
     {
-        public bool useDummyServer;                             // -> DummyServer을 사용하고 있는가?
-        public float loadProgress;                              // -> 다음씬이 얼마나 준비되었는지에 대한 값
+        public bool useDummyServer;                             // DummyServer을 사용하고 있는지의 여부
+        public float loadProgress;                              // 다음씬이 얼마나 준비되었는지에 대한 값
 
         /// <summary>
         /// 게임에 사용할 기획 데이터

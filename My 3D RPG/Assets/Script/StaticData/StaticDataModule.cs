@@ -54,7 +54,7 @@ namespace ProjectChan.SD
         private class StaticDataLoader
         {
             // private
-            private string path;    // -> 읽어올 파일이 존재하는 경로
+            private string path;    // 읽어올 파일이 존재하는 경로
 
             public StaticDataLoader()
             {

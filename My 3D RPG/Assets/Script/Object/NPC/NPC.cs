@@ -235,9 +235,8 @@ namespace ProjectChan.Object
 
             // 대화 기획 데이터에서 NPC의 기본 대화 대사로 사용할 기획 데이터를 가져옴
             var sdNovel = GameManager.SD.sdNovels.Where(obj => obj.index == speechIndex)?.SingleOrDefault();
-            var boNovel = new BoNovel(sdNovel);
 
-            uiDialogue.Initialize(boNovel, boNPC);
+            uiDialogue.Initialize(sdNovel, boNPC);
         }
     }
 }

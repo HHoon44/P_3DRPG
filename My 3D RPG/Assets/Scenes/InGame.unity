@@ -1002,8 +1002,8 @@ MonoBehaviour:
   isOpen: 0
   storeName: {fileID: 1901553492}
   ConfirmFrame: {fileID: 799125190}
-  buyBtn: {fileID: 0}
-  noBuyBtn: {fileID: 0}
+  buyBtn: {fileID: 927106045}
+  noBuyBtn: {fileID: 867331297}
   closeBtn: {fileID: 2077029577}
 --- !u!225 &62088789
 CanvasGroup:
