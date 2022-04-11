@@ -22,12 +22,14 @@ namespace ProjectChan
     /// </summary>
     public class GameManager : Singleton<GameManager>
     {
+        [HideInInspector]
         public bool useDummyServer;                             // DummyServer을 사용하고 있는지의 여부
         public float loadProgress;                              // 다음씬이 얼마나 준비되었는지에 대한 값
 
         /// <summary>
         /// 게임에 사용할 기획 데이터
         /// </summary>
+        [Header("모든 기획 데이터를 갖는 StaticData 모듈")]
         [SerializeField]
         private StaticDataModule sd = new StaticDataModule();
         public static StaticDataModule SD => Instance.sd;       

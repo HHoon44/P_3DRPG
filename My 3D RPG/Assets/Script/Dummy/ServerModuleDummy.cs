@@ -38,7 +38,7 @@ namespace ProjectChan.Dummy
 
         public void GetCharacter(int uniqueId, ResponsHandler<DtoCharacter> responsHandler)
         {
-            // 더미서버에서는 캐릭터 정보를 요청해서 어떻게 처리할지
+            // 더미서버에서는 캐릭터 정보를 요청해서 어떻 게 처리할지
             responsHandler.HandleSuccess(SerializationUtil.ToJson(serverData.userData.dtoCharacter));
         }
 
