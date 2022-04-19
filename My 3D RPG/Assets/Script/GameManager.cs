@@ -62,13 +62,13 @@ namespace ProjectChan
         /// </summary>
         public void OnApplicationSetting()
         {
-            // -> 수직 동기화를 꺼줍니다!
+            // 수직 동기화를 끔
             QualitySettings.vSyncCount = 0;
 
-            // -> 랜덤 프래임을 60으로 설정합니다!
+            // 랜덤 프래임을 60으로 설정
             Application.targetFrameRate = 60;
 
-            // -> 앱 실행 중 장시간 대기 시에도 화면이 꺼지지 않게합니다!
+            // 앱 실행 중 장시간 대기 시에도 화면이 꺼지지 않도록 설정
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
         }
 
