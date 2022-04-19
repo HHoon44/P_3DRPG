@@ -19,8 +19,8 @@ namespace ProjectChan.UI
         private CanvasGroup cachedCanvasGroup;
 
         /// <summary>
-        /// 캔버스 그룹을 이용하여, UI를 활성화/비활성화 하는 효과를 준다 ( 알파값을 설정 )
-        /// 비활성화 시, 실제로 객체가 비활성화 되는 것이 아니라 UI의 입력을 차단 한다 ( 블록 레이캐스트 )
+        /// 캔버스 그룹을 이용하여, UI를 활성화/비활성화 하는 효과를 준다(알파값을 설정)
+        /// 비활성화 시, 실제로 객체가 비활성화 되는 것이 아니라 UI의 입력을 차단 한다(블록 레이캐스트)
         /// </summary>
         public CanvasGroup CachedCanvasGroup
         {

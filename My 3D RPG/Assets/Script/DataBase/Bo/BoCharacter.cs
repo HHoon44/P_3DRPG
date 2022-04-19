@@ -23,9 +23,12 @@ namespace ProjectChan.DB
         /// <param name="dtoCharacter"> 서버에서 보낸 통신 데이터 </param>
         public BoCharacter(DtoCharacter dtoCharacter)
         {
-            sdCharacter = GameManager.SD.sdCharacters.Where(obj => obj.index == dtoCharacter.index).SingleOrDefault();
-            sdOriginInfo = GameManager.SD.sdOriginInfos.Where(obj => obj.index == dtoCharacter.index).SingleOrDefault();
-            sdFormInfo = GameManager.SD.sdFormInfos.Where(obj => obj.index == dtoCharacter.index).SingleOrDefault();
+            sdCharacter = GameManager.SD.sdCharacters.Where
+                (obj => obj.index == dtoCharacter.index).SingleOrDefault();
+            sdOriginInfo = GameManager.SD.sdOriginInfos.Where
+                (obj => obj.index == dtoCharacter.index).SingleOrDefault();
+            sdFormInfo = GameManager.SD.sdFormInfos.Where
+                (obj => obj.index == dtoCharacter.index).SingleOrDefault();
 
             level = dtoCharacter.level;
         }

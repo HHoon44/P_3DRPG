@@ -262,7 +262,6 @@ namespace ProjectChan.UI
                         dragSlot = null;
                         return;
                     }
-                    
                     // i번째 ItemSlot의 위치를 저장
                     dragSlotOriginVec = dragSlot.ItemImage.transform.position;
                     break;

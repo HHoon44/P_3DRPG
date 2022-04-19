@@ -123,7 +123,6 @@ namespace ProjectChan.UI
             }
             
             // 현재 메서드를 통해 접근하는 UIWindow는 모두 최종적으로 인스턴스 딕셔너리에 등록
-
             // 인스턴스 시 담아둘 딕셔너리에 키 값이 없다면
             if (!cachedInstanceDic.ContainsKey(key))
             {
@@ -136,9 +135,7 @@ namespace ProjectChan.UI
                 cachedInstanceDic[key] = (T)Convert.ChangeType(cachedTotalUIWindowDic[key], typeof(T));
             }
 
-
             // UIWindow 형태가 아니라 최종 파생 클래스형태로 반환
-            //return (T)cachedTotalUIWindowDic[key];
             return (T)cachedInstanceDic[key];
         }
 

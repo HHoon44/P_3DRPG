@@ -21,7 +21,7 @@ namespace ProjectChan
 
     /// <summary>
     /// 스테이지 세팅 작업들을 수행할 클래스
-    /// 스테이지 전환 시 처리 작업을 수행함( 해당 스테이지에 필요한 리소스 로드 및 인스턴스 생성 )
+    /// 스테이지 전환 시 처리 작업을 수행함(해당 스테이지에 필요한 리소스 로드 및 인스턴스 생성)
     /// </summary>
     public class StageManager : Singleton<StageManager>
     {
@@ -74,11 +74,11 @@ namespace ProjectChan
             // 프리팹으로 만들어놓은 스테이지를 가져와 생성
             currentStage = Instantiate(resourceManager.LoadObject(sdStage.resourcePath));
 
-            // 스테이지와 맞는 오디오 소스로 설정
-            AudioManager.Instance.ChangeAudioClip(sdStage.resourcePath.Remove(0, sdStage.resourcePath.LastIndexOf('/') + 1));
-
             // 로딩 씬을 띄워놓고 리소스를 생성하면, 로딩 씬에 리소스가 생기므로 인게임에 옮겨준다
             SceneManager.MoveGameObjectToScene(currentStage, SceneManager.GetSceneByName(SceneType.InGame.ToString()));
+
+            // 스테이지와 맞는 오디오 소스로 설정
+            AudioManager.Instance.ChangeAudioClip(sdStage.resourcePath.Remove(0, sdStage.resourcePath.LastIndexOf('/') + 1));
 
             // 이전 스테이지의 몬스터 스폰 지역을 삭제
             spawnAreaBounds.Clear();
