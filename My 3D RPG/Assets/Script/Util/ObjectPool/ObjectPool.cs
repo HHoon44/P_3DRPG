@@ -71,7 +71,6 @@ namespace ProjectChan.Util
                 }
                 else
                 {
-
                     return null;
                 }
             }
