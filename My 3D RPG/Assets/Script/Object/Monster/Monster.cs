@@ -1,14 +1,8 @@
 ﻿using ProjectChan.DB;
 using ProjectChan.Define;
 using ProjectChan.Dummy;
-using ProjectChan.NetWork;
-using ProjectChan.Resource;
 using ProjectChan.Util;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using static ProjectChan.Define.Actor;
